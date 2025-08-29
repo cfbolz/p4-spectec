@@ -1350,6 +1350,13 @@ and eval_return_instr (ctx : Ctx.t) (exp : exp) : Ctx.t * Sign.t =
 
 and invoke_rel (ctx : Ctx.t) (id : id) (values_input : value list) :
     (Ctx.t * value list) option =
+
+  values_input
+  |> List.iter (fun value ->
+      let yojson = Sl.Ast.value_to_yojson value in
+      Yojson.Safe.pretty_print Format.std_formatter yojson);
+  print_newline ();
+
   let _inputs, exps_input, instrs = Ctx.find_rel Local ctx id in
   check (instrs <> []) id.at "relation has no instructions";
   let attempt_rules () =
