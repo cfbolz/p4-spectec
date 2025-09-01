@@ -8,18 +8,18 @@
 ;;; syntax emptyStatement = EmptyS
 
 rule Stmt_ok/emptyStatement:
-  p TC f |- EmptyS : TC f EmptyS
+  TC f |- EmptyS : TC f EmptyS
 
 ;;; assignmentStatement
 ;;; syntax assignmentStatement = AssignS lvalue expression
 
-rule Stmt_ok/assignmentStatement:
-  p TC f |- AssignS lvalue expression
-          : TC f (AssignS typedLvalueIR typedExpressionIR_cast)
+rule AssignmentStmt_ok:
+  TC |- AssignS lvalue expression
+      : AssignS typedLvalueIR typedExpressionIR_cast
   ---- ;; check lvalue
-  -- Lvalue_ok: p TC |- lvalue : typedLvalueIR
+  -- Lvalue_ok: LOCAL TC |- lvalue : typedLvalueIR
   ---- ;; check expression
-  -- Expr_ok: p TC |- expression : typedExpressionIR
+  -- Expr_ok: LOCAL TC |- expression : typedExpressionIR
   ---- ;; fetch annotations
   -- if _ `( typeIR_l ) = typedLvalueIR
   -- if _ `( typeIR_r _ ) = typedExpressionIR
@@ -27,29 +27,38 @@ rule Stmt_ok/assignmentStatement:
   ---- ;; while inserting implicit casts if necessary
   -- if typedExpressionIR_cast = $coerce_unary(typedExpressionIR, typeIR_l)
 
+rule Stmt_ok/assignmentStatement:
+  TC f |- assignmentStatement : TC f assignmentStatementIR
+  -- AssignmentStmt_ok:
+      TC |- assignmentStatement : assignmentStatementIR
+
 ;;; callStatement
 ;;; syntax callStatement = CallS lvalue typeArgument* argument*
 
-rule Stmt_ok/callStatement:
-  p TC f |- CallS lvalue_routine typeArgument* argument*
-          : TC f callStatementIR
+rule CallStmt_ok:
+   TC |- CallS lvalue_routine typeArgument* argument*
+       : CallS routineTargetIR typeArgumentIR_inferred* argumentIR_cast*
   ---- ;; check base lvalue
-  -- RoutineTarget_lvalue_ok: p TC |- lvalue_routine : routineTargetIR
+  -- RoutineTarget_lvalue_ok:
+      LOCAL TC |- lvalue_routine : routineTargetIR
   ---- ;; check type arguments
-  -- TypeArguments_ok: p TC |- typeArgument* : typeArgumentIR* tid_impl*
+  -- TypeArguments_ok:
+      LOCAL TC |- typeArgument* : typeArgumentIR* tid_impl*
   ---- ;; check arguments
-  -- (Argument_ok: p TC |- argument : argumentIR)*
+  -- (Argument_ok: LOCAL TC |- argument : argumentIR)*
   ---- ;; check lvalue as routine
   -- RoutineType_ok:
-      p TC |- routineTargetIR typeArgumentIR* argumentIR*
-            : routineTypeIR tid_inserted* id_default*
+      LOCAL TC |- routineTargetIR typeArgumentIR* argumentIR*
+                : routineTypeIR tid_inserted* id_default*
   ---- ;; check calling convention
   -- if tid_infer* = tid_impl* ++ tid_inserted*
-  -- Call_ok: p TC |- routineTypeIR eps tid_infer* argumentIR* id_default*
-                    : typeIR_ret typeArgumentIR_inferred* argumentIR_cast*
-  ---- ;; create IR
-  -- if callStatementIR
-      = CallS routineTargetIR typeArgumentIR_inferred* argumentIR_cast*
+  -- Call_ok: LOCAL TC |- routineTypeIR eps tid_infer* argumentIR* id_default*
+                        : typeIR_ret typeArgumentIR_inferred* argumentIR_cast*
+
+rule Stmt_ok/callStatement:
+  TC f |- callStatement : TC f callStatementIR
+  -- CallStmt_ok:
+      TC |- callStatement : callStatementIR
 
 ;;; directApplicationStatement
 ;;; syntax directApplicationStatement = InstS namedType argument*
@@ -64,40 +73,46 @@ def $compat'_direct_application(ControlT _) = true
 def $compat'_direct_application(typeIR) = false
   -- otherwise
 
-rule Stmt_ok/directApplicationStatement:
-  p TC_0 f |- InstS namedType argument*
-            : TC_0 f directApplicationStatementIR
+rule DirectApplicationStmt_ok:
+  TC_0 |- InstS namedType argument*
+        : InstS prefixedName argumentIR_cast*
   ---- ;; check instantiation
-  -- Expr_ok: p TC_0 |- InstE namedType eps
-                      : (InstE prefixedName eps eps) `( typeIR_object _ )
+  -- Expr_ok: LOCAL TC_0 |- InstE namedType eps
+                          : (InstE prefixedName eps eps) `( typeIR_object _ )
   ---- ;; only parser and controls can be direclty invoked
   -- if $compat_direct_application(typeIR_object)
   ---- ;; insert temporary variable for the constructed type
   -- if name_object = "__direct_application"
-  -- if TC_1 = $add_var(p, TC_0, name_object, NO typeIR_object CTK eps)
+  -- if TC_1 = $add_var(LOCAL, TC_0, name_object, NO typeIR_object CTK eps)
   ---- ;; check apply method
   -- if lvalue = LvalueAccL (NameL (CURRENT name_object)) "apply"
-  -- Stmt_ok: p TC_1 f |- CallS lvalue eps argument* : _ _ callStatementIR
+  -- CallStmt_ok:
+      TC_1 |- CallS lvalue eps argument* : callStatementIR
   -- if CallS
           (MethodT
             ((NameE (CURRENT name_object)) `( typeIR_object CTK ))
             "apply")
           eps argumentIR_cast*
       = callStatementIR
-  ---- ;; create IR
-  -- if directApplicationStatementIR = InstS prefixedName argumentIR_cast*
+
+rule Stmt_ok/directApplicationStatement:
+  TC f |- directApplicationStatement
+        : TC f directApplicationStatementIR
+  -- DirectApplicationStmt_ok:
+      TC |- directApplicationStatement
+          : directApplicationStatementIR
 
 ;;; returnStatement
 ;;; syntax returnStatement = ReturnS expression?
 
 rule Stmt_ok/returnStatement-none:
-  LOCAL TC f |- ReturnS eps : TC RET (ReturnS eps)
+  TC f |- ReturnS eps : TC RET (ReturnS eps)
   ---- ;; check that the return type in the context is VOID
   -- if VoidT = $find_return_type(TC)
 
 rule Stmt_ok/returnStatement-some:
-  LOCAL TC f |- ReturnS expression
-              : TC RET (ReturnS typedExpressionIR_cast)
+  TC f |- ReturnS expression
+        : TC RET (ReturnS typedExpressionIR_cast)
   ---- ;; check expression
   -- Expr_ok: LOCAL TC |- expression : typedExpressionIR
   ---- ;; fetch annotation
@@ -112,41 +127,48 @@ rule Stmt_ok/returnStatement-some:
 ;;; syntax exitStatement = ExitS
 
 rule Stmt_ok/exitStatement:
-  p TC f |- ExitS : TC f ExitS
+  TC f |- ExitS : TC f ExitS
 
 ;;; blockStatement
 
 rule Stmt_ok/blockStatement:
-  LOCAL TC_0 f_0 |- blockStatement : TC_1 f_1 blockStatementIR
+  TC_0 f_0 |- blockStatement : TC_1 f_1 blockStatementIR
   -- Block_ok: TC_0 f_0 |- blockStatement
                          : TC_1 f_1 blockStatementIR
 
 ;;; conditionalStatement
 ;;; syntax conditionalStatement = IfS expression statement statement?
 
-rule Stmt_ok/conditionalStatement-none:
-  p TC f |- IfS expression_cond statement_then eps
-          : TC f (IfS typedExpressionIR_cond statementIR_then eps)
+rule ConditionalStmt_ok/none:
+  TC f |- IfS expression_cond statement_then eps
+        : f (IfS typedExpressionIR_cond statementIR_then eps)
   ---- ;; check condition expression
-  -- Expr_ok: p TC |- expression_cond : typedExpressionIR_cond
+  -- Expr_ok: LOCAL TC |- expression_cond : typedExpressionIR_cond
   ---- ;; fetch annotation
   ---- ;; the condition must be a boolean type
   -- if _ `( BoolT _ ) = typedExpressionIR_cond
   ---- ;; check then statement
-  -- Stmt_ok: p TC f |- statement_then : TC_then f_then statementIR_then
+  -- Stmt_ok:
+      TC f |- statement_then : TC_then f_then statementIR_then
+  -- if f_post = $join_flow(f, f_then)
 
-rule Stmt_ok/conditionalStatement-some:
-  p TC f |- IfS expression_cond statement_then statement_else
-          : TC f_post (IfS typedExpressionIR_cond statementIR_then statementIR_else)
+rule ConditionalStmt_ok/some:
+  TC f |- IfS expression_cond statement_then statement_else
+        : f_post (IfS typedExpressionIR_cond statementIR_then statementIR_else)
   ---- ;; check condition expression
-  -- Expr_ok: p TC |- expression_cond : typedExpressionIR_cond
+  -- Expr_ok: LOCAL TC |- expression_cond : typedExpressionIR_cond
   ---- ;; fetch annotation
   ---- ;; the condition must be a boolean type
   -- if _ `( BoolT _ ) = typedExpressionIR_cond
   ---- ;; check then and else statements
-  -- Stmt_ok: p TC f |- statement_then : TC_then f_then statementIR_then
-  -- Stmt_ok: p TC f |- statement_else : TC_else f_else statementIR_else
+  -- Stmt_ok: TC f |- statement_then : TC_then f_then statementIR_then
+  -- Stmt_ok: TC f |- statement_else : TC_else f_else statementIR_else
   -- if f_post = $join_flow(f_then, f_else)
+
+rule Stmt_ok/conditionalStatement:
+  TC f |- conditionalStatement : TC f_post conditionalStatementIR
+  -- ConditionalStmt_ok:
+      TC f |- conditionalStatement : f_post conditionalStatementIR
 
 ;;; switchStatement
 ;;; syntax switchStatement = SwitchS expression switchCase*
@@ -227,8 +249,8 @@ rule SwitchCases_table_ok/cons:
       TC f_h tid_table |- switchCase_t* : f_t switchCaseIR_t* switchLabel_t*
 
 rule Stmt_ok/switch-table-apply:
-  LOCAL TC f |- SwitchS expression_switch switchCase*
-              : TC f_post switchStatementIR
+  TC f |- SwitchS expression_switch switchCase*
+        : TC f_post switchStatementIR
   ---- ;; check expression
   -- Expr_ok: LOCAL TC |- expression_switch : typedExpressionIR_switch
   -- if _ `( typeIR_switch _ ) = typedExpressionIR_switch
@@ -329,8 +351,8 @@ def $compat'_switch(typeIR) = false
   -- otherwise
 
 rule Stmt_ok/switch-general:
-  LOCAL TC f |- SwitchS expression_switch switchCase*
-              : TC f_post switchStatementIR
+  TC f |- SwitchS expression_switch switchCase*
+        : TC f_post switchStatementIR
   ---- ;; check expression
   -- Expr_ok: LOCAL TC |- expression_switch : typedExpressionIR_switch
   -- if _ `( typeIR_switch _ ) = typedExpressionIR_switch
@@ -353,49 +375,21 @@ rule Stmt_ok/switch-general:
 
 rule BlockElementStmt_ok/constantDeclaration:
   TC_0 f |- constantDeclaration : TC_1 f constantDeclarationIR
-  -- Decl_ok: LOCAL TC_0 |- constantDeclaration : TC_1 constantDeclarationIR
+  -- ConstantDecl_ok:
+      LOCAL TC_0 |- constantDeclaration : TC_1 constantDeclarationIR
 
 ;;; variableDeclaration
-;;; syntax variableDeclaration = VarD type name initializer?
 
-rule BlockElementStmt_ok/variableDeclaration-none:
-  TC_0 f |- VarD type name eps
-          : TC_1 f variableDeclarationIR
-  ---- ;; check type
-  -- Type_ok: LOCAL TC_0 |- type : typeIR eps
-  -- Type_wf: $bound(LOCAL, TC_0) |- typeIR
-  ---- ;; check that the type is assignable
-  -- if $is_assignable_typeIR(typeIR)
-  ---- ;; update the context
-  -- if TC_1 = $add_var(LOCAL, TC_0, name, INOUT typeIR DYN eps)
-  ---- ;; create IR
-  -- if variableDeclarationIR = VarD typeIR name eps
-
-rule BlockElementStmt_ok/variableDeclaration-some:
-  TC_0 f |- VarD type name expression_init
-          : TC_1 f variableDeclarationIR
-  ---- ;; check type
-  -- Type_ok: LOCAL TC_0 |- type : typeIR eps
-  -- Type_wf: $bound(LOCAL, TC_0) |- typeIR
-  ---- ;; check that the type is assignable
-  -- if $is_assignable_typeIR(typeIR)
-  ---- ;; check expression
-  -- Expr_ok: LOCAL TC_0 |- expression_init : typedExpressionIR_init
-  ---- ;; check that the expression matches the type
-  ---- ;; while inserting implicit casts if necessary
-  -- if typedExpressionIR_init_cast
-      = $coerce_unary(typedExpressionIR_init, typeIR)
-  ---- ;; update the context
-  -- if TC_1 = $add_var(LOCAL, TC_0, name, INOUT typeIR DYN eps)
-  ---- ;; create IR
-  -- if variableDeclarationIR
-      = VarD typeIR name typedExpressionIR_init_cast
+rule BlockElementStmt_ok/variableDeclaration:
+  TC_0 f |- variableDeclaration : TC_1 f variableDeclarationIR
+  -- VariableDecl_ok:
+      LOCAL TC_0 |- variableDeclaration : TC_1 variableDeclarationIR
 
 ;;; statement
 
 rule BlockElementStmt_ok/statement:
   TC_0 f |- statement : TC_1 f_post statementIR
-  -- Stmt_ok: LOCAL TC_0 f |- statement : TC_1 f_post statementIR
+  -- Stmt_ok: TC_0 f |- statement : TC_1 f_post statementIR
 
 ;;
 ;; syntax blockElementStatementList

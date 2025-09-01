@@ -3,7 +3,7 @@ Running typing test on 310 files
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/accept_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/accept_e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:451.6-451.21: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:503.6-503.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/action-bind.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/action-bind.p4
@@ -41,15 +41,15 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/binary_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/bitExtract_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/bitExtract_e.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:383.6-383.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:58.6-58.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/call-table.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/call-table.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/call1_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/call1_e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:37.6-37.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:78.6-78.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/compound-assignment.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/compound-assignment.p4
@@ -57,7 +57,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/compound-assignment.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/conditional_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/conditional_e.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:398.6-398.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:170.6-170.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/const.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/const.p4
@@ -69,7 +69,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/const1_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/const_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/const_e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:30.6-30.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/constructor1_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/constructor1_e.p4
@@ -101,11 +101,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/default-initializer-er
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/default-last-switch.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/default-last-switch.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:195.6-195.26: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:217.6-217.26: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/default-param.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/default-param.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/default_action.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/default_action.p4
@@ -117,7 +117,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/default_action1.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/directionless.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/directionless.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:64.6-64.13: relation was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:39.6-39.19: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/div.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/div.p4
@@ -147,7 +147,7 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/dup-param2.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/dup-param3.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/dup-param3.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/dupConst.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/dupConst.p4
@@ -155,15 +155,15 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/dupConst.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/duplicate-label.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/duplicate-label.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:398.6-398.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:392.6-392.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/enumCast.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/enumCast.p4
-../../../../spec-concrete/5.13.1-typing-parser-statement.watsup:254.10-254.23: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:62.10-62.23: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/equality-fail.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/equality-fail.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:142.6-142.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:159.6-159.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/expression_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/expression_e.p4
@@ -171,7 +171,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/expression_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/extern.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/extern.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/extract.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/extract.p4
@@ -181,7 +181,7 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/extract1.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/factory-err2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/factory-err2.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/function1_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/function1_e.p4
@@ -189,15 +189,15 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/function1_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/function_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/function_e.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/function_e1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/function_e1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/function_e2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/function_e2.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/functors2_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/functors2_e.p4
@@ -205,7 +205,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/functors2_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/functors3_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/functors3_e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:37.6-37.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:78.6-78.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
@@ -225,19 +225,19 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/header1_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/header2_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/header2_e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:736.6-736.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/header3.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/header3.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:736.6-736.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/implicit.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/implicit.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:387.10-387.23: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:62.10-62.23: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/incorrect-label.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/incorrect-label.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:205.6-205.26: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:227.6-227.26: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
@@ -257,11 +257,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/inro.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/interface1_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/interface1_e.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/interface_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/interface_e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:37.6-37.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:78.6-78.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/invalid-invalid.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/invalid-invalid.p4
@@ -291,11 +291,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue1230.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue1296.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue1296.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:58.6-58.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:99.6-99.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue1331.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue1331.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue1336.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue1336.p4
@@ -323,11 +323,11 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/issue1803_same_table_name.
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue1932-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue1932-1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:306.17-306.42: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:353.17-353.42: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue1932-2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue1932-2.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:306.17-306.42: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:353.17-353.42: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue1932.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue1932.p4
@@ -371,7 +371,7 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/issue2206.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2220.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2220.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:387.10-387.23: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:62.10-62.23: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4
@@ -386,14 +386,14 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/issue2260-1.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2267.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2267.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:79.17-79.25: function was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:55.17-55.25: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2283_2-bmv2.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue2283_2-bmv2.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2290.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2290.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:736.6-736.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2317.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2317.p4
@@ -405,26 +405,26 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2332.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2335.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2335.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:410.6-410.25: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:385.6-385.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2354-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2354-1.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:64.6-64.13: relation was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:39.6-39.19: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2354.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2354.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:64.6-64.13: relation was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:39.6-39.19: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2373.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue2373.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2413.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2413.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2441.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2441.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2444-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2444-1.p4
@@ -432,14 +432,14 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2444-1.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2454.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2454.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2496.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue2496.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2525.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2525.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:205.6-205.26: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:227.6-227.26: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2544_recursive.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2544_recursive.p4
@@ -457,22 +457,22 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/issue2545.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2597.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue2597.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue2835-bmv2.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue2835-bmv2.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3045-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3045-1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3045-2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3045-2.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3045.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3045.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3057-1.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue3057-1.p4
@@ -487,7 +487,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3153.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3170-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3170-1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3170.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3170.p4
@@ -499,7 +499,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3188.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3197-e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3197-e.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3210.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3210.p4
@@ -507,7 +507,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3210.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3221.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3221.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:102.6-102.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:117.6-117.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3233.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue3233.p4
@@ -551,7 +551,7 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/issue3299.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3304.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3304.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:410.6-410.25: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:385.6-385.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3305.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3305.p4
@@ -567,7 +567,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3335.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3338.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3338.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:451.6-451.21: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:503.6-503.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3345.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3345.p4
@@ -575,11 +575,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3345.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3346.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3346.p4
-../../../../spec-concrete/5.13.3-typing-parser-declaration.watsup:93.6-93.24: relation was not matched
+../../../../spec-concrete/5.13.3-typing-parser-declaration.watsup:67.6-67.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3359.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3359.p4
-../../../../spec-concrete/5.13.3-typing-parser-declaration.watsup:93.6-93.24: relation was not matched
+../../../../spec-concrete/5.13.3-typing-parser-declaration.watsup:29.6-29.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3363.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue3363.p4
@@ -597,38 +597,38 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3442.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue345.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue345.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3522.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3522.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:383.6-383.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:58.6-58.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3534.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3534.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:109.35-109.48: function was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:124.35-124.48: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3589.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3589.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:383.6-383.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:58.6-58.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3611.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3611.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:205.6-205.26: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:227.6-227.26: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3613.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue3613.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3622.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3622.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:205.6-205.26: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:227.6-227.26: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3623-2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3623-2.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:267.10-267.23: function was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:289.10-289.23: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3623-3.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3623-3.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:267.10-267.23: function was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:289.10-289.23: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3644-1.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue3644-1.p4
@@ -661,19 +661,19 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3750.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3751.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3751.p4
-../../../../spec-concrete/5.13.3-typing-parser-declaration.watsup:93.6-93.24: relation was not matched
+../../../../spec-concrete/5.13.3-typing-parser-declaration.watsup:67.6-67.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3787.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3787.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3808-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3808-1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3808.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3808.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3813.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3813.p4
@@ -681,35 +681,35 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3813.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3814.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3814.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:37.6-37.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:78.6-78.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3846.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3846.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:131.6-131.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:146.6-146.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue3847.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue3847.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:131.6-131.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:146.6-146.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue388.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue388.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:40.6-40.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:81.6-81.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue394.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue394.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:96.6-96.25: relation was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:30.6-30.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue401.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue401.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:383.6-383.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:58.6-58.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue407-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue407-1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:736.6-736.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue413.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue413.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue4136.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue4136.p4
@@ -717,11 +717,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue4136.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue4140.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue4140.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:44.17-44.25: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:85.17-85.25: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue4142.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue4142.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:299.6-299.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue4144.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue4144.p4
@@ -735,15 +735,15 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue435.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_info.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_info.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:451.6-451.21: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:503.6-503.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_warning.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_warning.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:451.6-451.21: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:503.6-503.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue4365_no_disable_error.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue4365_no_disable_error.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:451.6-451.21: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:503.6-503.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue473.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue473.p4
@@ -759,11 +759,11 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/issue532.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue561-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue561-1.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:387.10-387.23: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:62.10-62.23: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue584.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue584.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue600.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/issue600.p4
@@ -774,7 +774,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue67.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue764.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue764.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue774-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue774-1.p4
@@ -782,11 +782,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue774-1.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue774-2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue774-2.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue803-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue803-1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:58.6-58.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:99.6-99.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue807.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue807.p4
@@ -794,11 +794,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue807.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue816-1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue816-1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue816.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue816.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue818.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue818.p4
@@ -810,7 +810,7 @@ cannot transpose a matrix of value batches
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/issue819.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/issue819.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/key-name.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/key-name.p4
@@ -830,7 +830,7 @@ Excluding file: ../../../../p4c/testdata/p4_16_errors/loop3-err.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/methodArgDontcare.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/methodArgDontcare.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:58.6-58.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:99.6-99.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/minWidth.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/minWidth.p4
@@ -838,7 +838,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/minWidth.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/missing_actions.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/missing_actions.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:76.6-76.14: relation was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:52.6-52.14: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/missing_match.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/missing_match.p4
@@ -857,11 +857,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/mux_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/named-fail.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/named-fail.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/named-fail1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/named-fail1.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/neg.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/neg.p4
@@ -877,11 +877,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/next.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/nostart.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/nostart.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:451.6-451.21: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:503.6-503.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/not_bound.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/not_bound.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:43.6-43.20: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:50.6-50.20: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/p_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/p_e.p4
@@ -889,15 +889,15 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/p_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/package.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/package.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/param.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/param.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:64.6-64.13: relation was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:39.6-39.19: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/parser-arg.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/parser-arg.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/persistent_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/persistent_e.p4
@@ -913,7 +913,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/psa-meter2.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/psa-type-hdr.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/psa-type-hdr.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/push_nonconstant.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/push_nonconstant.p4
@@ -937,7 +937,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/select-varbits.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/self-call.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/self-call.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:37.6-37.24: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:78.6-78.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/serEnumImplCast.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/serEnumImplCast.p4
@@ -945,11 +945,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/serEnumImplCast.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/serenum-type.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/serenum-type.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:559.35-559.48: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:611.35-611.48: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/serenum-typedef.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/serenum-typedef.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:559.35-559.48: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:611.35-611.48: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/shift-int-non-const.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/shift-int-non-const.p4
@@ -964,7 +964,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/signed.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/signs.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/signs.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:387.10-387.23: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:62.10-62.23: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/slice_out_of_bound.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/slice_out_of_bound.p4
@@ -997,7 +997,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/stack-const-index-out-
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/stack1_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/stack1_e.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:365.6-365.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:40.6-40.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/stack2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/stack2.p4
@@ -1009,19 +1009,19 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/stack3.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/stack_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/stack_e.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:410.6-410.25: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:385.6-385.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/string-e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/string-e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/string-e1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/string-e1.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:736.6-736.24: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/string-e2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/string-e2.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:48.6-48.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:55.6-55.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/struct_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/struct_e.p4
@@ -1094,7 +1094,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/tuple-left.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/tuple-newtype.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/tuple-newtype.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/tuple-to-header.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/tuple-to-header.p4
@@ -1117,7 +1117,7 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/type-in-expr-lex1.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/type-in-expr.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/type-in-expr.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/type-params_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/type-params_e.p4
@@ -1129,11 +1129,11 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/typecheck1_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/typecheck_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/typecheck_e.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:910.6-910.13: relation was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:970.6-970.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/underscore1_e.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/underscore1_e.p4
@@ -1153,27 +1153,27 @@ Error on typecheck: ../../../../p4c/testdata/p4_16_errors/underscore_e.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/virtual1.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/virtual1.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:109.35-109.48: function was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:124.35-124.48: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/virtual2.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/virtual2.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:109.35-109.48: function was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:124.35-124.48: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/virtual3.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/virtual3.p4
-../../../../spec-concrete/5.10-typing-statement.watsup:398.6-398.13: relation was not matched
+../../../../spec-concrete/5.10-typing-statement.watsup:392.6-392.13: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/virtual4.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/virtual4.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:196.29-196.41: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:238.29-238.41: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/virtual5.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/virtual5.p4
-../../../../spec-concrete/5.11-typing-declaration.watsup:154.6-154.18: function was not matched
+../../../../spec-concrete/5.11-typing-declaration.watsup:196.6-196.18: function was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/virtual6.p4
 Error on typecheck: ../../../../p4c/testdata/p4_16_errors/virtual6.p4
-../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:20.6-20.13: relation was not matched
+../../../../spec-concrete/5.14.2-typing-control-declaration.watsup:21.6-21.21: relation was not matched
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_errors/width1_e.p4
 Excluding file: ../../../../p4c/testdata/p4_16_errors/width1_e.p4

@@ -5,7 +5,7 @@
 ;;; constantDeclaration
 ;;; syntax constantDeclaration = ConstD type name initializer
 
-rule Decl_ok/constantDeclaration:
+rule ConstantDecl_ok:
   p TC_0 |- ConstD type name expression_value
           : TC_1 constantDeclarationIR
   ---- ;; check type
@@ -25,10 +25,51 @@ rule Decl_ok/constantDeclaration:
   ---- ;; create IR
   -- if constantDeclarationIR = ConstD typeIR name value
 
+rule Decl_ok/constantDeclaration:
+  TC_0 |- constantDeclaration : TC_1 constantDeclarationIR
+  -- ConstantDecl_ok:
+      GLOBAL TC_0 |- constantDeclaration : TC_1 constantDeclarationIR
+
+;;; variableDeclaration (though not inside declaration)
+;;; syntax variableDeclaration = VarD type name initializer?
+
+rule VariableDecl_ok/none:
+  p TC_0 |- VarD type name eps
+          : TC_1 variableDeclarationIR
+  ---- ;; check type
+  -- Type_ok: p TC_0 |- type : typeIR eps
+  -- Type_wf: $bound(p, TC_0) |- typeIR
+  ---- ;; check that the type is assignable
+  -- if $is_assignable_typeIR(typeIR)
+  ---- ;; update the context
+  -- if TC_1 = $add_var(p, TC_0, name, INOUT typeIR DYN eps)
+  ---- ;; create IR
+  -- if variableDeclarationIR = VarD typeIR name eps
+
+rule VariableDecl_ok/some:
+  p TC_0 |- VarD type name expression_init
+          : TC_1 variableDeclarationIR
+  ---- ;; check type
+  -- Type_ok: p TC_0 |- type : typeIR eps
+  -- Type_wf: $bound(p, TC_0) |- typeIR
+  ---- ;; check that the type is assignable
+  -- if $is_assignable_typeIR(typeIR)
+  ---- ;; check expression
+  -- Expr_ok: p TC_0 |- expression_init : typedExpressionIR_init
+  ---- ;; check that the expression matches the type
+  ---- ;; while inserting implicit casts if necessary
+  -- if typedExpressionIR_init_cast
+      = $coerce_unary(typedExpressionIR_init, typeIR)
+  ---- ;; update the context
+  -- if TC_1 = $add_var(p, TC_0, name, INOUT typeIR DYN eps)
+  ---- ;; create IR
+  -- if variableDeclarationIR
+      = VarD typeIR name typedExpressionIR_init_cast
+
 ;;; instantiation
 ;;; syntax instantiation = InstD type argument* name objectInitializer?
 
-rule Decl_ok/instantiation-nameT-none:
+rule InstanceDecl_ok/instantiation-nameT-none:
   p TC_0 |- InstD (NameT prefixedName) argument* name eps
           : TC_1 instantiationIR
   ---- ;; check arguments
@@ -47,7 +88,7 @@ rule Decl_ok/instantiation-nameT-none:
       = InstD typeIR_object prefixedName
           typeArgumentIR_inferred* argumentIR* name eps
 
-rule Decl_ok/instantiation-specT-none:
+rule InstanceDecl_ok/instantiation-specT-none:
   p TC_0 |- InstD (SpecT prefixedName typeArgument*) argument* name eps
           : TC_1 instantiationIR
   ---- ;; check type arguments
@@ -119,7 +160,8 @@ rule Decl_object_ok/instantiation:
   p TC_0 frame rdenv |- instantiation
                       : frame_init rdenv instantiationIR
   ---- ;; check instantiation
-  -- Decl_ok: p TC_0 |- instantiation : TC_1 instantiationIR
+  -- InstanceDecl_ok:
+      p TC_0 |- instantiation : TC_1 instantiationIR
   ---- ;; add instance
   -- if InstD _ _ _ _ name _ = instantiationIR
   -- if varTypeIR = $find_var(p, TC_1, CURRENT name)
@@ -166,7 +208,7 @@ def $subst_rdenv(
   -- if rdenv_extern_subst
       = $update_map<rid, routineTypeDefIR>(rdenv_extern, rid, routineTypeDefIR_subst)
 
-rule Decl_ok/instantiation-nameT-objectInitializer:
+rule InstanceDecl_ok/instantiation-nameT-objectInitializer:
   p TC_0 |- InstD (NameT prefixedName) argument* name objectDeclaration*
           : TC_2 instantiationIR
   ---- ;; check arguments
@@ -182,7 +224,7 @@ rule Decl_ok/instantiation-nameT-objectInitializer:
   -- if $is_extern_object_typeIR($canon(typeIR_object))
   -- if typeIR_object
       = SpecT
-          (PolyTD (ExternT tid_extern rdenv_extern) tid_expl* tid_impl*)
+          (PolyTD (ExternT tid_extern rdenv_extern) tid_extern_expl* tid_extern_impl*)
           typeIR_arg*
   ---- ;; temporarily add "this" to the context
   -- if TC_1 = $add_var(LOCAL, TC_0, "this", NO typeIR_object CTK eps)
@@ -191,12 +233,12 @@ rule Decl_ok/instantiation-nameT-objectInitializer:
       p TC_1 (`{ eps }) (`{ eps }) |- objectDeclaration*
                                     : frame_init rdenv_init objectDeclarationIR*
   ---- ;; create updated extern type
-  -- if tid* = tid_expl* ++ tid_impl*
+  -- if tid* = tid_extern_expl* ++ tid_extern_impl*
   -- if theta = `{ (tid -> typeIR_arg)* }
   -- if rdenv_init_subst = $subst_rdenv(theta, rdenv_extern, rdenv_init)
   -- if typeIR_object_init
       = SpecT
-          (PolyTD (ExternT tid_extern rdenv_init_subst) tid_expl* tid_impl*)
+          (PolyTD (ExternT tid_extern rdenv_init_subst) tid_extern_expl* tid_extern_impl*)
           typeIR_arg*
   ---- ;; constructed object may not contain an abstract method
   -- if $is_concrete_extern_object(typeIR_object_init)
@@ -207,7 +249,7 @@ rule Decl_ok/instantiation-nameT-objectInitializer:
       = InstD typeIR_object_init prefixedName
           typeArgumentIR_inferred* argumentIR* name objectDeclarationIR*
 
-rule Decl_ok/instantiation-specT-objectInitializer:
+rule InstanceDecl_ok/instantiation-specT-objectInitializer:
   p TC_0 |- InstD (SpecT prefixedName typeArgument*) argument*
               name objectDeclaration*
           : TC_2 instantiationIR
@@ -227,7 +269,7 @@ rule Decl_ok/instantiation-specT-objectInitializer:
   -- if $is_extern_object_typeIR($canon(typeIR_object))
   -- if typeIR_object
       = SpecT
-          (PolyTD (ExternT tid_extern rdenv_extern) tid_expl* tid_impl*)
+          (PolyTD (ExternT tid_extern rdenv_extern) tid_extern_expl* tid_extern_impl*)
           typeIR_arg*
   ---- ;; temporarily add "this" to the context
   -- if TC_1 = $add_var(LOCAL, TC_0, "this", NO typeIR_object CTK eps)
@@ -236,12 +278,12 @@ rule Decl_ok/instantiation-specT-objectInitializer:
       p TC_1 (`{ eps }) (`{ eps }) |- objectDeclaration*
                                     : frame_init rdenv_init objectDeclarationIR*
   ---- ;; create updated extern type
-  -- if tid* = tid_expl* ++ tid_impl*
+  -- if tid* = tid_extern_expl* ++ tid_extern_impl*
   -- if theta = `{ (tid -> typeIR_arg)* }
   -- if rdenv_init_subst = $subst_rdenv(theta, rdenv_extern, rdenv_init)
   -- if typeIR_object_init
       = SpecT
-          (PolyTD (ExternT tid_extern rdenv_init_subst) tid_expl* tid_impl*)
+          (PolyTD (ExternT tid_extern rdenv_init_subst) tid_extern_expl* tid_extern_impl*)
           typeIR_arg*
   ---- ;; constructed object may not contain an abstract method
   -- if $is_concrete_extern_object(typeIR_object_init)
@@ -252,13 +294,18 @@ rule Decl_ok/instantiation-specT-objectInitializer:
       = InstD typeIR_object_init prefixedName
           typeArgumentIR_inferred* argumentIR* name objectDeclarationIR*
 
+rule Decl_ok:
+  TC_0 |- instantiation : TC_1 instantiationIR
+  -- InstanceDecl_ok:
+      GLOBAL TC_0 |- instantiation : TC_1 instantiationIR
+
 ;;; functionDeclaration
 ;;; syntax functionDeclaration =
 ;;;   FuncD typeOrVoid typeParameter* parameter* blockStatement
 
 rule Decl_ok/functionDeclaration:
-  p TC_0 |- FuncD typeOrVoid name typeParameter* parameter* blockStatement
-          : TC_4 functionDeclarationIR
+  TC_0 |- FuncD typeOrVoid name typeParameter* parameter* blockStatement
+        : TC_4 functionDeclarationIR
   ---- ;; check type parameters
   -- if (tid_expl = typeParameter)*
   -- if TC_1 = $add_types(LOCAL, TC_0, tid_expl*, (MonoTD (NameT tid_expl))*)
@@ -271,14 +318,14 @@ rule Decl_ok/functionDeclaration:
   ---- ;; check body
   -- if TC_3 = TC_2[ .LOCAL.KIND = FUNC typeIR_ret ]
   -- Block_ok: TC_3 CONT |- blockStatement : _ f blockStatementIR
-  ---- ;; check that the function returns on all paths, if it is not void
-  -- if f = RET \/ typeIR_ret = VoidT
+  ---- ;; check that if the function does not return void, it returns on all paths
+  -- if (typeIR_ret =/= VoidT) => (f = RET)
   ---- ;; add function to the context
   -- if rid = $rid(name, parameter*)
   -- if routineTypeIR = FuncT parameterTypeIR* typeIR_ret
   -- if routineTypeDefIR = PolyTD routineTypeIR tid_expl* tid_impl*
-  -- RoutineTypeDef_wf: $bound(p, TC_0) |- routineTypeDefIR
-  -- if TC_4 = $add_routine_overload(p, TC_0, rid, routineTypeDefIR)
+  -- RoutineTypeDef_wf: $bound(GLOBAL, TC_0) |- routineTypeDefIR
+  -- if TC_4 = $add_routine_overload(GLOBAL, TC_0, rid, routineTypeDefIR)
   ---- ;; create IR
   -- if functionDeclarationIR
       = FuncD typeIR_ret name
@@ -287,7 +334,7 @@ rule Decl_ok/functionDeclaration:
 ;;; actionDeclaration
 ;;; syntax actionDeclaration = ActionD name parameter* blockStatement
 
-rule Decl_ok/actionDeclaration:
+rule ActionDecl_ok:
   p TC_0 |- ActionD name parameter* blockStatement
           : TC_3 actionDeclarationIR
   ---- ;; set local context
@@ -308,11 +355,16 @@ rule Decl_ok/actionDeclaration:
   -- if actionDeclarationIR
       = ActionD name parameterIR* blockStatementIR
 
+rule Decl_ok/actionDeclaration:
+  TC_0 |- actionDeclaration : TC_1 actionDeclarationIR
+  -- ActionDecl_ok:
+      GLOBAL TC_0 |- actionDeclaration : TC_1 actionDeclarationIR
+
 ;;; errorDeclaration
 ;;; syntax errorDeclaration = ErrD name*
 
 rule Decl_ok/errorDeclaration:
-  GLOBAL TC_0 |- ErrD name* : TC_1 (ErrD name*) 
+  TC_0 |- ErrD name* : TC_1 (ErrD name*) 
   ---- ;; check that error names are distinct
   -- if $distinct_<name>(name*)
   ---- ;; update the context
@@ -324,7 +376,7 @@ rule Decl_ok/errorDeclaration:
 ;;; syntax matchKindDeclaration = MatchKindD name*
 
 rule Decl_ok/matchKindDeclaration:
-  GLOBAL TC_0 |- MatchKindD name* : TC_1 (MatchKindD name*)
+  TC_0 |- MatchKindD name* : TC_1 (MatchKindD name*)
   ---- ;; check that match kind names are distinct
   -- if $distinct_<name>(name*)
   ---- ;; update the context
@@ -339,7 +391,7 @@ rule Decl_ok/matchKindDeclaration:
 ;;;;   ExternFuncD typeOrVoid name typeParameter* parameter*
 
 rule Decl_ok/externDeclaration-externFunctionDeclaration:
-  GLOBAL TC_0 |- ExternFuncD typeOrVoid name typeParameter* parameter*
+  TC_0 |- ExternFuncD typeOrVoid name typeParameter* parameter*
                : TC_4 externFunctionDeclarationIR
   ---- ;; check type parameters
   -- if (tid_expl = typeParameter)*
@@ -389,8 +441,8 @@ def $split_constructors(methodPrototype_h :: methodPrototype_t*)
       = $split_constructors(methodPrototype_t*)
 
 rule Decl_ok/externDeclaration-externObjectDeclaration:
-  GLOBAL TC_0 |- ExternObjectD name typeParameter* methodPrototype*
-               : TC_8 externObjectDeclarationIR
+  TC_0 |- ExternObjectD name typeParameter* methodPrototype*
+        : TC_8 externObjectDeclarationIR
   ---- ;; split methods and constructors
   -- if (methodPrototype_constructor*, methodPrototype_method*)
       = $split_constructors(methodPrototype*)
@@ -426,10 +478,10 @@ rule Decl_ok/externDeclaration-externObjectDeclaration:
 ;;;     parserLocalDeclaration* parserState*
 
 rule Decl_ok/parserDeclaration:
-  GLOBAL TC_0 |- ParserD name eps
+  TC_0 |- ParserD name eps
                   parameter* constructorParameter*
                   parserLocalDeclaration* parserState*
-               : TC_6 parserDeclarationIR
+        : TC_6 parserDeclarationIR
   ---- ;; set block context
   -- if TC_1 = TC_0 [ .BLOCK.KIND = PARSER ]
   ---- ;; check constructor parameters
@@ -475,10 +527,10 @@ rule Decl_ok/parserDeclaration:
 ;;;     controlLocalDeclaration* controlBody
 
 rule Decl_ok/controlDeclaration:
-  GLOBAL TC_0 |- ControlD name eps
+  TC_0 |- ControlD name eps
                   parameter* constructorParameter*
                   controlLocalDeclaration* controlBody
-               : TC_6 controlDeclarationIR
+        : TC_6 controlDeclarationIR
   ---- ;; set block context
   -- if TC_1 = TC_0 [ .BLOCK.KIND = CONTROL ]
   ---- ;; check constructor parameters
@@ -528,9 +580,9 @@ rule Decl_ok/controlDeclaration:
 
 ;;;;;; EnumD name name*
 
-rule Decl_ok/typeDeclaration-derivedTypeDeclaration-enumTypeDeclaration-enumD:
-  GLOBAL TC_0 |- EnumD name name_field*
-               : TC_2 enumTypeDeclarationIR
+rule DerivedTypeDecl_ok/enumTypeDeclaration-enumD:
+  TC_0 |- EnumD name name_field*
+        : TC_2 enumTypeDeclarationIR
   ---- ;; create enum type and add to context
   -- if typeIR_enum = EnumT name name_field*
   -- TypeDef_wf: $bound(GLOBAL, TC_0) |- MonoTD typeIR_enum
@@ -586,9 +638,9 @@ rule Enum_serializable_fields_ok/cons:
   -- if namedExpressionIR* = namedExpressionIR_h :: namedExpressionIR_t*
   -- if value_field* = value_field_h :: value_field_t*
 
-rule Decl_ok/typeDeclaration-derivedTypeDeclaration-enumTypeDeclaration-senumD:
-  GLOBAL TC_0 |- SEnumD type name namedExpression_field*
-               : TC_3 enumTypeDeclarationIR
+rule DerivedTypeDecl_ok/enumTypeDeclaration-senumD:
+  TC_0 |- SEnumD type name namedExpression_field*
+        : TC_3 enumTypeDeclarationIR
   ---- ;; check underlying type
   -- Type_ok: GLOBAL TC_0 |- type : typeIR eps
   -- Type_wf: $bound(GLOBAL, TC_0) |- typeIR
@@ -613,9 +665,9 @@ rule Decl_ok/typeDeclaration-derivedTypeDeclaration-enumTypeDeclaration-senumD:
 ;;;;; syntax structTypeDeclaration =
 ;;;;;   StructD name typeParameter* typeField*
 
-rule Decl_ok/typeDeclaration-derivedTypeDeclaration-structTypeDeclaration:
-  GLOBAL TC_0 |- StructD name typeParameter* typeField*
-               : TC_2 structTypeDeclarationIR
+rule DerivedTypeDecl_ok/structTypeDeclaration:
+  TC_0 |- StructD name typeParameter* typeField*
+        : TC_2 structTypeDeclarationIR
   ---- ;; check type parameters
   -- if (tid_expl = typeParameter)*
   -- if TC_1 = $add_types(BLOCK, TC_0, tid_expl*, (MonoTD (NameT tid_expl))*)
@@ -636,9 +688,9 @@ rule Decl_ok/typeDeclaration-derivedTypeDeclaration-structTypeDeclaration:
 ;;;;; syntax headerTypeDeclaration =
 ;;;;;   HeaderD name typeParameter* typeField*
 
-rule Decl_ok/typeDeclaration-derivedTypeDeclaration-headerTypeDeclaration:
-  GLOBAL TC_0 |- HeaderD name typeParameter* typeField*
-               : TC_2 headerTypeDeclarationIR
+rule DerivedTypeDecl_ok/headerTypeDeclaration:
+  TC_0 |- HeaderD name typeParameter* typeField*
+        : TC_2 headerTypeDeclarationIR
   ---- ;; check type parameters
   -- if (tid_expl = typeParameter)*
   -- if TC_1 = $add_types(BLOCK, TC_0, tid_expl*, (MonoTD (NameT tid_expl))*)
@@ -647,10 +699,10 @@ rule Decl_ok/typeDeclaration-derivedTypeDeclaration-headerTypeDeclaration:
   -- (Type_ok: BLOCK TC_1 |- type_field : typeIR_field tid_impl_field*)*
   -- if tid_impl* = $concat_<tid>(tid_impl_field**)
   ---- ;; create header type and add to context
-  -- if typeIR_struct = HeaderT name (typeIR_field name_field)*
-  -- if typeDefIR_struct = PolyTD typeIR_struct tid_expl* tid_impl*
-  -- TypeDef_wf: $bound(GLOBAL, TC_0) |- typeDefIR_struct
-  -- if TC_2 = $add_type(GLOBAL, TC_0, name, typeDefIR_struct)
+  -- if typeIR_header = HeaderT name (typeIR_field name_field)*
+  -- if typeDefIR_header = PolyTD typeIR_header tid_expl* tid_impl*
+  -- TypeDef_wf: $bound(GLOBAL, TC_0) |- typeDefIR_header
+  -- if TC_2 = $add_type(GLOBAL, TC_0, name, typeDefIR_header)
   ---- ;; create IR
   -- if headerTypeDeclarationIR
       = HeaderD name tid_expl* tid_impl* (typeIR_field name_field)*
@@ -659,9 +711,9 @@ rule Decl_ok/typeDeclaration-derivedTypeDeclaration-headerTypeDeclaration:
 ;;;;; syntax headerUnionTypeDeclaration =
 ;;;;;   HeaderUnionD name typeParameter* typeField*
 
-rule Decl_ok/typeDeclaration-derivedTypeDeclaration-headerUnionTypeDeclaration:
-  GLOBAL TC_0 |- HeaderUnionD name typeParameter* typeField*
-               : TC_2 headerUnionTypeDeclarationIR
+rule DerivedTypeDecl_ok/headerUnionTypeDeclaration:
+  TC_0 |- HeaderUnionD name typeParameter* typeField*
+        : TC_2 headerUnionTypeDeclarationIR
   ---- ;; check type parameters
   -- if (tid_expl = typeParameter)*
   -- if TC_1 = $add_types(BLOCK, TC_0, tid_expl*, (MonoTD (NameT tid_expl))*)
@@ -670,13 +722,19 @@ rule Decl_ok/typeDeclaration-derivedTypeDeclaration-headerUnionTypeDeclaration:
   -- (Type_ok: BLOCK TC_1 |- type_field : typeIR_field tid_impl_field*)*
   -- if tid_impl* = $concat_<tid>(tid_impl_field**)
   ---- ;; create header type and add to context
-  -- if typeIR_struct = HeaderUnionT name (typeIR_field name_field)*
-  -- if typeDefIR_struct = PolyTD typeIR_struct tid_expl* tid_impl*
-  -- TypeDef_wf: $bound(GLOBAL, TC_0) |- typeDefIR_struct
-  -- if TC_2 = $add_type(GLOBAL, TC_0, name, typeDefIR_struct)
+  -- if typeIR_union = HeaderUnionT name (typeIR_field name_field)*
+  -- if typeDefIR_union = PolyTD typeIR_union tid_expl* tid_impl*
+  -- TypeDef_wf: $bound(GLOBAL, TC_0) |- typeDefIR_union
+  -- if TC_2 = $add_type(GLOBAL, TC_0, name, typeDefIR_union)
   ---- ;; create IR
   -- if headerUnionTypeDeclarationIR
       = HeaderUnionD name tid_expl* tid_impl* (typeIR_field name_field)*
+
+rule Decl_ok/derivedTypeDeclaration:
+  TC_0 |- derivedTypeDeclaration
+        : TC_1 derivedTypeDeclarationIR
+  -- DerivedTypeDecl_ok:
+      TC_0 |- derivedTypeDeclaration : TC_1 derivedTypeDeclarationIR
 
 ;;;; typedefDeclaration
 ;;;; syntax typedefDeclaration
@@ -687,8 +745,8 @@ rule Decl_ok/typeDeclaration-derivedTypeDeclaration-headerUnionTypeDeclaration:
 ;;;;;; PlainT type
 
 rule Decl_ok/typeDeclaration-typedefDeclaration-typdefD-plainT-non-extern-package:
-  GLOBAL TC_0 |- TypeDefD (PlainT type) name
-               : TC_1 typedefDeclarationIR
+  TC_0 |- TypeDefD (PlainT type) name
+        : TC_1 typedefDeclarationIR
   ---- ;; check type
   -- Type_ok: GLOBAL TC_0 |- type : typeIR eps
   -- Type_wf: $bound(GLOBAL, TC_0) |- typeIR
@@ -703,8 +761,8 @@ rule Decl_ok/typeDeclaration-typedefDeclaration-typdefD-plainT-non-extern-packag
   -- if typedefDeclarationIR = TypeDefD (PlainT typeIR) name
 
 rule Decl_ok/typeDeclaration-typedefDeclaration-typdefD-plainT-extern:
-  GLOBAL TC_0 |- TypeDefD (PlainT type) name
-               : TC_2 typedefDeclarationIR
+  TC_0 |- TypeDefD (PlainT type) name
+        : TC_2 typedefDeclarationIR
   ---- ;; check type
   -- Type_ok: GLOBAL TC_0 |- type : typeIR eps
   -- Type_wf: $bound(GLOBAL, TC_0) |- typeIR
@@ -732,8 +790,8 @@ rule Decl_ok/typeDeclaration-typedefDeclaration-typdefD-plainT-extern:
   -- if typedefDeclarationIR = TypeDefD (PlainT typeIR) name
 
 rule Decl_ok/typeDeclaration-typedefDeclaration-typdefD-plainT-package:
-  GLOBAL TC_0 |- TypeDefD (PlainT type) name
-               : TC_2 typedefDeclarationIR
+  TC_0 |- TypeDefD (PlainT type) name
+        : TC_2 typedefDeclarationIR
   ---- ;; check type
   -- Type_ok: GLOBAL TC_0 |- type : typeIR eps
   -- Type_wf: $bound(GLOBAL, TC_0) |- typeIR
@@ -763,11 +821,12 @@ rule Decl_ok/typeDeclaration-typedefDeclaration-typdefD-plainT-package:
 ;;;;;; DerivedT derivedTypeDeclaration
 
 rule Decl_ok/typeDeclaration-typedefDeclaration-typedefD-derivedT-mono:
-  GLOBAL TC_0 |- TypeDefD (DerivedT derivedTypeDeclaration) name
-               : TC_1 typedefDeclarationIR
+  TC_0 |- TypeDefD (DerivedT derivedTypeDeclaration) name
+        : TC_1 typedefDeclarationIR
   ---- ;; check type
-  -- Decl_ok: GLOBAL TC_0 |- derivedTypeDeclaration
-                           : TC_1 derivedTypeDeclarationIR
+  -- DerivedTypeDecl_ok:
+      TC_0 |- derivedTypeDeclaration
+            : TC_1 derivedTypeDeclarationIR
   ---- ;; find the created type
   -- if `{ tid }
       = $diff_set<tid>($dom_map<tid, typeDefIR>(TC_1.GLOBAL.TDENV),
@@ -782,11 +841,12 @@ rule Decl_ok/typeDeclaration-typedefDeclaration-typedefD-derivedT-mono:
       = TypeDefD (DerivedT derivedTypeDeclarationIR) name
 
 rule Decl_ok/typeDeclaration-typedefDeclaration-typedefD-derivedT-poly:
-  GLOBAL TC_0 |- TypeDefD (DerivedT derivedTypeDeclaration) name
-               : TC_1 typedefDeclarationIR
+  TC_0 |- TypeDefD (DerivedT derivedTypeDeclaration) name
+        : TC_1 typedefDeclarationIR
   ---- ;; check type
-  -- Decl_ok: GLOBAL TC_0 |- derivedTypeDeclaration
-                           : TC_1 derivedTypeDeclarationIR
+  -- DerivedTypeDecl_ok:
+      TC_0 |- derivedTypeDeclaration
+            : TC_1 derivedTypeDeclarationIR
   ---- ;; find the created type
   -- if `{ tid }
       = $diff_set<tid>($dom_map<tid, typeDefIR>(TC_1.GLOBAL.TDENV),
@@ -803,8 +863,8 @@ rule Decl_ok/typeDeclaration-typedefDeclaration-typedefD-derivedT-poly:
 ;;;;; NewTypeD type name
 
 rule Decl_ok/typeDeclaration-typedefDeclaration-newtypeD:
-  GLOBAL TC_0 |- NewTypeD type name
-               : TC_1 typedefDeclarationIR
+  TC_0 |- NewTypeD type name
+        : TC_1 typedefDeclarationIR
   ---- ;; check type
   -- Type_ok: GLOBAL TC_0 |- type : typeIR eps
   -- Type_wf: $bound(GLOBAL, TC_0) |- typeIR
@@ -819,8 +879,8 @@ rule Decl_ok/typeDeclaration-typedefDeclaration-newtypeD:
 ;;;; syntax parserTypeDeclaration = ParserTypeD name typeParameter* parameter*
 
 rule Decl_ok/typeDeclaration-parserTypeDeclaration:
-  GLOBAL TC_0 |- ParserTypeD name typeParameter* parameter*
-               : TC_3 parserTypeDeclarationIR
+  TC_0 |- ParserTypeD name typeParameter* parameter*
+        : TC_3 parserTypeDeclarationIR
   ---- ;; set block context
   -- if TC_1 = TC_0 [ .BLOCK.KIND = PARSER ]
   ---- ;; add type parameters to the context
@@ -842,8 +902,8 @@ rule Decl_ok/typeDeclaration-parserTypeDeclaration:
 ;;;; syntax controlTypeDeclaration = ControlTypeD name typeParameter* parameter*
 
 rule Decl_ok/typeDeclaration-controlTypeDeclaration:
-  GLOBAL TC_0 |- ControlTypeD name typeParameter* parameter*
-               : TC_3 controlTypeDeclarationIR
+  TC_0 |- ControlTypeD name typeParameter* parameter*
+        : TC_3 controlTypeDeclarationIR
   ---- ;; set block context
   -- if TC_1 = TC_0 [ .BLOCK.KIND = CONTROL ]
   ---- ;; add type parameters to the context
@@ -865,8 +925,8 @@ rule Decl_ok/typeDeclaration-controlTypeDeclaration:
 ;;;; syntax packageTypeDeclaration = PackageTypeD name typeParameter* constructorParameter*
 
 rule Decl_ok/typeDeclaration-packageTypeDeclaration:
-  GLOBAL TC_0 |- PackageTypeD name typeParameter* constructorParameter*
-               : TC_4 packageTypeDeclarationIR
+  TC_0 |- PackageTypeD name typeParameter* constructorParameter*
+        : TC_4 packageTypeDeclarationIR
   ---- ;; set block context
   -- if TC_1 = TC_0 [ .BLOCK.KIND = PACKAGE ]
   ---- ;; add type parameters to the context
@@ -902,13 +962,13 @@ rule Decl_ok/typeDeclaration-packageTypeDeclaration:
 ;;
 
 rule Decls_ok/nil:
-  p TC |- eps : TC eps
+  TC |- eps : TC eps
 
 rule Decls_ok/cons:
-  p TC_0 |- declaration_h :: declaration_t*
-          : TC_2 (declarationIR_h :: declarationIR_t*)
-  -- Decl_ok: p TC_0 |- declaration_h : TC_1 declarationIR_h
-  -- Decls_ok: p TC_1 |- declaration_t* : TC_2 declarationIR_t*
+  TC_0 |- declaration_h :: declaration_t*
+        : TC_2 (declarationIR_h :: declarationIR_t*)
+  -- Decl_ok: TC_0 |- declaration_h : TC_1 declarationIR_h
+  -- Decls_ok: TC_1 |- declaration_t* : TC_2 declarationIR_t*
 
 ;;
 ;;;; syntax p4program
@@ -917,4 +977,4 @@ rule Decls_ok/cons:
 rule Program_ok:
   |- declaration* : TC_1 declarationIR*
   -- if TC_0 = $empty_typingContext
-  -- Decls_ok: GLOBAL TC_0 |- declaration* : TC_1 declarationIR*
+  -- Decls_ok: TC_0 |- declaration* : TC_1 declarationIR*

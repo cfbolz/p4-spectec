@@ -9,60 +9,36 @@
 rule ControlLocalDecl_ok/constantDeclaration:
   TC_0 |- constantDeclaration
         : TC_1 constantDeclarationIR
-  -- Decl_ok: BLOCK TC_0 |- constantDeclaration
-                          : TC_1 constantDeclarationIR
+  -- ConstantDecl_ok:
+      BLOCK TC_0 |- constantDeclaration
+                  : TC_1 constantDeclarationIR
 
 ;;; instantiation
 
 rule ControlLocalDecl_ok/instantiation:
   TC_0 |- instantiation
         : TC_1 instantiationIR
-  -- Decl_ok: BLOCK TC_0 |- instantiation
-                          : TC_1 instantiationIR
+  -- InstanceDecl_ok:
+      BLOCK TC_0 |- instantiation
+                  : TC_1 instantiationIR
 
 ;;; variableDeclaration
-;;; syntax variableDeclaration = VarD type name initializer?
 
-rule ControlLocalDecl_ok/variableDeclaration-none:
-  TC_0 |- VarD type name eps
+rule ControlLocalDecl_ok/variableDeclaration:
+  TC_0 |- variableDeclaration
         : TC_1 variableDeclarationIR
-  ---- ;; check type
-  -- Type_ok: BLOCK TC_0 |- type : typeIR eps
-  -- Type_wf: $bound(BLOCK, TC_0) |- typeIR
-  ---- ;; check that the type is assignable
-  -- if $is_assignable_typeIR(typeIR)
-  ---- ;; update the context
-  -- if TC_1 = $add_var(BLOCK, TC_0, name, INOUT typeIR DYN eps)
-  ---- ;; create IR
-  -- if variableDeclarationIR = VarD typeIR name eps
-
-rule ControlLocalDecl_ok/variableDeclaration-some:
-  TC_0 |- VarD type name expression_init
-        : TC_1 variableDeclarationIR
-  ---- ;; check type
-  -- Type_ok: BLOCK TC_0 |- type : typeIR eps
-  -- Type_wf: $bound(BLOCK, TC_0) |- typeIR
-  ---- ;; check that the type is assignable
-  -- if $is_assignable_typeIR(typeIR)
-  ---- ;; check expression
-  -- Expr_ok: BLOCK TC_0 |- expression_init : typedExpressionIR_init
-  ---- ;; check that the expression matches the type
-  ---- ;; while inserting implicit casts if necessary
-  -- if typedExpressionIR_init_cast
-      = $coerce_unary(typedExpressionIR_init, typeIR)
-  ---- ;; update the context
-  -- if TC_1 = $add_var(BLOCK, TC_0, name, INOUT typeIR DYN eps)
-  ---- ;; create IR
-  -- if variableDeclarationIR
-      = VarD typeIR name typedExpressionIR_init_cast
+  -- VariableDecl_ok:
+      BLOCK TC_0 |- variableDeclaration
+                  : TC_1 variableDeclarationIR
 
 ;;; actionDeclaration
 
 rule ControlLocalDecl_ok/actionDeclaration:
   TC_0 |- actionDeclaration
         : TC_1 actionDeclarationIR
-  -- Decl_ok: BLOCK TC_0 |- actionDeclaration
-                          : TC_1 actionDeclarationIR
+  -- ActionDecl_ok:
+      BLOCK TC_0 |- actionDeclaration
+                  : TC_1 actionDeclarationIR
 
 ;;; tableDeclaration
 ;;; syntax tableDeclaration = TableD name tableProperty*

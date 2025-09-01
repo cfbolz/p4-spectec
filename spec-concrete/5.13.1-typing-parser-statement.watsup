@@ -219,76 +219,44 @@ rule ParserTransition_ok/selectE:
 rule ParserStmt_ok/constantDeclaration:
   TC_0 |- constantDeclaration
         : TC_1 constantDeclarationIR
-  -- Decl_ok: LOCAL TC_0 |- constantDeclaration
-                          : TC_1 constantDeclarationIR
+  -- ConstantDecl_ok:
+      LOCAL TC_0 |- constantDeclaration
+                  : TC_1 constantDeclarationIR
 
 ;;; variableDeclaration
-;;; syntax variableDeclaration = VarD type name initializer?
 
-rule ParserStmt_ok/variableDeclaration-none:
-  TC_0 |- VarD type name eps
-        : TC_1 variableDeclarationIR
-  ---- ;; check type
-  -- Type_ok: LOCAL TC_0 |- type : typeIR eps
-  -- Type_wf: $bound(LOCAL, TC_0) |- typeIR
-  ---- ;; check that the type is assignable
-  -- if $is_assignable_typeIR(typeIR)
-  ---- ;; update the context
-  -- if TC_1 = $add_var(LOCAL, TC_0, name, INOUT typeIR DYN eps)
-  ---- ;; create IR
-  -- if variableDeclarationIR = VarD typeIR name eps
-
-rule ParserStmt_ok/variableDeclaration-some:
-  TC_0 |- VarD type name expression_init
-        : TC_1 variableDeclarationIR
-  ---- ;; check type
-  -- Type_ok: LOCAL TC_0 |- type : typeIR eps
-  -- Type_wf: $bound(LOCAL, TC_0) |- typeIR
-  ---- ;; check that the type is assignable
-  -- if $is_assignable_typeIR(typeIR)
-  ---- ;; check expression
-  -- Expr_ok: LOCAL TC_0 |- expression_init : typedExpressionIR_init
-  ---- ;; check that the expression matches the type
-  ---- ;; while inserting implicit casts if necessary
-  -- if typedExpressionIR_init_cast
-      = $coerce_unary(typedExpressionIR_init, typeIR)
-  ---- ;; update the context
-  -- if TC_1 = $add_var(LOCAL, TC_0, name, INOUT typeIR DYN eps)
-  ---- ;; create IR
-  -- if variableDeclarationIR
-      = VarD typeIR name typedExpressionIR_init_cast
+rule ParserStmt_ok/variableDeclaration:
+  TC_0 |- variableDeclaration : TC_1 variableDeclarationIR
+  -- VariableDecl_ok:
+      LOCAL TC_0 |- variableDeclaration
+                  : TC_1 variableDeclarationIR
 
 ;;; emptyStatement
 
 rule ParserStmt_ok/emptyStatement:
-  TC |- emptyStatement
-      : TC emptyStatementIR
-  -- Stmt_ok: LOCAL TC CONT |- emptyStatement 
-                              : _ _ emptyStatementIR
+  TC |- EmptyS : TC EmptyS
 
 ;;; assignmentStatement
 
 rule ParserStmt_ok/assignmentStatement:
-  TC_0 |- assignmentStatement
-        : TC_1 assignmentStatementIR
-  -- Stmt_ok: LOCAL TC_0 CONT |- assignmentStatement
-                               : TC_1 _ assignmentStatementIR
+  TC |- assignmentStatement : TC assignmentStatementIR
+  -- AssignmentStmt_ok:
+      TC |- assignmentStatement : assignmentStatementIR
 
 ;;; callStatement
 
 rule ParserStmt_ok/callStatement:
-  TC_0 |- callStatement
-        : TC_1 callStatementIR
-  -- Stmt_ok: LOCAL TC_0 CONT |- callStatement 
-                               : TC_1 _ callStatementIR
+  TC |- callStatement : TC callStatementIR
+  -- CallStmt_ok: TC |- callStatement : callStatementIR
 
 ;;; directApplicationStatement
 
 rule ParserStmt_ok/directApplicationStatement:
-  TC_0 |- directApplicationStatement
-        : TC_1 directApplicationStatementIR
-  -- Stmt_ok: LOCAL TC_0 CONT |- directApplicationStatement
-                               : TC_1 _ directApplicationStatementIR
+  TC |- directApplicationStatement
+      : TC directApplicationStatementIR
+  -- DirectApplicationStmt_ok:
+      TC |- directApplicationStatement
+          : directApplicationStatementIR
 
 ;;; parserBlockStatement
 ;;; syntax parserBlockStatement = ParserBlockS parserStatement*
@@ -306,10 +274,10 @@ rule ParserStmt_ok/parserBlockStatement:
 ;;; conditionalStatement
 
 rule ParserStmt_ok/conditionalStatement:
-  TC_0 |- conditionalStatement
-        : TC_1 conditionalStatementIR
-  -- Stmt_ok: LOCAL TC_0 CONT |- conditionalStatement 
-                               : TC_1 CONT conditionalStatementIR
+  TC |- conditionalStatement : TC conditionalStatementIR
+  -- ConditionalStmt_ok:
+      TC CONT |- conditionalStatement
+               : CONT conditionalStatementIR
 
 ;;
 ;; Parser statement list typing

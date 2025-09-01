@@ -64,13 +64,27 @@ relation Lvalue_ok:
 ;;;; Statement typing
 ;;
 
-relation Stmt_ok:
-  cursor typingContext flow |- statement : typingContext flow statementIR
-  hint(input %0 %1 %2 %3)
+relation AssignmentStmt_ok:
+  typingContext |- assignmentStatement : assignmentStatementIR
+  hint(input %0 %1)
 
-relation Stmts_ok:
-  cursor typingContext flow |- statement* : typingContext flow statementIR*
-  hint(input %0 %1 %2 %3)
+relation CallStmt_ok:
+  typingContext |- callStatement : callStatementIR
+  hint(input %0 %1)
+
+relation DirectApplicationStmt_ok:
+  typingContext |- directApplicationStatement
+                 : directApplicationStatementIR
+  hint(input %0 %1)
+
+relation ConditionalStmt_ok:
+  typingContext flow |- conditionalStatement
+                      : flow conditionalStatementIR
+  hint(input %0 %1 %2)
+
+relation Stmt_ok:
+  typingContext flow |- statement : typingContext flow statementIR
+  hint(input %0 %1 %2)
 
 relation BlockElementStmt_ok:
   typingContext flow |- blockElementStatement
@@ -259,13 +273,38 @@ relation ControlLocalDecls_ok:
 ;;;; Declaration typing
 ;;
 
-relation Decl_ok:
-  cursor typingContext |- declaration : typingContext declarationIR
+relation ConstantDecl_ok:
+  cursor typingContext |- constantDeclaration
+                        : typingContext constantDeclarationIR
   hint(input %0 %1 %2)
 
-relation Decls_ok:
-  cursor typingContext |- declaration* : typingContext declarationIR*
+relation VariableDecl_ok:
+  cursor typingContext |- variableDeclaration
+                        : typingContext variableDeclarationIR
   hint(input %0 %1 %2)
+
+relation InstanceDecl_ok:
+  cursor typingContext |- instantiation
+                        : typingContext instantiationIR
+  hint(input %0 %1 %2)
+
+relation ActionDecl_ok:
+  cursor typingContext |- actionDeclaration
+                        : typingContext actionDeclarationIR
+  hint(input %0 %1 %2)
+
+relation DerivedTypeDecl_ok:
+  typingContext |- derivedTypeDeclaration
+                 : typingContext derivedTypeDeclarationIR
+  hint(input %0 %1)
+
+relation Decl_ok:
+  typingContext |- declaration : typingContext declarationIR
+  hint(input %0 %1)
+
+relation Decls_ok:
+  typingContext |- declaration* : typingContext declarationIR*
+  hint(input %0 %1)
 
 relation Program_ok:
   |- p4program : typingContext p4programIR
