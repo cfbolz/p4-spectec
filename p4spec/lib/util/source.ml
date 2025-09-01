@@ -10,17 +10,6 @@ let region_of_file file = { left = pos_of_file file; right = pos_of_file file }
 let before_region region = { left = region.left; right = region.left }
 let after_region region = { left = region.right; right = region.right }
 
-let over_region = function
-  | [] -> no_region
-  | region :: regions ->
-      List.fold_left
-        (fun region_over region ->
-          {
-            left = min region_over.left region.left;
-            right = max region_over.right region.right;
-          })
-        region regions
-
 let string_of_pos pos =
   if pos.line = -1 then Printf.sprintf "0x%x" pos.column
   else string_of_int pos.line ^ "." ^ string_of_int (pos.column + 1)
@@ -46,3 +35,23 @@ let ( % ) at note = (at, note)
 let it { it; _ } = it
 let at { at; _ } = at
 let note { note; _ } = note
+
+let over_region = function
+  | [] -> no_region
+  | region :: regions ->
+      List.fold_left
+        (fun region_over region ->
+          {
+            left = min region_over.left region.left;
+            right = max region_over.right region.right;
+          })
+        region regions
+
+let exp_list_region = function
+  | [] -> no_region
+  | [ exp ] -> exp.at
+  | exp :: exps ->
+      (* take the leftmost and rightmost exps and construct a region that spans the whole list *)
+      let left = exp.at.left in
+      let right = (exps |> List.rev |> List.hd |> at).right in
+      { left; right }

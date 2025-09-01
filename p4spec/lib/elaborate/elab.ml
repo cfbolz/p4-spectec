@@ -1126,10 +1126,14 @@ and elab_exp_variant (ctx : Ctx.t) (plaintyp_expect : plaintyp)
     List.fold_left
       (fun (ctx, exps_il) (nottyp, plaintyp) ->
         elab_exp_not ctx (NotationT nottyp) exp |> function
-        | Ok (ctx, ((mixops, _) as notexp_il)) ->
+        | Ok (ctx, ((mixops, notexp_exps) as notexp_il)) ->
             let exp_il =
               let typ_il = elab_plaintyp ctx plaintyp in
-              let at = List.concat_map (List.map at) mixops |> over_region in
+              let at =
+                (* if mixops is empty, compute the region with the terminals that make up the variant *)
+                if List.flatten mixops = [] then exp_list_region notexp_exps
+                else List.concat_map (List.map at) mixops |> over_region
+              in
               Il.Ast.CaseE notexp_il $$ (at, typ_il.it)
             in
             let+ exp_il = cast_exp ctx plaintyp_expect plaintyp exp_il in
