@@ -344,6 +344,7 @@ let fuzz_seed_random (fuel : int) (pid : pid) (idx_seed : int)
   (* Randomly sample N vids from the program *)
   let vids_source =
     List.init vid_program Fun.id
+    |> List.filter (fun vid -> Dep.Graph.G.mem graph.nodes vid)
     |> Rand.random_sample Config.samples_related_vid
   in
   (* Mutate the ASTs and dump to file *)
@@ -500,8 +501,9 @@ let fuzz_phantom (fuel : int) (pid : pid) (config : Config.t) (log : Logger.t)
   in
   (* Generate tests from the files *)
   (try fuzz_seeds fuel pid config log query dirname_gen_tmp filenames_p4
-   with _ ->
-     F.asprintf "[F %d] [P %d] Unexpected error occurred" fuel pid
+   with _ as err ->
+     F.asprintf "[F %d] [P %d] Unexpected error occurred : %s" fuel pid
+       (Printexc.to_string err)
      |> Logger.warn config.modes.logmode log);
   (* Remove the directory for the generated programs *)
   Filesys.rmdir dirname_gen_tmp
