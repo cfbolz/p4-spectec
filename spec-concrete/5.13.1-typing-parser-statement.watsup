@@ -309,7 +309,7 @@ rule ParserStmt_ok/conditionalStatement:
   TC_0 |- conditionalStatement
         : TC_1 conditionalStatementIR
   -- Stmt_ok: LOCAL TC_0 CONT |- conditionalStatement 
-                               : TC_1 _ conditionalStatementIR
+                               : TC_1 CONT conditionalStatementIR
 
 ;;
 ;; Parser statement list typing

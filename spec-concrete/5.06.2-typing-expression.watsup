@@ -334,9 +334,12 @@ rule Expr_ok/binaryExpression-shift-integer:
   -- if _ `( typeIR_l_reduced ctk_l_reduced ) = typedExpressionIR_l_reduced
   -- if _ `( typeIR_r_reduced ctk_r_reduced ) = typedExpressionIR_r_reduced
   ---- ;; check that the right-hand side is local compile-time known int type
-  -- if ctk_r_reduced = LCTK
+  ---- ;; and is not a negative integer
   -- if $is_arbitrary_int_typeIR(typeIR_r_reduced)
         \/ $is_fixed_int_typeIR(typeIR_r_reduced)
+  -- if ctk_r_reduced = LCTK
+  -- Eval_static: p TC |- typedExpressionIR_r_reduced ~> value_r
+  -- if n_r = $to_number(value_r)
   ---- ;; create typed expression
   -- if ctk_reduced = $join_ctk(ctk_l_reduced, ctk_r_reduced)
   -- if expressionNoteIR = `( typeIR_l_reduced ctk_reduced )
@@ -687,59 +690,67 @@ rule Expr_ok/accessExpression-memberAccessExpression-typeaccE-senum:
 ;;;;; ExprAccE expression name
 
 rule Expr_ok/accessExpression-memberAccessExpression-expraccE-stack-size:
-  p TC |- ExprAccE expression_base "size"
-        : (ExprAccE typedExpressionIR_base "size") expressionNoteIR
+  p TC |- ExprAccE expression_base name
+        : (ExprAccE typedExpressionIR_base name) expressionNoteIR
   ---- ;; check expression
   -- Expr_ok: p TC |- expression_base : typedExpressionIR_base
   ---- ;; fetch annotation
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   ---- ;; check that the expression is a header stack
   -- if HeaderStackT typeIR n_size = $canon(typeIR_base)
+  ---- ;; if accessing "size"
+  -- if name = "size"
   ---- ;; create typed expression
   -- if expressionNoteIR = `( (FBitT 32) LCTK )
 
 rule Expr_ok/accessExpression-memberAccessExpression-expraccE-stack-lastIndex:
-  p TC |- ExprAccE expression_base "lastIndex"
-        : (ExprAccE typedExpressionIR_base "lastIndex") expressionNoteIR
-  ---- ;; "lastIndex" can be only used within a parser
-  -- if (p = BLOCK /\ $is_parser_blockKind(TC.BLOCK.KIND))
-        \/ (p = LOCAL /\ $is_parser_state_localKind(TC.LOCAL.KIND))
+  p TC |- ExprAccE expression_base name
+        : (ExprAccE typedExpressionIR_base name) expressionNoteIR
   ---- ;; check expression
   -- Expr_ok: p TC |- expression_base : typedExpressionIR_base
   ---- ;; fetch annotation
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   ---- ;; check that the expression is a header stack
   -- if HeaderStackT typeIR n_size = $canon(typeIR_base)
+  ---- ;; if accessing "lastIndex"
+  -- if name = "lastIndex"
+  ---- ;; "lastIndex" can be only used within a parser
+  -- if (p = BLOCK /\ $is_parser_blockKind(TC.BLOCK.KIND))
+        \/ (p = LOCAL /\ $is_parser_state_localKind(TC.LOCAL.KIND))
   ---- ;; create typed expression
   -- if expressionNoteIR = `( (FBitT 32) DYN )
 
 rule Expr_ok/accessExpression-memberAccessExpression-expraccE-stack-last:
-  p TC |- ExprAccE expression_base "last"
-        : (ExprAccE typedExpressionIR_base "last") expressionNoteIR
-  ---- ;; "last" can be only used within a parser
-  -- if (p = BLOCK /\ $is_parser_blockKind(TC.BLOCK.KIND))
-        \/ (p = LOCAL /\ $is_parser_state_localKind(TC.LOCAL.KIND))
+  p TC |- ExprAccE expression_base name
+        : (ExprAccE typedExpressionIR_base name) expressionNoteIR
   ---- ;; check expression
   -- Expr_ok: p TC |- expression_base : typedExpressionIR_base
   ---- ;; fetch annotation
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   ---- ;; check that the expression is a header stack
   -- if HeaderStackT typeIR n_size = $canon(typeIR_base)
+  ---- ;; if accessing "last"
+  -- if name = "last"
+  ---- ;; "last" can be only used within a parser
+  -- if (p = BLOCK /\ $is_parser_blockKind(TC.BLOCK.KIND))
+        \/ (p = LOCAL /\ $is_parser_state_localKind(TC.LOCAL.KIND))
   ---- ;; create typed expression
   -- if expressionNoteIR = `( typeIR DYN )
 
 rule Expr_ok/accessExpression-memberAccessExpression-expraccE-stack-next:
-  p TC |- ExprAccE expression_base "next"
-        : (ExprAccE typedExpressionIR_base "next") expressionNoteIR
-  ---- ;; "next" can be only used within a parser
-  -- if (p = BLOCK /\ $is_parser_blockKind(TC.BLOCK.KIND))
-        \/ (p = LOCAL /\ $is_parser_state_localKind(TC.LOCAL.KIND))
+  p TC |- ExprAccE expression_base name
+        : (ExprAccE typedExpressionIR_base name) expressionNoteIR
   ---- ;; check expression
   -- Expr_ok: p TC |- expression_base : typedExpressionIR_base
   ---- ;; fetch annotation
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   ---- ;; check that the expression is a header stack
   -- if HeaderStackT typeIR n_size = $canon(typeIR_base)
+  ---- ;; if accessing "next"
+  -- if name = "next"
+  ---- ;; "next" can be only used within a parser
+  -- if (p = BLOCK /\ $is_parser_blockKind(TC.BLOCK.KIND))
+        \/ (p = LOCAL /\ $is_parser_state_localKind(TC.LOCAL.KIND))
   ---- ;; create typed expression
   -- if expressionNoteIR = `( typeIR DYN )
 
