@@ -2,7 +2,7 @@
 ;; Bitwise operations
 ;;
 
-dec $pow2(nat) : int
+dec $pow2(int) : int
 
 dec $shl(int, int) : int
 dec $shr(int, int) : int
@@ -72,6 +72,50 @@ def $bin_plus(FIntV w i_l, FIntV w i_r) = FIntV w i'
 
 dec $bin_satplus(value, value) : value 
 
+def $bin_satplus(FBitV w i_l, FBitV w i_r) = FBitV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' + i_r') > i_max
+  -- if i' = $to_bitstr(w, i_max)
+def $bin_satplus(FBitV w i_l, FBitV w i_r) = FBitV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' + i_r') < i_min
+  -- if i' = $to_bitstr(w, i_min)
+def $bin_satplus(FBitV w i_l, FBitV w i_r) = FBitV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if i_min <= $(i_l' + i_r') /\ $(i_l' + i_r') <= i_max
+  -- if i' = $to_bitstr(w, $(i_l' + i_r'))
+
+def $bin_satplus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' + i_r') > i_max
+  -- if i' = $to_bitstr(w, i_max)
+def $bin_satplus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' + i_r') < i_min
+  -- if i' = $to_bitstr(w, i_min)
+def $bin_satplus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if i_min <= $(i_l' + i_r') /\ $(i_l' + i_r') <= i_max
+  -- if i' = $to_bitstr(w, $(i_l' + i_r'))
+
 ;;; Binary minus
 
 dec $bin_minus(value, value) : value
@@ -81,7 +125,7 @@ def $bin_minus(FBitV w i_l, FBitV w i_r) = FBitV w i'
   -- if i_l' = $to_int(w, i_l)
   -- if i_r' = $to_int(w, i_r)
   -- if i' = $to_bitstr(w, $(i_l' - i_r'))
-def $bin_plus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+def $bin_minus(FIntV w i_l, FIntV w i_r) = FIntV w i'
   -- if i_l' = $to_int(w, i_l)
   -- if i_r' = $to_int(w, i_r)
   -- if i' = $to_bitstr(w, $(i_l' - i_r'))
@@ -90,16 +134,60 @@ def $bin_plus(FIntV w i_l, FIntV w i_r) = FIntV w i'
 
 dec $bin_satminus(value, value) : value
 
+def $bin_satminus(FBitV w i_l, FBitV w i_r) = FBitV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' - i_r') > i_max
+  -- if i' = $to_bitstr(w, i_max)
+def $bin_satminus(FBitV w i_l, FBitV w i_r) = FBitV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' - i_r') < i_min
+  -- if i' = $to_bitstr(w, i_min)
+def $bin_satminus(FBitV w i_l, FBitV w i_r) = FBitV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if i_min <= $(i_l' - i_r') /\ $(i_l' - i_r') <= i_max
+  -- if i' = $to_bitstr(w, $(i_l' - i_r'))
+
+def $bin_satminus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' - i_r') > i_max
+  -- if i' = $to_bitstr(w, i_max)
+def $bin_satminus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if $(i_l' - i_r') < i_min
+  -- if i' = $to_bitstr(w, i_min)
+def $bin_satminus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+  -- if i_l' = $to_int(w, i_l)
+  -- if i_r' = $to_int(w, i_r)
+  -- if i_max = $($pow2($(w - 1)) - 1)
+  -- if i_min = -$pow2($(w - 1))
+  -- if i_min <= $(i_l' - i_r') /\ $(i_l' - i_r') <= i_max
+  -- if i' = $to_bitstr(w, $(i_l' - i_r'))
+
 ;;; Binary multiplication
 
 dec $bin_mul(value, value) : value
 
 def $bin_mul(IntV i_l, IntV i_r) = IntV $(i_l * i_r)
-def $bin_minus(FBitV w i_l, FBitV w i_r) = FBitV w i'
+def $bin_mul(FBitV w i_l, FBitV w i_r) = FBitV w i'
   -- if i_l' = $to_int(w, i_l)
   -- if i_r' = $to_int(w, i_r)
   -- if i' = $to_bitstr(w, $(i_l' * i_r'))
-def $bin_plus(FIntV w i_l, FIntV w i_r) = FIntV w i'
+def $bin_mul(FIntV w i_l, FIntV w i_r) = FIntV w i'
   -- if i_l' = $to_int(w, i_l)
   -- if i_r' = $to_int(w, i_r)
   -- if i' = $to_bitstr(w, $(i_l' * i_r'))
