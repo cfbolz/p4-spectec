@@ -1,162 +1,125 @@
 # Overall Coverage: 257/1000 (25.70%)
 # Coverage for BlockElementStmt_ok: 3/8 (37.50%)
-842 Miss BlockElementStmt_ok
-843 Miss BlockElementStmt_ok
-844 Hit_likely BlockElementStmt_ok p4c/testdata/p4_16_errors/stack_e.p4
-845 Miss BlockElementStmt_ok
-846 Miss BlockElementStmt_ok
-847 Hit_likely BlockElementStmt_ok p4c/testdata/p4_16_errors/issue2335.p4
-848 Hit_likely BlockElementStmt_ok p4c/testdata/p4_16_errors/issue3304.p4
-849 Miss BlockElementStmt_ok
+879 Miss BlockElementStmt_ok
+880 Miss BlockElementStmt_ok
+881 Hit_likely BlockElementStmt_ok p4c/testdata/p4_16_errors/stack_e.p4
+882 Miss BlockElementStmt_ok
+883 Miss BlockElementStmt_ok
+884 Hit_likely BlockElementStmt_ok p4c/testdata/p4_16_errors/issue2335.p4
+885 Hit_likely BlockElementStmt_ok p4c/testdata/p4_16_errors/issue3304.p4
+886 Miss BlockElementStmt_ok
 # Coverage for Call_action_partial_ok: 1/1 (100.00%)
-901 Hit_likely Call_action_partial_ok p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4
+938 Hit_likely Call_action_partial_ok p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4
 # Coverage for Call_convention_argument_ok: 1/2 (50.00%)
-1066 Miss Call_convention_argument_ok
-1067 Hit_likely Call_convention_argument_ok p4c/testdata/p4_16_errors/issue774-1.p4
+1103 Miss Call_convention_argument_ok
+1104 Hit_likely Call_convention_argument_ok p4c/testdata/p4_16_errors/issue774-1.p4
 # Coverage for Call_convention_expr_ok: 6/11 (54.55%)
-1055 Miss Call_convention_expr_ok
-1056 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/function1_e.p4
-1057 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/issue2036-2.p4
-1058 Miss Call_convention_expr_ok
-1059 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4
-1060 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/persistent_e.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/action-bind.p4
-1061 Miss Call_convention_expr_ok
-1062 Miss Call_convention_expr_ok
-1063 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/persistent_e.p4
-1064 Miss Call_convention_expr_ok
-1065 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/function1_e.p4
+1092 Miss Call_convention_expr_ok
+1093 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/function1_e.p4
+1094 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/issue2036-2.p4
+1095 Miss Call_convention_expr_ok
+1096 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4
+1097 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/persistent_e.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/action-bind.p4
+1098 Miss Call_convention_expr_ok
+1099 Miss Call_convention_expr_ok
+1100 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/persistent_e.p4
+1101 Miss Call_convention_expr_ok
+1102 Hit_likely Call_convention_expr_ok p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/function1_e.p4
 # Coverage for Call_convention_ok: 1/2 (50.00%)
-1068 Miss Call_convention_ok
-1069 Hit_likely Call_convention_ok p4c/testdata/p4_16_errors/action-bind1.p4
+1105 Miss Call_convention_ok
+1106 Hit_likely Call_convention_ok p4c/testdata/p4_16_errors/action-bind1.p4
 # Coverage for Call_ok: 8/43 (18.60%)
-1098 Miss Call_ok
-1099 Miss Call_ok
-1100 Miss Call_ok
-1101 Miss Call_ok
-1102 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue2454.p4
-1103 Miss Call_ok
-1104 Miss Call_ok
-1105 Miss Call_ok
-1106 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue3188.p4
-1107 Hit_likely Call_ok p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4
-1108 Miss Call_ok
-1109 Miss Call_ok
-1110 Miss Call_ok
-1111 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/function_e2.p4
-1112 Miss Call_ok
-1113 Miss Call_ok
-1114 Miss Call_ok
-1115 Miss Call_ok
-1116 Miss Call_ok
-1117 Miss Call_ok
-1118 Miss Call_ok
-1119 Miss Call_ok
-1120 Miss Call_ok
-1121 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue774-2.p4
-1122 Miss Call_ok
-1123 Miss Call_ok
-1124 Miss Call_ok
-1125 Miss Call_ok
-1126 Miss Call_ok
-1127 Miss Call_ok
-1128 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue1331.p4
-1129 Miss Call_ok
-1130 Miss Call_ok
-1131 Miss Call_ok
-1132 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue2597.p4
-1133 Miss Call_ok
-1134 Miss Call_ok
 1135 Miss Call_ok
-1136 Hit_likely Call_ok p4c/testdata/p4_16_errors/call-table.p4
+1136 Miss Call_ok
 1137 Miss Call_ok
 1138 Miss Call_ok
-1139 Miss Call_ok
+1139 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue2454.p4
 1140 Miss Call_ok
+1141 Miss Call_ok
+1142 Miss Call_ok
+1143 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue3188.p4
+1144 Hit_likely Call_ok p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4
+1145 Miss Call_ok
+1146 Miss Call_ok
+1147 Miss Call_ok
+1148 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/function_e2.p4
+1149 Miss Call_ok
+1150 Miss Call_ok
+1151 Miss Call_ok
+1152 Miss Call_ok
+1153 Miss Call_ok
+1154 Miss Call_ok
+1155 Miss Call_ok
+1156 Miss Call_ok
+1157 Miss Call_ok
+1158 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue774-2.p4
+1159 Miss Call_ok
+1160 Miss Call_ok
+1161 Miss Call_ok
+1162 Miss Call_ok
+1163 Miss Call_ok
+1164 Miss Call_ok
+1165 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue1331.p4
+1166 Miss Call_ok
+1167 Miss Call_ok
+1168 Miss Call_ok
+1169 Hit_likely Call_ok p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue2597.p4
+1170 Miss Call_ok
+1171 Miss Call_ok
+1172 Miss Call_ok
+1173 Hit_likely Call_ok p4c/testdata/p4_16_errors/call-table.p4
+1174 Miss Call_ok
+1175 Miss Call_ok
+1176 Miss Call_ok
+1177 Miss Call_ok
 # Coverage for ConstructorParameterType_wf: 1/2 (50.00%)
-493 Miss ConstructorParameterType_wf
-494 Hit_likely ConstructorParameterType_wf p4c/testdata/p4_16_errors/package.p4
+530 Miss ConstructorParameterType_wf
+531 Hit_likely ConstructorParameterType_wf p4c/testdata/p4_16_errors/package.p4
 # Coverage for ConstructorParameterTypes_wf: 1/2 (50.00%)
-495 Hit_likely ConstructorParameterTypes_wf p4c/testdata/p4_16_errors/package.p4
-496 Miss ConstructorParameterTypes_wf
+532 Hit_likely ConstructorParameterTypes_wf p4c/testdata/p4_16_errors/package.p4
+533 Miss ConstructorParameterTypes_wf
 # Coverage for ConstructorTypeDef_wf: 1/2 (50.00%)
-504 Hit_likely ConstructorTypeDef_wf p4c/testdata/p4_16_errors/package.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816-1.p4
-505 Miss ConstructorTypeDef_wf
+541 Hit_likely ConstructorTypeDef_wf p4c/testdata/p4_16_errors/package.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816-1.p4
+542 Miss ConstructorTypeDef_wf
 # Coverage for ConstructorType_ok: 2/2 (100.00%)
-1141 Hit_likely ConstructorType_ok p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
-1142 Hit_likely ConstructorType_ok p4c/testdata/p4_16_errors/self-call.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/interface_e.p4 p4c/testdata/p4_16_errors/functors3_e.p4 p4c/testdata/p4_16_errors/functors2_e.p4 p4c/testdata/p4_16_errors/call1_e.p4
+1178 Hit_likely ConstructorType_ok p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
+1179 Hit_likely ConstructorType_ok p4c/testdata/p4_16_errors/self-call.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/interface_e.p4 p4c/testdata/p4_16_errors/functors3_e.p4 p4c/testdata/p4_16_errors/functors2_e.p4 p4c/testdata/p4_16_errors/call1_e.p4
 # Coverage for ConstructorType_wf: 4/7 (57.14%)
-497 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/issue818.p4
-498 Miss ConstructorType_wf
-499 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/issue816-1.p4
-500 Miss ConstructorType_wf
-501 Miss ConstructorType_wf
-502 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
-503 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/package.p4
+534 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/issue818.p4
+535 Miss ConstructorType_wf
+536 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/issue816-1.p4
+537 Miss ConstructorType_wf
+538 Miss ConstructorType_wf
+539 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
+540 Hit_likely ConstructorType_wf p4c/testdata/p4_16_errors/package.p4
 # Coverage for ControlLocalDecl_ok: 1/10 (10.00%)
-970 Miss ControlLocalDecl_ok
-971 Miss ControlLocalDecl_ok
-972 Hit_likely ControlLocalDecl_ok p4c/testdata/p4_16_errors/issue394.p4
-973 Miss ControlLocalDecl_ok
-974 Miss ControlLocalDecl_ok
-975 Miss ControlLocalDecl_ok
-976 Miss ControlLocalDecl_ok
-977 Miss ControlLocalDecl_ok
-978 Miss ControlLocalDecl_ok
-979 Miss ControlLocalDecl_ok
+1007 Miss ControlLocalDecl_ok
+1008 Miss ControlLocalDecl_ok
+1009 Hit_likely ControlLocalDecl_ok p4c/testdata/p4_16_errors/issue394.p4
+1010 Miss ControlLocalDecl_ok
+1011 Miss ControlLocalDecl_ok
+1012 Miss ControlLocalDecl_ok
+1013 Miss ControlLocalDecl_ok
+1014 Miss ControlLocalDecl_ok
+1015 Miss ControlLocalDecl_ok
+1016 Miss ControlLocalDecl_ok
 # Coverage for Decl_object_ok: 0/7 (0.00%)
-1170 Miss Decl_object_ok
-1171 Miss Decl_object_ok
-1172 Miss Decl_object_ok
-1173 Miss Decl_object_ok
-1174 Miss Decl_object_ok
-1175 Miss Decl_object_ok
-1176 Miss Decl_object_ok
+1207 Miss Decl_object_ok
+1208 Miss Decl_object_ok
+1209 Miss Decl_object_ok
+1210 Miss Decl_object_ok
+1211 Miss Decl_object_ok
+1212 Miss Decl_object_ok
+1213 Miss Decl_object_ok
 # Coverage for Decl_ok: 22/75 (29.33%)
-980 Miss Decl_ok
-981 Hit_likely Decl_ok p4c/testdata/p4_16_errors/const_e.p4
-982 Miss Decl_ok
-983 Miss Decl_ok
-984 Hit_likely Decl_ok p4c/testdata/p4_16_errors/virtual6.p4
-985 Miss Decl_ok
-986 Miss Decl_ok
-987 Miss Decl_ok
-988 Miss Decl_ok
-989 Miss Decl_ok
-990 Miss Decl_ok
-991 Miss Decl_ok
-992 Miss Decl_ok
-993 Miss Decl_ok
-994 Miss Decl_ok
-995 Miss Decl_ok
-996 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue4142.p4
-997 Miss Decl_ok
-998 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/function_e1.p4
-999 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4
-1000 Hit_likely Decl_ok p4c/testdata/p4_16_errors/function_e1.p4
-1001 Miss Decl_ok
-1002 Hit_likely Decl_ok p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/directionless.p4
-1003 Miss Decl_ok
-1004 Hit_likely Decl_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual3.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/typecheck_e.p4 p4c/testdata/p4_16_errors/typecheck1_e.p4 p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/type-in-expr.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/template_e.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/self-call.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/scope.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/persistent_e.p4 p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/package.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/nostart.p4 p4c/testdata/p4_16_errors/next.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/mux_e.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/missing_actions.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue819-1.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue816-1.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue4365_no_disable_error.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_warning.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_info.p4 p4c/testdata/p4_16_errors/issue435.p4 p4c/testdata/p4_16_errors/issue4140.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue394.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue3751.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3656.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3522.p4 p4c/testdata/p4_16_errors/issue345.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue3378.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3346.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3338.p4 p4c/testdata/p4_16_errors/issue3335.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3293.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue3170.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2441.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/issue2335.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue2033.p4 p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/issue1230.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/interface_e.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/inro.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/header3.p4 p4c/testdata/p4_16_errors/header2_e.p4 p4c/testdata/p4_16_errors/generic1_e.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/functors3_e.p4 p4c/testdata/p4_16_errors/functors2_e.p4 p4c/testdata/p4_16_errors/function_e.p4 p4c/testdata/p4_16_errors/function1_e.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/dup-param3.p4 p4c/testdata/p4_16_errors/dup-param.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/directionless.p4 p4c/testdata/p4_16_errors/default_action1.p4 p4c/testdata/p4_16_errors/default_action.p4 p4c/testdata/p4_16_errors/default-param.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/control-verify.p4 p4c/testdata/p4_16_errors/constructor_e.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const_e.p4 p4c/testdata/p4_16_errors/conditional_e.p4 p4c/testdata/p4_16_errors/call1_e.p4 p4c/testdata/p4_16_errors/call-table.p4 p4c/testdata/p4_16_errors/bitExtract_e.p4 p4c/testdata/p4_16_errors/binary_e.p4 p4c/testdata/p4_16_errors/assign.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4 p4c/testdata/p4_16_errors/accept_e.p4
-1005 Miss Decl_ok
-1006 Miss Decl_ok
-1007 Hit_likely Decl_ok p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/default-param.p4
-1008 Miss Decl_ok
-1009 Miss Decl_ok
-1010 Hit_likely Decl_ok p4c/testdata/p4_16_errors/parser-arg.p4
-1011 Miss Decl_ok
-1012 Miss Decl_ok
-1013 Miss Decl_ok
-1014 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue816-1.p4
-1015 Hit_likely Decl_ok p4c/testdata/p4_16_errors/extern.p4
-1016 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue3808-1.p4
 1017 Miss Decl_ok
-1018 Hit_likely Decl_ok p4c/testdata/p4_16_errors/typecheck_e.p4 p4c/testdata/p4_16_errors/type-in-expr.p4 p4c/testdata/p4_16_errors/issue345.p4 p4c/testdata/p4_16_errors/issue2441.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/dup-param3.p4
+1018 Hit_likely Decl_ok p4c/testdata/p4_16_errors/const_e.p4
 1019 Miss Decl_ok
 1020 Miss Decl_ok
-1021 Miss Decl_ok
+1021 Hit_likely Decl_ok p4c/testdata/p4_16_errors/virtual6.p4
 1022 Miss Decl_ok
-1023 Hit_likely Decl_ok p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/header2_e.p4
-1024 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/header3.p4
+1023 Miss Decl_ok
+1024 Miss Decl_ok
 1025 Miss Decl_ok
 1026 Miss Decl_ok
 1027 Miss Decl_ok
@@ -165,250 +128,287 @@
 1030 Miss Decl_ok
 1031 Miss Decl_ok
 1032 Miss Decl_ok
-1033 Miss Decl_ok
+1033 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue4142.p4
 1034 Miss Decl_ok
-1035 Miss Decl_ok
-1036 Miss Decl_ok
-1037 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3170-1.p4
+1035 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/function_e1.p4
+1036 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4
+1037 Hit_likely Decl_ok p4c/testdata/p4_16_errors/function_e1.p4
 1038 Miss Decl_ok
-1039 Miss Decl_ok
+1039 Hit_likely Decl_ok p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/directionless.p4
 1040 Miss Decl_ok
-1041 Miss Decl_ok
+1041 Hit_likely Decl_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual3.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/typecheck_e.p4 p4c/testdata/p4_16_errors/typecheck1_e.p4 p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/type-in-expr.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/template_e.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/self-call.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/scope.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/persistent_e.p4 p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/package.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/nostart.p4 p4c/testdata/p4_16_errors/next.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/mux_e.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/missing_actions.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue819-1.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue816-1.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue4365_no_disable_error.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_warning.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_info.p4 p4c/testdata/p4_16_errors/issue435.p4 p4c/testdata/p4_16_errors/issue4140.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue394.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue3751.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3656.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3522.p4 p4c/testdata/p4_16_errors/issue345.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue3378.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3346.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3338.p4 p4c/testdata/p4_16_errors/issue3335.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3293.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue3170.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2441.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/issue2335.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue2033.p4 p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/issue1230.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/interface_e.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/inro.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/header3.p4 p4c/testdata/p4_16_errors/header2_e.p4 p4c/testdata/p4_16_errors/generic1_e.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/functors3_e.p4 p4c/testdata/p4_16_errors/functors2_e.p4 p4c/testdata/p4_16_errors/function_e.p4 p4c/testdata/p4_16_errors/function1_e.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/dup-param3.p4 p4c/testdata/p4_16_errors/dup-param.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/directionless.p4 p4c/testdata/p4_16_errors/default_action1.p4 p4c/testdata/p4_16_errors/default_action.p4 p4c/testdata/p4_16_errors/default-param.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/control-verify.p4 p4c/testdata/p4_16_errors/constructor_e.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const_e.p4 p4c/testdata/p4_16_errors/conditional_e.p4 p4c/testdata/p4_16_errors/call1_e.p4 p4c/testdata/p4_16_errors/call-table.p4 p4c/testdata/p4_16_errors/bitExtract_e.p4 p4c/testdata/p4_16_errors/binary_e.p4 p4c/testdata/p4_16_errors/assign.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4 p4c/testdata/p4_16_errors/accept_e.p4
 1042 Miss Decl_ok
 1043 Miss Decl_ok
-1044 Miss Decl_ok
+1044 Hit_likely Decl_ok p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/default-param.p4
 1045 Miss Decl_ok
-1046 Hit_likely Decl_ok p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4
-1047 Miss Decl_ok
+1046 Miss Decl_ok
+1047 Hit_likely Decl_ok p4c/testdata/p4_16_errors/parser-arg.p4
 1048 Miss Decl_ok
 1049 Miss Decl_ok
-1050 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3787.p4
-1051 Hit_likely Decl_ok p4c/testdata/p4_16_errors/package.p4
-1052 Miss Decl_ok
-1053 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue4142.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/function_e1.p4 p4c/testdata/p4_16_errors/const_e.p4
-1054 Hit_likely Decl_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/directionless.p4
+1050 Miss Decl_ok
+1051 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue816-1.p4
+1052 Hit_likely Decl_ok p4c/testdata/p4_16_errors/extern.p4
+1053 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue3808-1.p4
+1054 Miss Decl_ok
+1055 Hit_likely Decl_ok p4c/testdata/p4_16_errors/typecheck_e.p4 p4c/testdata/p4_16_errors/type-in-expr.p4 p4c/testdata/p4_16_errors/issue345.p4 p4c/testdata/p4_16_errors/issue2441.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/dup-param3.p4
+1056 Miss Decl_ok
+1057 Miss Decl_ok
+1058 Miss Decl_ok
+1059 Miss Decl_ok
+1060 Hit_likely Decl_ok p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/header2_e.p4
+1061 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/header3.p4
+1062 Miss Decl_ok
+1063 Miss Decl_ok
+1064 Miss Decl_ok
+1065 Miss Decl_ok
+1066 Miss Decl_ok
+1067 Miss Decl_ok
+1068 Miss Decl_ok
+1069 Miss Decl_ok
+1070 Miss Decl_ok
+1071 Miss Decl_ok
+1072 Miss Decl_ok
+1073 Miss Decl_ok
+1074 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3170-1.p4
+1075 Miss Decl_ok
+1076 Miss Decl_ok
+1077 Miss Decl_ok
+1078 Miss Decl_ok
+1079 Miss Decl_ok
+1080 Miss Decl_ok
+1081 Miss Decl_ok
+1082 Miss Decl_ok
+1083 Hit_likely Decl_ok p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4
+1084 Miss Decl_ok
+1085 Miss Decl_ok
+1086 Miss Decl_ok
+1087 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue3787.p4
+1088 Hit_likely Decl_ok p4c/testdata/p4_16_errors/package.p4
+1089 Miss Decl_ok
+1090 Hit_likely Decl_ok p4c/testdata/p4_16_errors/issue4142.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/function_e1.p4 p4c/testdata/p4_16_errors/const_e.p4
+1091 Hit_likely Decl_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/directionless.p4
 # Coverage for Enum_serializable_field_ok: 0/2 (0.00%)
-1183 Miss Enum_serializable_field_ok
-1184 Miss Enum_serializable_field_ok
+1220 Miss Enum_serializable_field_ok
+1221 Miss Enum_serializable_field_ok
 # Coverage for Expr_lvalue_ok: 3/15 (20.00%)
-1235 Miss Expr_lvalue_ok
-1236 Miss Expr_lvalue_ok
-1237 Miss Expr_lvalue_ok
-1238 Hit_likely Expr_lvalue_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
-1239 Miss Expr_lvalue_ok
-1240 Miss Expr_lvalue_ok
-1241 Miss Expr_lvalue_ok
-1242 Miss Expr_lvalue_ok
-1243 Hit_likely Expr_lvalue_ok p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4
-1244 Miss Expr_lvalue_ok
-1245 Miss Expr_lvalue_ok
-1246 Miss Expr_lvalue_ok
-1247 Miss Expr_lvalue_ok
-1248 Miss Expr_lvalue_ok
-1249 Hit_likely Expr_lvalue_ok p4c/testdata/p4_16_errors/function1_e.p4
+1272 Miss Expr_lvalue_ok
+1273 Miss Expr_lvalue_ok
+1274 Miss Expr_lvalue_ok
+1275 Hit_likely Expr_lvalue_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
+1276 Miss Expr_lvalue_ok
+1277 Miss Expr_lvalue_ok
+1278 Miss Expr_lvalue_ok
+1279 Miss Expr_lvalue_ok
+1280 Hit_likely Expr_lvalue_ok p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4
+1281 Miss Expr_lvalue_ok
+1282 Miss Expr_lvalue_ok
+1283 Miss Expr_lvalue_ok
+1284 Miss Expr_lvalue_ok
+1285 Miss Expr_lvalue_ok
+1286 Hit_likely Expr_lvalue_ok p4c/testdata/p4_16_errors/function1_e.p4
 # Coverage for Expr_ok: 29/88 (32.95%)
-699 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3264.p4
-700 Miss Expr_ok
-701 Hit_likely Expr_ok p4c/testdata/p4_16_errors/typecheck1_e.p4
-702 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3153.p4
-703 Miss Expr_ok
-704 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4
-705 Hit_likely Expr_ok p4c/testdata/p4_16_errors/const1_e.p4
-706 Miss Expr_ok
-707 Miss Expr_ok
-708 Miss Expr_ok
-709 Hit_likely Expr_ok p4c/testdata/p4_16_errors/div.p4
-710 Miss Expr_ok
-711 Hit_likely Expr_ok p4c/testdata/p4_16_errors/neg.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4
-712 Miss Expr_ok
-713 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4
-714 Miss Expr_ok
-715 Miss Expr_ok
-716 Miss Expr_ok
-717 Miss Expr_ok
-718 Miss Expr_ok
-719 Miss Expr_ok
-720 Miss Expr_ok
-721 Miss Expr_ok
-722 Miss Expr_ok
-723 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3589.p4
-724 Hit_likely Expr_ok p4c/testdata/p4_16_errors/equality-fail.p4
-725 Miss Expr_ok
-726 Miss Expr_ok
-727 Miss Expr_ok
-728 Miss Expr_ok
-729 Miss Expr_ok
-730 Miss Expr_ok
-731 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4 p4c/testdata/p4_16_errors/issue3671-2.p4
-732 Miss Expr_ok
-733 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4
-734 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4 p4c/testdata/p4_16_errors/neg.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/div.p4 p4c/testdata/p4_16_errors/const1_e.p4
-735 Miss Expr_ok
-736 Miss Expr_ok
+736 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3264.p4
 737 Miss Expr_ok
-738 Hit_likely Expr_ok p4c/testdata/p4_16_errors/mux_e.p4
-739 Hit_likely Expr_ok p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4
+738 Hit_likely Expr_ok p4c/testdata/p4_16_errors/typecheck1_e.p4
+739 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3153.p4
 740 Miss Expr_ok
-741 Miss Expr_ok
-742 Miss Expr_ok
-743 Hit_likely Expr_ok p4c/testdata/p4_16_errors/default-initializer-err.p4
+741 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4
+742 Hit_likely Expr_ok p4c/testdata/p4_16_errors/const1_e.p4
+743 Miss Expr_ok
 744 Miss Expr_ok
 745 Miss Expr_ok
-746 Miss Expr_ok
+746 Hit_likely Expr_ok p4c/testdata/p4_16_errors/div.p4
 747 Miss Expr_ok
-748 Miss Expr_ok
-749 Hit_likely Expr_ok p4c/testdata/p4_16_errors/type-field.p4
-750 Hit_likely Expr_ok p4c/testdata/p4_16_errors/scope.p4
-751 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3522.p4
-752 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3522.p4
-753 Hit_likely Expr_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
+748 Hit_likely Expr_ok p4c/testdata/p4_16_errors/neg.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4
+749 Miss Expr_ok
+750 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4
+751 Miss Expr_ok
+752 Miss Expr_ok
+753 Miss Expr_ok
 754 Miss Expr_ok
-755 Hit_likely Expr_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
+755 Miss Expr_ok
 756 Miss Expr_ok
 757 Miss Expr_ok
-758 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue1059.p4
+758 Miss Expr_ok
 759 Miss Expr_ok
-760 Miss Expr_ok
-761 Miss Expr_ok
+760 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3589.p4
+761 Hit_likely Expr_ok p4c/testdata/p4_16_errors/equality-fail.p4
 762 Miss Expr_ok
 763 Miss Expr_ok
 764 Miss Expr_ok
 765 Miss Expr_ok
 766 Miss Expr_ok
 767 Miss Expr_ok
-768 Miss Expr_ok
-769 Hit_likely Expr_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
-770 Miss Expr_ok
-771 Hit_likely Expr_ok p4c/testdata/p4_16_errors/binary_e.p4
+768 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4 p4c/testdata/p4_16_errors/issue3671-2.p4
+769 Miss Expr_ok
+770 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4
+771 Hit_likely Expr_ok p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4 p4c/testdata/p4_16_errors/neg.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/div.p4 p4c/testdata/p4_16_errors/const1_e.p4
 772 Miss Expr_ok
 773 Miss Expr_ok
 774 Miss Expr_ok
-775 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue4136.p4
-776 Miss Expr_ok
+775 Hit_likely Expr_ok p4c/testdata/p4_16_errors/mux_e.p4
+776 Hit_likely Expr_ok p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4
 777 Miss Expr_ok
 778 Miss Expr_ok
 779 Miss Expr_ok
-780 Miss Expr_ok
+780 Hit_likely Expr_ok p4c/testdata/p4_16_errors/default-initializer-err.p4
 781 Miss Expr_ok
 782 Miss Expr_ok
-783 Hit_likely Expr_ok p4c/testdata/p4_16_errors/bitExtract_e.p4
-784 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue2317.p4
-785 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3282.p4
-786 Miss Expr_ok
+783 Miss Expr_ok
+784 Miss Expr_ok
+785 Miss Expr_ok
+786 Hit_likely Expr_ok p4c/testdata/p4_16_errors/type-field.p4
+787 Hit_likely Expr_ok p4c/testdata/p4_16_errors/scope.p4
+788 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3522.p4
+789 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3522.p4
+790 Hit_likely Expr_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
+791 Miss Expr_ok
+792 Hit_likely Expr_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
+793 Miss Expr_ok
+794 Miss Expr_ok
+795 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue1059.p4
+796 Miss Expr_ok
+797 Miss Expr_ok
+798 Miss Expr_ok
+799 Miss Expr_ok
+800 Miss Expr_ok
+801 Miss Expr_ok
+802 Miss Expr_ok
+803 Miss Expr_ok
+804 Miss Expr_ok
+805 Miss Expr_ok
+806 Hit_likely Expr_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4
+807 Miss Expr_ok
+808 Hit_likely Expr_ok p4c/testdata/p4_16_errors/binary_e.p4
+809 Miss Expr_ok
+810 Miss Expr_ok
+811 Miss Expr_ok
+812 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue4136.p4
+813 Miss Expr_ok
+814 Miss Expr_ok
+815 Miss Expr_ok
+816 Miss Expr_ok
+817 Miss Expr_ok
+818 Miss Expr_ok
+819 Miss Expr_ok
+820 Hit_likely Expr_ok p4c/testdata/p4_16_errors/bitExtract_e.p4
+821 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue2317.p4
+822 Hit_likely Expr_ok p4c/testdata/p4_16_errors/issue3282.p4
+823 Miss Expr_ok
 # Coverage for ExternConstructor_ok: 2/6 (33.33%)
-861 Hit_likely ExternConstructor_ok p4c/testdata/p4_16_errors/issue818.p4
-862 Miss ExternConstructor_ok
-863 Miss ExternConstructor_ok
-864 Miss ExternConstructor_ok
-865 Hit_likely ExternConstructor_ok p4c/testdata/p4_16_errors/issue435.p4
-866 Miss ExternConstructor_ok
+898 Hit_likely ExternConstructor_ok p4c/testdata/p4_16_errors/issue818.p4
+899 Miss ExternConstructor_ok
+900 Miss ExternConstructor_ok
+901 Miss ExternConstructor_ok
+902 Hit_likely ExternConstructor_ok p4c/testdata/p4_16_errors/issue435.p4
+903 Miss ExternConstructor_ok
 # Coverage for ExternMethod_ok: 2/7 (28.57%)
-854 Hit_likely ExternMethod_ok p4c/testdata/p4_16_errors/issue807.p4
-855 Miss ExternMethod_ok
-856 Hit_likely ExternMethod_ok p4c/testdata/p4_16_errors/constructor_e.p4
-857 Miss ExternMethod_ok
-858 Miss ExternMethod_ok
-859 Miss ExternMethod_ok
-860 Miss ExternMethod_ok
+891 Hit_likely ExternMethod_ok p4c/testdata/p4_16_errors/issue807.p4
+892 Miss ExternMethod_ok
+893 Hit_likely ExternMethod_ok p4c/testdata/p4_16_errors/constructor_e.p4
+894 Miss ExternMethod_ok
+895 Miss ExternMethod_ok
+896 Miss ExternMethod_ok
+897 Miss ExternMethod_ok
 # Coverage for Inst_ok: 3/13 (23.08%)
-1143 Miss Inst_ok
-1144 Miss Inst_ok
-1145 Miss Inst_ok
-1146 Miss Inst_ok
-1147 Miss Inst_ok
-1148 Hit_likely Inst_ok p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue4140.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/const_e.p4
-1149 Hit_likely Inst_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual3.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/scope.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/persistent_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/assign.p4
-1150 Hit_likely Inst_ok p4c/testdata/p4_16_errors/issue388.p4
-1151 Miss Inst_ok
-1152 Miss Inst_ok
-1153 Miss Inst_ok
-1154 Miss Inst_ok
-1155 Miss Inst_ok
+1180 Miss Inst_ok
+1181 Miss Inst_ok
+1182 Miss Inst_ok
+1183 Miss Inst_ok
+1184 Miss Inst_ok
+1185 Hit_likely Inst_ok p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue4140.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/const_e.p4
+1186 Hit_likely Inst_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual3.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/scope.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/persistent_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/assign.p4
+1187 Hit_likely Inst_ok p4c/testdata/p4_16_errors/issue388.p4
+1188 Miss Inst_ok
+1189 Miss Inst_ok
+1190 Miss Inst_ok
+1191 Miss Inst_ok
+1192 Miss Inst_ok
 # Coverage for Lvalue_ok: 6/29 (20.69%)
-787 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/inro.p4
-788 Miss Lvalue_ok
-789 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/assign.p4
-790 Miss Lvalue_ok
-791 Miss Lvalue_ok
-792 Miss Lvalue_ok
-793 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/next.p4
-794 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/next.p4
-795 Miss Lvalue_ok
-796 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4
-797 Miss Lvalue_ok
-798 Miss Lvalue_ok
-799 Miss Lvalue_ok
-800 Miss Lvalue_ok
-801 Miss Lvalue_ok
-802 Miss Lvalue_ok
-803 Miss Lvalue_ok
-804 Miss Lvalue_ok
-805 Miss Lvalue_ok
-806 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/slice_out_of_bound.p4
-807 Miss Lvalue_ok
-808 Miss Lvalue_ok
-809 Miss Lvalue_ok
-810 Miss Lvalue_ok
-811 Miss Lvalue_ok
-812 Miss Lvalue_ok
-813 Miss Lvalue_ok
-814 Miss Lvalue_ok
-815 Miss Lvalue_ok
+824 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/inro.p4
+825 Miss Lvalue_ok
+826 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/assign.p4
+827 Miss Lvalue_ok
+828 Miss Lvalue_ok
+829 Miss Lvalue_ok
+830 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/next.p4
+831 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/next.p4
+832 Miss Lvalue_ok
+833 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4
+834 Miss Lvalue_ok
+835 Miss Lvalue_ok
+836 Miss Lvalue_ok
+837 Miss Lvalue_ok
+838 Miss Lvalue_ok
+839 Miss Lvalue_ok
+840 Miss Lvalue_ok
+841 Miss Lvalue_ok
+842 Miss Lvalue_ok
+843 Hit_likely Lvalue_ok p4c/testdata/p4_16_errors/slice_out_of_bound.p4
+844 Miss Lvalue_ok
+845 Miss Lvalue_ok
+846 Miss Lvalue_ok
+847 Miss Lvalue_ok
+848 Miss Lvalue_ok
+849 Miss Lvalue_ok
+850 Miss Lvalue_ok
+851 Miss Lvalue_ok
+852 Miss Lvalue_ok
 # Coverage for ParameterType_alpha: 1/1 (100.00%)
 106 Hit_likely ParameterType_alpha p4c/testdata/p4_16_errors/module_e.p4
 # Coverage for ParameterType_wf: 3/6 (50.00%)
-457 Hit_likely ParameterType_wf p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/extern.p4
-458 Hit_likely ParameterType_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3808.p4
-459 Miss ParameterType_wf
-460 Miss ParameterType_wf
-461 Hit_likely ParameterType_wf p4c/testdata/p4_16_errors/default-param.p4
-462 Miss ParameterType_wf
+494 Hit_likely ParameterType_wf p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/extern.p4
+495 Hit_likely ParameterType_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3808.p4
+496 Miss ParameterType_wf
+497 Miss ParameterType_wf
+498 Hit_likely ParameterType_wf p4c/testdata/p4_16_errors/default-param.p4
+499 Miss ParameterType_wf
 # Coverage for ParameterTypes_wf: 1/2 (50.00%)
-463 Hit_likely ParameterTypes_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/default-param.p4
-464 Miss ParameterTypes_wf
+500 Hit_likely ParameterTypes_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/default-param.p4
+501 Miss ParameterTypes_wf
 # Coverage for Parameter_ok: 2/4 (50.00%)
-850 Hit_likely Parameter_ok p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3378.p4
-851 Miss Parameter_ok
-852 Hit_likely Parameter_ok p4c/testdata/p4_16_errors/issue3316.p4
-853 Miss Parameter_ok
+887 Hit_likely Parameter_ok p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3378.p4
+888 Miss Parameter_ok
+889 Hit_likely Parameter_ok p4c/testdata/p4_16_errors/issue3316.p4
+890 Miss Parameter_ok
 # Coverage for ParserLocalDecl_ok: 3/12 (25.00%)
-886 Miss ParserLocalDecl_ok
-887 Miss ParserLocalDecl_ok
-888 Miss ParserLocalDecl_ok
-889 Miss ParserLocalDecl_ok
-890 Miss ParserLocalDecl_ok
-891 Miss ParserLocalDecl_ok
-892 Hit_likely ParserLocalDecl_ok p4c/testdata/p4_16_errors/issue3359.p4
-893 Miss ParserLocalDecl_ok
-894 Miss ParserLocalDecl_ok
-895 Hit_likely ParserLocalDecl_ok p4c/testdata/p4_16_errors/issue3751.p4
-896 Hit_likely ParserLocalDecl_ok p4c/testdata/p4_16_errors/issue3346.p4
-897 Miss ParserLocalDecl_ok
+923 Miss ParserLocalDecl_ok
+924 Miss ParserLocalDecl_ok
+925 Miss ParserLocalDecl_ok
+926 Miss ParserLocalDecl_ok
+927 Miss ParserLocalDecl_ok
+928 Miss ParserLocalDecl_ok
+929 Hit_likely ParserLocalDecl_ok p4c/testdata/p4_16_errors/issue3359.p4
+930 Miss ParserLocalDecl_ok
+931 Miss ParserLocalDecl_ok
+932 Hit_likely ParserLocalDecl_ok p4c/testdata/p4_16_errors/issue3751.p4
+933 Hit_likely ParserLocalDecl_ok p4c/testdata/p4_16_errors/issue3346.p4
+934 Miss ParserLocalDecl_ok
 # Coverage for ParserStates_ok: 1/3 (33.33%)
-883 Miss ParserStates_ok
-884 Hit_likely ParserStates_ok p4c/testdata/p4_16_errors/nostart.p4 p4c/testdata/p4_16_errors/issue4365_no_disable_error.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_warning.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_info.p4 p4c/testdata/p4_16_errors/issue3338.p4 p4c/testdata/p4_16_errors/accept_e.p4
-885 Miss ParserStates_ok
+920 Miss ParserStates_ok
+921 Hit_likely ParserStates_ok p4c/testdata/p4_16_errors/nostart.p4 p4c/testdata/p4_16_errors/issue4365_no_disable_error.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_warning.p4 p4c/testdata/p4_16_errors/issue4365_no_demote_error_to_info.p4 p4c/testdata/p4_16_errors/issue3338.p4 p4c/testdata/p4_16_errors/accept_e.p4
+922 Miss ParserStates_ok
 # Coverage for ParserStmt_ok: 0/14 (0.00%)
-869 Miss ParserStmt_ok
-870 Miss ParserStmt_ok
-871 Miss ParserStmt_ok
-872 Miss ParserStmt_ok
-873 Miss ParserStmt_ok
-874 Miss ParserStmt_ok
-875 Miss ParserStmt_ok
-876 Miss ParserStmt_ok
-877 Miss ParserStmt_ok
-878 Miss ParserStmt_ok
-879 Miss ParserStmt_ok
-880 Miss ParserStmt_ok
-881 Miss ParserStmt_ok
-882 Miss ParserStmt_ok
+906 Miss ParserStmt_ok
+907 Miss ParserStmt_ok
+908 Miss ParserStmt_ok
+909 Miss ParserStmt_ok
+910 Miss ParserStmt_ok
+911 Miss ParserStmt_ok
+912 Miss ParserStmt_ok
+913 Miss ParserStmt_ok
+914 Miss ParserStmt_ok
+915 Miss ParserStmt_ok
+916 Miss ParserStmt_ok
+917 Miss ParserStmt_ok
+918 Miss ParserStmt_ok
+919 Miss ParserStmt_ok
 # Coverage for ParserTransition_ok: 1/2 (50.00%)
-867 Miss ParserTransition_ok
-868 Hit_likely ParserTransition_ok p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue3335.p4
+904 Miss ParserTransition_ok
+905 Hit_likely ParserTransition_ok p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue3335.p4
 # Coverage for RoutineTarget_ok: 1/2 (50.00%)
-1070 Hit_likely RoutineTarget_ok p4c/testdata/p4_16_errors/control-verify.p4
-1071 Miss RoutineTarget_ok
+1107 Hit_likely RoutineTarget_ok p4c/testdata/p4_16_errors/control-verify.p4
+1108 Miss RoutineTarget_ok
 # Coverage for RoutineTypeDef_alpha: 0/6 (0.00%)
 133 Miss RoutineTypeDef_alpha
 134 Miss RoutineTypeDef_alpha
@@ -417,9 +417,9 @@
 137 Miss RoutineTypeDef_alpha
 138 Miss RoutineTypeDef_alpha
 # Coverage for RoutineTypeDef_wf: 2/3 (66.67%)
-490 Hit_likely RoutineTypeDef_wf p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/directionless.p4
-491 Hit_likely RoutineTypeDef_wf p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/default-param.p4
-492 Miss RoutineTypeDef_wf
+527 Hit_likely RoutineTypeDef_wf p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/directionless.p4
+528 Hit_likely RoutineTypeDef_wf p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/default-param.p4
+529 Miss RoutineTypeDef_wf
 # Coverage for RoutineType_alpha: 0/26 (0.00%)
 107 Miss RoutineType_alpha
 108 Miss RoutineType_alpha
@@ -448,169 +448,132 @@
 131 Miss RoutineType_alpha
 132 Miss RoutineType_alpha
 # Coverage for RoutineType_ok: 10/26 (38.46%)
-1072 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/issue3808.p4
-1073 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3197-e.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/function_e.p4
-1074 Miss RoutineType_ok
-1075 Miss RoutineType_ok
-1076 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4
-1077 Miss RoutineType_ok
-1078 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4
-1079 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4
-1080 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/issue3246.p4
-1081 Miss RoutineType_ok
-1082 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/interface1_e.p4
-1083 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4
-1084 Miss RoutineType_ok
-1085 Miss RoutineType_ok
-1086 Miss RoutineType_ok
-1087 Miss RoutineType_ok
-1088 Miss RoutineType_ok
-1089 Miss RoutineType_ok
-1090 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4
-1091 Miss RoutineType_ok
-1092 Miss RoutineType_ok
-1093 Miss RoutineType_ok
-1094 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/interface1_e.p4
-1095 Miss RoutineType_ok
-1096 Miss RoutineType_ok
-1097 Miss RoutineType_ok
+1109 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/issue3808.p4
+1110 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3197-e.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/function_e.p4
+1111 Miss RoutineType_ok
+1112 Miss RoutineType_ok
+1113 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4
+1114 Miss RoutineType_ok
+1115 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4
+1116 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4
+1117 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/issue3246.p4
+1118 Miss RoutineType_ok
+1119 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/interface1_e.p4
+1120 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4
+1121 Miss RoutineType_ok
+1122 Miss RoutineType_ok
+1123 Miss RoutineType_ok
+1124 Miss RoutineType_ok
+1125 Miss RoutineType_ok
+1126 Miss RoutineType_ok
+1127 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4
+1128 Miss RoutineType_ok
+1129 Miss RoutineType_ok
+1130 Miss RoutineType_ok
+1131 Hit_likely RoutineType_ok p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/interface1_e.p4
+1132 Miss RoutineType_ok
+1133 Miss RoutineType_ok
+1134 Miss RoutineType_ok
 # Coverage for RoutineType_wf: 9/25 (36.00%)
-465 Miss RoutineType_wf
-466 Miss RoutineType_wf
-467 Miss RoutineType_wf
-468 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2454.p4
-469 Miss RoutineType_wf
-470 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4
-471 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/directionless.p4
-472 Miss RoutineType_wf
-473 Miss RoutineType_wf
-474 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4
-475 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/default-param.p4
-476 Miss RoutineType_wf
-477 Miss RoutineType_wf
-478 Miss RoutineType_wf
-479 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/issue807.p4
-480 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
-481 Miss RoutineType_wf
-482 Miss RoutineType_wf
-483 Miss RoutineType_wf
-484 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/parser-arg.p4
-485 Miss RoutineType_wf
-486 Miss RoutineType_wf
-487 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/extern.p4
-488 Miss RoutineType_wf
-489 Miss RoutineType_wf
+502 Miss RoutineType_wf
+503 Miss RoutineType_wf
+504 Miss RoutineType_wf
+505 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2454.p4
+506 Miss RoutineType_wf
+507 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2354-1.p4
+508 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/directionless.p4
+509 Miss RoutineType_wf
+510 Miss RoutineType_wf
+511 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4
+512 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/default-param.p4
+513 Miss RoutineType_wf
+514 Miss RoutineType_wf
+515 Miss RoutineType_wf
+516 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/issue807.p4
+517 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
+518 Miss RoutineType_wf
+519 Miss RoutineType_wf
+520 Miss RoutineType_wf
+521 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/parser-arg.p4
+522 Miss RoutineType_wf
+523 Miss RoutineType_wf
+524 Hit_likely RoutineType_wf p4c/testdata/p4_16_errors/extern.p4
+525 Miss RoutineType_wf
+526 Miss RoutineType_wf
 # Coverage for SelectCase_keyset_ok: 3/13 (23.08%)
-1185 Miss SelectCase_keyset_ok
-1186 Hit_likely SelectCase_keyset_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
-1187 Hit_likely SelectCase_keyset_ok p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
-1188 Miss SelectCase_keyset_ok
-1189 Miss SelectCase_keyset_ok
-1190 Miss SelectCase_keyset_ok
-1191 Miss SelectCase_keyset_ok
-1192 Miss SelectCase_keyset_ok
-1193 Miss SelectCase_keyset_ok
-1194 Miss SelectCase_keyset_ok
-1195 Miss SelectCase_keyset_ok
-1196 Miss SelectCase_keyset_ok
-1197 Hit_likely SelectCase_keyset_ok p4c/testdata/p4_16_errors/range_e.p4
+1222 Miss SelectCase_keyset_ok
+1223 Hit_likely SelectCase_keyset_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
+1224 Hit_likely SelectCase_keyset_ok p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
+1225 Miss SelectCase_keyset_ok
+1226 Miss SelectCase_keyset_ok
+1227 Miss SelectCase_keyset_ok
+1228 Miss SelectCase_keyset_ok
+1229 Miss SelectCase_keyset_ok
+1230 Miss SelectCase_keyset_ok
+1231 Miss SelectCase_keyset_ok
+1232 Miss SelectCase_keyset_ok
+1233 Miss SelectCase_keyset_ok
+1234 Hit_likely SelectCase_keyset_ok p4c/testdata/p4_16_errors/range_e.p4
 # Coverage for SelectCase_keysets_ok: 3/6 (50.00%)
-1198 Miss SelectCase_keysets_ok
-1199 Hit_likely SelectCase_keysets_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
-1200 Miss SelectCase_keysets_ok
-1201 Hit_likely SelectCase_keysets_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/issue3359.p4
-1202 Hit_likely SelectCase_keysets_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
-1203 Miss SelectCase_keysets_ok
+1235 Miss SelectCase_keysets_ok
+1236 Hit_likely SelectCase_keysets_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
+1237 Miss SelectCase_keysets_ok
+1238 Hit_likely SelectCase_keysets_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/issue3359.p4
+1239 Hit_likely SelectCase_keysets_ok p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4
+1240 Miss SelectCase_keysets_ok
 # Coverage for SelectCase_ok: 0/1 (0.00%)
-1204 Miss SelectCase_ok
+1241 Miss SelectCase_ok
 # Coverage for Stmt_ok: 9/26 (34.62%)
-816 Miss Stmt_ok
-817 Miss Stmt_ok
-818 Miss Stmt_ok
-819 Miss Stmt_ok
-820 Miss Stmt_ok
-821 Miss Stmt_ok
-822 Miss Stmt_ok
-823 Miss Stmt_ok
-824 Miss Stmt_ok
-825 Miss Stmt_ok
-826 Miss Stmt_ok
-827 Miss Stmt_ok
-828 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/conditional_e.p4
-829 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual3.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/function_e1.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4
-830 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual3.p4
-831 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/function_e1.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/conditional_e.p4
-832 Miss Stmt_ok
-833 Miss Stmt_ok
-834 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual3.p4
-835 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/duplicate-label.p4
-836 Miss Stmt_ok
-837 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4
-838 Miss Stmt_ok
-839 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/duplicate-label.p4
-840 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/conditional_e.p4
-841 Miss Stmt_ok
+853 Miss Stmt_ok
+854 Miss Stmt_ok
+855 Miss Stmt_ok
+856 Miss Stmt_ok
+857 Miss Stmt_ok
+858 Miss Stmt_ok
+859 Miss Stmt_ok
+860 Miss Stmt_ok
+861 Miss Stmt_ok
+862 Miss Stmt_ok
+863 Miss Stmt_ok
+864 Miss Stmt_ok
+865 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/conditional_e.p4
+866 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual3.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/function_e1.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4
+867 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual3.p4
+868 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3246.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/function_e1.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/conditional_e.p4
+869 Miss Stmt_ok
+870 Miss Stmt_ok
+871 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/virtual3.p4
+872 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/duplicate-label.p4
+873 Miss Stmt_ok
+874 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4
+875 Miss Stmt_ok
+876 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/duplicate-label.p4
+877 Hit_likely Stmt_ok p4c/testdata/p4_16_errors/conditional_e.p4
+878 Miss Stmt_ok
 # Coverage for Sub_expl: 1/1 (100.00%)
-570 Hit_likely Sub_expl p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4
+607 Hit_likely Sub_expl p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4
 # Coverage for Sub_expl_canon: 1/1 (100.00%)
-571 Hit_likely Sub_expl_canon p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4
+608 Hit_likely Sub_expl_canon p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4
 # Coverage for Sub_expl_canon_neq: 8/73 (10.96%)
-572 Miss Sub_expl_canon_neq
-573 Miss Sub_expl_canon_neq
-574 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
-575 Miss Sub_expl_canon_neq
-576 Miss Sub_expl_canon_neq
-577 Miss Sub_expl_canon_neq
-578 Miss Sub_expl_canon_neq
-579 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/psa-meter2.p4
-580 Miss Sub_expl_canon_neq
-581 Miss Sub_expl_canon_neq
-582 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/wrong-cast.p4
-583 Miss Sub_expl_canon_neq
-584 Miss Sub_expl_canon_neq
-585 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue3221.p4
-586 Miss Sub_expl_canon_neq
-587 Miss Sub_expl_canon_neq
-588 Miss Sub_expl_canon_neq
-589 Miss Sub_expl_canon_neq
-590 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/psa-meter2.p4
-591 Miss Sub_expl_canon_neq
-592 Miss Sub_expl_canon_neq
-593 Miss Sub_expl_canon_neq
-594 Miss Sub_expl_canon_neq
-595 Miss Sub_expl_canon_neq
-596 Miss Sub_expl_canon_neq
-597 Miss Sub_expl_canon_neq
-598 Miss Sub_expl_canon_neq
-599 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/issue401.p4
-600 Miss Sub_expl_canon_neq
-601 Miss Sub_expl_canon_neq
-602 Miss Sub_expl_canon_neq
-603 Miss Sub_expl_canon_neq
-604 Miss Sub_expl_canon_neq
-605 Miss Sub_expl_canon_neq
-606 Miss Sub_expl_canon_neq
-607 Miss Sub_expl_canon_neq
-608 Miss Sub_expl_canon_neq
 609 Miss Sub_expl_canon_neq
 610 Miss Sub_expl_canon_neq
-611 Miss Sub_expl_canon_neq
+611 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
 612 Miss Sub_expl_canon_neq
 613 Miss Sub_expl_canon_neq
 614 Miss Sub_expl_canon_neq
 615 Miss Sub_expl_canon_neq
-616 Miss Sub_expl_canon_neq
+616 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/psa-meter2.p4
 617 Miss Sub_expl_canon_neq
 618 Miss Sub_expl_canon_neq
-619 Miss Sub_expl_canon_neq
+619 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/wrong-cast.p4
 620 Miss Sub_expl_canon_neq
 621 Miss Sub_expl_canon_neq
-622 Miss Sub_expl_canon_neq
+622 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue3221.p4
 623 Miss Sub_expl_canon_neq
 624 Miss Sub_expl_canon_neq
 625 Miss Sub_expl_canon_neq
 626 Miss Sub_expl_canon_neq
-627 Miss Sub_expl_canon_neq
+627 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/psa-meter2.p4
 628 Miss Sub_expl_canon_neq
 629 Miss Sub_expl_canon_neq
 630 Miss Sub_expl_canon_neq
@@ -619,60 +582,60 @@
 633 Miss Sub_expl_canon_neq
 634 Miss Sub_expl_canon_neq
 635 Miss Sub_expl_canon_neq
-636 Miss Sub_expl_canon_neq
+636 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/issue401.p4
 637 Miss Sub_expl_canon_neq
-638 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/issue3221.p4
+638 Miss Sub_expl_canon_neq
 639 Miss Sub_expl_canon_neq
 640 Miss Sub_expl_canon_neq
 641 Miss Sub_expl_canon_neq
 642 Miss Sub_expl_canon_neq
 643 Miss Sub_expl_canon_neq
-644 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4
+644 Miss Sub_expl_canon_neq
+645 Miss Sub_expl_canon_neq
+646 Miss Sub_expl_canon_neq
+647 Miss Sub_expl_canon_neq
+648 Miss Sub_expl_canon_neq
+649 Miss Sub_expl_canon_neq
+650 Miss Sub_expl_canon_neq
+651 Miss Sub_expl_canon_neq
+652 Miss Sub_expl_canon_neq
+653 Miss Sub_expl_canon_neq
+654 Miss Sub_expl_canon_neq
+655 Miss Sub_expl_canon_neq
+656 Miss Sub_expl_canon_neq
+657 Miss Sub_expl_canon_neq
+658 Miss Sub_expl_canon_neq
+659 Miss Sub_expl_canon_neq
+660 Miss Sub_expl_canon_neq
+661 Miss Sub_expl_canon_neq
+662 Miss Sub_expl_canon_neq
+663 Miss Sub_expl_canon_neq
+664 Miss Sub_expl_canon_neq
+665 Miss Sub_expl_canon_neq
+666 Miss Sub_expl_canon_neq
+667 Miss Sub_expl_canon_neq
+668 Miss Sub_expl_canon_neq
+669 Miss Sub_expl_canon_neq
+670 Miss Sub_expl_canon_neq
+671 Miss Sub_expl_canon_neq
+672 Miss Sub_expl_canon_neq
+673 Miss Sub_expl_canon_neq
+674 Miss Sub_expl_canon_neq
+675 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/issue3221.p4
+676 Miss Sub_expl_canon_neq
+677 Miss Sub_expl_canon_neq
+678 Miss Sub_expl_canon_neq
+679 Miss Sub_expl_canon_neq
+680 Miss Sub_expl_canon_neq
+681 Hit_likely Sub_expl_canon_neq p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue401.p4
 # Coverage for Sub_impl: 1/1 (100.00%)
-645 Hit_likely Sub_impl p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4
+682 Hit_likely Sub_impl p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4
 # Coverage for Sub_impl_canon: 1/1 (100.00%)
-646 Hit_likely Sub_impl_canon p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4
+683 Hit_likely Sub_impl_canon p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4
 # Coverage for Sub_impl_canon_neq: 6/52 (11.54%)
-647 Miss Sub_impl_canon_neq
-648 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/enumCast.p4
-649 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4
-650 Miss Sub_impl_canon_neq
-651 Miss Sub_impl_canon_neq
-652 Miss Sub_impl_canon_neq
-653 Miss Sub_impl_canon_neq
-654 Miss Sub_impl_canon_neq
-655 Miss Sub_impl_canon_neq
-656 Miss Sub_impl_canon_neq
-657 Miss Sub_impl_canon_neq
-658 Miss Sub_impl_canon_neq
-659 Miss Sub_impl_canon_neq
-660 Miss Sub_impl_canon_neq
-661 Miss Sub_impl_canon_neq
-662 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue1986.p4
-663 Miss Sub_impl_canon_neq
-664 Miss Sub_impl_canon_neq
-665 Miss Sub_impl_canon_neq
-666 Miss Sub_impl_canon_neq
-667 Miss Sub_impl_canon_neq
-668 Miss Sub_impl_canon_neq
-669 Miss Sub_impl_canon_neq
-670 Miss Sub_impl_canon_neq
-671 Miss Sub_impl_canon_neq
-672 Miss Sub_impl_canon_neq
-673 Miss Sub_impl_canon_neq
-674 Miss Sub_impl_canon_neq
-675 Miss Sub_impl_canon_neq
-676 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
-677 Miss Sub_impl_canon_neq
-678 Miss Sub_impl_canon_neq
-679 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
-680 Miss Sub_impl_canon_neq
-681 Miss Sub_impl_canon_neq
-682 Miss Sub_impl_canon_neq
-683 Miss Sub_impl_canon_neq
 684 Miss Sub_impl_canon_neq
-685 Miss Sub_impl_canon_neq
-686 Miss Sub_impl_canon_neq
+685 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/enumCast.p4
+686 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4
 687 Miss Sub_impl_canon_neq
 688 Miss Sub_impl_canon_neq
 689 Miss Sub_impl_canon_neq
@@ -684,137 +647,174 @@
 695 Miss Sub_impl_canon_neq
 696 Miss Sub_impl_canon_neq
 697 Miss Sub_impl_canon_neq
-698 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/constructor3_e.p4
+698 Miss Sub_impl_canon_neq
+699 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue1986.p4
+700 Miss Sub_impl_canon_neq
+701 Miss Sub_impl_canon_neq
+702 Miss Sub_impl_canon_neq
+703 Miss Sub_impl_canon_neq
+704 Miss Sub_impl_canon_neq
+705 Miss Sub_impl_canon_neq
+706 Miss Sub_impl_canon_neq
+707 Miss Sub_impl_canon_neq
+708 Miss Sub_impl_canon_neq
+709 Miss Sub_impl_canon_neq
+710 Miss Sub_impl_canon_neq
+711 Miss Sub_impl_canon_neq
+712 Miss Sub_impl_canon_neq
+713 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
+714 Miss Sub_impl_canon_neq
+715 Miss Sub_impl_canon_neq
+716 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/generic-struct-self-nested.p4
+717 Miss Sub_impl_canon_neq
+718 Miss Sub_impl_canon_neq
+719 Miss Sub_impl_canon_neq
+720 Miss Sub_impl_canon_neq
+721 Miss Sub_impl_canon_neq
+722 Miss Sub_impl_canon_neq
+723 Miss Sub_impl_canon_neq
+724 Miss Sub_impl_canon_neq
+725 Miss Sub_impl_canon_neq
+726 Miss Sub_impl_canon_neq
+727 Miss Sub_impl_canon_neq
+728 Miss Sub_impl_canon_neq
+729 Miss Sub_impl_canon_neq
+730 Miss Sub_impl_canon_neq
+731 Miss Sub_impl_canon_neq
+732 Miss Sub_impl_canon_neq
+733 Miss Sub_impl_canon_neq
+734 Miss Sub_impl_canon_neq
+735 Hit_likely Sub_impl_canon_neq p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/constructor3_e.p4
 # Coverage for SwitchLabel_general_ok: 1/5 (20.00%)
-1165 Miss SwitchLabel_general_ok
-1166 Hit_likely SwitchLabel_general_ok p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4
-1167 Miss SwitchLabel_general_ok
-1168 Miss SwitchLabel_general_ok
-1169 Miss SwitchLabel_general_ok
+1202 Miss SwitchLabel_general_ok
+1203 Hit_likely SwitchLabel_general_ok p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4
+1204 Miss SwitchLabel_general_ok
+1205 Miss SwitchLabel_general_ok
+1206 Miss SwitchLabel_general_ok
 # Coverage for SwitchLabel_table_ok: 5/8 (62.50%)
-1157 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4
-1158 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4
-1159 Miss SwitchLabel_table_ok
-1160 Miss SwitchLabel_table_ok
-1161 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/incorrect-label.p4
-1162 Miss SwitchLabel_table_ok
-1163 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4
-1164 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/default-last-switch.p4
+1194 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4
+1195 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default-last-switch.p4
+1196 Miss SwitchLabel_table_ok
+1197 Miss SwitchLabel_table_ok
+1198 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/incorrect-label.p4
+1199 Miss SwitchLabel_table_ok
+1200 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4
+1201 Hit_likely SwitchLabel_table_ok p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/default-last-switch.p4
 # Coverage for TableAction_ok: 1/3 (33.33%)
-902 Miss TableAction_ok
-903 Hit_likely TableAction_ok p4c/testdata/p4_16_errors/issue3727.p4
-904 Miss TableAction_ok
+939 Miss TableAction_ok
+940 Hit_likely TableAction_ok p4c/testdata/p4_16_errors/issue3727.p4
+941 Miss TableAction_ok
 # Coverage for TableDefaultAction_ok: 3/7 (42.86%)
-905 Hit_likely TableDefaultAction_ok p4c/testdata/p4_16_errors/issue2033.p4 p4c/testdata/p4_16_errors/default_action.p4
-906 Hit_likely TableDefaultAction_ok p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/action-bind.p4
-907 Hit_likely TableDefaultAction_ok p4c/testdata/p4_16_errors/default_action1.p4
-908 Miss TableDefaultAction_ok
-909 Miss TableDefaultAction_ok
-910 Miss TableDefaultAction_ok
-911 Miss TableDefaultAction_ok
+942 Hit_likely TableDefaultAction_ok p4c/testdata/p4_16_errors/issue2033.p4 p4c/testdata/p4_16_errors/default_action.p4
+943 Hit_likely TableDefaultAction_ok p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/action-bind.p4
+944 Hit_likely TableDefaultAction_ok p4c/testdata/p4_16_errors/default_action1.p4
+945 Miss TableDefaultAction_ok
+946 Miss TableDefaultAction_ok
+947 Miss TableDefaultAction_ok
+948 Miss TableDefaultAction_ok
 # Coverage for TableEntry_action_ok: 1/2 (50.00%)
-919 Hit_likely TableEntry_action_ok p4c/testdata/p4_16_errors/issue1542.p4
-920 Miss TableEntry_action_ok
+956 Hit_likely TableEntry_action_ok p4c/testdata/p4_16_errors/issue1542.p4
+957 Miss TableEntry_action_ok
 # Coverage for TableEntry_keyset_ok: 3/25 (12.00%)
-1205 Miss TableEntry_keyset_ok
-1206 Miss TableEntry_keyset_ok
-1207 Miss TableEntry_keyset_ok
-1208 Miss TableEntry_keyset_ok
-1209 Miss TableEntry_keyset_ok
-1210 Miss TableEntry_keyset_ok
-1211 Miss TableEntry_keyset_ok
-1212 Miss TableEntry_keyset_ok
-1213 Miss TableEntry_keyset_ok
-1214 Miss TableEntry_keyset_ok
-1215 Miss TableEntry_keyset_ok
-1216 Miss TableEntry_keyset_ok
-1217 Miss TableEntry_keyset_ok
-1218 Miss TableEntry_keyset_ok
-1219 Hit_likely TableEntry_keyset_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
-1220 Miss TableEntry_keyset_ok
-1221 Miss TableEntry_keyset_ok
-1222 Miss TableEntry_keyset_ok
-1223 Miss TableEntry_keyset_ok
-1224 Hit_likely TableEntry_keyset_ok p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
-1225 Miss TableEntry_keyset_ok
-1226 Miss TableEntry_keyset_ok
-1227 Miss TableEntry_keyset_ok
-1228 Miss TableEntry_keyset_ok
-1229 Hit_likely TableEntry_keyset_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4
+1242 Miss TableEntry_keyset_ok
+1243 Miss TableEntry_keyset_ok
+1244 Miss TableEntry_keyset_ok
+1245 Miss TableEntry_keyset_ok
+1246 Miss TableEntry_keyset_ok
+1247 Miss TableEntry_keyset_ok
+1248 Miss TableEntry_keyset_ok
+1249 Miss TableEntry_keyset_ok
+1250 Miss TableEntry_keyset_ok
+1251 Miss TableEntry_keyset_ok
+1252 Miss TableEntry_keyset_ok
+1253 Miss TableEntry_keyset_ok
+1254 Miss TableEntry_keyset_ok
+1255 Miss TableEntry_keyset_ok
+1256 Hit_likely TableEntry_keyset_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
+1257 Miss TableEntry_keyset_ok
+1258 Miss TableEntry_keyset_ok
+1259 Miss TableEntry_keyset_ok
+1260 Miss TableEntry_keyset_ok
+1261 Hit_likely TableEntry_keyset_ok p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
+1262 Miss TableEntry_keyset_ok
+1263 Miss TableEntry_keyset_ok
+1264 Miss TableEntry_keyset_ok
+1265 Miss TableEntry_keyset_ok
+1266 Hit_likely TableEntry_keyset_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4
 # Coverage for TableEntry_keysets_ok: 3/7 (42.86%)
-912 Miss TableEntry_keysets_ok
-913 Miss TableEntry_keysets_ok
-914 Hit_likely TableEntry_keysets_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4
-915 Miss TableEntry_keysets_ok
-916 Hit_likely TableEntry_keysets_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
-917 Hit_likely TableEntry_keysets_ok p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4
-918 Miss TableEntry_keysets_ok
+949 Miss TableEntry_keysets_ok
+950 Miss TableEntry_keysets_ok
+951 Hit_likely TableEntry_keysets_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4
+952 Miss TableEntry_keysets_ok
+953 Hit_likely TableEntry_keysets_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
+954 Hit_likely TableEntry_keysets_ok p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4
+955 Miss TableEntry_keysets_ok
 # Coverage for TableEntry_keysets_ok': 0/2 (0.00%)
-1230 Miss TableEntry_keysets_ok'
-1231 Miss TableEntry_keysets_ok'
+1267 Miss TableEntry_keysets_ok'
+1268 Miss TableEntry_keysets_ok'
 # Coverage for TableEntry_priority_ok: 5/25 (20.00%)
-921 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
-922 Miss TableEntry_priority_ok
-923 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
-924 Miss TableEntry_priority_ok
-925 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4
-926 Miss TableEntry_priority_ok
-927 Miss TableEntry_priority_ok
-928 Miss TableEntry_priority_ok
-929 Miss TableEntry_priority_ok
-930 Miss TableEntry_priority_ok
-931 Miss TableEntry_priority_ok
-932 Miss TableEntry_priority_ok
-933 Miss TableEntry_priority_ok
-934 Miss TableEntry_priority_ok
-935 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
-936 Miss TableEntry_priority_ok
-937 Miss TableEntry_priority_ok
-938 Miss TableEntry_priority_ok
-939 Miss TableEntry_priority_ok
-940 Miss TableEntry_priority_ok
-941 Miss TableEntry_priority_ok
-942 Miss TableEntry_priority_ok
-943 Miss TableEntry_priority_ok
-944 Miss TableEntry_priority_ok
-945 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
+958 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
+959 Miss TableEntry_priority_ok
+960 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
+961 Miss TableEntry_priority_ok
+962 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4
+963 Miss TableEntry_priority_ok
+964 Miss TableEntry_priority_ok
+965 Miss TableEntry_priority_ok
+966 Miss TableEntry_priority_ok
+967 Miss TableEntry_priority_ok
+968 Miss TableEntry_priority_ok
+969 Miss TableEntry_priority_ok
+970 Miss TableEntry_priority_ok
+971 Miss TableEntry_priority_ok
+972 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4
+973 Miss TableEntry_priority_ok
+974 Miss TableEntry_priority_ok
+975 Miss TableEntry_priority_ok
+976 Miss TableEntry_priority_ok
+977 Miss TableEntry_priority_ok
+978 Miss TableEntry_priority_ok
+979 Miss TableEntry_priority_ok
+980 Miss TableEntry_priority_ok
+981 Miss TableEntry_priority_ok
+982 Hit_likely TableEntry_priority_ok p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
 # Coverage for TableKey_ok: 1/3 (33.33%)
-898 Miss TableKey_ok
-899 Hit_likely TableKey_ok p4c/testdata/p4_16_errors/missing_match.p4
-900 Miss TableKey_ok
+935 Miss TableKey_ok
+936 Hit_likely TableKey_ok p4c/testdata/p4_16_errors/missing_match.p4
+937 Miss TableKey_ok
 # Coverage for TableProperty_ok: 5/22 (22.73%)
-946 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/issue3442.p4
-947 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
-948 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
-949 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
-950 Miss TableProperty_ok
-951 Miss TableProperty_ok
-952 Miss TableProperty_ok
-953 Miss TableProperty_ok
-954 Miss TableProperty_ok
-955 Miss TableProperty_ok
-956 Miss TableProperty_ok
-957 Miss TableProperty_ok
-958 Miss TableProperty_ok
-959 Miss TableProperty_ok
-960 Miss TableProperty_ok
-961 Miss TableProperty_ok
-962 Miss TableProperty_ok
-963 Miss TableProperty_ok
-964 Miss TableProperty_ok
-965 Miss TableProperty_ok
-966 Miss TableProperty_ok
-967 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
+983 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/issue3442.p4
+984 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
+985 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
+986 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
+987 Miss TableProperty_ok
+988 Miss TableProperty_ok
+989 Miss TableProperty_ok
+990 Miss TableProperty_ok
+991 Miss TableProperty_ok
+992 Miss TableProperty_ok
+993 Miss TableProperty_ok
+994 Miss TableProperty_ok
+995 Miss TableProperty_ok
+996 Miss TableProperty_ok
+997 Miss TableProperty_ok
+998 Miss TableProperty_ok
+999 Miss TableProperty_ok
+1000 Miss TableProperty_ok
+1001 Miss TableProperty_ok
+1002 Miss TableProperty_ok
+1003 Miss TableProperty_ok
+1004 Hit_likely TableProperty_ok p4c/testdata/p4_16_errors/issue1230.p4
 # Coverage for Table_ok: 1/2 (50.00%)
-968 Hit_likely Table_ok p4c/testdata/p4_16_errors/missing_actions.p4
-969 Miss Table_ok
+1005 Hit_likely Table_ok p4c/testdata/p4_16_errors/missing_actions.p4
+1006 Miss Table_ok
 # Coverage for TypeArgument_ok: 1/2 (50.00%)
-568 Hit_likely TypeArgument_ok p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3808-1.p4
-569 Miss TypeArgument_ok
+605 Hit_likely TypeArgument_ok p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3808-1.p4
+606 Miss TypeArgument_ok
 # Coverage for TypeDef_wf: 2/3 (66.67%)
-454 Hit_likely TypeDef_wf p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4
-455 Hit_likely TypeDef_wf p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/header3.p4 p4c/testdata/p4_16_errors/header2_e.p4
-456 Miss TypeDef_wf
+491 Hit_likely TypeDef_wf p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4
+492 Hit_likely TypeDef_wf p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/header3.p4 p4c/testdata/p4_16_errors/header2_e.p4
+493 Miss TypeDef_wf
 # Coverage for Type_alpha: 20/91 (21.98%)
 15 Hit_likely Type_alpha p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/dupConst.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/default-param.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4 p4c/testdata/p4_16_errors/action-bind.p4
 16 Hit_likely Type_alpha p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4
@@ -908,151 +908,151 @@
 104 Hit_likely Type_alpha p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/issue3221.p4
 105 Hit_likely Type_alpha p4c/testdata/p4_16_errors/wrong-cast.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/range_e.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/dupConst.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/div1.p4 p4c/testdata/p4_16_errors/div0.p4 p4c/testdata/p4_16_errors/default-param.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const1_e.p4 p4c/testdata/p4_16_errors/const.p4 p4c/testdata/p4_16_errors/action-bind.p4
 # Coverage for Type_ok: 5/25 (20.00%)
-543 Miss Type_ok
-544 Miss Type_ok
-545 Miss Type_ok
-546 Miss Type_ok
-547 Miss Type_ok
-548 Miss Type_ok
-549 Miss Type_ok
-550 Miss Type_ok
-551 Miss Type_ok
-552 Miss Type_ok
-553 Hit_likely Type_ok p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4
-554 Miss Type_ok
-555 Miss Type_ok
-556 Hit_likely Type_ok p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/factory-err2.p4
-557 Miss Type_ok
-558 Miss Type_ok
-559 Miss Type_ok
-560 Miss Type_ok
-561 Hit_likely Type_ok p4c/testdata/p4_16_errors/stack1_e.p4
-562 Miss Type_ok
-563 Miss Type_ok
-564 Miss Type_ok
-565 Miss Type_ok
-566 Hit_likely Type_ok p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/typecheck_e.p4 p4c/testdata/p4_16_errors/type-in-expr.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/missing_actions.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue819-1.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue816-1.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue4140.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/issue3264.p4 p4c/testdata/p4_16_errors/issue3197-e.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/issue1230.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/function_e2.p4 p4c/testdata/p4_16_errors/function_e.p4 p4c/testdata/p4_16_errors/function1_e.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/default-param.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/control-verify.p4 p4c/testdata/p4_16_errors/assign.p4
-567 Hit_likely Type_ok p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4
+580 Miss Type_ok
+581 Miss Type_ok
+582 Miss Type_ok
+583 Miss Type_ok
+584 Miss Type_ok
+585 Miss Type_ok
+586 Miss Type_ok
+587 Miss Type_ok
+588 Miss Type_ok
+589 Miss Type_ok
+590 Hit_likely Type_ok p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4
+591 Miss Type_ok
+592 Miss Type_ok
+593 Hit_likely Type_ok p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/factory-err2.p4
+594 Miss Type_ok
+595 Miss Type_ok
+596 Miss Type_ok
+597 Miss Type_ok
+598 Hit_likely Type_ok p4c/testdata/p4_16_errors/stack1_e.p4
+599 Miss Type_ok
+600 Miss Type_ok
+601 Miss Type_ok
+602 Miss Type_ok
+603 Hit_likely Type_ok p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/typecheck_e.p4 p4c/testdata/p4_16_errors/type-in-expr.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/string-e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-1.p4 p4c/testdata/p4_16_errors/spec-issue1297-string-cat-err-0.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/missing_actions.p4 p4c/testdata/p4_16_errors/minWidth.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue819-1.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue816-1.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue4140.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/issue3264.p4 p4c/testdata/p4_16_errors/issue3197-e.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/issue1230.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/function_e2.p4 p4c/testdata/p4_16_errors/function_e.p4 p4c/testdata/p4_16_errors/function1_e.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/default-param.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/control-verify.p4 p4c/testdata/p4_16_errors/assign.p4
+604 Hit_likely Type_ok p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4
 # Coverage for Type_wf: 10/41 (24.39%)
-413 Hit_likely Type_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3808.p4
-414 Hit_likely Type_wf p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3378.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue1296.p4
-415 Miss Type_wf
-416 Miss Type_wf
-417 Miss Type_wf
-418 Hit_likely Type_wf p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4
-419 Miss Type_wf
-420 Miss Type_wf
-421 Miss Type_wf
-422 Hit_likely Type_wf p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3378.p4
-423 Miss Type_wf
-424 Hit_likely Type_wf p4c/testdata/p4_16_errors/stack_e.p4
-425 Miss Type_wf
-426 Hit_likely Type_wf p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/header2_e.p4
-427 Miss Type_wf
-428 Miss Type_wf
-429 Hit_likely Type_wf p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/header3.p4
-430 Miss Type_wf
-431 Miss Type_wf
-432 Miss Type_wf
-433 Miss Type_wf
-434 Miss Type_wf
-435 Miss Type_wf
-436 Miss Type_wf
-437 Miss Type_wf
-438 Hit_likely Type_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
-439 Miss Type_wf
-440 Hit_likely Type_wf p4c/testdata/p4_16_errors/issue3787.p4
-441 Miss Type_wf
-442 Miss Type_wf
-443 Miss Type_wf
-444 Miss Type_wf
-445 Miss Type_wf
-446 Miss Type_wf
-447 Miss Type_wf
-448 Miss Type_wf
-449 Miss Type_wf
-450 Miss Type_wf
-451 Miss Type_wf
-452 Hit_likely Type_wf p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue3346.p4 p4c/testdata/p4_16_errors/issue3335.p4
+450 Hit_likely Type_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3808.p4
+451 Hit_likely Type_wf p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3378.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue1296.p4
+452 Miss Type_wf
 453 Miss Type_wf
+454 Miss Type_wf
+455 Hit_likely Type_wf p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/tuple-newtype.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4
+456 Miss Type_wf
+457 Miss Type_wf
+458 Miss Type_wf
+459 Hit_likely Type_wf p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3378.p4
+460 Miss Type_wf
+461 Hit_likely Type_wf p4c/testdata/p4_16_errors/stack_e.p4
+462 Miss Type_wf
+463 Hit_likely Type_wf p4c/testdata/p4_16_errors/string-e1.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/header2_e.p4
+464 Miss Type_wf
+465 Miss Type_wf
+466 Hit_likely Type_wf p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/header3.p4
+467 Miss Type_wf
+468 Miss Type_wf
+469 Miss Type_wf
+470 Miss Type_wf
+471 Miss Type_wf
+472 Miss Type_wf
+473 Miss Type_wf
+474 Miss Type_wf
+475 Hit_likely Type_wf p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue1296.p4
+476 Miss Type_wf
+477 Hit_likely Type_wf p4c/testdata/p4_16_errors/issue3787.p4
+478 Miss Type_wf
+479 Miss Type_wf
+480 Miss Type_wf
+481 Miss Type_wf
+482 Miss Type_wf
+483 Miss Type_wf
+484 Miss Type_wf
+485 Miss Type_wf
+486 Miss Type_wf
+487 Miss Type_wf
+488 Miss Type_wf
+489 Hit_likely Type_wf p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/issue3346.p4 p4c/testdata/p4_16_errors/issue3335.p4
+490 Miss Type_wf
 # Coverage for add_constructor: 0/1 (0.00%)
-377 Miss add_constructor
+414 Miss add_constructor
 # Coverage for add_constructors: 0/2 (0.00%)
-378 Miss add_constructors
-379 Miss add_constructors
+415 Miss add_constructors
+416 Miss add_constructors
 # Coverage for add_routine_non_overload: 2/3 (66.67%)
-374 Hit_likely add_routine_non_overload p4c/testdata/p4_16_errors/issue1932-2.p4
-375 Hit_likely add_routine_non_overload p4c/testdata/p4_16_errors/issue1932-1.p4
-376 Miss add_routine_non_overload
+411 Hit_likely add_routine_non_overload p4c/testdata/p4_16_errors/issue1932-2.p4
+412 Hit_likely add_routine_non_overload p4c/testdata/p4_16_errors/issue1932-1.p4
+413 Miss add_routine_non_overload
 # Coverage for add_routine_overload: 0/3 (0.00%)
-371 Miss add_routine_overload
-372 Miss add_routine_overload
-373 Miss add_routine_overload
+408 Miss add_routine_overload
+409 Miss add_routine_overload
+410 Miss add_routine_overload
 # Coverage for add_type: 1/3 (33.33%)
-366 Miss add_type
-367 Hit_likely add_type p4c/testdata/p4_16_errors/template_e.p4
-368 Miss add_type
+403 Miss add_type
+404 Hit_likely add_type p4c/testdata/p4_16_errors/template_e.p4
+405 Miss add_type
 # Coverage for add_types: 0/2 (0.00%)
-369 Miss add_types
-370 Miss add_types
+406 Miss add_types
+407 Miss add_types
 # Coverage for add_var: 3/7 (42.86%)
-357 Hit_likely add_var p4c/testdata/p4_16_errors/issue4140.p4
-358 Hit_likely add_var p4c/testdata/p4_16_errors/dupConst.p4
-359 Miss add_var
-360 Hit_likely add_var p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/dup-param.p4
-361 Miss add_var
-362 Miss add_var
-363 Miss add_var
+394 Hit_likely add_var p4c/testdata/p4_16_errors/issue4140.p4
+395 Hit_likely add_var p4c/testdata/p4_16_errors/dupConst.p4
+396 Miss add_var
+397 Hit_likely add_var p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/dup-param.p4
+398 Miss add_var
+399 Miss add_var
+400 Miss add_var
 # Coverage for add_vars: 0/2 (0.00%)
-364 Miss add_vars
-365 Miss add_vars
+401 Miss add_vars
+402 Miss add_vars
 # Coverage for align_parameters: 0/1 (0.00%)
-1232 Miss align_parameters
+1269 Miss align_parameters
 # Coverage for align_parameters': 1/2 (50.00%)
-1233 Hit_likely align_parameters' p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4
-1234 Miss align_parameters'
+1270 Hit_likely align_parameters' p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4
+1271 Miss align_parameters'
 # Coverage for coerce_unary: 1/1 (100.00%)
-1156 Hit_likely coerce_unary p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const.p4
+1193 Hit_likely coerce_unary p4c/testdata/p4_16_errors/virtual2.p4 p4c/testdata/p4_16_errors/virtual1.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/signs.p4 p4c/testdata/p4_16_errors/signed.p4 p4c/testdata/p4_16_errors/serenum-typedef.p4 p4c/testdata/p4_16_errors/serenum-type.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/list-error.p4 p4c/testdata/p4_16_errors/issue67.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue2444-1.p4 p4c/testdata/p4_16_errors/issue2332.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/implicit.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/constructor3_e.p4 p4c/testdata/p4_16_errors/const.p4
 # Coverage for directionless_trailing': 1/2 (50.00%)
-506 Hit_likely directionless_trailing' p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/directionless.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4
-507 Miss directionless_trailing'
+543 Hit_likely directionless_trailing' p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/directionless.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4
+544 Miss directionless_trailing'
 # Coverage for exit: 0/1 (0.00%)
-356 Miss exit
+393 Miss exit
 # Coverage for find_non_overloadeds: 1/2 (50.00%)
-354 Hit_likely find_non_overloadeds p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1230.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default_action1.p4 p4c/testdata/p4_16_errors/default_action.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4
-355 Miss find_non_overloadeds
+391 Hit_likely find_non_overloadeds p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1230.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/default_action1.p4 p4c/testdata/p4_16_errors/default_action.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind2.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4
+392 Miss find_non_overloadeds
 # Coverage for find_routine_non_overloaded': 1/2 (50.00%)
-396 Hit_likely find_routine_non_overloaded' p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue1230.p4
-397 Miss find_routine_non_overloaded'
+433 Hit_likely find_routine_non_overloaded' p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3727.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue1230.p4
+434 Miss find_routine_non_overloaded'
 # Coverage for find_routine_overloaded': 1/2 (50.00%)
-394 Hit_likely find_routine_overloaded' p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3656.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3197-e.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/function_e2.p4 p4c/testdata/p4_16_errors/function_e.p4 p4c/testdata/p4_16_errors/function1_e.p4
-395 Miss find_routine_overloaded'
+431 Hit_likely find_routine_overloaded' p4c/testdata/p4_16_errors/string-e2.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/named-fail1.p4 p4c/testdata/p4_16_errors/named-fail.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3813.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3656.p4 p4c/testdata/p4_16_errors/issue3316.p4 p4c/testdata/p4_16_errors/issue3197-e.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/function_e2.p4 p4c/testdata/p4_16_errors/function_e.p4 p4c/testdata/p4_16_errors/function1_e.p4
+432 Miss find_routine_overloaded'
 # Coverage for find_table_priority_last: 0/2 (0.00%)
-398 Miss find_table_priority_last
-399 Miss find_table_priority_last
+435 Miss find_table_priority_last
+436 Miss find_table_priority_last
 # Coverage for find_type': 2/4 (50.00%)
-390 Hit_likely find_type' p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/package.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/next.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue819-1.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue816-1.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue394.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3522.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue3378.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3293.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue2033.p4 p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/header2_e.p4 p4c/testdata/p4_16_errors/generic1_e.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/bitExtract_e.p4 p4c/testdata/p4_16_errors/binary_e.p4
-391 Miss find_type'
-392 Hit_likely find_type' p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3522.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3293.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/generic1_e.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/bitExtract_e.p4 p4c/testdata/p4_16_errors/binary_e.p4
-393 Miss find_type'
+427 Hit_likely find_type' p4c/testdata/p4_16_errors/typedef-and-type-definitions.p4 p4c/testdata/p4_16_errors/type-params_e.p4 p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/spec-issue563.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-type-hdr.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/package.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/next.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/module_e.p4 p4c/testdata/p4_16_errors/issue819.p4 p4c/testdata/p4_16_errors/issue819-1.p4 p4c/testdata/p4_16_errors/issue818.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue816-1.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue803-1.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue774-1.p4 p4c/testdata/p4_16_errors/issue764.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue407-1.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue394.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3787.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3522.p4 p4c/testdata/p4_16_errors/issue3442.p4 p4c/testdata/p4_16_errors/issue3378.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3293.p4 p4c/testdata/p4_16_errors/issue3282.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue3170-1.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue2033.p4 p4c/testdata/p4_16_errors/issue2021.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/issue1006-1.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/header2_e.p4 p4c/testdata/p4_16_errors/generic1_e.p4 p4c/testdata/p4_16_errors/generic-struct-self-nested.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/extern.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/bitExtract_e.p4 p4c/testdata/p4_16_errors/binary_e.p4
+428 Miss find_type'
+429 Hit_likely find_type' p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/struct_e.p4 p4c/testdata/p4_16_errors/stack_e.p4 p4c/testdata/p4_16_errors/stack3.p4 p4c/testdata/p4_16_errors/stack2.p4 p4c/testdata/p4_16_errors/stack1_e.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/slice_out_of_bound.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-struct.p4 p4c/testdata/p4_16_errors/push_nonconstant.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/param.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/newtype-err.p4 p4c/testdata/p4_16_errors/methodArgDontcare.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue807.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue584.p4 p4c/testdata/p4_16_errors/issue561-1.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue401.p4 p4c/testdata/p4_16_errors/issue388.p4 p4c/testdata/p4_16_errors/issue3808-1.p4 p4c/testdata/p4_16_errors/issue3750.p4 p4c/testdata/p4_16_errors/issue3750-1.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3534.p4 p4c/testdata/p4_16_errors/issue3522.p4 p4c/testdata/p4_16_errors/issue3305.p4 p4c/testdata/p4_16_errors/issue3304.p4 p4c/testdata/p4_16_errors/issue3293.p4 p4c/testdata/p4_16_errors/issue3221.p4 p4c/testdata/p4_16_errors/issue3188.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue3045.p4 p4c/testdata/p4_16_errors/issue3045-2.p4 p4c/testdata/p4_16_errors/issue3045-1.p4 p4c/testdata/p4_16_errors/issue2544_self_ref.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2290.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2220.p4 p4c/testdata/p4_16_errors/issue2036-2.p4 p4c/testdata/p4_16_errors/issue2036-1.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1932-2.p4 p4c/testdata/p4_16_errors/issue1932-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1296.p4 p4c/testdata/p4_16_errors/issue1059.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/generic1_e.p4 p4c/testdata/p4_16_errors/factory-err2.p4 p4c/testdata/p4_16_errors/enumCast.p4 p4c/testdata/p4_16_errors/default-initializer-err.p4 p4c/testdata/p4_16_errors/bitExtract_e.p4 p4c/testdata/p4_16_errors/binary_e.p4
+430 Miss find_type'
 # Coverage for find_value': 3/6 (50.00%)
-384 Hit_likely find_value' p4c/testdata/p4_16_errors/missing_match.p4
-385 Miss find_value'
-386 Hit_likely find_value' p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
-387 Miss find_value'
-388 Hit_likely find_value' p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
-389 Miss find_value'
+421 Hit_likely find_value' p4c/testdata/p4_16_errors/missing_match.p4
+422 Miss find_value'
+423 Hit_likely find_value' p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
+424 Miss find_value'
+425 Hit_likely find_value' p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4
+426 Miss find_value'
 # Coverage for find_var': 2/4 (50.00%)
-380 Hit_likely find_var' p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3264.p4 p4c/testdata/p4_16_errors/incorrect-label.p4
-381 Miss find_var'
-382 Hit_likely find_var' p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/next.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3264.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/inro.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4 p4c/testdata/p4_16_errors/assign.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4
-383 Miss find_var'
+417 Hit_likely find_var' p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue3264.p4 p4c/testdata/p4_16_errors/incorrect-label.p4
+418 Miss find_var'
+419 Hit_likely find_var' p4c/testdata/p4_16_errors/type-field.p4 p4c/testdata/p4_16_errors/tuple-to-header.p4 p4c/testdata/p4_16_errors/table-entries-ternary.p4 p4c/testdata/p4_16_errors/table-entries-range.p4 p4c/testdata/p4_16_errors/table-entries-optional-2-bmv2.p4 p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4 p4c/testdata/p4_16_errors/table-entries-exact.p4 p4c/testdata/p4_16_errors/table-entries-exact-ternary.p4 p4c/testdata/p4_16_errors/table-entries-decl-order.p4 p4c/testdata/p4_16_errors/structure-valued-expr-errs-1.p4 p4c/testdata/p4_16_errors/stack-const-index-out-of-bounds-bmv2.p4 p4c/testdata/p4_16_errors/serEnumImplCast.p4 p4c/testdata/p4_16_errors/select-varbits.p4 p4c/testdata/p4_16_errors/psa-meter2.p4 p4c/testdata/p4_16_errors/pr2918.p4 p4c/testdata/p4_16_errors/parser-arg.p4 p4c/testdata/p4_16_errors/not_bound.p4 p4c/testdata/p4_16_errors/next.p4 p4c/testdata/p4_16_errors/missing_match.p4 p4c/testdata/p4_16_errors/issue816.p4 p4c/testdata/p4_16_errors/issue774-2.p4 p4c/testdata/p4_16_errors/issue4136.p4 p4c/testdata/p4_16_errors/issue413.p4 p4c/testdata/p4_16_errors/issue3847.p4 p4c/testdata/p4_16_errors/issue3846.p4 p4c/testdata/p4_16_errors/issue3814.p4 p4c/testdata/p4_16_errors/issue3808.p4 p4c/testdata/p4_16_errors/issue3671-2.p4 p4c/testdata/p4_16_errors/issue3623-3.p4 p4c/testdata/p4_16_errors/issue3623-2.p4 p4c/testdata/p4_16_errors/issue3622.p4 p4c/testdata/p4_16_errors/issue3611.p4 p4c/testdata/p4_16_errors/issue3589.p4 p4c/testdata/p4_16_errors/issue3359.p4 p4c/testdata/p4_16_errors/issue3345.p4 p4c/testdata/p4_16_errors/issue3264.p4 p4c/testdata/p4_16_errors/issue306.p4 p4c/testdata/p4_16_errors/issue2597.p4 p4c/testdata/p4_16_errors/issue2525.p4 p4c/testdata/p4_16_errors/issue2454.p4 p4c/testdata/p4_16_errors/issue2413.p4 p4c/testdata/p4_16_errors/issue2354.p4 p4c/testdata/p4_16_errors/issue2317.p4 p4c/testdata/p4_16_errors/issue2267.p4 p4c/testdata/p4_16_errors/issue2230.p4 p4c/testdata/p4_16_errors/issue2230-1-bmv2.p4 p4c/testdata/p4_16_errors/issue2036.p4 p4c/testdata/p4_16_errors/issue1986.p4 p4c/testdata/p4_16_errors/issue1986-1.p4 p4c/testdata/p4_16_errors/issue1557-bmv2.p4 p4c/testdata/p4_16_errors/issue1542.p4 p4c/testdata/p4_16_errors/issue1331.p4 p4c/testdata/p4_16_errors/interface1_e.p4 p4c/testdata/p4_16_errors/inro.p4 p4c/testdata/p4_16_errors/init-entries-error3-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error2-bmv2.p4 p4c/testdata/p4_16_errors/init-entries-error1-bmv2.p4 p4c/testdata/p4_16_errors/incorrect-label.p4 p4c/testdata/p4_16_errors/equality-fail.p4 p4c/testdata/p4_16_errors/duplicate-label.p4 p4c/testdata/p4_16_errors/div3.p4 p4c/testdata/p4_16_errors/default-last-switch.p4 p4c/testdata/p4_16_errors/call-table.p4 p4c/testdata/p4_16_errors/assign.p4 p4c/testdata/p4_16_errors/action-bind3.p4 p4c/testdata/p4_16_errors/action-bind1.p4 p4c/testdata/p4_16_errors/action-bind.p4
+420 Miss find_var'
 # Coverage for fresh_tids: 0/1 (0.00%)
 2 Miss fresh_tids
 # Coverage for init_: 0/1 (0.00%)
 0 Miss init_
 # Coverage for join_tableEntryState: 0/1 (0.00%)
-400 Miss join_tableEntryState
+437 Miss join_tableEntryState
 # Coverage for repeat_: 0/1 (0.00%)
 1 Miss repeat_
 # Coverage for specialize_constructorTypeDef: 0/3 (0.00%)
@@ -1067,12 +1067,12 @@
 # Coverage for specialize_typeDef: 0/1 (0.00%)
 7 Miss specialize_typeDef
 # Coverage for subst_rdenv: 2/6 (33.33%)
-1177 Hit_likely subst_rdenv p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4
-1178 Miss subst_rdenv
-1179 Miss subst_rdenv
-1180 Miss subst_rdenv
-1181 Hit_likely subst_rdenv p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4
-1182 Miss subst_rdenv
+1214 Hit_likely subst_rdenv p4c/testdata/p4_16_errors/virtual6.p4 p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4
+1215 Miss subst_rdenv
+1216 Miss subst_rdenv
+1217 Miss subst_rdenv
+1218 Hit_likely subst_rdenv p4c/testdata/p4_16_errors/virtual5.p4 p4c/testdata/p4_16_errors/virtual4.p4
+1219 Miss subst_rdenv
 # Coverage for subst_routineTypeDef': 0/2 (0.00%)
 5 Miss subst_routineTypeDef'
 6 Miss subst_routineTypeDef'
@@ -1080,15 +1080,15 @@
 3 Miss subst_typeDef'
 4 Miss subst_typeDef'
 # Coverage for tableEntry_lpm_prefix': 3/12 (25.00%)
-401 Hit_likely tableEntry_lpm_prefix' p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4
-402 Miss tableEntry_lpm_prefix'
-403 Hit_likely tableEntry_lpm_prefix' p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4
-404 Miss tableEntry_lpm_prefix'
-405 Miss tableEntry_lpm_prefix'
-406 Miss tableEntry_lpm_prefix'
-407 Miss tableEntry_lpm_prefix'
-408 Miss tableEntry_lpm_prefix'
-409 Hit_likely tableEntry_lpm_prefix' p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4
-410 Miss tableEntry_lpm_prefix'
-411 Miss tableEntry_lpm_prefix'
-412 Miss tableEntry_lpm_prefix'
+438 Hit_likely tableEntry_lpm_prefix' p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4
+439 Miss tableEntry_lpm_prefix'
+440 Hit_likely tableEntry_lpm_prefix' p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4
+441 Miss tableEntry_lpm_prefix'
+442 Miss tableEntry_lpm_prefix'
+443 Miss tableEntry_lpm_prefix'
+444 Miss tableEntry_lpm_prefix'
+445 Miss tableEntry_lpm_prefix'
+446 Hit_likely tableEntry_lpm_prefix' p4c/testdata/p4_16_errors/table-entries-lpm.p4 p4c/testdata/p4_16_errors/table-entries-lpm-2.p4
+447 Miss tableEntry_lpm_prefix'
+448 Miss tableEntry_lpm_prefix'
+449 Miss tableEntry_lpm_prefix'

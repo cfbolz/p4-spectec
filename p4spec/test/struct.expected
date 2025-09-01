@@ -4062,7 +4062,7 @@ def $un_minus(value)
 
       1. (Let (FBitV w i) be numberValue)
 
-      2. (Let i' be ($pow2(w) - i))
+      2. (Let i' be ($pow2((w as int)) - i))
 
       3. Return ((FBitV w i') as value)
 
@@ -4155,14 +4155,6 @@ def $bin_plus(value, value')
 
             4. Return ((FIntV w i') as value)
 
-            5. (Let i' be $to_bitstr((w as int), (i_l' - i_r')))
-
-            6. Return ((FIntV w i') as value)
-
-            7. (Let i' be $to_bitstr((w as int), (i_l' * i_r')))
-
-            8. Return ((FIntV w i') as value)
-
           2. Else Phantom#152
 
         2. Else Phantom#153
@@ -4174,11 +4166,123 @@ def $bin_plus(value, value')
 1. Else Phantom#156
 
 ;; ../../../../spec-concrete/3-numerics.watsup:73.1-73.39
-def $bin_satplus
+def $bin_satplus(value, value')
 
+1. If ((value has type numberValue)), then
 
+  1. (Let numberValue be (value as numberValue))
 
-;; ../../../../spec-concrete/3-numerics.watsup:77.1-77.37
+  2. Case analysis on numberValue
+
+    1. Case (% matches pattern `FBitV%%`)
+
+      1. (Let (FBitV w i_l) be numberValue)
+
+      2. If ((value' has type numberValue)), then
+
+        1. (Let numberValue' be (value' as numberValue))
+
+        2. If ((numberValue' matches pattern `FBitV%%`)), then
+
+          1. (Let (FBitV w' i_r) be numberValue')
+
+          2. If ((w = w')), then
+
+            1. (Let i_l' be $to_int((w as int), i_l))
+
+            2. (Let i_r' be $to_int((w as int), i_r))
+
+            3. (Let i_max be ($pow2((w - 1)) - (1 as int)))
+
+            4. (Let i_min be -$pow2((w - 1)))
+
+            5. If (((i_l' + i_r') > i_max)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_max))
+
+              2. Return ((FBitV w i') as value)
+
+            5. Else Phantom#157
+
+            6. If (((i_l' + i_r') < i_min)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_min))
+
+              2. Return ((FBitV w i') as value)
+
+            6. Else Phantom#158
+
+            7. If (((i_min <= (i_l' + i_r')) /\ ((i_l' + i_r') <= i_max))), then
+
+              1. (Let i' be $to_bitstr((w as int), (i_l' + i_r')))
+
+              2. Return ((FBitV w i') as value)
+
+            7. Else Phantom#159
+
+          2. Else Phantom#160
+
+        2. Else Phantom#161
+
+      2. Else Phantom#162
+
+    2. Case (% matches pattern `FIntV%%`)
+
+      1. (Let (FIntV w i_l) be numberValue)
+
+      2. If ((value' has type numberValue)), then
+
+        1. (Let numberValue' be (value' as numberValue))
+
+        2. If ((numberValue' matches pattern `FIntV%%`)), then
+
+          1. (Let (FIntV w' i_r) be numberValue')
+
+          2. If ((w = w')), then
+
+            1. (Let i_l' be $to_int((w as int), i_l))
+
+            2. (Let i_r' be $to_int((w as int), i_r))
+
+            3. (Let i_max be ($pow2((w - 1)) - (1 as int)))
+
+            4. (Let i_min be -$pow2((w - 1)))
+
+            5. If (((i_l' + i_r') > i_max)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_max))
+
+              2. Return ((FIntV w i') as value)
+
+            5. Else Phantom#163
+
+            6. If (((i_l' + i_r') < i_min)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_min))
+
+              2. Return ((FIntV w i') as value)
+
+            6. Else Phantom#164
+
+            7. If (((i_min <= (i_l' + i_r')) /\ ((i_l' + i_r') <= i_max))), then
+
+              1. (Let i' be $to_bitstr((w as int), (i_l' + i_r')))
+
+              2. Return ((FIntV w i') as value)
+
+            7. Else Phantom#165
+
+          2. Else Phantom#166
+
+        2. Else Phantom#167
+
+      2. Else Phantom#168
+
+  2. Else Phantom#169
+
+1. Else Phantom#170
+
+;; ../../../../spec-concrete/3-numerics.watsup:121.1-121.37
 def $bin_minus(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4201,9 +4305,9 @@ def $bin_minus(value, value')
 
           2. Return ((IntV (i_l - i_r)) as value)
 
-        2. Else Phantom#157
+        2. Else Phantom#171
 
-      2. Else Phantom#158
+      2. Else Phantom#172
 
     2. Case (% matches pattern `FBitV%%`)
 
@@ -4227,55 +4331,249 @@ def $bin_minus(value, value')
 
             4. Return ((FBitV w i') as value)
 
-            5. (Let i' be $to_bitstr((w as int), (i_l' * i_r')))
+          2. Else Phantom#173
 
-            6. Return ((FBitV w i') as value)
+        2. Else Phantom#174
 
-          2. Else Phantom#159
+      2. Else Phantom#175
 
-        2. Else Phantom#160
+    3. Case (% matches pattern `FIntV%%`)
 
-      2. Else Phantom#161
+      1. (Let (FIntV w i_l) be numberValue)
 
-  2. Else Phantom#162
+      2. If ((value' has type numberValue)), then
 
-1. Else Phantom#163
+        1. (Let numberValue' be (value' as numberValue))
 
-;; ../../../../spec-concrete/3-numerics.watsup:91.1-91.40
-def $bin_satminus
+        2. If ((numberValue' matches pattern `FIntV%%`)), then
 
+          1. (Let (FIntV w' i_r) be numberValue')
 
+          2. If ((w = w')), then
 
-;; ../../../../spec-concrete/3-numerics.watsup:95.1-95.35
+            1. (Let i_l' be $to_int((w as int), i_l))
+
+            2. (Let i_r' be $to_int((w as int), i_r))
+
+            3. (Let i' be $to_bitstr((w as int), (i_l' - i_r')))
+
+            4. Return ((FIntV w i') as value)
+
+          2. Else Phantom#176
+
+        2. Else Phantom#177
+
+      2. Else Phantom#178
+
+  2. Else Phantom#179
+
+1. Else Phantom#180
+
+;; ../../../../spec-concrete/3-numerics.watsup:135.1-135.40
+def $bin_satminus(value, value')
+
+1. If ((value has type numberValue)), then
+
+  1. (Let numberValue be (value as numberValue))
+
+  2. Case analysis on numberValue
+
+    1. Case (% matches pattern `FBitV%%`)
+
+      1. (Let (FBitV w i_l) be numberValue)
+
+      2. If ((value' has type numberValue)), then
+
+        1. (Let numberValue' be (value' as numberValue))
+
+        2. If ((numberValue' matches pattern `FBitV%%`)), then
+
+          1. (Let (FBitV w' i_r) be numberValue')
+
+          2. If ((w = w')), then
+
+            1. (Let i_l' be $to_int((w as int), i_l))
+
+            2. (Let i_r' be $to_int((w as int), i_r))
+
+            3. (Let i_max be ($pow2((w - 1)) - (1 as int)))
+
+            4. (Let i_min be -$pow2((w - 1)))
+
+            5. If (((i_l' - i_r') > i_max)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_max))
+
+              2. Return ((FBitV w i') as value)
+
+            5. Else Phantom#181
+
+            6. If (((i_l' - i_r') < i_min)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_min))
+
+              2. Return ((FBitV w i') as value)
+
+            6. Else Phantom#182
+
+            7. If (((i_min <= (i_l' - i_r')) /\ ((i_l' - i_r') <= i_max))), then
+
+              1. (Let i' be $to_bitstr((w as int), (i_l' - i_r')))
+
+              2. Return ((FBitV w i') as value)
+
+            7. Else Phantom#183
+
+          2. Else Phantom#184
+
+        2. Else Phantom#185
+
+      2. Else Phantom#186
+
+    2. Case (% matches pattern `FIntV%%`)
+
+      1. (Let (FIntV w i_l) be numberValue)
+
+      2. If ((value' has type numberValue)), then
+
+        1. (Let numberValue' be (value' as numberValue))
+
+        2. If ((numberValue' matches pattern `FIntV%%`)), then
+
+          1. (Let (FIntV w' i_r) be numberValue')
+
+          2. If ((w = w')), then
+
+            1. (Let i_l' be $to_int((w as int), i_l))
+
+            2. (Let i_r' be $to_int((w as int), i_r))
+
+            3. (Let i_max be ($pow2((w - 1)) - (1 as int)))
+
+            4. (Let i_min be -$pow2((w - 1)))
+
+            5. If (((i_l' - i_r') > i_max)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_max))
+
+              2. Return ((FIntV w i') as value)
+
+            5. Else Phantom#187
+
+            6. If (((i_l' - i_r') < i_min)), then
+
+              1. (Let i' be $to_bitstr((w as int), i_min))
+
+              2. Return ((FIntV w i') as value)
+
+            6. Else Phantom#188
+
+            7. If (((i_min <= (i_l' - i_r')) /\ ((i_l' - i_r') <= i_max))), then
+
+              1. (Let i' be $to_bitstr((w as int), (i_l' - i_r')))
+
+              2. Return ((FIntV w i') as value)
+
+            7. Else Phantom#189
+
+          2. Else Phantom#190
+
+        2. Else Phantom#191
+
+      2. Else Phantom#192
+
+  2. Else Phantom#193
+
+1. Else Phantom#194
+
+;; ../../../../spec-concrete/3-numerics.watsup:183.1-183.35
 def $bin_mul(value, value')
 
 1. If ((value has type numberValue)), then
 
   1. (Let numberValue be (value as numberValue))
 
-  2. If ((numberValue matches pattern `IntV%`)), then
+  2. Case analysis on numberValue
 
-    1. (Let (IntV i_l) be numberValue)
+    1. Case (% matches pattern `IntV%`)
 
-    2. If ((value' has type numberValue)), then
+      1. (Let (IntV i_l) be numberValue)
 
-      1. (Let numberValue' be (value' as numberValue))
+      2. If ((value' has type numberValue)), then
 
-      2. If ((numberValue' matches pattern `IntV%`)), then
+        1. (Let numberValue' be (value' as numberValue))
 
-        1. (Let (IntV i_r) be numberValue')
+        2. If ((numberValue' matches pattern `IntV%`)), then
 
-        2. Return ((IntV (i_l * i_r)) as value)
+          1. (Let (IntV i_r) be numberValue')
 
-      2. Else Phantom#164
+          2. Return ((IntV (i_l * i_r)) as value)
 
-    2. Else Phantom#165
+        2. Else Phantom#195
 
-  2. Else Phantom#166
+      2. Else Phantom#196
 
-1. Else Phantom#167
+    2. Case (% matches pattern `FBitV%%`)
 
-;; ../../../../spec-concrete/3-numerics.watsup:109.1-109.35
+      1. (Let (FBitV w i_l) be numberValue)
+
+      2. If ((value' has type numberValue)), then
+
+        1. (Let numberValue' be (value' as numberValue))
+
+        2. If ((numberValue' matches pattern `FBitV%%`)), then
+
+          1. (Let (FBitV w' i_r) be numberValue')
+
+          2. If ((w = w')), then
+
+            1. (Let i_l' be $to_int((w as int), i_l))
+
+            2. (Let i_r' be $to_int((w as int), i_r))
+
+            3. (Let i' be $to_bitstr((w as int), (i_l' * i_r')))
+
+            4. Return ((FBitV w i') as value)
+
+          2. Else Phantom#197
+
+        2. Else Phantom#198
+
+      2. Else Phantom#199
+
+    3. Case (% matches pattern `FIntV%%`)
+
+      1. (Let (FIntV w i_l) be numberValue)
+
+      2. If ((value' has type numberValue)), then
+
+        1. (Let numberValue' be (value' as numberValue))
+
+        2. If ((numberValue' matches pattern `FIntV%%`)), then
+
+          1. (Let (FIntV w' i_r) be numberValue')
+
+          2. If ((w = w')), then
+
+            1. (Let i_l' be $to_int((w as int), i_l))
+
+            2. (Let i_r' be $to_int((w as int), i_r))
+
+            3. (Let i' be $to_bitstr((w as int), (i_l' * i_r')))
+
+            4. Return ((FIntV w i') as value)
+
+          2. Else Phantom#200
+
+        2. Else Phantom#201
+
+      2. Else Phantom#202
+
+  2. Else Phantom#203
+
+1. Else Phantom#204
+
+;; ../../../../spec-concrete/3-numerics.watsup:197.1-197.35
 def $bin_div(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4296,15 +4594,15 @@ def $bin_div(value, value')
 
         2. Return ((IntV (i_l / i_r)) as value)
 
-      2. Else Phantom#168
+      2. Else Phantom#205
 
-    2. Else Phantom#169
+    2. Else Phantom#206
 
-  2. Else Phantom#170
+  2. Else Phantom#207
 
-1. Else Phantom#171
+1. Else Phantom#208
 
-;; ../../../../spec-concrete/3-numerics.watsup:115.1-115.35
+;; ../../../../spec-concrete/3-numerics.watsup:203.1-203.35
 def $bin_mod(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4325,15 +4623,15 @@ def $bin_mod(value, value')
 
         2. Return ((IntV (i_l \ i_r)) as value)
 
-      2. Else Phantom#172
+      2. Else Phantom#209
 
-    2. Else Phantom#173
+    2. Else Phantom#210
 
-  2. Else Phantom#174
+  2. Else Phantom#211
 
-1. Else Phantom#175
+1. Else Phantom#212
 
-;; ../../../../spec-concrete/3-numerics.watsup:121.1-121.35
+;; ../../../../spec-concrete/3-numerics.watsup:209.1-209.35
 def $bin_shl(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4372,9 +4670,9 @@ def $bin_shl(value, value')
 
             3. Return ((IntV $shl(i_l, i_r')) as value)
 
-        2. Else Phantom#176
+        2. Else Phantom#213
 
-      2. Else Phantom#177
+      2. Else Phantom#214
 
     2. Case (% matches pattern `FBitV%%`)
 
@@ -4410,9 +4708,9 @@ def $bin_shl(value, value')
 
             4. Return ((FBitV w_l i') as value)
 
-        2. Else Phantom#178
+        2. Else Phantom#215
 
-      2. Else Phantom#179
+      2. Else Phantom#216
 
     3. Case (% matches pattern `FIntV%%`)
 
@@ -4452,15 +4750,15 @@ def $bin_shl(value, value')
 
             5. Return ((FIntV w_l i') as value)
 
-        2. Else Phantom#180
+        2. Else Phantom#217
 
-      2. Else Phantom#181
+      2. Else Phantom#218
 
-  2. Else Phantom#182
+  2. Else Phantom#219
 
-1. Else Phantom#183
+1. Else Phantom#220
 
-;; ../../../../spec-concrete/3-numerics.watsup:148.1-148.35
+;; ../../../../spec-concrete/3-numerics.watsup:236.1-236.35
 def $bin_shr(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4499,9 +4797,9 @@ def $bin_shr(value, value')
 
             3. Return ((IntV $shr(i_l, i_r')) as value)
 
-        2. Else Phantom#184
+        2. Else Phantom#221
 
-      2. Else Phantom#185
+      2. Else Phantom#222
 
     2. Case (% matches pattern `FBitV%%`)
 
@@ -4537,9 +4835,9 @@ def $bin_shr(value, value')
 
             4. Return ((FBitV w_l i') as value)
 
-        2. Else Phantom#186
+        2. Else Phantom#223
 
-      2. Else Phantom#187
+      2. Else Phantom#224
 
     3. Case (% matches pattern `FIntV%%`)
 
@@ -4559,13 +4857,13 @@ def $bin_shr(value, value')
 
             3. If ((i_l' < (0 as int))), then
 
-              1. (Let i' be $shr_arith(i_l, i_r, ($pow2(w_l) - (1 as int))))
+              1. (Let i' be $shr_arith(i_l, i_r, ($pow2((w_l as int)) - (1 as int))))
 
               2. (Let i'' be $to_bitstr((w_l as int), i'))
 
               3. Return ((FIntV w_l i'') as value)
 
-            3. Else Phantom#188
+            3. Else Phantom#225
 
             4. If ((i_l' >= (0 as int))), then
 
@@ -4575,7 +4873,7 @@ def $bin_shr(value, value')
 
               3. Return ((FIntV w_l i'') as value)
 
-            4. Else Phantom#189
+            4. Else Phantom#226
 
           2. Case (% matches pattern `FBitV%%`)
 
@@ -4585,13 +4883,13 @@ def $bin_shr(value, value')
 
             3. If ((i_l' < (0 as int))), then
 
-              1. (Let i' be $shr_arith(i_l, i_r, ($pow2(w_l) - (1 as int))))
+              1. (Let i' be $shr_arith(i_l, i_r, ($pow2((w_l as int)) - (1 as int))))
 
               2. (Let i'' be $to_bitstr((w_l as int), i'))
 
               3. Return ((FIntV w_l i'') as value)
 
-            3. Else Phantom#190
+            3. Else Phantom#227
 
             4. If ((i_l' >= (0 as int))), then
 
@@ -4601,7 +4899,7 @@ def $bin_shr(value, value')
 
               3. Return ((FIntV w_l i'') as value)
 
-            4. Else Phantom#191
+            4. Else Phantom#228
 
           3. Case (% matches pattern `FIntV%%`)
 
@@ -4613,13 +4911,13 @@ def $bin_shr(value, value')
 
             4. If ((i_l' < (0 as int))), then
 
-              1. (Let i' be $shr_arith(i_l, i_r, ($pow2(w_l) - (1 as int))))
+              1. (Let i' be $shr_arith(i_l, i_r, ($pow2((w_l as int)) - (1 as int))))
 
               2. (Let i'' be $to_bitstr((w_l as int), i'))
 
               3. Return ((FIntV w_l i'') as value)
 
-            4. Else Phantom#192
+            4. Else Phantom#229
 
             5. If ((i_l' >= (0 as int))), then
 
@@ -4629,17 +4927,17 @@ def $bin_shr(value, value')
 
               3. Return ((FIntV w_l i'') as value)
 
-            5. Else Phantom#193
+            5. Else Phantom#230
 
-        2. Else Phantom#194
+        2. Else Phantom#231
 
-      2. Else Phantom#195
+      2. Else Phantom#232
 
-  2. Else Phantom#196
+  2. Else Phantom#233
 
-1. Else Phantom#197
+1. Else Phantom#234
 
-;; ../../../../spec-concrete/3-numerics.watsup:198.1-198.33
+;; ../../../../spec-concrete/3-numerics.watsup:286.1-286.33
 def $bin_le(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4662,9 +4960,9 @@ def $bin_le(value, value')
 
           2. Return (i_l <= i_r)
 
-        2. Else Phantom#198
+        2. Else Phantom#235
 
-      2. Else Phantom#199
+      2. Else Phantom#236
 
     2. Case (% matches pattern `FBitV%%`)
 
@@ -4682,11 +4980,11 @@ def $bin_le(value, value')
 
             1. Return (i_l <= i_r)
 
-          2. Else Phantom#200
+          2. Else Phantom#237
 
-        2. Else Phantom#201
+        2. Else Phantom#238
 
-      2. Else Phantom#202
+      2. Else Phantom#239
 
     3. Case (% matches pattern `FIntV%%`)
 
@@ -4708,17 +5006,17 @@ def $bin_le(value, value')
 
             3. Return (i_l' <= i_r')
 
-          2. Else Phantom#203
+          2. Else Phantom#240
 
-        2. Else Phantom#204
+        2. Else Phantom#241
 
-      2. Else Phantom#205
+      2. Else Phantom#242
 
-  2. Else Phantom#206
+  2. Else Phantom#243
 
-1. Else Phantom#207
+1. Else Phantom#244
 
-;; ../../../../spec-concrete/3-numerics.watsup:208.1-208.33
+;; ../../../../spec-concrete/3-numerics.watsup:296.1-296.33
 def $bin_ge(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4741,9 +5039,9 @@ def $bin_ge(value, value')
 
           2. Return (i_l >= i_r)
 
-        2. Else Phantom#208
+        2. Else Phantom#245
 
-      2. Else Phantom#209
+      2. Else Phantom#246
 
     2. Case (% matches pattern `FBitV%%`)
 
@@ -4761,11 +5059,11 @@ def $bin_ge(value, value')
 
             1. Return (i_l >= i_r)
 
-          2. Else Phantom#210
+          2. Else Phantom#247
 
-        2. Else Phantom#211
+        2. Else Phantom#248
 
-      2. Else Phantom#212
+      2. Else Phantom#249
 
     3. Case (% matches pattern `FIntV%%`)
 
@@ -4787,17 +5085,17 @@ def $bin_ge(value, value')
 
             3. Return (i_l' >= i_r')
 
-          2. Else Phantom#213
+          2. Else Phantom#250
 
-        2. Else Phantom#214
+        2. Else Phantom#251
 
-      2. Else Phantom#215
+      2. Else Phantom#252
 
-  2. Else Phantom#216
+  2. Else Phantom#253
 
-1. Else Phantom#217
+1. Else Phantom#254
 
-;; ../../../../spec-concrete/3-numerics.watsup:218.1-218.33
+;; ../../../../spec-concrete/3-numerics.watsup:306.1-306.33
 def $bin_lt(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4820,9 +5118,9 @@ def $bin_lt(value, value')
 
           2. Return (i_l < i_r)
 
-        2. Else Phantom#218
+        2. Else Phantom#255
 
-      2. Else Phantom#219
+      2. Else Phantom#256
 
     2. Case (% matches pattern `FBitV%%`)
 
@@ -4840,11 +5138,11 @@ def $bin_lt(value, value')
 
             1. Return (i_l < i_r)
 
-          2. Else Phantom#220
+          2. Else Phantom#257
 
-        2. Else Phantom#221
+        2. Else Phantom#258
 
-      2. Else Phantom#222
+      2. Else Phantom#259
 
     3. Case (% matches pattern `FIntV%%`)
 
@@ -4866,17 +5164,17 @@ def $bin_lt(value, value')
 
             3. Return (i_l' < i_r')
 
-          2. Else Phantom#223
+          2. Else Phantom#260
 
-        2. Else Phantom#224
+        2. Else Phantom#261
 
-      2. Else Phantom#225
+      2. Else Phantom#262
 
-  2. Else Phantom#226
+  2. Else Phantom#263
 
-1. Else Phantom#227
+1. Else Phantom#264
 
-;; ../../../../spec-concrete/3-numerics.watsup:228.1-228.33
+;; ../../../../spec-concrete/3-numerics.watsup:316.1-316.33
 def $bin_gt(value, value')
 
 1. If ((value has type numberValue)), then
@@ -4899,9 +5197,9 @@ def $bin_gt(value, value')
 
           2. Return (i_l > i_r)
 
-        2. Else Phantom#228
+        2. Else Phantom#265
 
-      2. Else Phantom#229
+      2. Else Phantom#266
 
     2. Case (% matches pattern `FBitV%%`)
 
@@ -4919,11 +5217,11 @@ def $bin_gt(value, value')
 
             1. Return (i_l > i_r)
 
-          2. Else Phantom#230
+          2. Else Phantom#267
 
-        2. Else Phantom#231
+        2. Else Phantom#268
 
-      2. Else Phantom#232
+      2. Else Phantom#269
 
     3. Case (% matches pattern `FIntV%%`)
 
@@ -4945,17 +5243,17 @@ def $bin_gt(value, value')
 
             3. Return (i_l' > i_r')
 
-          2. Else Phantom#233
+          2. Else Phantom#270
 
-        2. Else Phantom#234
+        2. Else Phantom#271
 
-      2. Else Phantom#235
+      2. Else Phantom#272
 
-  2. Else Phantom#236
+  2. Else Phantom#273
 
-1. Else Phantom#237
+1. Else Phantom#274
 
-;; ../../../../spec-concrete/3-numerics.watsup:238.1-238.33
+;; ../../../../spec-concrete/3-numerics.watsup:326.1-326.33
 def $bin_eq(value, value')
 
 1. Case analysis on value
@@ -4970,7 +5268,7 @@ def $bin_eq(value, value')
 
       2. Return (primitiveValue_a = primitiveValue_b)
 
-    2. Else Phantom#238
+    2. Else Phantom#275
 
   2. Case (% has type numberValue)
 
@@ -4992,9 +5290,9 @@ def $bin_eq(value, value')
 
             2. Return (i_a = i_b)
 
-          2. Else Phantom#239
+          2. Else Phantom#276
 
-        2. Else Phantom#240
+        2. Else Phantom#277
 
       2. Case (% matches pattern `FBitV%%`)
 
@@ -5010,9 +5308,9 @@ def $bin_eq(value, value')
 
             2. Return ((w_a = w_b) /\ (i_a = i_b))
 
-          2. Else Phantom#241
+          2. Else Phantom#278
 
-        2. Else Phantom#242
+        2. Else Phantom#279
 
       3. Case (% matches pattern `FIntV%%`)
 
@@ -5028,9 +5326,9 @@ def $bin_eq(value, value')
 
             2. Return ((w_a = w_b) /\ (i_a = i_b))
 
-          2. Else Phantom#243
+          2. Else Phantom#280
 
-        2. Else Phantom#244
+        2. Else Phantom#281
 
       4. Case (% matches pattern `VBitV%%%`)
 
@@ -5046,9 +5344,9 @@ def $bin_eq(value, value')
 
             2. Return ((w_a = w_b) /\ (i_a = i_b))
 
-          2. Else Phantom#245
+          2. Else Phantom#282
 
-        2. Else Phantom#246
+        2. Else Phantom#283
 
   3. Case (% has type listValue)
 
@@ -5060,7 +5358,7 @@ def $bin_eq(value, value')
 
       2. Return $bin_eqs(value_a*{value_a <- value_a*}, value_b*{value_b <- value_b*})
 
-    2. Else Phantom#247
+    2. Else Phantom#284
 
   4. Case (% has type tupleValue)
 
@@ -5072,7 +5370,7 @@ def $bin_eq(value, value')
 
       2. Return $bin_eqs(value_a*{value_a <- value_a*}, value_b*{value_b <- value_b*})
 
-    2. Else Phantom#248
+    2. Else Phantom#285
 
   5. Case (% has type headerStackValue)
 
@@ -5084,7 +5382,7 @@ def $bin_eq(value, value')
 
       2. Return ($bin_eqs(value_a*{value_a <- value_a*}, value_b*{value_b <- value_b*}) /\ (n_s_a = n_s_b))
 
-    2. Else Phantom#249
+    2. Else Phantom#286
 
   6. Case (% has type structValue)
 
@@ -5096,7 +5394,7 @@ def $bin_eq(value, value')
 
       2. Return ((tid_a = tid_b) /\ $bin_eqs_fields((value_f_a, id_f_a)*{id_f_a <- id_f_a*, value_f_a <- value_f_a*}, (value_f_b, id_f_b)*{id_f_b <- id_f_b*, value_f_b <- value_f_b*}))
 
-    2. Else Phantom#250
+    2. Else Phantom#287
 
   7. Case (% has type headerValue)
 
@@ -5108,7 +5406,7 @@ def $bin_eq(value, value')
 
       2. Return (((tid_a = tid_b) /\ (b_a = b_b)) /\ $bin_eqs_fields((value_f_a, id_f_a)*{id_f_a <- id_f_a*, value_f_a <- value_f_a*}, (value_f_b, id_f_b)*{id_f_b <- id_f_b*, value_f_b <- value_f_b*}))
 
-    2. Else Phantom#251
+    2. Else Phantom#288
 
   8. Case (% has type headerUnionValue)
 
@@ -5120,7 +5418,7 @@ def $bin_eq(value, value')
 
       2. Return ((tid_a = tid_b) /\ $bin_eqs_fields((value_f_a, id_f_a)*{id_f_a <- id_f_a*, value_f_a <- value_f_a*}, (value_f_b, id_f_b)*{id_f_b <- id_f_b*, value_f_b <- value_f_b*}))
 
-    2. Else Phantom#252
+    2. Else Phantom#289
 
   9. Case (% has type enumValue)
 
@@ -5142,9 +5440,9 @@ def $bin_eq(value, value')
 
             2. Return ((tid_a = tid_b) /\ (id_f_a = id_f_b))
 
-          2. Else Phantom#253
+          2. Else Phantom#290
 
-        2. Else Phantom#254
+        2. Else Phantom#291
 
       2. Case (% matches pattern `SEnumV%%%`)
 
@@ -5160,9 +5458,9 @@ def $bin_eq(value, value')
 
             2. Return (((tid_a = tid_b) /\ (id_f_a = id_f_b)) /\ $bin_eq(value_f_a, value_f_b))
 
-          2. Else Phantom#255
+          2. Else Phantom#292
 
-        2. Else Phantom#256
+        2. Else Phantom#293
 
   10. Case (% has type invalidHeaderValue)
 
@@ -5174,11 +5472,11 @@ def $bin_eq(value, value')
 
       2. Return true
 
-    2. Else Phantom#257
+    2. Else Phantom#294
 
-1. Else Phantom#258
+1. Else Phantom#295
 
-;; ../../../../spec-concrete/3-numerics.watsup:239.1-239.36
+;; ../../../../spec-concrete/3-numerics.watsup:327.1-327.36
 def $bin_eqs(value*{value <- value*}, value'*{value' <- value'*})
 
 1. Case analysis on value*{value <- value*}
@@ -5205,7 +5503,7 @@ def $bin_eqs(value*{value <- value*}, value'*{value' <- value'*})
 
       1. Return false
 
-    2. Else Phantom#259
+    2. Else Phantom#296
 
     3. (Let value_a_h :: value_a_t*{value_a_t <- value_a_t*} be value*{value <- value*})
 
@@ -5215,9 +5513,9 @@ def $bin_eqs(value*{value <- value*}, value'*{value' <- value'*})
 
       2. Return ($bin_eq(value_a_h, value_b_h) /\ $bin_eqs(value_a_t*{value_a_t <- value_a_t*}, value_b_t*{value_b_t <- value_b_t*}))
 
-    4. Else Phantom#260
+    4. Else Phantom#297
 
-;; ../../../../spec-concrete/3-numerics.watsup:240.1-240.55
+;; ../../../../spec-concrete/3-numerics.watsup:328.1-328.55
 def $bin_eqs_fields((value, id)*{(value, id) <- (value, id)*}, (value, id)'*{(value, id)' <- (value, id)'*})
 
 1. Case analysis on (value, id)*{(value, id) <- (value, id)*}
@@ -5244,7 +5542,7 @@ def $bin_eqs_fields((value, id)*{(value, id) <- (value, id)*}, (value, id)'*{(va
 
       1. Return false
 
-    2. Else Phantom#261
+    2. Else Phantom#298
 
     3. (Let (value_a_h, id_a_h) :: (value_a_t, id_a_t)*{id_a_t <- id_a_t*, value_a_t <- value_a_t*} be (value, id)*{(value, id) <- (value, id)*})
 
@@ -5254,14 +5552,14 @@ def $bin_eqs_fields((value, id)*{(value, id) <- (value, id)*}, (value, id)'*{(va
 
       2. Return (((id_a_h = id_b_h) /\ $bin_eq(value_a_h, value_b_h)) /\ $bin_eqs_fields((value_a_t, id_a_t)*{id_a_t <- id_a_t*, value_a_t <- value_a_t*}, (value_b_t, id_b_t)*{id_b_t <- id_b_t*, value_b_t <- value_b_t*}))
 
-    4. Else Phantom#262
+    4. Else Phantom#299
 
-;; ../../../../spec-concrete/3-numerics.watsup:298.1-298.33
+;; ../../../../spec-concrete/3-numerics.watsup:386.1-386.33
 def $bin_ne(value_l, value_r)
 
 1. Return ~$bin_eq(value_l, value_r)
 
-;; ../../../../spec-concrete/3-numerics.watsup:304.1-304.36
+;; ../../../../spec-concrete/3-numerics.watsup:392.1-392.36
 def $bin_band(value, value')
 
 1. If ((value has type numberValue)), then
@@ -5288,11 +5586,11 @@ def $bin_band(value, value')
 
             2. Return ((FBitV w i') as value)
 
-          2. Else Phantom#263
+          2. Else Phantom#300
 
-        2. Else Phantom#264
+        2. Else Phantom#301
 
-      2. Else Phantom#265
+      2. Else Phantom#302
 
     2. Case (% matches pattern `FIntV%%`)
 
@@ -5316,17 +5614,17 @@ def $bin_band(value, value')
 
             4. Return ((FIntV w i') as value)
 
-          2. Else Phantom#266
+          2. Else Phantom#303
 
-        2. Else Phantom#267
+        2. Else Phantom#304
 
-      2. Else Phantom#268
+      2. Else Phantom#305
 
-  2. Else Phantom#269
+  2. Else Phantom#306
 
-1. Else Phantom#270
+1. Else Phantom#307
 
-;; ../../../../spec-concrete/3-numerics.watsup:316.1-316.36
+;; ../../../../spec-concrete/3-numerics.watsup:404.1-404.36
 def $bin_bxor(value, value')
 
 1. If ((value has type numberValue)), then
@@ -5353,11 +5651,11 @@ def $bin_bxor(value, value')
 
             2. Return ((FBitV w i') as value)
 
-          2. Else Phantom#271
+          2. Else Phantom#308
 
-        2. Else Phantom#272
+        2. Else Phantom#309
 
-      2. Else Phantom#273
+      2. Else Phantom#310
 
     2. Case (% matches pattern `FIntV%%`)
 
@@ -5381,17 +5679,17 @@ def $bin_bxor(value, value')
 
             4. Return ((FIntV w i') as value)
 
-          2. Else Phantom#274
+          2. Else Phantom#311
 
-        2. Else Phantom#275
+        2. Else Phantom#312
 
-      2. Else Phantom#276
+      2. Else Phantom#313
 
-  2. Else Phantom#277
+  2. Else Phantom#314
 
-1. Else Phantom#278
+1. Else Phantom#315
 
-;; ../../../../spec-concrete/3-numerics.watsup:328.1-328.35
+;; ../../../../spec-concrete/3-numerics.watsup:416.1-416.35
 def $bin_bor(value, value')
 
 1. If ((value has type numberValue)), then
@@ -5418,11 +5716,11 @@ def $bin_bor(value, value')
 
             2. Return ((FBitV w i') as value)
 
-          2. Else Phantom#279
+          2. Else Phantom#316
 
-        2. Else Phantom#280
+        2. Else Phantom#317
 
-      2. Else Phantom#281
+      2. Else Phantom#318
 
     2. Case (% matches pattern `FIntV%%`)
 
@@ -5446,17 +5744,17 @@ def $bin_bor(value, value')
 
             4. Return ((FIntV w i') as value)
 
-          2. Else Phantom#282
+          2. Else Phantom#319
 
-        2. Else Phantom#283
+        2. Else Phantom#320
 
-      2. Else Phantom#284
+      2. Else Phantom#321
 
-  2. Else Phantom#285
+  2. Else Phantom#322
 
-1. Else Phantom#286
+1. Else Phantom#323
 
-;; ../../../../spec-concrete/3-numerics.watsup:340.1-340.38
+;; ../../../../spec-concrete/3-numerics.watsup:428.1-428.38
 def $bin_concat(value, value')
 
 1. If ((value has type numberValue)), then
@@ -5503,9 +5801,9 @@ def $bin_concat(value, value')
 
             6. Return ((FBitV w i'') as value)
 
-        2. Else Phantom#287
+        2. Else Phantom#324
 
-      2. Else Phantom#288
+      2. Else Phantom#325
 
     2. Case (% matches pattern `FIntV%%`)
 
@@ -5549,15 +5847,15 @@ def $bin_concat(value, value')
 
             7. Return ((FIntV w i''') as value)
 
-        2. Else Phantom#289
+        2. Else Phantom#326
 
-      2. Else Phantom#290
+      2. Else Phantom#327
 
-  2. Else Phantom#291
+  2. Else Phantom#328
 
-1. Else Phantom#292
+1. Else Phantom#329
 
-;; ../../../../spec-concrete/3-numerics.watsup:368.1-368.36
+;; ../../../../spec-concrete/3-numerics.watsup:456.1-456.36
 def $bin_land(value, value')
 
 1. If ((value has type primitiveValue)), then
@@ -5578,15 +5876,15 @@ def $bin_land(value, value')
 
         2. Return ((BoolV (b_l /\ b_r)) as value)
 
-      2. Else Phantom#293
+      2. Else Phantom#330
 
-    2. Else Phantom#294
+    2. Else Phantom#331
 
-  2. Else Phantom#295
+  2. Else Phantom#332
 
-1. Else Phantom#296
+1. Else Phantom#333
 
-;; ../../../../spec-concrete/3-numerics.watsup:374.1-374.35
+;; ../../../../spec-concrete/3-numerics.watsup:462.1-462.35
 def $bin_lor(value, value')
 
 1. If ((value has type primitiveValue)), then
@@ -5607,15 +5905,15 @@ def $bin_lor(value, value')
 
         2. Return ((BoolV (b_l \/ b_r)) as value)
 
-      2. Else Phantom#297
+      2. Else Phantom#334
 
-    2. Else Phantom#298
+    2. Else Phantom#335
 
-  2. Else Phantom#299
+  2. Else Phantom#336
 
-1. Else Phantom#300
+1. Else Phantom#337
 
-;; ../../../../spec-concrete/3-numerics.watsup:382.1-382.36
+;; ../../../../spec-concrete/3-numerics.watsup:470.1-470.36
 def $cast_op(typeIR, value'')
 
 1. Case analysis on value''
@@ -5630,7 +5928,7 @@ def $cast_op(typeIR, value'')
 
       2. Return $cast_bool(typeIR, b)
 
-    2. Else Phantom#301
+    2. Else Phantom#338
 
   2. Case (% has type numberValue)
 
@@ -5656,7 +5954,7 @@ def $cast_op(typeIR, value'')
 
         2. Return $cast_fixint(typeIR, w, i)
 
-    2. Else Phantom#302
+    2. Else Phantom#339
 
   3. Case (% has type structValue)
 
@@ -5680,7 +5978,7 @@ def $cast_op(typeIR, value'')
 
       2. Return $cast_op(typeIR, value)
 
-    2. Else Phantom#303
+    2. Else Phantom#340
 
   6. Case (% has type sequenceValue)
 
@@ -5692,7 +5990,7 @@ def $cast_op(typeIR, value'')
 
       2. Return $cast_sequence(typeIR, value*{value <- value*})
 
-    2. Else Phantom#304
+    2. Else Phantom#341
 
   7. Case (% has type recordValue)
 
@@ -5704,7 +6002,7 @@ def $cast_op(typeIR, value'')
 
       2. Return $cast_record(typeIR, (value, id)*{id <- id*, value <- value*})
 
-    2. Else Phantom#305
+    2. Else Phantom#342
 
   8. Case (% has type defaultValue)
 
@@ -5742,14 +6040,14 @@ def $cast_op(typeIR, value'')
 
         2. Return $cast_set_range(typeIR, value_l, value_u)
 
-1. Else Phantom#306
+1. Else Phantom#343
 
-;; ../../../../spec-concrete/3-numerics.watsup:384.1-384.29
+;; ../../../../spec-concrete/3-numerics.watsup:472.1-472.29
 def $default(typeIR)
 
 1. Return $default'($canon(typeIR))
 
-;; ../../../../spec-concrete/3-numerics.watsup:385.1-385.30
+;; ../../../../spec-concrete/3-numerics.watsup:473.1-473.30
 def $default'(typeIR'')
 
 1. Case analysis on typeIR''
@@ -5772,7 +6070,7 @@ def $default'(typeIR'')
 
         1. Return ((StrV "") as value)
 
-    2. Else Phantom#307
+    2. Else Phantom#344
 
   2. Case (% has type numberTypeIR)
 
@@ -5850,7 +6148,7 @@ def $default'(typeIR'')
 
           2. Return ((EnumV tid id_f_h) as value)
 
-        2. Else Phantom#308
+        2. Else Phantom#345
 
       2. Case (% matches pattern `SEnumT%%%`)
 
@@ -5866,7 +6164,7 @@ def $default'(typeIR'')
 
           2. Return ((SEnumV tid id_zero value_zero) as value)
 
-        4. Else Phantom#309
+        4. Else Phantom#346
 
         5. If ((?() = $assoc_<value, id>(value_zero, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*}))), then
 
@@ -5874,16 +6172,16 @@ def $default'(typeIR'')
 
           2. Return ((SEnumV tid id_zero value_zero) as value)
 
-        5. Else Phantom#310
+        5. Else Phantom#347
 
-1. Else Phantom#311
+1. Else Phantom#348
 
-;; ../../../../spec-concrete/3-numerics.watsup:389.1-389.37
+;; ../../../../spec-concrete/3-numerics.watsup:477.1-477.37
 def $cast_bool(typeIR, b)
 
 1. Return $cast_bool'($canon(typeIR), b)
 
-;; ../../../../spec-concrete/3-numerics.watsup:390.1-390.38
+;; ../../../../spec-concrete/3-numerics.watsup:478.1-478.38
 def $cast_bool'(typeIR'', b')
 
 1. Case analysis on typeIR''
@@ -5896,7 +6194,7 @@ def $cast_bool'(typeIR'', b')
 
       1. Return ((BoolV b') as value)
 
-    2. Else Phantom#312
+    2. Else Phantom#349
 
   2. Case (% has type numberTypeIR)
 
@@ -5916,7 +6214,7 @@ def $cast_bool'(typeIR'', b')
 
           1. Return ((FBitV w (0 as bits)) as value)
 
-    2. Else Phantom#313
+    2. Else Phantom#350
 
   3. Case (% has type aliasTypeIR)
 
@@ -5928,16 +6226,16 @@ def $cast_bool'(typeIR'', b')
 
       2. Return $cast_bool(typeIR, b')
 
-    2. Else Phantom#314
+    2. Else Phantom#351
 
-1. Else Phantom#315
+1. Else Phantom#352
 
-;; ../../../../spec-concrete/3-numerics.watsup:403.1-403.38
+;; ../../../../spec-concrete/3-numerics.watsup:491.1-491.38
 def $cast_arbint(typeIR, i)
 
 1. Return $cast_arbint'($canon(typeIR), i)
 
-;; ../../../../spec-concrete/3-numerics.watsup:404.1-404.39
+;; ../../../../spec-concrete/3-numerics.watsup:492.1-492.39
 def $cast_arbint'(typeIR'', i)
 
 1. Case analysis on typeIR''
@@ -5950,7 +6248,7 @@ def $cast_arbint'(typeIR'', i)
 
       1. Return ((BoolV (i = (0 as int))) as value)
 
-    2. Else Phantom#316
+    2. Else Phantom#353
 
   2. Case (% has type numberTypeIR)
 
@@ -5974,7 +6272,7 @@ def $cast_arbint'(typeIR'', i)
 
         2. Return ((FBitV w $to_bitstr((w as int), i)) as value)
 
-    2. Else Phantom#317
+    2. Else Phantom#354
 
   3. Case (% has type aliasTypeIR)
 
@@ -5986,7 +6284,7 @@ def $cast_arbint'(typeIR'', i)
 
       2. Return $cast_arbint(typeIR, i)
 
-    2. Else Phantom#318
+    2. Else Phantom#355
 
   4. Case (% has type setTypeIR)
 
@@ -5994,14 +6292,14 @@ def $cast_arbint'(typeIR'', i)
 
     2. Return ((SingletonSetV $cast_arbint(typeIR, i)) as value)
 
-1. Else Phantom#319
+1. Else Phantom#356
 
-;; ../../../../spec-concrete/3-numerics.watsup:419.1-419.43
+;; ../../../../spec-concrete/3-numerics.watsup:507.1-507.43
 def $cast_fixbit(typeIR, w, i)
 
 1. Return $cast_fixbit'($canon(typeIR), w, i)
 
-;; ../../../../spec-concrete/3-numerics.watsup:420.1-420.44
+;; ../../../../spec-concrete/3-numerics.watsup:508.1-508.44
 def $cast_fixbit'(typeIR'', w', i)
 
 1. Case analysis on typeIR''
@@ -6014,7 +6312,7 @@ def $cast_fixbit'(typeIR'', w', i)
 
       1. Return ((BoolV (i = (1 as int))) as value)
 
-    2. Else Phantom#320
+    2. Else Phantom#357
 
   2. Case (% has type numberTypeIR)
 
@@ -6042,7 +6340,7 @@ def $cast_fixbit'(typeIR'', w', i)
 
         3. Return ((FIntV w_to i') as value)
 
-    2. Else Phantom#321
+    2. Else Phantom#358
 
   3. Case (% has type aliasTypeIR)
 
@@ -6054,7 +6352,7 @@ def $cast_fixbit'(typeIR'', w', i)
 
       2. Return $cast_fixbit(typeIR, w', i)
 
-    2. Else Phantom#322
+    2. Else Phantom#359
 
   4. Case (% has type setTypeIR)
 
@@ -6062,14 +6360,14 @@ def $cast_fixbit'(typeIR'', w', i)
 
     2. Return ((SingletonSetV $cast_fixbit(typeIR, w', i)) as value)
 
-1. Else Phantom#323
+1. Else Phantom#360
 
-;; ../../../../spec-concrete/3-numerics.watsup:437.1-437.43
+;; ../../../../spec-concrete/3-numerics.watsup:525.1-525.43
 def $cast_fixint(typeIR, w, i)
 
 1. Return $cast_fixint'($canon(typeIR), w, i)
 
-;; ../../../../spec-concrete/3-numerics.watsup:438.1-438.44
+;; ../../../../spec-concrete/3-numerics.watsup:526.1-526.44
 def $cast_fixint'(typeIR'', w', i)
 
 1. Case analysis on typeIR''
@@ -6100,7 +6398,7 @@ def $cast_fixint'(typeIR'', w', i)
 
         3. Return ((FIntV w_to i') as value)
 
-    2. Else Phantom#324
+    2. Else Phantom#361
 
   2. Case (% has type aliasTypeIR)
 
@@ -6112,7 +6410,7 @@ def $cast_fixint'(typeIR'', w', i)
 
       2. Return $cast_fixint(typeIR, w', i)
 
-    2. Else Phantom#325
+    2. Else Phantom#362
 
   3. Case (% has type setTypeIR)
 
@@ -6120,14 +6418,14 @@ def $cast_fixint'(typeIR'', w', i)
 
     2. Return ((SingletonSetV $cast_fixint(typeIR, w', i)) as value)
 
-1. Else Phantom#326
+1. Else Phantom#363
 
-;; ../../../../spec-concrete/3-numerics.watsup:454.1-454.52
+;; ../../../../spec-concrete/3-numerics.watsup:542.1-542.52
 def $cast_struct(typeIR, tid, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
 1. Return $cast_struct'($canon(typeIR), tid, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
-;; ../../../../spec-concrete/3-numerics.watsup:455.1-455.53
+;; ../../../../spec-concrete/3-numerics.watsup:543.1-543.53
 def $cast_struct'(typeIR, tid', (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
 1. If ((typeIR has type structTypeIR)), then
@@ -6138,16 +6436,16 @@ def $cast_struct'(typeIR, tid', (value_f, id_f)*{id_f <- id_f*, value_f <- value
 
     1. Return ((StructV tid (value_f id_f)*{id_f <- id_f*, value_f <- value_f*}) as value)
 
-  2. Else Phantom#327
+  2. Else Phantom#364
 
-1. Else Phantom#328
+1. Else Phantom#365
 
-;; ../../../../spec-concrete/3-numerics.watsup:468.1-468.58
+;; ../../../../spec-concrete/3-numerics.watsup:556.1-556.58
 def $cast_header(typeIR, tid, b, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
 1. Return $cast_header'($canon(typeIR), tid, b, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
-;; ../../../../spec-concrete/3-numerics.watsup:469.1-469.59
+;; ../../../../spec-concrete/3-numerics.watsup:557.1-557.59
 def $cast_header'(typeIR, tid', b, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
 1. If ((typeIR has type headerTypeIR)), then
@@ -6158,16 +6456,16 @@ def $cast_header'(typeIR, tid', b, (value_f, id_f)*{id_f <- id_f*, value_f <- va
 
     1. Return ((HeaderV tid b (value_f id_f)*{id_f <- id_f*, value_f <- value_f*}) as value)
 
-  2. Else Phantom#329
+  2. Else Phantom#366
 
-1. Else Phantom#330
+1. Else Phantom#367
 
-;; ../../../../spec-concrete/3-numerics.watsup:486.1-486.43
+;; ../../../../spec-concrete/3-numerics.watsup:574.1-574.43
 def $cast_sequence(typeIR, value*{value <- value*})
 
 1. Return $cast_sequence'($canon(typeIR), value*{value <- value*})
 
-;; ../../../../spec-concrete/3-numerics.watsup:487.1-487.44
+;; ../../../../spec-concrete/3-numerics.watsup:575.1-575.44
 def $cast_sequence'(typeIR'', value*{value <- value*})
 
 1. Case analysis on typeIR''
@@ -6210,14 +6508,14 @@ def $cast_sequence'(typeIR'', value*{value <- value*})
 
     3. Return ((HeaderV tid true (value_cast id_f)*{id_f <- id_f*, value_cast <- value_cast*}) as value)
 
-1. Else Phantom#331
+1. Else Phantom#368
 
-;; ../../../../spec-concrete/3-numerics.watsup:517.1-517.47
+;; ../../../../spec-concrete/3-numerics.watsup:605.1-605.47
 def $cast_record(typeIR, (value, id)*{id <- id*, value <- value*})
 
 1. Return $cast_record'($canon(typeIR), (value, id)*{id <- id*, value <- value*})
 
-;; ../../../../spec-concrete/3-numerics.watsup:518.1-518.48
+;; ../../../../spec-concrete/3-numerics.watsup:606.1-606.48
 def $cast_record'(typeIR, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
 1. Case analysis on typeIR
@@ -6236,7 +6534,7 @@ def $cast_record'(typeIR, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
       3. Return ((StructV tid (value_f_cast id_f)*{id_f <- id_f*, value_f_cast <- value_f_cast*}) as value)
 
-    3. Else Phantom#332
+    3. Else Phantom#369
 
   2. Case (% has type headerTypeIR)
 
@@ -6252,16 +6550,16 @@ def $cast_record'(typeIR, (value_f, id_f)*{id_f <- id_f*, value_f <- value_f*})
 
       3. Return ((HeaderV tid true (value_f_cast id_f)*{id_f <- id_f*, value_f_cast <- value_f_cast*}) as value)
 
-    3. Else Phantom#333
+    3. Else Phantom#370
 
-1. Else Phantom#334
+1. Else Phantom#371
 
-;; ../../../../spec-concrete/3-numerics.watsup:550.1-550.34
+;; ../../../../spec-concrete/3-numerics.watsup:638.1-638.34
 def $cast_invalid(typeIR)
 
 1. Return $cast_invalid'($canon(typeIR))
 
-;; ../../../../spec-concrete/3-numerics.watsup:551.1-551.35
+;; ../../../../spec-concrete/3-numerics.watsup:639.1-639.35
 def $cast_invalid'(typeIR)
 
 1. Case analysis on typeIR
@@ -6278,14 +6576,14 @@ def $cast_invalid'(typeIR)
 
     2. Return $default(typeIR)
 
-1. Else Phantom#335
+1. Else Phantom#372
 
-;; ../../../../spec-concrete/3-numerics.watsup:565.1-565.47
+;; ../../../../spec-concrete/3-numerics.watsup:653.1-653.47
 def $cast_set_singleton(typeIR, value)
 
 1. Return $cast_set_singleton'($canon(typeIR), value)
 
-;; ../../../../spec-concrete/3-numerics.watsup:566.1-566.48
+;; ../../../../spec-concrete/3-numerics.watsup:654.1-654.48
 def $cast_set_singleton'(typeIR', value)
 
 1. If ((typeIR' has type setTypeIR)), then
@@ -6294,14 +6592,14 @@ def $cast_set_singleton'(typeIR', value)
 
   2. Return ((SingletonSetV $cast_op(typeIR, value)) as value)
 
-1. Else Phantom#336
+1. Else Phantom#373
 
-;; ../../../../spec-concrete/3-numerics.watsup:574.1-574.49
+;; ../../../../spec-concrete/3-numerics.watsup:662.1-662.49
 def $cast_set_mask(typeIR, value_b, value_m)
 
 1. Return $cast_set_mask'($canon(typeIR), value_b, value_m)
 
-;; ../../../../spec-concrete/3-numerics.watsup:575.1-575.50
+;; ../../../../spec-concrete/3-numerics.watsup:663.1-663.50
 def $cast_set_mask'(typeIR', value_b, value_m)
 
 1. If ((typeIR' has type setTypeIR)), then
@@ -6314,14 +6612,14 @@ def $cast_set_mask'(typeIR', value_b, value_m)
 
   4. Return ((MaskSetV value_b_cast value_m_cast) as value)
 
-1. Else Phantom#337
+1. Else Phantom#374
 
-;; ../../../../spec-concrete/3-numerics.watsup:585.1-585.50
+;; ../../../../spec-concrete/3-numerics.watsup:673.1-673.50
 def $cast_set_range(typeIR, value_l, value_u)
 
 1. Return $cast_set_range'($canon(typeIR), value_l, value_u)
 
-;; ../../../../spec-concrete/3-numerics.watsup:586.1-586.51
+;; ../../../../spec-concrete/3-numerics.watsup:674.1-674.51
 def $cast_set_range'(typeIR', value_l, value_u)
 
 1. If ((typeIR' has type setTypeIR)), then
@@ -6334,9 +6632,9 @@ def $cast_set_range'(typeIR', value_l, value_u)
 
   4. Return ((RangeSetV value_l_cast value_u_cast) as value)
 
-1. Else Phantom#338
+1. Else Phantom#375
 
-;; ../../../../spec-concrete/3-numerics.watsup:650.1-650.44
+;; ../../../../spec-concrete/3-numerics.watsup:738.1-738.44
 def $bitacc_op(value_b, value_h, value_l)
 
 1. (Let int?{int <- int?} be $to_number(value_b))
@@ -6367,15 +6665,15 @@ def $bitacc_op(value_b, value_h, value_l)
 
         3. Return ((FBitV w i) as value)
 
-      3. Else Phantom#339
+      3. Else Phantom#376
 
-    3. Else Phantom#340
+    3. Else Phantom#377
 
-  3. Else Phantom#341
+  3. Else Phantom#378
 
-2. Else Phantom#342
+2. Else Phantom#379
 
-;; ../../../../spec-concrete/3-numerics.watsup:663.1-663.32
+;; ../../../../spec-concrete/3-numerics.watsup:751.1-751.32
 def $sizeof(typeIR, text)
 
 1. Case analysis on text
@@ -6396,19 +6694,19 @@ def $sizeof(typeIR, text)
 
     1. Return $sizeof_maxSizeInBytes(typeIR)
 
-1. Else Phantom#343
+1. Else Phantom#380
 
-;; ../../../../spec-concrete/3-numerics.watsup:665.1-665.42
+;; ../../../../spec-concrete/3-numerics.watsup:753.1-753.42
 def $sizeof_minSizeInBits(typeIR)
 
 1. Return ((IntV ($sizeof_minSizeInBits'(typeIR) as int)) as value)
 
-;; ../../../../spec-concrete/3-numerics.watsup:666.1-666.41
+;; ../../../../spec-concrete/3-numerics.watsup:754.1-754.41
 def $sizeof_minSizeInBits'(typeIR)
 
 1. Return $sizeof_minSizeInBits''($canon(typeIR))
 
-;; ../../../../spec-concrete/3-numerics.watsup:667.1-667.42
+;; ../../../../spec-concrete/3-numerics.watsup:755.1-755.42
 def $sizeof_minSizeInBits''(typeIR'')
 
 1. Case analysis on typeIR''
@@ -6421,7 +6719,7 @@ def $sizeof_minSizeInBits''(typeIR'')
 
       1. Return 1
 
-    2. Else Phantom#344
+    2. Else Phantom#381
 
   2. Case (% has type numberTypeIR)
 
@@ -6447,7 +6745,7 @@ def $sizeof_minSizeInBits''(typeIR'')
 
         2. Return 0
 
-    2. Else Phantom#345
+    2. Else Phantom#382
 
   3. Case (% has type aliasTypeIR)
 
@@ -6459,7 +6757,7 @@ def $sizeof_minSizeInBits''(typeIR'')
 
       2. Return $sizeof_minSizeInBits'(typeIR)
 
-    2. Else Phantom#346
+    2. Else Phantom#383
 
   4. Case (% has type enumTypeIR)
 
@@ -6471,7 +6769,7 @@ def $sizeof_minSizeInBits''(typeIR'')
 
       2. Return $sizeof_minSizeInBits'(typeIR)
 
-    2. Else Phantom#347
+    2. Else Phantom#384
 
   5. Case (% has type tupleTypeIR)
 
@@ -6503,26 +6801,26 @@ def $sizeof_minSizeInBits''(typeIR'')
 
     2. Return $min($sizeof_minSizeInBits'(typeIR)*{typeIR <- typeIR*})
 
-1. Else Phantom#348
+1. Else Phantom#385
 
-;; ../../../../spec-concrete/3-numerics.watsup:669.1-669.43
+;; ../../../../spec-concrete/3-numerics.watsup:757.1-757.43
 def $sizeof_minSizeInBytes(typeIR)
 
 1. (Let n_size be $sizeof_minSizeInBits'(typeIR))
 
 2. Return ((IntV ((n_size / 8) as int)) as value)
 
-;; ../../../../spec-concrete/3-numerics.watsup:671.1-671.42
+;; ../../../../spec-concrete/3-numerics.watsup:759.1-759.42
 def $sizeof_maxSizeInBits(typeIR)
 
 1. Return ((IntV ($sizeof_maxSizeInBits'(typeIR) as int)) as value)
 
-;; ../../../../spec-concrete/3-numerics.watsup:672.1-672.41
+;; ../../../../spec-concrete/3-numerics.watsup:760.1-760.41
 def $sizeof_maxSizeInBits'(typeIR)
 
 1. Return $sizeof_maxSizeInBits''($canon(typeIR))
 
-;; ../../../../spec-concrete/3-numerics.watsup:673.1-673.42
+;; ../../../../spec-concrete/3-numerics.watsup:761.1-761.42
 def $sizeof_maxSizeInBits''(typeIR'')
 
 1. Case analysis on typeIR''
@@ -6535,7 +6833,7 @@ def $sizeof_maxSizeInBits''(typeIR'')
 
       1. Return 1
 
-    2. Else Phantom#349
+    2. Else Phantom#386
 
   2. Case (% has type numberTypeIR)
 
@@ -6561,7 +6859,7 @@ def $sizeof_maxSizeInBits''(typeIR'')
 
         2. Return w
 
-    2. Else Phantom#350
+    2. Else Phantom#387
 
   3. Case (% has type aliasTypeIR)
 
@@ -6573,7 +6871,7 @@ def $sizeof_maxSizeInBits''(typeIR'')
 
       2. Return $sizeof_maxSizeInBits'(typeIR)
 
-    2. Else Phantom#351
+    2. Else Phantom#388
 
   4. Case (% has type enumTypeIR)
 
@@ -6585,7 +6883,7 @@ def $sizeof_maxSizeInBits''(typeIR'')
 
       2. Return $sizeof_maxSizeInBits'(typeIR)
 
-    2. Else Phantom#352
+    2. Else Phantom#389
 
   5. Case (% has type tupleTypeIR)
 
@@ -6617,9 +6915,9 @@ def $sizeof_maxSizeInBits''(typeIR'')
 
     2. Return $max($sizeof_maxSizeInBits'(typeIR)*{typeIR <- typeIR*})
 
-1. Else Phantom#353
+1. Else Phantom#390
 
-;; ../../../../spec-concrete/3-numerics.watsup:675.1-675.43
+;; ../../../../spec-concrete/3-numerics.watsup:763.1-763.43
 def $sizeof_maxSizeInBytes(typeIR)
 
 1. (Let n_size be $sizeof_maxSizeInBits'(typeIR))
@@ -7367,7 +7665,7 @@ def $find_non_overloadeds<V>(set<pair<rid, V>>', id)
 
   1. Return []
 
-1. Else Phantom#354
+1. Else Phantom#391
 
 2. (Let ({ pair<rid, V>*{pair<rid, V> <- pair<rid, V>*} }) be set<pair<rid, V>>')
 
@@ -7391,7 +7689,7 @@ def $find_non_overloadeds<V>(set<pair<rid, V>>', id)
 
       2. Return (rid_t_found, V_t_found)*{V_t_found <- V_t_found*, rid_t_found <- rid_t_found*}
 
-3. Else Phantom#355
+3. Else Phantom#392
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:5.17-5.39
 syntax cursor = 
@@ -7597,7 +7895,7 @@ def $exit(TC)
 
   2. Return TC[LOCAL.FRAMES = frame_t*{frame_t <- frame_t*}]
 
-2. Else Phantom#356
+2. Else Phantom#393
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:178.1-178.67
 def $add_var(cursor, TC, id, varTypeIR)
@@ -7620,9 +7918,9 @@ def $add_var(cursor, TC, id, varTypeIR)
 
         3. Return TC'
 
-      2. Else Phantom#357
+      2. Else Phantom#394
 
-    2. Else Phantom#358
+    2. Else Phantom#395
 
   2. Case (% matches pattern `BLOCK`)
 
@@ -7638,9 +7936,9 @@ def $add_var(cursor, TC, id, varTypeIR)
 
         3. Return TC'
 
-      1. Else Phantom#359
+      1. Else Phantom#396
 
-    2. Else Phantom#360
+    2. Else Phantom#397
 
   3. Case (% matches pattern `LOCAL`)
 
@@ -7662,11 +7960,11 @@ def $add_var(cursor, TC, id, varTypeIR)
 
           4. Return TC'
 
-        1. Else Phantom#361
+        1. Else Phantom#398
 
-      2. Else Phantom#362
+      2. Else Phantom#399
 
-    2. Else Phantom#363
+    2. Else Phantom#400
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:179.1-179.70
 def $add_vars(p, TC, id*{id <- id*}, varTypeIR*{varTypeIR <- varTypeIR*})
@@ -7679,7 +7977,7 @@ def $add_vars(p, TC, id*{id <- id*}, varTypeIR*{varTypeIR <- varTypeIR*})
 
       1. Return TC
 
-    1. Else Phantom#364
+    1. Else Phantom#401
 
   2. Case (% matches pattern _ :: _)
 
@@ -7695,7 +7993,7 @@ def $add_vars(p, TC, id*{id <- id*}, varTypeIR*{varTypeIR <- varTypeIR*})
 
       4. Return TC''
 
-    2. Else Phantom#365
+    2. Else Phantom#402
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:209.1-209.75
 def $add_parameter(cursor, TC, (direction typeIR id value?{value <- value?}))
@@ -7812,7 +8110,7 @@ def $add_type(cursor, TC, tid, typeDefIR)
 
       3. Return TC'
 
-    2. Else Phantom#366
+    2. Else Phantom#403
 
   2. Case (% matches pattern `BLOCK`)
 
@@ -7826,7 +8124,7 @@ def $add_type(cursor, TC, tid, typeDefIR)
 
       3. Return TC'
 
-    2. Else Phantom#367
+    2. Else Phantom#404
 
   3. Case (% matches pattern `LOCAL`)
 
@@ -7840,7 +8138,7 @@ def $add_type(cursor, TC, tid, typeDefIR)
 
       3. Return TC'
 
-    2. Else Phantom#368
+    2. Else Phantom#405
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:264.1-264.72
 def $add_types(p, TC, tid*{tid <- tid*}, typeDefIR*{typeDefIR <- typeDefIR*})
@@ -7853,7 +8151,7 @@ def $add_types(p, TC, tid*{tid <- tid*}, typeDefIR*{typeDefIR <- typeDefIR*})
 
       1. Return TC
 
-    1. Else Phantom#369
+    1. Else Phantom#406
 
   2. Case (% matches pattern _ :: _)
 
@@ -7869,7 +8167,7 @@ def $add_types(p, TC, tid*{tid <- tid*}, typeDefIR*{typeDefIR <- typeDefIR*})
 
       4. Return TC''
 
-    2. Else Phantom#370
+    2. Else Phantom#407
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:272.1-272.88
 def $add_routine_overload(cursor, TC, rid, routineTypeDefIR)
@@ -7888,7 +8186,7 @@ def $add_routine_overload(cursor, TC, rid, routineTypeDefIR)
 
       3. Return TC'
 
-    2. Else Phantom#371
+    2. Else Phantom#408
 
   2. Case (% matches pattern `BLOCK`)
 
@@ -7902,9 +8200,9 @@ def $add_routine_overload(cursor, TC, rid, routineTypeDefIR)
 
       3. Return TC'
 
-    2. Else Phantom#372
+    2. Else Phantom#409
 
-1. Else Phantom#373
+1. Else Phantom#410
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:287.1-287.92
 def $add_routine_non_overload(cursor, TC, rid, routineTypeDefIR)
@@ -7927,7 +8225,7 @@ def $add_routine_non_overload(cursor, TC, rid, routineTypeDefIR)
 
       3. Return TC'
 
-    4. Else Phantom#374
+    4. Else Phantom#411
 
   2. Case (% matches pattern `BLOCK`)
 
@@ -7945,9 +8243,9 @@ def $add_routine_non_overload(cursor, TC, rid, routineTypeDefIR)
 
       3. Return TC'
 
-    4. Else Phantom#375
+    4. Else Phantom#412
 
-1. Else Phantom#376
+1. Else Phantom#413
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:308.1-308.79
 def $add_constructor(TC, cid, constructorTypeDefIR)
@@ -7962,7 +8260,7 @@ def $add_constructor(TC, cid, constructorTypeDefIR)
 
   3. Return TC'
 
-2. Else Phantom#377
+2. Else Phantom#414
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:309.1-309.82
 def $add_constructors(TC, cid*{cid <- cid*}, constructorTypeDefIR*{constructorTypeDefIR <- constructorTypeDefIR*})
@@ -7975,7 +8273,7 @@ def $add_constructors(TC, cid*{cid <- cid*}, constructorTypeDefIR*{constructorTy
 
       1. Return TC
 
-    1. Else Phantom#378
+    1. Else Phantom#415
 
   2. Case (% matches pattern _ :: _)
 
@@ -7991,7 +8289,7 @@ def $add_constructors(TC, cid*{cid <- cid*}, constructorTypeDefIR*{constructorTy
 
       4. Return TC''
 
-    2. Else Phantom#379
+    2. Else Phantom#416
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:334.1-334.64
 def $find_var(p, TC, prefixedName)
@@ -8033,13 +8331,13 @@ def $find_var'(cursor, TC, id)
 
       2. Return ?(varTypeIR)
 
-    3. Else Phantom#380
+    3. Else Phantom#417
 
     4. If ((?() = $find_map<id, varTypeIR>(frame, id))), then
 
       1. Return $find_var'((GLOBAL), TC, id)
 
-    4. Else Phantom#381
+    4. Else Phantom#418
 
   3. Case (% matches pattern `LOCAL`)
 
@@ -8053,13 +8351,13 @@ def $find_var'(cursor, TC, id)
 
       2. Return ?(varTypeIR)
 
-    3. Else Phantom#382
+    3. Else Phantom#419
 
     4. If ((?() = $find_maps<id, varTypeIR>(frame*{frame <- frame*}, id))), then
 
       1. Return $find_var'((BLOCK), TC, id)
 
-    4. Else Phantom#383
+    4. Else Phantom#420
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:357.1-357.62
 def $find_value(p, TC, prefixedName)
@@ -8095,13 +8393,13 @@ def $find_value'(cursor, TC, id)
 
       2. Return value?{value <- value?}
 
-    3. Else Phantom#384
+    3. Else Phantom#421
 
     4. If ((?() = $find_map<id, varTypeIR>(frame, id))), then
 
       1. Return ?()
 
-    4. Else Phantom#385
+    4. Else Phantom#422
 
   2. Case (% matches pattern `BLOCK`)
 
@@ -8115,13 +8413,13 @@ def $find_value'(cursor, TC, id)
 
       2. Return value?{value <- value?}
 
-    3. Else Phantom#386
+    3. Else Phantom#423
 
     4. If ((?() = $find_map<id, varTypeIR>(frame, id))), then
 
       1. Return $find_value'((GLOBAL), TC, id)
 
-    4. Else Phantom#387
+    4. Else Phantom#424
 
   3. Case (% matches pattern `LOCAL`)
 
@@ -8135,13 +8433,13 @@ def $find_value'(cursor, TC, id)
 
       2. Return value?{value <- value?}
 
-    3. Else Phantom#388
+    3. Else Phantom#425
 
     4. If ((?() = $find_maps<id, varTypeIR>(frame*{frame <- frame*}, id))), then
 
       1. Return $find_value'((BLOCK), TC, id)
 
-    4. Else Phantom#389
+    4. Else Phantom#426
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:384.1-384.65
 def $find_type(p, TC, prefixedName)
@@ -8183,13 +8481,13 @@ def $find_type'(cursor, TC, tid)
 
       2. Return ?(typeDefIR)
 
-    3. Else Phantom#390
+    3. Else Phantom#427
 
     4. If ((?() = $find_map<tid, typeDefIR>(tdenv, tid))), then
 
       1. Return $find_type'((GLOBAL), TC, tid)
 
-    4. Else Phantom#391
+    4. Else Phantom#428
 
   3. Case (% matches pattern `LOCAL`)
 
@@ -8203,13 +8501,13 @@ def $find_type'(cursor, TC, tid)
 
       2. Return ?(typeDefIR)
 
-    3. Else Phantom#392
+    3. Else Phantom#429
 
     4. If ((?() = $find_maps<tid, typeDefIR>(tdenv*{tdenv <- tdenv*}, tid))), then
 
       1. Return $find_type'((BLOCK), TC, tid)
 
-    4. Else Phantom#393
+    4. Else Phantom#430
 
 ;; ../../../../spec-concrete/5.02.1-context.watsup:408.1-408.41
 def $ids_arguments(argumentIR*{argumentIR <- argumentIR*})
@@ -8287,13 +8585,13 @@ def $find_routine_overloaded'(cursor, TC, id, argumentIR*{argumentIR <- argument
 
       2. Return ?((rid, routineTypeDefIR, id_default*{id_default <- id_default*}))
 
-    4. Else Phantom#394
+    4. Else Phantom#431
 
     5. If ((?() = $find_overloaded<routineTypeDefIR>(rdenv, id, id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*}))), then
 
       1. Return $find_routine_overloaded'((GLOBAL), TC, id, argumentIR*{argumentIR <- argumentIR*})
 
-    5. Else Phantom#395
+    5. Else Phantom#432
 
   3. Case (% matches pattern `LOCAL`)
 
@@ -8335,13 +8633,13 @@ def $find_routine_non_overloaded'(cursor, TC, id)
 
       2. Return ?((rid, routineTypeDefIR))
 
-    2. Else Phantom#396
+    2. Else Phantom#433
 
     3. If ((?() = $find_non_overloaded<routineTypeDefIR>(TC.BLOCK.RDENV, id))), then
 
       1. Return $find_routine_non_overloaded'((GLOBAL), TC, id)
 
-    3. Else Phantom#397
+    3. Else Phantom#434
 
   3. Case (% matches pattern `LOCAL`)
 
@@ -8640,9 +8938,9 @@ def $find_table_priority_last(TBLC)
 
     2. Return n*{n <- n*}[n']
 
-  2. Else Phantom#398
+  2. Else Phantom#435
 
-2. Else Phantom#399
+2. Else Phantom#436
 
 ;; ../../../../spec-concrete/5.02.2-table-context.watsup:167.1-167.78
 def $join_tableEntryState(tableEntryState, tableEntryState')
@@ -8671,7 +8969,7 @@ def $join_tableEntryState(tableEntryState, tableEntryState')
 
       1. Return (LPM n)
 
-    2. Else Phantom#400
+    2. Else Phantom#437
 
 ;; ../../../../spec-concrete/5.02.2-table-context.watsup:173.1-173.40
 def $tableEntry_lpm_prefix(value)
@@ -8693,7 +8991,7 @@ def $tableEntry_lpm_prefix'(value, n_prefix')
 
       1. Return n_prefix'
 
-    2. Else Phantom#401
+    2. Else Phantom#438
 
     3. If ((_bits has type nat)), then
 
@@ -8719,13 +9017,13 @@ def $tableEntry_lpm_prefix'(value, n_prefix')
 
               3. Return $tableEntry_lpm_prefix'(value', (n_prefix' + 1))
 
-            2. Else Phantom#402
+            2. Else Phantom#439
 
-          2. Else Phantom#403
+          2. Else Phantom#440
 
-        2. Else Phantom#404
+        2. Else Phantom#441
 
-      2. Else Phantom#405
+      2. Else Phantom#442
 
       3. If ((n_prefix' = 0)), then
 
@@ -8743,19 +9041,19 @@ def $tableEntry_lpm_prefix'(value, n_prefix')
 
               2. Return $tableEntry_lpm_prefix'(value', 0)
 
-            2. Else Phantom#406
+            2. Else Phantom#443
 
-          2. Else Phantom#407
+          2. Else Phantom#444
 
-        1. Else Phantom#408
+        1. Else Phantom#445
 
-      3. Else Phantom#409
+      3. Else Phantom#446
 
-    3. Else Phantom#410
+    3. Else Phantom#447
 
-  2. Else Phantom#411
+  2. Else Phantom#448
 
-1. Else Phantom#412
+1. Else Phantom#449
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:5.1-7.20
 relation Type_wf: bound, typeIR'''
@@ -8782,7 +9080,7 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        2. Else Phantom#413
+        2. Else Phantom#450
 
       2. Case (% matches pattern `SpecT%%`)
 
@@ -8794,7 +9092,7 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        3. Else Phantom#414
+        3. Else Phantom#451
 
   3. Case (% has type aliasTypeIR)
 
@@ -8812,9 +9110,9 @@ relation Type_wf: bound, typeIR'''
 
             1. The relation holds
 
-          1. Else Phantom#415
+          1. Else Phantom#452
 
-        2. Else Phantom#416
+        2. Else Phantom#453
 
       2. Case (% matches pattern `NewT%%`)
 
@@ -8826,9 +9124,9 @@ relation Type_wf: bound, typeIR'''
 
             1. The relation holds
 
-          1. Else Phantom#417
+          1. Else Phantom#454
 
-        2. Else Phantom#418
+        2. Else Phantom#455
 
   4. Case (% has type listTypeIR)
 
@@ -8840,9 +9138,9 @@ relation Type_wf: bound, typeIR'''
 
         1. The relation holds
 
-      1. Else Phantom#419
+      1. Else Phantom#456
 
-    2. Else Phantom#420
+    2. Else Phantom#457
 
   5. Case (% has type tupleTypeIR)
 
@@ -8854,9 +9152,9 @@ relation Type_wf: bound, typeIR'''
 
         1. The relation holds
 
-      1. Else Phantom#421
+      1. Else Phantom#458
 
-    2. Else Phantom#422
+    2. Else Phantom#459
 
   6. Case (% has type headerStackTypeIR)
 
@@ -8868,9 +9166,9 @@ relation Type_wf: bound, typeIR'''
 
         1. The relation holds
 
-      1. Else Phantom#423
+      1. Else Phantom#460
 
-    2. Else Phantom#424
+    2. Else Phantom#461
 
   7. Case (% has type structTypeIR)
 
@@ -8884,11 +9182,11 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        1. Else Phantom#425
+        1. Else Phantom#462
 
-      1. Else Phantom#426
+      1. Else Phantom#463
 
-    2. Else Phantom#427
+    2. Else Phantom#464
 
   8. Case (% has type headerTypeIR)
 
@@ -8902,11 +9200,11 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        1. Else Phantom#428
+        1. Else Phantom#465
 
-      1. Else Phantom#429
+      1. Else Phantom#466
 
-    2. Else Phantom#430
+    2. Else Phantom#467
 
   9. Case (% has type headerUnionTypeIR)
 
@@ -8920,11 +9218,11 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        1. Else Phantom#431
+        1. Else Phantom#468
 
-      1. Else Phantom#432
+      1. Else Phantom#469
 
-    2. Else Phantom#433
+    2. Else Phantom#470
 
   10. Case (% has type enumTypeIR)
 
@@ -8940,7 +9238,7 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        2. Else Phantom#434
+        2. Else Phantom#471
 
       2. Case (% matches pattern `SEnumT%%%`)
 
@@ -8954,11 +9252,11 @@ relation Type_wf: bound, typeIR'''
 
               1. The relation holds
 
-            1. Else Phantom#435
+            1. Else Phantom#472
 
-          1. Else Phantom#436
+          1. Else Phantom#473
 
-        2. Else Phantom#437
+        2. Else Phantom#474
 
   11. Case (% has type externObjectTypeIR)
 
@@ -8968,7 +9266,7 @@ relation Type_wf: bound, typeIR'''
 
       1. The relation holds
 
-    2. Else Phantom#438
+    2. Else Phantom#475
 
   12. Case (% has type parserObjectTypeIR)
 
@@ -8978,7 +9276,7 @@ relation Type_wf: bound, typeIR'''
 
       1. The relation holds
 
-    2. Else Phantom#439
+    2. Else Phantom#476
 
   13. Case (% has type controlObjectTypeIR)
 
@@ -8988,7 +9286,7 @@ relation Type_wf: bound, typeIR'''
 
       1. The relation holds
 
-    2. Else Phantom#440
+    2. Else Phantom#477
 
   14. Case (% has type packageObjectTypeIR)
 
@@ -8998,7 +9296,7 @@ relation Type_wf: bound, typeIR'''
 
       1. The relation holds
 
-    2. Else Phantom#441
+    2. Else Phantom#478
 
   15. Case (% has type tableObjectTypeIR)
 
@@ -9018,11 +9316,11 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        2. Else Phantom#442
+        2. Else Phantom#479
 
-      2. Else Phantom#443
+      2. Else Phantom#480
 
-    3. Else Phantom#444
+    3. Else Phantom#481
 
   16. Case (% has type defaultTypeIR)
 
@@ -9044,7 +9342,7 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        2. Else Phantom#445
+        2. Else Phantom#482
 
       2. Case (% matches pattern `SeqDefaultT%`)
 
@@ -9054,7 +9352,7 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        2. Else Phantom#446
+        2. Else Phantom#483
 
   18. Case (% has type recordTypeIR)
 
@@ -9072,9 +9370,9 @@ relation Type_wf: bound, typeIR'''
 
             1. The relation holds
 
-          1. Else Phantom#447
+          1. Else Phantom#484
 
-        2. Else Phantom#448
+        2. Else Phantom#485
 
       2. Case (% matches pattern `RecordDefaultT%`)
 
@@ -9086,9 +9384,9 @@ relation Type_wf: bound, typeIR'''
 
             1. The relation holds
 
-          1. Else Phantom#449
+          1. Else Phantom#486
 
-        2. Else Phantom#450
+        2. Else Phantom#487
 
   19. Case (% has type invalidHeaderTypeIR)
 
@@ -9106,9 +9404,9 @@ relation Type_wf: bound, typeIR'''
 
         1. The relation holds
 
-      1. Else Phantom#451
+      1. Else Phantom#488
 
-    2. Else Phantom#452
+    2. Else Phantom#489
 
   21. Case (% has type tableTypeIR)
 
@@ -9124,7 +9422,7 @@ relation Type_wf: bound, typeIR'''
 
           1. The relation holds
 
-        2. Else Phantom#453
+        2. Else Phantom#490
 
       2. Case (% matches pattern `TableStructT%%`)
 
@@ -9145,7 +9443,7 @@ relation TypeDef_wf: bound, typeDefIR
 
       1. The relation holds
 
-    2. Else Phantom#454
+    2. Else Phantom#491
 
   2. Case (% has type polyTypeDefIR)
 
@@ -9159,9 +9457,9 @@ relation TypeDef_wf: bound, typeDefIR
 
         1. The relation holds
 
-      2. Else Phantom#455
+      2. Else Phantom#492
 
-    2. Else Phantom#456
+    2. Else Phantom#493
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:13.1-15.20
 relation ParameterType_wf: bound, (direction typeIR _id value''?{value'' <- value''?})
@@ -9176,9 +9474,9 @@ relation ParameterType_wf: bound, (direction typeIR _id value''?{value'' <- valu
 
         1. The relation holds
 
-      1. Else Phantom#457
+      1. Else Phantom#494
 
-    1. Else Phantom#458
+    1. Else Phantom#495
 
   2. Case (% matches pattern (_))
 
@@ -9194,7 +9492,7 @@ relation ParameterType_wf: bound, (direction typeIR _id value''?{value'' <- valu
 
             1. The relation holds
 
-          1. Else Phantom#459
+          1. Else Phantom#496
 
         2. Case (% matches pattern `NO`)
 
@@ -9202,11 +9500,11 @@ relation ParameterType_wf: bound, (direction typeIR _id value''?{value'' <- valu
 
             1. The relation holds
 
-          1. Else Phantom#460
+          1. Else Phantom#497
 
-      1. Else Phantom#461
+      1. Else Phantom#498
 
-    2. Else Phantom#462
+    2. Else Phantom#499
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:17.1-19.20
 relation ParameterTypes_wf: bound, parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}
@@ -9219,9 +9517,9 @@ relation ParameterTypes_wf: bound, parameterTypeIR*{parameterTypeIR <- parameter
 
     1. The relation holds
 
-  1. Else Phantom#463
+  1. Else Phantom#500
 
-2. Else Phantom#464
+2. Else Phantom#501
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:21.1-23.20
 relation RoutineType_wf: bound, routineTypeIR
@@ -9238,9 +9536,9 @@ relation RoutineType_wf: bound, routineTypeIR
 
         1. The relation holds
 
-      1. Else Phantom#465
+      1. Else Phantom#502
 
-    2. Else Phantom#466
+    2. Else Phantom#503
 
   2. Case (% matches pattern `FuncT%%`)
 
@@ -9256,11 +9554,11 @@ relation RoutineType_wf: bound, routineTypeIR
 
           1. The relation holds
 
-        1. Else Phantom#467
+        1. Else Phantom#504
 
-      2. Else Phantom#468
+      2. Else Phantom#505
 
-    2. Else Phantom#469
+    2. Else Phantom#506
 
   3. Case (% matches pattern `ActionT%`)
 
@@ -9276,11 +9574,11 @@ relation RoutineType_wf: bound, routineTypeIR
 
           1. The relation holds
 
-        1. Else Phantom#470
+        1. Else Phantom#507
 
-      2. Else Phantom#471
+      2. Else Phantom#508
 
-    2. Else Phantom#472
+    2. Else Phantom#509
 
   4. Case (% matches pattern `ExternFuncT%%`)
 
@@ -9296,11 +9594,11 @@ relation RoutineType_wf: bound, routineTypeIR
 
           1. The relation holds
 
-        1. Else Phantom#473
+        1. Else Phantom#510
 
-      2. Else Phantom#474
+      2. Else Phantom#511
 
-    2. Else Phantom#475
+    2. Else Phantom#512
 
   5. Case (% matches pattern `BuiltinMethodT%%`)
 
@@ -9312,9 +9610,9 @@ relation RoutineType_wf: bound, routineTypeIR
 
         1. The relation holds
 
-      1. Else Phantom#476
+      1. Else Phantom#513
 
-    2. Else Phantom#477
+    2. Else Phantom#514
 
   6. Case (% matches pattern `ExternMethodT%%`)
 
@@ -9330,11 +9628,11 @@ relation RoutineType_wf: bound, routineTypeIR
 
           1. The relation holds
 
-        1. Else Phantom#478
+        1. Else Phantom#515
 
-      2. Else Phantom#479
+      2. Else Phantom#516
 
-    2. Else Phantom#480
+    2. Else Phantom#517
 
   7. Case (% matches pattern `ExternAbstractMethodT%%`)
 
@@ -9350,11 +9648,11 @@ relation RoutineType_wf: bound, routineTypeIR
 
           1. The relation holds
 
-        1. Else Phantom#481
+        1. Else Phantom#518
 
-      2. Else Phantom#482
+      2. Else Phantom#519
 
-    2. Else Phantom#483
+    2. Else Phantom#520
 
   8. Case (% matches pattern `ParserApplyMethodT%`)
 
@@ -9368,9 +9666,9 @@ relation RoutineType_wf: bound, routineTypeIR
 
         1. The relation holds
 
-      2. Else Phantom#484
+      2. Else Phantom#521
 
-    2. Else Phantom#485
+    2. Else Phantom#522
 
   9. Case (% matches pattern `ControlApplyMethodT%`)
 
@@ -9384,9 +9682,9 @@ relation RoutineType_wf: bound, routineTypeIR
 
         1. The relation holds
 
-      2. Else Phantom#486
+      2. Else Phantom#523
 
-    2. Else Phantom#487
+    2. Else Phantom#524
 
   10. Case (% matches pattern `TableApplyMethodT%`)
 
@@ -9402,9 +9700,9 @@ relation RoutineType_wf: bound, routineTypeIR
 
         2. The relation holds
 
-      2. Else Phantom#488
+      2. Else Phantom#525
 
-    2. Else Phantom#489
+    2. Else Phantom#526
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:25.1-27.20
 relation RoutineTypeDef_wf: bound, routineTypeDefIR
@@ -9419,7 +9717,7 @@ relation RoutineTypeDef_wf: bound, routineTypeDefIR
 
       1. The relation holds
 
-    2. Else Phantom#490
+    2. Else Phantom#527
 
   2. Case (% has type polyRoutineTypeDefIR)
 
@@ -9433,9 +9731,9 @@ relation RoutineTypeDef_wf: bound, routineTypeDefIR
 
         1. The relation holds
 
-      2. Else Phantom#491
+      2. Else Phantom#528
 
-    2. Else Phantom#492
+    2. Else Phantom#529
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:29.1-31.20
 relation ConstructorParameterType_wf: bound, (direction typeIR _id _value?{_value <- _value?})
@@ -9446,9 +9744,9 @@ relation ConstructorParameterType_wf: bound, (direction typeIR _id _value?{_valu
 
     1. The relation holds
 
-  1. Else Phantom#493
+  1. Else Phantom#530
 
-1. Else Phantom#494
+1. Else Phantom#531
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:33.1-35.20
 relation ConstructorParameterTypes_wf: bound, parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}
@@ -9461,9 +9759,9 @@ relation ConstructorParameterTypes_wf: bound, parameterTypeIR*{parameterTypeIR <
 
     1. The relation holds
 
-  1. Else Phantom#495
+  1. Else Phantom#532
 
-2. Else Phantom#496
+2. Else Phantom#533
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:37.1-39.20
 relation ConstructorType_wf: bound, (ConstructorT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*} typeIR_object)
@@ -9486,7 +9784,7 @@ relation ConstructorType_wf: bound, (ConstructorT parameterTypeIR*{parameterType
 
           1. The relation holds
 
-        3. Else Phantom#497
+        3. Else Phantom#534
 
       2. Case (% has type parserObjectTypeIR)
 
@@ -9498,7 +9796,7 @@ relation ConstructorType_wf: bound, (ConstructorT parameterTypeIR*{parameterType
 
           1. The relation holds
 
-        3. Else Phantom#498
+        3. Else Phantom#535
 
       3. Case (% has type controlObjectTypeIR)
 
@@ -9510,7 +9808,7 @@ relation ConstructorType_wf: bound, (ConstructorT parameterTypeIR*{parameterType
 
           1. The relation holds
 
-        3. Else Phantom#499
+        3. Else Phantom#536
 
       4. Case (% has type packageObjectTypeIR)
 
@@ -9522,13 +9820,13 @@ relation ConstructorType_wf: bound, (ConstructorT parameterTypeIR*{parameterType
 
           1. The relation holds
 
-        3. Else Phantom#500
+        3. Else Phantom#537
 
-    2. Else Phantom#501
+    2. Else Phantom#538
 
-  1. Else Phantom#502
+  1. Else Phantom#539
 
-1. Else Phantom#503
+1. Else Phantom#540
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:41.1-43.20
 relation ConstructorTypeDef_wf: bound, (PolyTD constructorTypeIR tid_expl*{tid_expl <- tid_expl*} tid_impl*{tid_impl <- tid_impl*})
@@ -9543,9 +9841,9 @@ relation ConstructorTypeDef_wf: bound, (PolyTD constructorTypeIR tid_expl*{tid_e
 
     1. The relation holds
 
-  2. Else Phantom#504
+  2. Else Phantom#541
 
-2. Else Phantom#505
+2. Else Phantom#542
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:90.1-90.37
 def $nestable_typedef(typeIR)
@@ -10685,7 +10983,7 @@ def $directionless_trailing'(direction''*{direction'' <- direction''*}, _bool')
 
           1. Return false
 
-    2. Else Phantom#506
+    2. Else Phantom#543
 
     3. (Let direction_h :: direction_t*{direction_t <- direction_t*} be direction''*{direction'' <- direction''*})
 
@@ -10693,7 +10991,7 @@ def $directionless_trailing'(direction''*{direction'' <- direction''*}, _bool')
 
       1. Return $directionless_trailing'(direction_t*{direction_t <- direction_t*}, false)
 
-    4. Else Phantom#507
+    4. Else Phantom#544
 
 ;; ../../../../spec-concrete/5.03-wellformed.watsup:479.1-479.47
 def $nestable_action(direction, typeIR)
@@ -11196,7 +11494,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
       2. Result in value
 
-    3. Else Phantom#508
+    3. Else Phantom#545
 
   3. Case (% has type defaultExpressionIR)
 
@@ -11400,7 +11698,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
         3. Result in $bin_lor(value_l, value_r)
 
-    2. Else Phantom#509
+    2. Else Phantom#546
 
   6. Case (% has type ternaryExpressionIR)
 
@@ -11414,7 +11712,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
       2. Result in value_true
 
-    3. Else Phantom#510
+    3. Else Phantom#547
 
     4. If ((value = ((BoolV false) as value))), then
 
@@ -11422,7 +11720,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
       2. Result in value_false
 
-    4. Else Phantom#511
+    4. Else Phantom#548
 
   7. Case (% has type castExpressionIR)
 
@@ -11490,7 +11788,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
       2. Result in value_error
 
-    4. Else Phantom#512
+    4. Else Phantom#549
 
   10. Case (% has type memberAccessExpressionIR)
 
@@ -11526,7 +11824,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
                     1. Result in ((EnumV tid name) as value)
 
-                  2. Else Phantom#513
+                  2. Else Phantom#550
 
                 2. Case (% matches pattern `SEnumT%%%`)
 
@@ -11540,13 +11838,13 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
                     2. Result in ((SEnumV tid name value) as value)
 
-                  3. Else Phantom#514
+                  3. Else Phantom#551
 
-            2. Else Phantom#515
+            2. Else Phantom#552
 
-          2. Else Phantom#516
+          2. Else Phantom#553
 
-        3. Else Phantom#517
+        3. Else Phantom#554
 
       2. Case (% matches pattern `ExprAccE%%`)
 
@@ -11562,9 +11860,9 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
             2. Result in ((IntV (n_size as int)) as value)
 
-          2. Else Phantom#518
+          2. Else Phantom#555
 
-        2. Else Phantom#519
+        2. Else Phantom#556
 
         3. (Eval_static: p TC |- typedExpressionIR_base ~> value_base)
 
@@ -11584,7 +11882,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
               2. Result in value
 
-            3. Else Phantom#520
+            3. Else Phantom#557
 
           2. Case (% has type headerValue)
 
@@ -11598,7 +11896,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
               2. Result in value
 
-            3. Else Phantom#521
+            3. Else Phantom#558
 
           3. Case (% has type headerUnionValue)
 
@@ -11612,9 +11910,9 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
               2. Result in value
 
-            3. Else Phantom#522
+            3. Else Phantom#559
 
-        5. Else Phantom#523
+        5. Else Phantom#560
 
   11. Case (% has type indexAccessExpressionIR)
 
@@ -11654,11 +11952,11 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
                   2. Result in value
 
-                2. Else Phantom#524
+                2. Else Phantom#561
 
-              2. Else Phantom#525
+              2. Else Phantom#562
 
-            3. Else Phantom#526
+            3. Else Phantom#563
 
           2. Case (% has type headerStackValue)
 
@@ -11680,13 +11978,13 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
                   2. Result in value
 
-                2. Else Phantom#527
+                2. Else Phantom#564
 
-              2. Else Phantom#528
+              2. Else Phantom#565
 
-            3. Else Phantom#529
+            3. Else Phantom#566
 
-        5. Else Phantom#530
+        5. Else Phantom#567
 
       2. Case (% matches pattern `BitAccE%%%`)
 
@@ -11724,11 +12022,11 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
                 1. Result in $sizeof(typeIR_base, name)
 
-              2. Else Phantom#531
+              2. Else Phantom#568
 
-            1. Else Phantom#532
+            1. Else Phantom#569
 
-          2. Else Phantom#533
+          2. Else Phantom#570
 
         2. Case (% matches pattern `TypeT%%`)
 
@@ -11754,7 +12052,7 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
                       1. Result in $sizeof(typeIR_base, name)
 
-                    2. Else Phantom#534
+                    2. Else Phantom#571
 
                   2. Case (% has type polyTypeDefIR)
 
@@ -11768,21 +12066,21 @@ relation Eval_static: p, TC, (expressionIR (( _typeIR' _ctk )))
 
                           1. Result in $sizeof(typeIR_base, name)
 
-                        1. Else Phantom#535
+                        1. Else Phantom#572
 
-                      1. Else Phantom#536
+                      1. Else Phantom#573
 
-                    2. Else Phantom#537
+                    2. Else Phantom#574
 
-              2. Else Phantom#538
+              2. Else Phantom#575
 
-            1. Else Phantom#539
+            1. Else Phantom#576
 
-          2. Else Phantom#540
+          2. Else Phantom#577
 
-      2. Else Phantom#541
+      2. Else Phantom#578
 
-    2. Else Phantom#542
+    2. Else Phantom#579
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:15.1-17.23
 relation Type_ok: p, TC, typeOrVoid
@@ -11841,13 +12139,13 @@ relation Type_ok: p, TC, typeOrVoid
 
                 1. Result in ((FIntT n) as typeIR), []
 
-              2. Else Phantom#543
+              2. Else Phantom#580
 
-            2. Else Phantom#544
+            2. Else Phantom#581
 
-          3. Else Phantom#545
+          3. Else Phantom#582
 
-        4. Else Phantom#546
+        4. Else Phantom#583
 
       7. Case (% matches pattern `FBitT%`)
 
@@ -11873,11 +12171,11 @@ relation Type_ok: p, TC, typeOrVoid
 
               2. Result in ((FBitT n) as typeIR), []
 
-            2. Else Phantom#547
+            2. Else Phantom#584
 
-          3. Else Phantom#548
+          3. Else Phantom#585
 
-        4. Else Phantom#549
+        4. Else Phantom#586
 
       8. Case (% matches pattern `VBitT%`)
 
@@ -11903,11 +12201,11 @@ relation Type_ok: p, TC, typeOrVoid
 
               2. Result in ((VBitT n) as typeIR), []
 
-            2. Else Phantom#550
+            2. Else Phantom#587
 
-          3. Else Phantom#551
+          3. Else Phantom#588
 
-        4. Else Phantom#552
+        4. Else Phantom#589
 
   2. Case (% has type nameType)
 
@@ -11933,7 +12231,7 @@ relation Type_ok: p, TC, typeOrVoid
 
           2. Result in ((SpecT polyTypeDefIR []) as typeIR), []
 
-    3. Else Phantom#553
+    3. Else Phantom#590
 
   3. Case (% has type specializedType)
 
@@ -11953,11 +12251,11 @@ relation Type_ok: p, TC, typeOrVoid
 
           2. Result in typeIR, []
 
-        2. Else Phantom#554
+        2. Else Phantom#591
 
-      2. Else Phantom#555
+      2. Else Phantom#592
 
-    2. Else Phantom#556
+    2. Else Phantom#593
 
     3. (Let typeDefIR'?{typeDefIR' <- typeDefIR'?} be $find_type(p, TC, prefixedName))
 
@@ -11975,9 +12273,9 @@ relation Type_ok: p, TC, typeOrVoid
 
         4. Result in ((SpecT polyTypeDefIR typeIR_arg*{typeIR_arg <- typeIR_arg*}) as typeIR), tid_fresh*{tid_fresh <- tid_fresh*}
 
-      2. Else Phantom#557
+      2. Else Phantom#594
 
-    4. Else Phantom#558
+    4. Else Phantom#595
 
   4. Case (% has type headerStackType)
 
@@ -12017,13 +12315,13 @@ relation Type_ok: p, TC, typeOrVoid
 
                 4. Result in ((SpecT polyTypeDefIR_stack [typeIR_base]) as typeIR), []
 
-              2. Else Phantom#559
+              2. Else Phantom#596
 
-            3. Else Phantom#560
+            3. Else Phantom#597
 
-          3. Else Phantom#561
+          3. Else Phantom#598
 
-        3. Else Phantom#562
+        3. Else Phantom#599
 
       2. Case (% has type specializedType)
 
@@ -12055,11 +12353,11 @@ relation Type_ok: p, TC, typeOrVoid
 
               4. Result in ((SpecT polyTypeDefIR_stack [typeIR_base]) as typeIR), tid_fresh*{tid_fresh <- tid_fresh*}
 
-            2. Else Phantom#563
+            2. Else Phantom#600
 
-          3. Else Phantom#564
+          3. Else Phantom#601
 
-        5. Else Phantom#565
+        5. Else Phantom#602
 
   5. Case (% has type listType)
 
@@ -12089,13 +12387,13 @@ relation Type_ok: p, TC, typeOrVoid
 
     7. Result in ((SpecT polyTypeDefIR_tuple typeIR_arg*{typeIR_arg <- typeIR_arg*}) as typeIR), tid_fresh*{tid_fresh <- tid_fresh*}
 
-1. Else Phantom#566
+1. Else Phantom#603
 
 2. If ((typeOrVoid matches pattern `VoidT`)), then
 
   1. Result in ((VoidT) as typeIR), []
 
-2. Else Phantom#567
+2. Else Phantom#604
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:19.1-21.23
 relation TypeArgument_ok: p, TC, typeArgument
@@ -12108,7 +12406,7 @@ relation TypeArgument_ok: p, TC, typeArgument
 
   3. Result in typeIR, tid_impl*{tid_impl <- tid_impl*}
 
-1. Else Phantom#568
+1. Else Phantom#605
 
 2. Case analysis on typeArgument
 
@@ -12122,7 +12420,7 @@ relation TypeArgument_ok: p, TC, typeArgument
 
     2. Result in ((NameT tid_impl) as typeArgumentIR), [tid_impl]
 
-2. Else Phantom#569
+2. Else Phantom#606
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:23.1-25.23
 relation TypeArguments_ok: p, TC, typeArgument*{typeArgument <- typeArgument*}
@@ -12156,7 +12454,7 @@ relation Sub_expl: typeIR_a, typeIR_b
 
   1. The relation holds
 
-3. Else Phantom#570
+3. Else Phantom#607
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:32.1-32.60
 relation Sub_expl_canon: typeIR_a, typeIR_b
@@ -12173,7 +12471,7 @@ relation Sub_expl_canon: typeIR_a, typeIR_b
 
       1. The relation holds
 
-    1. Else Phantom#571
+    1. Else Phantom#608
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:33.1-33.64
 relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
@@ -12188,11 +12486,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
       1. The relation holds
 
-    2. Else Phantom#572
+    2. Else Phantom#609
 
-  1. Else Phantom#573
+  1. Else Phantom#610
 
-1. Else Phantom#574
+1. Else Phantom#611
 
 2. Case analysis on typeIR'''''
 
@@ -12206,9 +12504,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         1. The relation holds
 
-      1. Else Phantom#575
+      1. Else Phantom#612
 
-    2. Else Phantom#576
+    2. Else Phantom#613
 
   2. Case (% has type numberTypeIR)
 
@@ -12228,7 +12526,7 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
               1. The relation holds
 
-            2. Else Phantom#577
+            2. Else Phantom#614
 
           2. Case (% has type numberTypeIR)
 
@@ -12248,9 +12546,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                 2. The relation holds
 
-            2. Else Phantom#578
+            2. Else Phantom#615
 
-        1. Else Phantom#579
+        1. Else Phantom#616
 
       2. Case (% matches pattern `FIntT%`)
 
@@ -12280,11 +12578,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                 1. The relation holds
 
-              2. Else Phantom#580
+              2. Else Phantom#617
 
-          2. Else Phantom#581
+          2. Else Phantom#618
 
-        2. Else Phantom#582
+        2. Else Phantom#619
 
       3. Case (% matches pattern `FBitT%`)
 
@@ -12308,7 +12606,7 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                 1. The relation holds
 
-              2. Else Phantom#583
+              2. Else Phantom#620
 
             3. Case (% matches pattern `FBitT%`)
 
@@ -12316,11 +12614,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
               2. The relation holds
 
-          2. Else Phantom#584
+          2. Else Phantom#621
 
-        2. Else Phantom#585
+        2. Else Phantom#622
 
-    2. Else Phantom#586
+    2. Else Phantom#623
 
   3. Case (% has type aliasTypeIR)
 
@@ -12334,9 +12632,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         1. The relation holds
 
-      2. Else Phantom#587
+      2. Else Phantom#624
 
-    2. Else Phantom#588
+    2. Else Phantom#625
 
   4. Case (% has type enumTypeIR)
 
@@ -12350,9 +12648,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         1. The relation holds
 
-      2. Else Phantom#589
+      2. Else Phantom#626
 
-    2. Else Phantom#590
+    2. Else Phantom#627
 
   5. Case (% has type defaultTypeIR)
 
@@ -12362,7 +12660,7 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
       1. The relation holds
 
-    2. Else Phantom#591
+    2. Else Phantom#628
 
   6. Case (% has type invalidHeaderTypeIR)
 
@@ -12382,7 +12680,7 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         2. The relation holds
 
-    2. Else Phantom#592
+    2. Else Phantom#629
 
   7. Case (% has type sequenceTypeIR)
 
@@ -12404,7 +12702,7 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
               1. The relation holds
 
-            2. Else Phantom#593
+            2. Else Phantom#630
 
           2. Case (% has type tupleTypeIR)
 
@@ -12414,7 +12712,7 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
               1. The relation holds
 
-            2. Else Phantom#594
+            2. Else Phantom#631
 
           3. Case (% has type headerStackTypeIR)
 
@@ -12426,9 +12724,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                 1. The relation holds
 
-              1. Else Phantom#595
+              1. Else Phantom#632
 
-            2. Else Phantom#596
+            2. Else Phantom#633
 
           4. Case (% has type structTypeIR)
 
@@ -12438,7 +12736,7 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
               1. The relation holds
 
-            2. Else Phantom#597
+            2. Else Phantom#634
 
           5. Case (% has type headerTypeIR)
 
@@ -12448,9 +12746,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
               1. The relation holds
 
-            2. Else Phantom#598
+            2. Else Phantom#635
 
-        2. Else Phantom#599
+        2. Else Phantom#636
 
       2. Case (% matches pattern `SeqDefaultT%`)
 
@@ -12472,11 +12770,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                   1. The relation holds
 
-                1. Else Phantom#600
+                1. Else Phantom#637
 
-              2. Else Phantom#601
+              2. Else Phantom#638
 
-            2. Else Phantom#602
+            2. Else Phantom#639
 
           2. Case (% has type headerStackTypeIR)
 
@@ -12490,11 +12788,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                   1. The relation holds
 
-                1. Else Phantom#603
+                1. Else Phantom#640
 
-              1. Else Phantom#604
+              1. Else Phantom#641
 
-            2. Else Phantom#605
+            2. Else Phantom#642
 
           3. Case (% has type structTypeIR)
 
@@ -12510,11 +12808,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                   1. The relation holds
 
-                1. Else Phantom#606
+                1. Else Phantom#643
 
-              2. Else Phantom#607
+              2. Else Phantom#644
 
-            2. Else Phantom#608
+            2. Else Phantom#645
 
           4. Case (% has type headerTypeIR)
 
@@ -12530,13 +12828,13 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                   1. The relation holds
 
-                1. Else Phantom#609
+                1. Else Phantom#646
 
-              2. Else Phantom#610
+              2. Else Phantom#647
 
-            2. Else Phantom#611
+            2. Else Phantom#648
 
-        2. Else Phantom#612
+        2. Else Phantom#649
 
   8. Case (% has type recordTypeIR)
 
@@ -12572,13 +12870,13 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                     1. The relation holds
 
-                  2. Else Phantom#613
+                  2. Else Phantom#650
 
-                3. Else Phantom#614
+                3. Else Phantom#651
 
-              2. Else Phantom#615
+              2. Else Phantom#652
 
-            2. Else Phantom#616
+            2. Else Phantom#653
 
           2. Case (% has type headerTypeIR)
 
@@ -12602,15 +12900,15 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                     1. The relation holds
 
-                  2. Else Phantom#617
+                  2. Else Phantom#654
 
-                3. Else Phantom#618
+                3. Else Phantom#655
 
-              2. Else Phantom#619
+              2. Else Phantom#656
 
-            2. Else Phantom#620
+            2. Else Phantom#657
 
-        2. Else Phantom#621
+        2. Else Phantom#658
 
       2. Case (% matches pattern `RecordDefaultT%`)
 
@@ -12650,17 +12948,17 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                         1. The relation holds
 
-                      2. Else Phantom#622
+                      2. Else Phantom#659
 
-                    3. Else Phantom#623
+                    3. Else Phantom#660
 
-                  2. Else Phantom#624
+                  2. Else Phantom#661
 
-                3. Else Phantom#625
+                3. Else Phantom#662
 
-              2. Else Phantom#626
+              2. Else Phantom#663
 
-            2. Else Phantom#627
+            2. Else Phantom#664
 
           2. Case (% has type headerTypeIR)
 
@@ -12694,19 +12992,19 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
                         1. The relation holds
 
-                      2. Else Phantom#628
+                      2. Else Phantom#665
 
-                    3. Else Phantom#629
+                    3. Else Phantom#666
 
-                  2. Else Phantom#630
+                  2. Else Phantom#667
 
-                3. Else Phantom#631
+                3. Else Phantom#668
 
-              2. Else Phantom#632
+              2. Else Phantom#669
 
-            2. Else Phantom#633
+            2. Else Phantom#670
 
-        2. Else Phantom#634
+        2. Else Phantom#671
 
   9. Case (% has type setTypeIR)
 
@@ -12720,11 +13018,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         1. The relation holds
 
-      2. Else Phantom#635
+      2. Else Phantom#672
 
-    2. Else Phantom#636
+    2. Else Phantom#673
 
-2. Else Phantom#637
+2. Else Phantom#674
 
 3. Case analysis on typeIR''''''
 
@@ -12740,9 +13038,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         1. The relation holds
 
-      2. Else Phantom#638
+      2. Else Phantom#675
 
-    2. Else Phantom#639
+    2. Else Phantom#676
 
   2. Case (% has type enumTypeIR)
 
@@ -12756,9 +13054,9 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         1. The relation holds
 
-      2. Else Phantom#640
+      2. Else Phantom#677
 
-    2. Else Phantom#641
+    2. Else Phantom#678
 
   3. Case (% has type setTypeIR)
 
@@ -12770,11 +13068,11 @@ relation Sub_expl_canon_neq: typeIR''''', typeIR''''''
 
         1. The relation holds
 
-      1. Else Phantom#642
+      1. Else Phantom#679
 
-    2. Else Phantom#643
+    2. Else Phantom#680
 
-3. Else Phantom#644
+3. Else Phantom#681
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:35.1-35.54
 relation Sub_impl: typeIR_a, typeIR_b
@@ -12787,7 +13085,7 @@ relation Sub_impl: typeIR_a, typeIR_b
 
   1. The relation holds
 
-3. Else Phantom#645
+3. Else Phantom#682
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:36.1-36.60
 relation Sub_impl_canon: typeIR_a, typeIR_b
@@ -12804,7 +13102,7 @@ relation Sub_impl_canon: typeIR_a, typeIR_b
 
       1. The relation holds
 
-    1. Else Phantom#646
+    1. Else Phantom#683
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:37.1-37.64
 relation Sub_impl_canon_neq: typeIR, typeIR'''''
@@ -12835,11 +13133,11 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
             2. The relation holds
 
-        2. Else Phantom#647
+        2. Else Phantom#684
 
-      1. Else Phantom#648
+      1. Else Phantom#685
 
-    2. Else Phantom#649
+    2. Else Phantom#686
 
   2. Case (% has type enumTypeIR)
 
@@ -12853,9 +13151,9 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
         1. The relation holds
 
-      2. Else Phantom#650
+      2. Else Phantom#687
 
-    2. Else Phantom#651
+    2. Else Phantom#688
 
   3. Case (% has type defaultTypeIR)
 
@@ -12865,7 +13163,7 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
       1. The relation holds
 
-    2. Else Phantom#652
+    2. Else Phantom#689
 
   4. Case (% has type invalidHeaderTypeIR)
 
@@ -12885,7 +13183,7 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
         2. The relation holds
 
-    2. Else Phantom#653
+    2. Else Phantom#690
 
   5. Case (% has type sequenceTypeIR)
 
@@ -12907,7 +13205,7 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
               1. The relation holds
 
-            2. Else Phantom#654
+            2. Else Phantom#691
 
           2. Case (% has type tupleTypeIR)
 
@@ -12917,7 +13215,7 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
               1. The relation holds
 
-            2. Else Phantom#655
+            2. Else Phantom#692
 
           3. Case (% has type headerStackTypeIR)
 
@@ -12929,9 +13227,9 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                 1. The relation holds
 
-              1. Else Phantom#656
+              1. Else Phantom#693
 
-            2. Else Phantom#657
+            2. Else Phantom#694
 
           4. Case (% has type structTypeIR)
 
@@ -12941,7 +13239,7 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
               1. The relation holds
 
-            2. Else Phantom#658
+            2. Else Phantom#695
 
           5. Case (% has type headerTypeIR)
 
@@ -12951,7 +13249,7 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
               1. The relation holds
 
-            2. Else Phantom#659
+            2. Else Phantom#696
 
           6. Case (% has type sequenceTypeIR)
 
@@ -12965,11 +13263,11 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                 1. The relation holds
 
-              2. Else Phantom#660
+              2. Else Phantom#697
 
-            2. Else Phantom#661
+            2. Else Phantom#698
 
-        2. Else Phantom#662
+        2. Else Phantom#699
 
       2. Case (% matches pattern `SeqDefaultT%`)
 
@@ -12991,11 +13289,11 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                   1. The relation holds
 
-                1. Else Phantom#663
+                1. Else Phantom#700
 
-              2. Else Phantom#664
+              2. Else Phantom#701
 
-            2. Else Phantom#665
+            2. Else Phantom#702
 
           2. Case (% has type headerStackTypeIR)
 
@@ -13009,11 +13307,11 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                   1. The relation holds
 
-                1. Else Phantom#666
+                1. Else Phantom#703
 
-              1. Else Phantom#667
+              1. Else Phantom#704
 
-            2. Else Phantom#668
+            2. Else Phantom#705
 
           3. Case (% has type structTypeIR)
 
@@ -13029,11 +13327,11 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                   1. The relation holds
 
-                1. Else Phantom#669
+                1. Else Phantom#706
 
-              2. Else Phantom#670
+              2. Else Phantom#707
 
-            2. Else Phantom#671
+            2. Else Phantom#708
 
           4. Case (% has type headerTypeIR)
 
@@ -13049,13 +13347,13 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                   1. The relation holds
 
-                1. Else Phantom#672
+                1. Else Phantom#709
 
-              2. Else Phantom#673
+              2. Else Phantom#710
 
-            2. Else Phantom#674
+            2. Else Phantom#711
 
-        2. Else Phantom#675
+        2. Else Phantom#712
 
   6. Case (% has type recordTypeIR)
 
@@ -13091,13 +13389,13 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                     1. The relation holds
 
-                  2. Else Phantom#676
+                  2. Else Phantom#713
 
-                3. Else Phantom#677
+                3. Else Phantom#714
 
-              2. Else Phantom#678
+              2. Else Phantom#715
 
-            2. Else Phantom#679
+            2. Else Phantom#716
 
           2. Case (% has type headerTypeIR)
 
@@ -13121,15 +13419,15 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                     1. The relation holds
 
-                  2. Else Phantom#680
+                  2. Else Phantom#717
 
-                3. Else Phantom#681
+                3. Else Phantom#718
 
-              2. Else Phantom#682
+              2. Else Phantom#719
 
-            2. Else Phantom#683
+            2. Else Phantom#720
 
-        2. Else Phantom#684
+        2. Else Phantom#721
 
       2. Case (% matches pattern `RecordDefaultT%`)
 
@@ -13169,17 +13467,17 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                         1. The relation holds
 
-                      2. Else Phantom#685
+                      2. Else Phantom#722
 
-                    3. Else Phantom#686
+                    3. Else Phantom#723
 
-                  2. Else Phantom#687
+                  2. Else Phantom#724
 
-                3. Else Phantom#688
+                3. Else Phantom#725
 
-              2. Else Phantom#689
+              2. Else Phantom#726
 
-            2. Else Phantom#690
+            2. Else Phantom#727
 
           2. Case (% has type headerTypeIR)
 
@@ -13213,21 +13511,21 @@ relation Sub_impl_canon_neq: typeIR, typeIR'''''
 
                         1. The relation holds
 
-                      2. Else Phantom#691
+                      2. Else Phantom#728
 
-                    3. Else Phantom#692
+                    3. Else Phantom#729
 
-                  2. Else Phantom#693
+                  2. Else Phantom#730
 
-                3. Else Phantom#694
+                3. Else Phantom#731
 
-              2. Else Phantom#695
+              2. Else Phantom#732
 
-            2. Else Phantom#696
+            2. Else Phantom#733
 
-        2. Else Phantom#697
+        2. Else Phantom#734
 
-1. Else Phantom#698
+1. Else Phantom#735
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:43.1-45.23
 relation Expr_ok: p, TC, expression'''
@@ -13300,7 +13598,7 @@ relation Expr_ok: p, TC, expression'''
 
       3. Result in (((NameE prefixedName) as expressionIR) expressionNoteIR)
 
-    3. Else Phantom#699
+    3. Else Phantom#736
 
   3. Case (% has type defaultExpression)
 
@@ -13330,7 +13628,7 @@ relation Expr_ok: p, TC, expression'''
 
           3. Result in (((UnE (LNOT) typedExpressionIR_reduced) as expressionIR) expressionNoteIR)
 
-        3. Else Phantom#700
+        3. Else Phantom#737
 
       2. Case (% matches pattern `BNOT`)
 
@@ -13346,7 +13644,7 @@ relation Expr_ok: p, TC, expression'''
 
           3. Result in (((UnE (BNOT) typedExpressionIR_reduced) as expressionIR) expressionNoteIR)
 
-        3. Else Phantom#701
+        3. Else Phantom#738
 
       3. Case (% matches pattern `UPLUS`)
 
@@ -13362,7 +13660,7 @@ relation Expr_ok: p, TC, expression'''
 
           3. Result in (((UnE unop typedExpressionIR_reduced) as expressionIR) expressionNoteIR)
 
-        3. Else Phantom#702
+        3. Else Phantom#739
 
       4. Case (% matches pattern `UMINUS`)
 
@@ -13378,7 +13676,7 @@ relation Expr_ok: p, TC, expression'''
 
           3. Result in (((UnE unop typedExpressionIR_reduced) as expressionIR) expressionNoteIR)
 
-        3. Else Phantom#703
+        3. Else Phantom#740
 
   5. Case (% has type binaryExpression)
 
@@ -13414,9 +13712,9 @@ relation Expr_ok: p, TC, expression'''
 
             6. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-          3. Else Phantom#704
+          3. Else Phantom#741
 
-        4. Else Phantom#705
+        4. Else Phantom#742
 
       2. Case (% is in [(SPLUS), (SMINUS)])
 
@@ -13446,9 +13744,9 @@ relation Expr_ok: p, TC, expression'''
 
             6. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-          3. Else Phantom#706
+          3. Else Phantom#743
 
-        4. Else Phantom#707
+        4. Else Phantom#744
 
       3. Case (% is in [(DIV), (MOD)])
 
@@ -13496,11 +13794,11 @@ relation Expr_ok: p, TC, expression'''
 
                       3. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-                    2. Else Phantom#708
+                    2. Else Phantom#745
 
-                  2. Else Phantom#709
+                  2. Else Phantom#746
 
-                3. Else Phantom#710
+                3. Else Phantom#747
 
               2. Case false
 
@@ -13510,9 +13808,9 @@ relation Expr_ok: p, TC, expression'''
 
                 3. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-          3. Else Phantom#711
+          3. Else Phantom#748
 
-        4. Else Phantom#712
+        4. Else Phantom#749
 
       4. Case (% is in [(SHL), (SHR)])
 
@@ -13538,7 +13836,7 @@ relation Expr_ok: p, TC, expression'''
 
             3. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-          4. Else Phantom#713
+          4. Else Phantom#750
 
           5. If ($is_arbitrary_int_typeIR(typeIR_r_reduced)), then
 
@@ -13562,13 +13860,13 @@ relation Expr_ok: p, TC, expression'''
 
                   4. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-                2. Else Phantom#714
+                2. Else Phantom#751
 
-              3. Else Phantom#715
+              3. Else Phantom#752
 
-            1. Else Phantom#716
+            1. Else Phantom#753
 
-          5. Else Phantom#717
+          5. Else Phantom#754
 
           6. If ($is_fixed_int_typeIR(typeIR_r_reduced)), then
 
@@ -13592,15 +13890,15 @@ relation Expr_ok: p, TC, expression'''
 
                   4. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-                2. Else Phantom#718
+                2. Else Phantom#755
 
-              3. Else Phantom#719
+              3. Else Phantom#756
 
-            1. Else Phantom#720
+            1. Else Phantom#757
 
-          6. Else Phantom#721
+          6. Else Phantom#758
 
-        4. Else Phantom#722
+        4. Else Phantom#759
 
       5. Case (% is in [(EQ), (NE)])
 
@@ -13626,9 +13924,9 @@ relation Expr_ok: p, TC, expression'''
 
             3. Result in (((BinE typedExpressionIR_l_cast binop typedExpressionIR_r_cast) as expressionIR) expressionNoteIR)
 
-          4. Else Phantom#723
+          4. Else Phantom#760
 
-        4. Else Phantom#724
+        4. Else Phantom#761
 
       6. Case (% is in [(LE), (GE), (LT), (GT)])
 
@@ -13658,9 +13956,9 @@ relation Expr_ok: p, TC, expression'''
 
             6. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-          3. Else Phantom#725
+          3. Else Phantom#762
 
-        4. Else Phantom#726
+        4. Else Phantom#763
 
       7. Case (% is in [(BAND), (BXOR), (BOR)])
 
@@ -13690,9 +13988,9 @@ relation Expr_ok: p, TC, expression'''
 
             6. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-          3. Else Phantom#727
+          3. Else Phantom#764
 
-        4. Else Phantom#728
+        4. Else Phantom#765
 
       8. Case (% is in [(LAND), (LOR)])
 
@@ -13722,11 +14020,11 @@ relation Expr_ok: p, TC, expression'''
 
             6. Result in (((BinE typedExpressionIR_l_reduced binop typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-          3. Else Phantom#729
+          3. Else Phantom#766
 
-        4. Else Phantom#730
+        4. Else Phantom#767
 
-    2. Else Phantom#731
+    2. Else Phantom#768
 
     3. If ((binop matches pattern `CONCAT`)), then
 
@@ -13756,11 +14054,11 @@ relation Expr_ok: p, TC, expression'''
 
           4. Result in (((BinE typedExpressionIR_l_reduced (CONCAT) typedExpressionIR_r_reduced) as expressionIR) expressionNoteIR)
 
-        5. Else Phantom#732
+        5. Else Phantom#769
 
-      4. Else Phantom#733
+      4. Else Phantom#770
 
-    3. Else Phantom#734
+    3. Else Phantom#771
 
   6. Case (% has type ternaryExpression)
 
@@ -13798,13 +14096,13 @@ relation Expr_ok: p, TC, expression'''
 
             3. Result in (((TernE typedExpressionIR_cond typedExpressionIR_true_cast typedExpressionIR_false_cast) as expressionIR) expressionNoteIR)
 
-          4. Else Phantom#735
+          4. Else Phantom#772
 
-        4. Else Phantom#736
+        4. Else Phantom#773
 
-      2. Else Phantom#737
+      2. Else Phantom#774
 
-    4. Else Phantom#738
+    4. Else Phantom#775
 
   7. Case (% has type castExpression)
 
@@ -13826,11 +14124,11 @@ relation Expr_ok: p, TC, expression'''
 
           2. Result in (((CastE typeIR_t typedExpressionIR) as expressionIR) expressionNoteIR)
 
-        3. Else Phantom#739
+        3. Else Phantom#776
 
-      1. Else Phantom#740
+      1. Else Phantom#777
 
-    3. Else Phantom#741
+    3. Else Phantom#778
 
   8. Case (% has type dataExpression)
 
@@ -13892,11 +14190,11 @@ relation Expr_ok: p, TC, expression'''
 
                   6. Result in (((SeqDefaultE typedExpressionIR_e_h*{typedExpressionIR_e_h <- typedExpressionIR_e_h*}) as expressionIR) expressionNoteIR)
 
-                3. Else Phantom#742
+                3. Else Phantom#779
 
-              2. Else Phantom#743
+              2. Else Phantom#780
 
-            2. Else Phantom#744
+            2. Else Phantom#781
 
       3. Case (% matches pattern `RecordE%`)
 
@@ -13942,7 +14240,7 @@ relation Expr_ok: p, TC, expression'''
 
       2. Result in (((ErrAccE name) as expressionIR) expressionNoteIR)
 
-    3. Else Phantom#745
+    3. Else Phantom#782
 
   10. Case (% has type memberAccessExpression)
 
@@ -13982,7 +14280,7 @@ relation Expr_ok: p, TC, expression'''
 
                     2. Result in (((TypeAccE prefixedName_base name) as expressionIR) expressionNoteIR)
 
-                  2. Else Phantom#746
+                  2. Else Phantom#783
 
                 2. Case (% matches pattern `SEnumT%%%`)
 
@@ -13994,13 +14292,13 @@ relation Expr_ok: p, TC, expression'''
 
                     2. Result in (((TypeAccE prefixedName_base name) as expressionIR) expressionNoteIR)
 
-                  2. Else Phantom#747
+                  2. Else Phantom#784
 
-            3. Else Phantom#748
+            3. Else Phantom#785
 
-          2. Else Phantom#749
+          2. Else Phantom#786
 
-        3. Else Phantom#750
+        3. Else Phantom#787
 
       2. Case (% matches pattern `ExprAccE%%`)
 
@@ -14034,7 +14332,7 @@ relation Expr_ok: p, TC, expression'''
 
                   2. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-                1. Else Phantom#751
+                1. Else Phantom#788
 
                 2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
@@ -14042,7 +14340,7 @@ relation Expr_ok: p, TC, expression'''
 
                   2. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-                2. Else Phantom#752
+                2. Else Phantom#789
 
               3. Case (% = "last")
 
@@ -14052,7 +14350,7 @@ relation Expr_ok: p, TC, expression'''
 
                   2. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-                1. Else Phantom#753
+                1. Else Phantom#790
 
                 2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
@@ -14060,7 +14358,7 @@ relation Expr_ok: p, TC, expression'''
 
                   2. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-                2. Else Phantom#754
+                2. Else Phantom#791
 
               4. Case (% = "next")
 
@@ -14070,7 +14368,7 @@ relation Expr_ok: p, TC, expression'''
 
                   2. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-                1. Else Phantom#755
+                1. Else Phantom#792
 
                 2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
@@ -14078,9 +14376,9 @@ relation Expr_ok: p, TC, expression'''
 
                   2. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-                2. Else Phantom#756
+                2. Else Phantom#793
 
-            2. Else Phantom#757
+            2. Else Phantom#794
 
           2. Case (% has type structTypeIR)
 
@@ -14096,7 +14394,7 @@ relation Expr_ok: p, TC, expression'''
 
               3. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-            3. Else Phantom#758
+            3. Else Phantom#795
 
           3. Case (% has type headerTypeIR)
 
@@ -14112,7 +14410,7 @@ relation Expr_ok: p, TC, expression'''
 
               3. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-            3. Else Phantom#759
+            3. Else Phantom#796
 
           4. Case (% has type headerUnionTypeIR)
 
@@ -14128,7 +14426,7 @@ relation Expr_ok: p, TC, expression'''
 
               3. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-            3. Else Phantom#760
+            3. Else Phantom#797
 
           5. Case (% has type tableTypeIR)
 
@@ -14148,11 +14446,11 @@ relation Expr_ok: p, TC, expression'''
 
                 3. Result in (((ExprAccE typedExpressionIR_base name) as expressionIR) expressionNoteIR)
 
-              3. Else Phantom#761
+              3. Else Phantom#798
 
-            2. Else Phantom#762
+            2. Else Phantom#799
 
-        5. Else Phantom#763
+        5. Else Phantom#800
 
   11. Case (% has type indexAccessExpression)
 
@@ -14206,13 +14504,13 @@ relation Expr_ok: p, TC, expression'''
 
                       2. Result in (((ArrAccE typedExpressionIR_base typedExpressionIR_index_reduced) as expressionIR) expressionNoteIR)
 
-                    2. Else Phantom#764
+                    2. Else Phantom#801
 
-                  2. Else Phantom#765
+                  2. Else Phantom#802
 
-                3. Else Phantom#766
+                3. Else Phantom#803
 
-              2. Else Phantom#767
+              2. Else Phantom#804
 
             2. Case (% has type headerStackTypeIR)
 
@@ -14240,11 +14538,11 @@ relation Expr_ok: p, TC, expression'''
 
                         2. Result in (((ArrAccE typedExpressionIR_base typedExpressionIR_index_reduced) as expressionIR) expressionNoteIR)
 
-                      2. Else Phantom#768
+                      2. Else Phantom#805
 
-                    2. Else Phantom#769
+                    2. Else Phantom#806
 
-                  3. Else Phantom#770
+                  3. Else Phantom#807
 
                 2. Case false
 
@@ -14254,9 +14552,9 @@ relation Expr_ok: p, TC, expression'''
 
                   3. Result in (((ArrAccE typedExpressionIR_base typedExpressionIR_index_reduced) as expressionIR) expressionNoteIR)
 
-          3. Else Phantom#771
+          3. Else Phantom#808
 
-        7. Else Phantom#772
+        7. Else Phantom#809
 
       2. Case (% matches pattern `BitAccE%%%`)
 
@@ -14334,27 +14632,27 @@ relation Expr_ok: p, TC, expression'''
 
                               4. Result in (((BitAccE typedExpressionIR_base typedExpressionIR_hi_reduced typedExpressionIR_lo_reduced) as expressionIR) expressionNoteIR)
 
-                            2. Else Phantom#773
+                            2. Else Phantom#810
 
-                          2. Else Phantom#774
+                          2. Else Phantom#811
 
-                        2. Else Phantom#775
+                        2. Else Phantom#812
 
-                      3. Else Phantom#776
+                      3. Else Phantom#813
 
-                    2. Else Phantom#777
+                    2. Else Phantom#814
 
-                  2. Else Phantom#778
+                  2. Else Phantom#815
 
-                3. Else Phantom#779
+                3. Else Phantom#816
 
-              4. Else Phantom#780
+              4. Else Phantom#817
 
-            3. Else Phantom#781
+            3. Else Phantom#818
 
-          4. Else Phantom#782
+          4. Else Phantom#819
 
-        6. Else Phantom#783
+        6. Else Phantom#820
 
   12. Case (% has type callExpression)
 
@@ -14388,7 +14686,7 @@ relation Expr_ok: p, TC, expression'''
 
           4. Result in ((callExpressionIR as expressionIR) expressionNoteIR)
 
-        8. Else Phantom#784
+        8. Else Phantom#821
 
       2. Case (% matches pattern `InstE%%`)
 
@@ -14414,7 +14712,7 @@ relation Expr_ok: p, TC, expression'''
 
               3. Result in ((callExpressionIR as expressionIR) expressionNoteIR)
 
-            5. Else Phantom#785
+            5. Else Phantom#822
 
           2. Case (% has type specializedType)
 
@@ -14438,7 +14736,7 @@ relation Expr_ok: p, TC, expression'''
 
               3. Result in ((callExpressionIR as expressionIR) expressionNoteIR)
 
-            7. Else Phantom#786
+            7. Else Phantom#823
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:51.1-53.23
 relation Argument_ok: p, TC, argument
@@ -14500,13 +14798,13 @@ relation Lvalue_ok: p, TC, lvalue
 
               1. Result in ((NameL prefixedName) (( typeIR )))
 
-          1. Else Phantom#787
+          1. Else Phantom#824
 
-        1. Else Phantom#788
+        1. Else Phantom#825
 
-      2. Else Phantom#789
+      2. Else Phantom#826
 
-    3. Else Phantom#790
+    3. Else Phantom#827
 
   2. Case (% matches pattern `LvalueAccL%%`)
 
@@ -14534,7 +14832,7 @@ relation Lvalue_ok: p, TC, lvalue
 
               2. Result in typedLvalueIR
 
-            1. Else Phantom#791
+            1. Else Phantom#828
 
             2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
@@ -14542,7 +14840,7 @@ relation Lvalue_ok: p, TC, lvalue
 
               2. Result in typedLvalueIR
 
-            2. Else Phantom#792
+            2. Else Phantom#829
 
           2. Case (% = "last")
 
@@ -14552,7 +14850,7 @@ relation Lvalue_ok: p, TC, lvalue
 
               2. Result in typedLvalueIR
 
-            1. Else Phantom#793
+            1. Else Phantom#830
 
             2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
@@ -14560,9 +14858,9 @@ relation Lvalue_ok: p, TC, lvalue
 
               2. Result in typedLvalueIR
 
-            2. Else Phantom#794
+            2. Else Phantom#831
 
-        2. Else Phantom#795
+        2. Else Phantom#832
 
       2. Case (% has type structTypeIR)
 
@@ -14578,7 +14876,7 @@ relation Lvalue_ok: p, TC, lvalue
 
           3. Result in typedLvalueIR
 
-        3. Else Phantom#796
+        3. Else Phantom#833
 
       3. Case (% has type headerTypeIR)
 
@@ -14594,7 +14892,7 @@ relation Lvalue_ok: p, TC, lvalue
 
           3. Result in typedLvalueIR
 
-        3. Else Phantom#797
+        3. Else Phantom#834
 
       4. Case (% has type headerUnionTypeIR)
 
@@ -14610,9 +14908,9 @@ relation Lvalue_ok: p, TC, lvalue
 
           3. Result in typedLvalueIR
 
-        3. Else Phantom#798
+        3. Else Phantom#835
 
-    5. Else Phantom#799
+    5. Else Phantom#836
 
   3. Case (% matches pattern `ArrAccL%%`)
 
@@ -14660,11 +14958,11 @@ relation Lvalue_ok: p, TC, lvalue
 
                   2. Result in typedLvalueIR
 
-                2. Else Phantom#800
+                2. Else Phantom#837
 
-              2. Else Phantom#801
+              2. Else Phantom#838
 
-            3. Else Phantom#802
+            3. Else Phantom#839
 
           2. Case false
 
@@ -14672,9 +14970,9 @@ relation Lvalue_ok: p, TC, lvalue
 
             2. Result in typedLvalueIR
 
-      5. Else Phantom#803
+      5. Else Phantom#840
 
-    5. Else Phantom#804
+    5. Else Phantom#841
 
   4. Case (% matches pattern `BitAccL%%%`)
 
@@ -14748,27 +15046,27 @@ relation Lvalue_ok: p, TC, lvalue
 
                           4. Result in typedLvalueIR
 
-                        2. Else Phantom#805
+                        2. Else Phantom#842
 
-                      2. Else Phantom#806
+                      2. Else Phantom#843
 
-                    2. Else Phantom#807
+                    2. Else Phantom#844
 
-                  3. Else Phantom#808
+                  3. Else Phantom#845
 
-                2. Else Phantom#809
+                2. Else Phantom#846
 
-              2. Else Phantom#810
+              2. Else Phantom#847
 
-            3. Else Phantom#811
+            3. Else Phantom#848
 
-          4. Else Phantom#812
+          4. Else Phantom#849
 
-        3. Else Phantom#813
+        3. Else Phantom#850
 
-      4. Else Phantom#814
+      4. Else Phantom#851
 
-    4. Else Phantom#815
+    4. Else Phantom#852
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:67.1-69.26
 relation Stmt_ok: p', TC', f', statement''
@@ -14801,7 +15099,7 @@ relation Stmt_ok: p', TC', f', statement''
 
       2. Result in TC', f', ((AssignS typedLvalueIR typedExpressionIR_cast) as statementIR)
 
-    7. Else Phantom#816
+    7. Else Phantom#853
 
   3. Case (% has type callStatement)
 
@@ -14865,21 +15163,21 @@ relation Stmt_ok: p', TC', f', statement''
 
                     2. Result in TC', f', (directApplicationStatementIR as statementIR)
 
-                  1. Else Phantom#817
+                  1. Else Phantom#854
 
-                3. Else Phantom#818
+                3. Else Phantom#855
 
-              5. Else Phantom#819
+              5. Else Phantom#856
 
-            1. Else Phantom#820
+            1. Else Phantom#857
 
-          1. Else Phantom#821
+          1. Else Phantom#858
 
-        2. Else Phantom#822
+        2. Else Phantom#859
 
-      2. Else Phantom#823
+      2. Else Phantom#860
 
-    3. Else Phantom#824
+    3. Else Phantom#861
 
   5. Case (% has type exitStatement)
 
@@ -14909,9 +15207,9 @@ relation Stmt_ok: p', TC', f', statement''
 
             2. Result in TC', f', ((IfS typedExpressionIR_cond statementIR_then ?()) as statementIR)
 
-          2. Else Phantom#825
+          2. Else Phantom#862
 
-        3. Else Phantom#826
+        3. Else Phantom#863
 
       2. Case (% matches pattern (_))
 
@@ -14935,11 +15233,11 @@ relation Stmt_ok: p', TC', f', statement''
 
             4. Result in TC', f_post, ((IfS typedExpressionIR_cond statementIR_then ?(statementIR_else)) as statementIR)
 
-          2. Else Phantom#827
+          2. Else Phantom#864
 
-        4. Else Phantom#828
+        4. Else Phantom#865
 
-1. Else Phantom#829
+1. Else Phantom#866
 
 2. If ((p' matches pattern `LOCAL`)), then
 
@@ -14949,9 +15247,9 @@ relation Stmt_ok: p', TC', f', statement''
 
       1. Result in TC', (RET), ((ReturnS ?()) as statementIR)
 
-    1. Else Phantom#830
+    1. Else Phantom#867
 
-  1. Else Phantom#831
+  1. Else Phantom#868
 
   2. Case analysis on statement''
 
@@ -14981,11 +15279,11 @@ relation Stmt_ok: p', TC', f', statement''
 
             2. Result in TC', (RET), ((ReturnS ?(typedExpressionIR_cast)) as statementIR)
 
-          3. Else Phantom#832
+          3. Else Phantom#869
 
-        5. Else Phantom#833
+        5. Else Phantom#870
 
-      2. Else Phantom#834
+      2. Else Phantom#871
 
     2. Case (% has type blockStatement)
 
@@ -15023,11 +15321,11 @@ relation Stmt_ok: p', TC', f', statement''
 
             2. Result in TC', f_post, (switchStatementIR as statementIR)
 
-          4. Else Phantom#835
+          4. Else Phantom#872
 
-        2. Else Phantom#836
+        2. Else Phantom#873
 
-      5. Else Phantom#837
+      5. Else Phantom#874
 
       6. If ($compat_switch(typeIR_switch)), then
 
@@ -15039,13 +15337,13 @@ relation Stmt_ok: p', TC', f', statement''
 
           2. Result in TC', f_post, (switchStatementIR as statementIR)
 
-        2. Else Phantom#838
+        2. Else Phantom#875
 
-      6. Else Phantom#839
+      6. Else Phantom#876
 
-  2. Else Phantom#840
+  2. Else Phantom#877
 
-2. Else Phantom#841
+2. Else Phantom#878
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:71.1-73.26
 relation Stmts_ok: 
@@ -15069,7 +15367,7 @@ relation BlockElementStmt_ok: TC_0, f, blockElementStatement
 
       2. Result in TC_1, f, (constantDeclarationIR as blockElementStatementIR)
 
-    3. Else Phantom#842
+    3. Else Phantom#879
 
   2. Case (% has type variableDeclaration)
 
@@ -15093,11 +15391,11 @@ relation BlockElementStmt_ok: TC_0, f, blockElementStatement
 
               3. Result in TC_1, f, (variableDeclarationIR as blockElementStatementIR)
 
-            1. Else Phantom#843
+            1. Else Phantom#880
 
-          1. Else Phantom#844
+          1. Else Phantom#881
 
-        2. Else Phantom#845
+        2. Else Phantom#882
 
       2. Case (% matches pattern (_))
 
@@ -15125,13 +15423,13 @@ relation BlockElementStmt_ok: TC_0, f, blockElementStatement
 
                 4. Result in TC_1, f, (variableDeclarationIR as blockElementStatementIR)
 
-              3. Else Phantom#846
+              3. Else Phantom#883
 
-            1. Else Phantom#847
+            1. Else Phantom#884
 
-          1. Else Phantom#848
+          1. Else Phantom#885
 
-        3. Else Phantom#849
+        3. Else Phantom#886
 
   3. Case (% has type statement)
 
@@ -15188,7 +15486,7 @@ relation Parameter_ok: p, TC, (direction type name initializer?{initializer <- i
 
       1. Result in (direction typeIR name ?()), tid_fresh*{tid_fresh <- tid_fresh*}
 
-    3. Else Phantom#850
+    3. Else Phantom#887
 
   2. Case (% matches pattern (_))
 
@@ -15216,11 +15514,11 @@ relation Parameter_ok: p, TC, (direction type name initializer?{initializer <- i
 
           3. Result in (direction typeIR name ?(value_init)), tid_fresh*{tid_fresh <- tid_fresh*}
 
-        2. Else Phantom#851
+        2. Else Phantom#888
 
-      3. Else Phantom#852
+      3. Else Phantom#889
 
-    4. Else Phantom#853
+    4. Else Phantom#890
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:99.1-101.23
 relation Parameters_ok: p, TC, parameter*{parameter <- parameter*}
@@ -15316,11 +15614,11 @@ relation ExternMethod_ok: TC_0, tid_extern, methodPrototype
 
           3. Result in TC_4, methodPrototypeIR
 
-        8. Else Phantom#854
+        8. Else Phantom#891
 
-      4. Else Phantom#855
+      4. Else Phantom#892
 
-    2. Else Phantom#856
+    2. Else Phantom#893
 
   2. Case (% matches pattern `AbstractMethodM%%%%`)
 
@@ -15358,13 +15656,13 @@ relation ExternMethod_ok: TC_0, tid_extern, methodPrototype
 
           3. Result in TC_4, methodPrototypeIR
 
-        8. Else Phantom#857
+        8. Else Phantom#894
 
-      4. Else Phantom#858
+      4. Else Phantom#895
 
-    2. Else Phantom#859
+    2. Else Phantom#896
 
-1. Else Phantom#860
+1. Else Phantom#897
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:131.1-133.23
 relation ExternMethods_ok: TC', tid_extern, methodPrototype*{methodPrototype <- methodPrototype*}
@@ -15426,17 +15724,17 @@ relation ExternConstructor_ok: TC_0, tid_extern, methodPrototype
 
             3. Result in TC_1, methodPrototypeIR
 
-          5. Else Phantom#861
+          5. Else Phantom#898
 
-        2. Else Phantom#862
+        2. Else Phantom#899
 
-      2. Else Phantom#863
+      2. Else Phantom#900
 
-    4. Else Phantom#864
+    4. Else Phantom#901
 
-  2. Else Phantom#865
+  2. Else Phantom#902
 
-1. Else Phantom#866
+1. Else Phantom#903
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:139.1-141.23
 relation ExternConstructors_ok: TC', tid_extern, methodPrototype*{methodPrototype <- methodPrototype*}
@@ -15472,7 +15770,7 @@ relation ParserTransition_ok: TC_0, name_state*{name_state <- name_state*}, (Tra
 
       2. Result in transitionStatementIR
 
-    2. Else Phantom#867
+    2. Else Phantom#904
 
   2. Case (% matches pattern `SelectE%%`)
 
@@ -15490,7 +15788,7 @@ relation ParserTransition_ok: TC_0, name_state*{name_state <- name_state*}, (Tra
 
       3. Result in transitionStatementIR
 
-    4. Else Phantom#868
+    4. Else Phantom#905
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:151.1-153.20
 relation ParserStmt_ok: TC_0', parserStatement''
@@ -15509,7 +15807,7 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
       2. Result in TC_1, (constantDeclarationIR as parserStatementIR)
 
-    3. Else Phantom#869
+    3. Else Phantom#906
 
   2. Case (% has type variableDeclaration)
 
@@ -15533,11 +15831,11 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
               3. Result in TC_1, (variableDeclarationIR as parserStatementIR)
 
-            1. Else Phantom#870
+            1. Else Phantom#907
 
-          1. Else Phantom#871
+          1. Else Phantom#908
 
-        2. Else Phantom#872
+        2. Else Phantom#909
 
       2. Case (% matches pattern (_))
 
@@ -15565,13 +15863,13 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
                 4. Result in TC_1, (variableDeclarationIR as parserStatementIR)
 
-              3. Else Phantom#873
+              3. Else Phantom#910
 
-            1. Else Phantom#874
+            1. Else Phantom#911
 
-          1. Else Phantom#875
+          1. Else Phantom#912
 
-        3. Else Phantom#876
+        3. Else Phantom#913
 
   3. Case (% has type emptyStatement)
 
@@ -15585,7 +15883,7 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
       2. Result in TC_0', (emptyStatementIR as parserStatementIR)
 
-    3. Else Phantom#877
+    3. Else Phantom#914
 
   4. Case (% has type assignmentStatement)
 
@@ -15599,7 +15897,7 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
       2. Result in TC_1, (assignmentStatementIR as parserStatementIR)
 
-    3. Else Phantom#878
+    3. Else Phantom#915
 
   5. Case (% has type callStatement)
 
@@ -15613,7 +15911,7 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
       2. Result in TC_1, (callStatementIR as parserStatementIR)
 
-    3. Else Phantom#879
+    3. Else Phantom#916
 
   6. Case (% has type directApplicationStatement)
 
@@ -15627,7 +15925,7 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
       2. Result in TC_1, (directApplicationStatementIR as parserStatementIR)
 
-    3. Else Phantom#880
+    3. Else Phantom#917
 
   7. Case (% has type parserBlockStatement)
 
@@ -15657,9 +15955,9 @@ relation ParserStmt_ok: TC_0', parserStatement''
 
         2. Result in TC_1, (conditionalStatementIR as parserStatementIR)
 
-      1. Else Phantom#881
+      1. Else Phantom#918
 
-    3. Else Phantom#882
+    3. Else Phantom#919
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:155.1-157.20
 relation ParserStmts_ok: TC', parserStatement*{parserStatement <- parserStatement*}
@@ -15732,11 +16030,11 @@ relation ParserStates_ok: TC, parserState*{parserState <- parserState*}
 
       3. Result in parserStateIR*{parserStateIR <- parserStateIR*}
 
-    1. Else Phantom#883
+    1. Else Phantom#920
 
-  1. Else Phantom#884
+  1. Else Phantom#921
 
-2. Else Phantom#885
+2. Else Phantom#922
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:167.1-170.20
 relation ParserLocalDecl_ok: TC_0, parserLocalDeclaration
@@ -15755,7 +16053,7 @@ relation ParserLocalDecl_ok: TC_0, parserLocalDeclaration
 
       2. Result in TC_1, (constantDeclarationIR as parserLocalDeclarationIR)
 
-    3. Else Phantom#886
+    3. Else Phantom#923
 
   2. Case (% has type instantiation)
 
@@ -15769,7 +16067,7 @@ relation ParserLocalDecl_ok: TC_0, parserLocalDeclaration
 
       2. Result in TC_1, (instantiationIR as parserLocalDeclarationIR)
 
-    3. Else Phantom#887
+    3. Else Phantom#924
 
   3. Case (% has type variableDeclaration)
 
@@ -15793,11 +16091,11 @@ relation ParserLocalDecl_ok: TC_0, parserLocalDeclaration
 
               3. Result in TC_1, (variableDeclarationIR as parserLocalDeclarationIR)
 
-            1. Else Phantom#888
+            1. Else Phantom#925
 
-          1. Else Phantom#889
+          1. Else Phantom#926
 
-        2. Else Phantom#890
+        2. Else Phantom#927
 
       2. Case (% matches pattern (_))
 
@@ -15825,13 +16123,13 @@ relation ParserLocalDecl_ok: TC_0, parserLocalDeclaration
 
                 4. Result in TC_1, (variableDeclarationIR as parserLocalDeclarationIR)
 
-              3. Else Phantom#891
+              3. Else Phantom#928
 
-            1. Else Phantom#892
+            1. Else Phantom#929
 
-          1. Else Phantom#893
+          1. Else Phantom#930
 
-        3. Else Phantom#894
+        3. Else Phantom#931
 
   4. Case (% has type valueSetDeclaration)
 
@@ -15855,11 +16153,11 @@ relation ParserLocalDecl_ok: TC_0, parserLocalDeclaration
 
           3. Result in TC_1, (valueSetDeclarationIR as parserLocalDeclarationIR)
 
-        3. Else Phantom#895
+        3. Else Phantom#932
 
-      1. Else Phantom#896
+      1. Else Phantom#933
 
-    3. Else Phantom#897
+    3. Else Phantom#934
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:172.1-175.20
 relation ParserLocalDecls_ok: TC', parserLocalDeclaration*{parserLocalDeclaration <- parserLocalDeclaration*}
@@ -15901,11 +16199,11 @@ relation TableKey_ok: TC, TBLC_0, (expression name_matchkind)
 
       4. Result in TBLC_2, tableKeyIR
 
-    1. Else Phantom#898
+    1. Else Phantom#935
 
-  1. Else Phantom#899
+  1. Else Phantom#936
 
-3. Else Phantom#900
+3. Else Phantom#937
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:185.1-187.23
 relation TableKeys_ok: TC, TBLC', tableKey*{tableKey <- tableKey*}
@@ -15937,7 +16235,7 @@ relation Call_action_partial_ok: TC, parameterTypeIR*{parameterTypeIR <- paramet
 
   2. Result in parameterTypeIR_data*{parameterTypeIR_data <- parameterTypeIR_data*}, parameterTypeIR_control*{parameterTypeIR_control <- parameterTypeIR_control*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-2. Else Phantom#901
+2. Else Phantom#938
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:194.1-196.23
 relation TableAction_ok: TC, TBLC_0, (prefixedName argument*{argument <- argument*})
@@ -15966,11 +16264,11 @@ relation TableAction_ok: TC, TBLC_0, (prefixedName argument*{argument <- argumen
 
       6. Result in TBLC_1, tableActionIR
 
-    2. Else Phantom#902
+    2. Else Phantom#939
 
-  2. Else Phantom#903
+  2. Else Phantom#940
 
-2. Else Phantom#904
+2. Else Phantom#941
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:198.1-200.23
 relation TableActions_ok: TC, TBLC', tableAction*{tableAction <- tableAction*}
@@ -16013,7 +16311,7 @@ relation TableDefaultAction_ok: TC, TBLC, initializer
 
       1. Result in (prefixedName [])
 
-    2. Else Phantom#905
+    2. Else Phantom#942
 
   2. Case (% has type callExpression)
 
@@ -16047,17 +16345,17 @@ relation TableDefaultAction_ok: TC, TBLC, initializer
 
               1. Result in (prefixedName argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-            6. Else Phantom#906
+            6. Else Phantom#943
 
-          2. Else Phantom#907
+          2. Else Phantom#944
 
-        2. Else Phantom#908
+        2. Else Phantom#945
 
-      2. Else Phantom#909
+      2. Else Phantom#946
 
-    2. Else Phantom#910
+    2. Else Phantom#947
 
-1. Else Phantom#911
+1. Else Phantom#948
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:211.1-213.23
 relation TableEntry_keysets_ok: TC, TBLC, keysetExpression*{keysetExpression <- keysetExpression*}
@@ -16076,7 +16374,7 @@ relation TableEntry_keysets_ok: TC, TBLC, keysetExpression*{keysetExpression <- 
 
       3. Result in TBLS, [(DefaultK)]
 
-    2. Else Phantom#912
+    2. Else Phantom#949
 
     3. Case analysis on TBLC.MODE
 
@@ -16098,7 +16396,7 @@ relation TableEntry_keysets_ok: TC, TBLC, keysetExpression*{keysetExpression <- 
 
         2. Result in TBLS, [(DefaultK)]
 
-    3. Else Phantom#913
+    3. Else Phantom#950
 
   2. Case (% = [(AnyK)])
 
@@ -16112,7 +16410,7 @@ relation TableEntry_keysets_ok: TC, TBLC, keysetExpression*{keysetExpression <- 
 
       3. Result in TBLS, [(AnyK)]
 
-    2. Else Phantom#914
+    2. Else Phantom#951
 
     3. Case analysis on TBLC.MODE
 
@@ -16134,9 +16432,9 @@ relation TableEntry_keysets_ok: TC, TBLC, keysetExpression*{keysetExpression <- 
 
         2. Result in TBLS, [(AnyK)]
 
-    3. Else Phantom#915
+    3. Else Phantom#952
 
-1. Else Phantom#916
+1. Else Phantom#953
 
 2. If (((keysetExpression*{keysetExpression <- keysetExpression*} =/= [(AnyK)]) /\ (keysetExpression*{keysetExpression <- keysetExpression*} =/= [(DefaultK)]))), then
 
@@ -16146,9 +16444,9 @@ relation TableEntry_keysets_ok: TC, TBLC, keysetExpression*{keysetExpression <- 
 
     2. Result in TBLS, keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*}
 
-  1. Else Phantom#917
+  1. Else Phantom#954
 
-2. Else Phantom#918
+2. Else Phantom#955
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:215.1-217.23
 relation TableEntry_action_ok: TC, TBLC, (prefixedName argument*{argument <- argument*})
@@ -16171,9 +16469,9 @@ relation TableEntry_action_ok: TC, TBLC, (prefixedName argument*{argument <- arg
 
     1. Result in (prefixedName argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-  6. Else Phantom#919
+  6. Else Phantom#956
 
-2. Else Phantom#920
+2. Else Phantom#957
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:219.1-222.26
 relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}
@@ -16186,7 +16484,7 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
       1. Result in TBLC', ?()
 
-    1. Else Phantom#921
+    1. Else Phantom#958
 
     2. (Let matchMode be TBLC'.MODE)
 
@@ -16202,9 +16500,9 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
         2. Result in TBLC', ?()
 
-      3. Else Phantom#922
+      3. Else Phantom#959
 
-    3. Else Phantom#923
+    3. Else Phantom#960
 
     4. Case analysis on TBLC'.MODE
 
@@ -16234,7 +16532,7 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                   4. Result in TBLC_1, ?(typedExpressionIR)
 
-                4. Else Phantom#924
+                4. Else Phantom#961
 
               2. Case false
 
@@ -16266,7 +16564,7 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                   4. Result in TBLC_1, ?(typedExpressionIR)
 
-                4. Else Phantom#925
+                4. Else Phantom#962
 
               2. Case false
 
@@ -16308,7 +16606,7 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                   4. Result in TBLC_1, ?(typedExpressionIR)
 
-                4. Else Phantom#926
+                4. Else Phantom#963
 
               2. Case false
 
@@ -16340,7 +16638,7 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                   4. Result in TBLC_1, ?(typedExpressionIR)
 
-                4. Else Phantom#927
+                4. Else Phantom#964
 
               2. Case false
 
@@ -16356,7 +16654,7 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                 6. Result in TBLC_1, ?(typedExpressionIR)
 
-    4. Else Phantom#928
+    4. Else Phantom#965
 
   2. Case (% matches pattern (_))
 
@@ -16396,11 +16694,11 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                     4. Result in TBLC_2, ?(typedExpressionIR)
 
-                  2. Else Phantom#929
+                  2. Else Phantom#966
 
-                3. Else Phantom#930
+                3. Else Phantom#967
 
-              3. Else Phantom#931
+              3. Else Phantom#968
 
             2. Case (% =/= [])
 
@@ -16428,15 +16726,15 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                       3. Result in TBLC_1, ?(typedExpressionIR)
 
-                    2. Else Phantom#932
+                    2. Else Phantom#969
 
-                  3. Else Phantom#933
+                  3. Else Phantom#970
 
-                3. Else Phantom#934
+                3. Else Phantom#971
 
-              1. Else Phantom#935
+              1. Else Phantom#972
 
-        1. Else Phantom#936
+        1. Else Phantom#973
 
       2. Case (% matches pattern `PRILPM`)
 
@@ -16470,11 +16768,11 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                     4. Result in TBLC_2, ?(typedExpressionIR)
 
-                  2. Else Phantom#937
+                  2. Else Phantom#974
 
-                3. Else Phantom#938
+                3. Else Phantom#975
 
-              3. Else Phantom#939
+              3. Else Phantom#976
 
             2. Case (% =/= [])
 
@@ -16502,17 +16800,17 @@ relation TableEntry_priority_ok: TC, TBLC', TBLS, tableEntryPriority?{tableEntry
 
                       3. Result in TBLC_1, ?(typedExpressionIR)
 
-                    2. Else Phantom#940
+                    2. Else Phantom#977
 
-                  3. Else Phantom#941
+                  3. Else Phantom#978
 
-                3. Else Phantom#942
+                3. Else Phantom#979
 
-              1. Else Phantom#943
+              1. Else Phantom#980
 
-        1. Else Phantom#944
+        1. Else Phantom#981
 
-    2. Else Phantom#945
+    2. Else Phantom#982
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:224.1-226.23
 relation TableEntry_ok: TC, TBLC_0, (const?{const <- const?} tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} keysetExpression*{keysetExpression <- keysetExpression*} tableActionReference)
@@ -16581,7 +16879,7 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
       4. Result in TBLC_3, (EntryP const?{const <- const?} tableEntryIR*{tableEntryIR <- tableEntryIR*})
 
-    2. Else Phantom#946
+    2. Else Phantom#983
 
   4. Case (% matches pattern `CustomP%%%`)
 
@@ -16609,7 +16907,7 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
           2. Result in TBLC_0', tablePropertyIR
 
-        3. Else Phantom#947
+        3. Else Phantom#984
 
         4. If ($is_fixed_int_typeIR(typeIR)), then
 
@@ -16617,7 +16915,7 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
           2. Result in TBLC_0', tablePropertyIR
 
-        4. Else Phantom#948
+        4. Else Phantom#985
 
         5. If ($is_fixed_bit_typeIR(typeIR)), then
 
@@ -16625,7 +16923,7 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
           2. Result in TBLC_0', tablePropertyIR
 
-        5. Else Phantom#949
+        5. Else Phantom#986
 
       3. Case (% = "largest_priority_wins")
 
@@ -16651,11 +16949,11 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
               4. Result in TBLC_1, tablePropertyIR
 
-            2. Else Phantom#950
+            2. Else Phantom#987
 
-          2. Else Phantom#951
+          2. Else Phantom#988
 
-        3. Else Phantom#952
+        3. Else Phantom#989
 
       4. Case (% = "priority_delta")
 
@@ -16687,13 +16985,13 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
                   3. Result in TBLC_1, tablePropertyIR
 
-                2. Else Phantom#953
+                2. Else Phantom#990
 
-              2. Else Phantom#954
+              2. Else Phantom#991
 
-            3. Else Phantom#955
+            3. Else Phantom#992
 
-          1. Else Phantom#956
+          1. Else Phantom#993
 
           2. If ($is_fixed_int_typeIR(typeIR)), then
 
@@ -16717,13 +17015,13 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
                   3. Result in TBLC_1, tablePropertyIR
 
-                2. Else Phantom#957
+                2. Else Phantom#994
 
-              2. Else Phantom#958
+              2. Else Phantom#995
 
-            3. Else Phantom#959
+            3. Else Phantom#996
 
-          2. Else Phantom#960
+          2. Else Phantom#997
 
           3. If ($is_fixed_bit_typeIR(typeIR)), then
 
@@ -16747,17 +17045,17 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
                   3. Result in TBLC_1, tablePropertyIR
 
-                2. Else Phantom#961
+                2. Else Phantom#998
 
-              2. Else Phantom#962
+              2. Else Phantom#999
 
-            3. Else Phantom#963
+            3. Else Phantom#1000
 
-          3. Else Phantom#964
+          3. Else Phantom#1001
 
-        3. Else Phantom#965
+        3. Else Phantom#1002
 
-    2. Else Phantom#966
+    2. Else Phantom#1003
 
     3. If ((((text =/= "size") /\ (text =/= "largest_priority_wins")) /\ (text =/= "priority_delta"))), then
 
@@ -16767,7 +17065,7 @@ relation TableProperty_ok: TC, TBLC_0', tableProperty
 
       3. Result in TBLC_0', tablePropertyIR
 
-    3. Else Phantom#967
+    3. Else Phantom#1004
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:236.1-238.23
 relation TableProperties_ok: TC, TBLC', tableProperty*{tableProperty <- tableProperty*}
@@ -16801,9 +17099,9 @@ relation Table_ok: TC, tableProperty*{tableProperty <- tableProperty*}
 
     3. Result in TBLC_1, tablePropertyIR*{tablePropertyIR <- tablePropertyIR*}
 
-  1. Else Phantom#968
+  1. Else Phantom#1005
 
-1. Else Phantom#969
+1. Else Phantom#1006
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:244.1-246.23
 relation TableType_ok: TC_0, TBLC, name
@@ -16847,7 +17145,7 @@ relation ControlLocalDecl_ok: TC_0, controlLocalDeclaration
 
       2. Result in TC_1, (constantDeclarationIR as controlLocalDeclarationIR)
 
-    3. Else Phantom#970
+    3. Else Phantom#1007
 
   2. Case (% has type instantiation)
 
@@ -16861,7 +17159,7 @@ relation ControlLocalDecl_ok: TC_0, controlLocalDeclaration
 
       2. Result in TC_1, (instantiationIR as controlLocalDeclarationIR)
 
-    3. Else Phantom#971
+    3. Else Phantom#1008
 
   3. Case (% has type variableDeclaration)
 
@@ -16885,11 +17183,11 @@ relation ControlLocalDecl_ok: TC_0, controlLocalDeclaration
 
               3. Result in TC_1, (variableDeclarationIR as controlLocalDeclarationIR)
 
-            1. Else Phantom#972
+            1. Else Phantom#1009
 
-          1. Else Phantom#973
+          1. Else Phantom#1010
 
-        2. Else Phantom#974
+        2. Else Phantom#1011
 
       2. Case (% matches pattern (_))
 
@@ -16917,13 +17215,13 @@ relation ControlLocalDecl_ok: TC_0, controlLocalDeclaration
 
                 4. Result in TC_1, (variableDeclarationIR as controlLocalDeclarationIR)
 
-              3. Else Phantom#975
+              3. Else Phantom#1012
 
-            1. Else Phantom#976
+            1. Else Phantom#1013
 
-          1. Else Phantom#977
+          1. Else Phantom#1014
 
-        3. Else Phantom#978
+        3. Else Phantom#1015
 
   4. Case (% has type actionDeclaration)
 
@@ -16937,7 +17235,7 @@ relation ControlLocalDecl_ok: TC_0, controlLocalDeclaration
 
       2. Result in TC_1, (actionDeclarationIR as controlLocalDeclarationIR)
 
-    3. Else Phantom#979
+    3. Else Phantom#1016
 
   5. Case (% has type tableDeclaration)
 
@@ -17009,13 +17307,13 @@ relation Decl_ok: p', TC_0, declaration
 
             5. Result in TC_1, (constantDeclarationIR as declarationIR)
 
-          2. Else Phantom#980
+          2. Else Phantom#1017
 
-        3. Else Phantom#981
+        3. Else Phantom#1018
 
-      1. Else Phantom#982
+      1. Else Phantom#1019
 
-    3. Else Phantom#983
+    3. Else Phantom#1020
 
   2. Case (% has type instantiation)
 
@@ -17091,17 +17389,17 @@ relation Decl_ok: p', TC_0, declaration
 
                         3. Result in TC_2, (instantiationIR as declarationIR)
 
-                      7. Else Phantom#984
+                      7. Else Phantom#1021
 
-                    2. Else Phantom#985
+                    2. Else Phantom#1022
 
-                  2. Else Phantom#986
+                  2. Else Phantom#1023
 
-                2. Else Phantom#987
+                2. Else Phantom#1024
 
-              2. Else Phantom#988
+              2. Else Phantom#1025
 
-            5. Else Phantom#989
+            5. Else Phantom#1026
 
       2. Case (% has type specializedType)
 
@@ -17179,19 +17477,19 @@ relation Decl_ok: p', TC_0, declaration
 
                         3. Result in TC_2, (instantiationIR as declarationIR)
 
-                      7. Else Phantom#990
+                      7. Else Phantom#1027
 
-                    2. Else Phantom#991
+                    2. Else Phantom#1028
 
-                  2. Else Phantom#992
+                  2. Else Phantom#1029
 
-                2. Else Phantom#993
+                2. Else Phantom#1030
 
-              2. Else Phantom#994
+              2. Else Phantom#1031
 
-            7. Else Phantom#995
+            7. Else Phantom#1032
 
-    2. Else Phantom#996
+    2. Else Phantom#1033
 
   3. Case (% has type functionDeclaration)
 
@@ -17231,9 +17529,9 @@ relation Decl_ok: p', TC_0, declaration
 
           3. Result in TC_4, (functionDeclarationIR as declarationIR)
 
-        4. Else Phantom#997
+        4. Else Phantom#1034
 
-      6. Else Phantom#998
+      6. Else Phantom#1035
 
       7. If ((typeIR_ret = ((VoidT) as typeIR))), then
 
@@ -17251,11 +17549,11 @@ relation Decl_ok: p', TC_0, declaration
 
           3. Result in TC_4, (functionDeclarationIR as declarationIR)
 
-        4. Else Phantom#999
+        4. Else Phantom#1036
 
-      7. Else Phantom#1000
+      7. Else Phantom#1037
 
-    5. Else Phantom#1001
+    5. Else Phantom#1038
 
   4. Case (% has type actionDeclaration)
 
@@ -17285,11 +17583,11 @@ relation Decl_ok: p', TC_0, declaration
 
         3. Result in TC_3, (actionDeclarationIR as declarationIR)
 
-      6. Else Phantom#1002
+      6. Else Phantom#1039
 
-    4. Else Phantom#1003
+    4. Else Phantom#1040
 
-1. Else Phantom#1004
+1. Else Phantom#1041
 
 2. If ((p' matches pattern `GLOBAL`)), then
 
@@ -17309,7 +17607,7 @@ relation Decl_ok: p', TC_0, declaration
 
         4. Result in TC_1, ((ErrD name*{name <- name*}) as declarationIR)
 
-      2. Else Phantom#1005
+      2. Else Phantom#1042
 
     2. Case (% has type matchKindDeclaration)
 
@@ -17323,7 +17621,7 @@ relation Decl_ok: p', TC_0, declaration
 
         3. Result in TC_1, ((MatchKindD name*{name <- name*}) as declarationIR)
 
-      2. Else Phantom#1006
+      2. Else Phantom#1043
 
     3. Case (% has type externFunctionDeclaration)
 
@@ -17359,9 +17657,9 @@ relation Decl_ok: p', TC_0, declaration
 
           3. Result in TC_4, (externFunctionDeclarationIR as declarationIR)
 
-        8. Else Phantom#1007
+        8. Else Phantom#1044
 
-      5. Else Phantom#1008
+      5. Else Phantom#1045
 
     4. Case (% has type externObjectDeclaration)
 
@@ -17447,15 +17745,15 @@ relation Decl_ok: p', TC_0, declaration
 
                 3. Result in TC_6, (parserDeclarationIR as declarationIR)
 
-              6. Else Phantom#1009
+              6. Else Phantom#1046
 
-            7. Else Phantom#1010
+            7. Else Phantom#1047
 
-          4. Else Phantom#1011
+          4. Else Phantom#1048
 
-        3. Else Phantom#1012
+        3. Else Phantom#1049
 
-      2. Else Phantom#1013
+      2. Else Phantom#1050
 
     6. Case (% has type controlDeclaration)
 
@@ -17509,15 +17807,15 @@ relation Decl_ok: p', TC_0, declaration
 
                 3. Result in TC_6, (controlDeclarationIR as declarationIR)
 
-              6. Else Phantom#1014
+              6. Else Phantom#1051
 
-            7. Else Phantom#1015
+            7. Else Phantom#1052
 
-          4. Else Phantom#1016
+          4. Else Phantom#1053
 
-        3. Else Phantom#1017
+        3. Else Phantom#1054
 
-      2. Else Phantom#1018
+      2. Else Phantom#1055
 
     7. Case (% has type enumTypeDeclaration)
 
@@ -17545,7 +17843,7 @@ relation Decl_ok: p', TC_0, declaration
 
             6. Result in TC_2, (enumTypeDeclarationIR as declarationIR)
 
-          3. Else Phantom#1019
+          3. Else Phantom#1056
 
         2. Case (% matches pattern `SEnumD%%%`)
 
@@ -17575,11 +17873,11 @@ relation Decl_ok: p', TC_0, declaration
 
                 3. Result in TC_3, (enumTypeDeclarationIR as declarationIR)
 
-              6. Else Phantom#1020
+              6. Else Phantom#1057
 
-            1. Else Phantom#1021
+            1. Else Phantom#1058
 
-          3. Else Phantom#1022
+          3. Else Phantom#1059
 
     8. Case (% has type structTypeDeclaration)
 
@@ -17607,7 +17905,7 @@ relation Decl_ok: p', TC_0, declaration
 
         3. Result in TC_2, (structTypeDeclarationIR as declarationIR)
 
-      9. Else Phantom#1023
+      9. Else Phantom#1060
 
     9. Case (% has type headerTypeDeclaration)
 
@@ -17635,7 +17933,7 @@ relation Decl_ok: p', TC_0, declaration
 
         3. Result in TC_2, (headerTypeDeclarationIR as declarationIR)
 
-      9. Else Phantom#1024
+      9. Else Phantom#1061
 
     10. Case (% has type headerUnionTypeDeclaration)
 
@@ -17663,7 +17961,7 @@ relation Decl_ok: p', TC_0, declaration
 
         3. Result in TC_2, (headerUnionTypeDeclarationIR as declarationIR)
 
-      9. Else Phantom#1025
+      9. Else Phantom#1062
 
     11. Case (% has type typedefDeclaration)
 
@@ -17699,9 +17997,9 @@ relation Decl_ok: p', TC_0, declaration
 
                       3. Result in TC_1, (typedefDeclarationIR as declarationIR)
 
-                    2. Else Phantom#1026
+                    2. Else Phantom#1063
 
-                  1. Else Phantom#1027
+                  1. Else Phantom#1064
 
                   2. (Let typeIR' be $canon(typeIR))
 
@@ -17749,13 +18047,13 @@ relation Decl_ok: p', TC_0, declaration
 
                               6. Result in TC_2, (typedefDeclarationIR as declarationIR)
 
-                            6. Else Phantom#1028
+                            6. Else Phantom#1065
 
-                          3. Else Phantom#1029
+                          3. Else Phantom#1066
 
-                        2. Else Phantom#1030
+                        2. Else Phantom#1067
 
-                      3. Else Phantom#1031
+                      3. Else Phantom#1068
 
                     2. Case (% has type packageObjectTypeIR)
 
@@ -17799,19 +18097,19 @@ relation Decl_ok: p', TC_0, declaration
 
                               6. Result in TC_2, (typedefDeclarationIR as declarationIR)
 
-                            6. Else Phantom#1032
+                            6. Else Phantom#1069
 
-                          3. Else Phantom#1033
+                          3. Else Phantom#1070
 
-                        2. Else Phantom#1034
+                        2. Else Phantom#1071
 
-                      3. Else Phantom#1035
+                      3. Else Phantom#1072
 
-                  3. Else Phantom#1036
+                  3. Else Phantom#1073
 
-                1. Else Phantom#1037
+                1. Else Phantom#1074
 
-              3. Else Phantom#1038
+              3. Else Phantom#1075
 
             2. Case (% matches pattern `DerivedT%`)
 
@@ -17851,7 +18149,7 @@ relation Decl_ok: p', TC_0, declaration
 
                           3. Result in TC_1, (typedefDeclarationIR as declarationIR)
 
-                        3. Else Phantom#1039
+                        3. Else Phantom#1076
 
                       2. Case (% has type polyTypeDefIR)
 
@@ -17871,17 +18169,17 @@ relation Decl_ok: p', TC_0, declaration
 
                               3. Result in TC_1, (typedefDeclarationIR as declarationIR)
 
-                            2. Else Phantom#1040
+                            2. Else Phantom#1077
 
-                          1. Else Phantom#1041
+                          1. Else Phantom#1078
 
-                        2. Else Phantom#1042
+                        2. Else Phantom#1079
 
-                  3. Else Phantom#1043
+                  3. Else Phantom#1080
 
-                3. Else Phantom#1044
+                3. Else Phantom#1081
 
-              3. Else Phantom#1045
+              3. Else Phantom#1082
 
         2. Case (% matches pattern `NewTypeD%%`)
 
@@ -17903,11 +18201,11 @@ relation Decl_ok: p', TC_0, declaration
 
                 3. Result in TC_1, (typedefDeclarationIR as declarationIR)
 
-              2. Else Phantom#1046
+              2. Else Phantom#1083
 
-            1. Else Phantom#1047
+            1. Else Phantom#1084
 
-          3. Else Phantom#1048
+          3. Else Phantom#1085
 
     12. Case (% has type parserTypeDeclaration)
 
@@ -17935,7 +18233,7 @@ relation Decl_ok: p', TC_0, declaration
 
         3. Result in TC_3, (parserTypeDeclarationIR as declarationIR)
 
-      9. Else Phantom#1049
+      9. Else Phantom#1086
 
     13. Case (% has type controlTypeDeclaration)
 
@@ -17963,7 +18261,7 @@ relation Decl_ok: p', TC_0, declaration
 
         3. Result in TC_3, (controlTypeDeclarationIR as declarationIR)
 
-      9. Else Phantom#1050
+      9. Else Phantom#1087
 
     14. Case (% has type packageTypeDeclaration)
 
@@ -18005,13 +18303,13 @@ relation Decl_ok: p', TC_0, declaration
 
           3. Result in TC_4, (packageTypeDeclarationIR as declarationIR)
 
-        6. Else Phantom#1051
+        6. Else Phantom#1088
 
-      10. Else Phantom#1052
+      10. Else Phantom#1089
 
-  1. Else Phantom#1053
+  1. Else Phantom#1090
 
-2. Else Phantom#1054
+2. Else Phantom#1091
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:266.1-268.23
 relation Decls_ok: p, TC', declaration*{declaration <- declaration*}
@@ -18061,7 +18359,7 @@ relation Call_convention_expr_ok: p, TC, actctxt, (direction typeIR_param _id _v
 
       2. Result in typedExpressionIR_arg_cast
 
-    2. Else Phantom#1055
+    2. Else Phantom#1092
 
   2. Case (% matches pattern `OUT`)
 
@@ -18073,9 +18371,9 @@ relation Call_convention_expr_ok: p, TC, actctxt, (direction typeIR_param _id _v
 
         1. Result in typedExpressionIR_arg
 
-      1. Else Phantom#1056
+      1. Else Phantom#1093
 
-    2. Else Phantom#1057
+    2. Else Phantom#1094
 
   3. Case (% matches pattern `INOUT`)
 
@@ -18087,11 +18385,11 @@ relation Call_convention_expr_ok: p, TC, actctxt, (direction typeIR_param _id _v
 
         1. Result in typedExpressionIR_arg
 
-      1. Else Phantom#1058
+      1. Else Phantom#1095
 
-    2. Else Phantom#1059
+    2. Else Phantom#1096
 
-1. Else Phantom#1060
+1. Else Phantom#1097
 
 2. Case analysis on actctxt
 
@@ -18107,9 +18405,9 @@ relation Call_convention_expr_ok: p, TC, actctxt, (direction typeIR_param _id _v
 
         2. Result in typedExpressionIR_arg_cast
 
-      2. Else Phantom#1061
+      2. Else Phantom#1098
 
-    1. Else Phantom#1062
+    1. Else Phantom#1099
 
   2. Case (% matches pattern `NOACTION`)
 
@@ -18127,11 +18425,11 @@ relation Call_convention_expr_ok: p, TC, actctxt, (direction typeIR_param _id _v
 
           1. Result in typedExpressionIR_arg_cast
 
-        3. Else Phantom#1063
+        3. Else Phantom#1100
 
-      2. Else Phantom#1064
+      2. Else Phantom#1101
 
-    1. Else Phantom#1065
+    1. Else Phantom#1102
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:289.1-292.29
 relation Call_convention_argument_ok: p, TC, actctxt, parameterTypeIR, argumentIR
@@ -18164,7 +18462,7 @@ relation Call_convention_argument_ok: p, TC, actctxt, parameterTypeIR, argumentI
 
       1. Result in (NameAnyA name)
 
-    3. Else Phantom#1066
+    3. Else Phantom#1103
 
   4. Case (% matches pattern `AnyA`)
 
@@ -18174,7 +18472,7 @@ relation Call_convention_argument_ok: p, TC, actctxt, parameterTypeIR, argumentI
 
       1. Result in (AnyA)
 
-    2. Else Phantom#1067
+    2. Else Phantom#1104
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:294.1-297.29
 relation Call_convention_ok: p, TC, actctxt, parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, argumentIR*{argumentIR <- argumentIR*}
@@ -18187,7 +18485,7 @@ relation Call_convention_ok: p, TC, actctxt, parameterTypeIR*{parameterTypeIR <-
 
       1. Result in []
 
-    1. Else Phantom#1068
+    1. Else Phantom#1105
 
   2. Case (% matches pattern _ :: _)
 
@@ -18203,7 +18501,7 @@ relation Call_convention_ok: p, TC, actctxt, parameterTypeIR*{parameterTypeIR <-
 
       4. Result in argumentIR_h_cast :: argumentIR_t_cast*{argumentIR_t_cast <- argumentIR_t_cast*}
 
-    2. Else Phantom#1069
+    2. Else Phantom#1106
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:307.1-309.23
 relation RoutineTarget_ok: p, TC, routineTarget
@@ -18218,7 +18516,7 @@ relation RoutineTarget_ok: p, TC, routineTarget
 
       1. Result in (FuncT prefixedName)
 
-    2. Else Phantom#1070
+    2. Else Phantom#1107
 
   2. Case (% has type memberAccessExpression)
 
@@ -18240,7 +18538,7 @@ relation RoutineTarget_ok: p, TC, routineTarget
 
         3. Result in (MethodT typedExpressionIR_base name)
 
-1. Else Phantom#1071
+1. Else Phantom#1108
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:311.1-313.23
 relation RoutineTarget_lvalue_ok: p, TC, lvalue
@@ -18274,9 +18572,9 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
         1. Result in routineTypeIR, tid_impl*{tid_impl <- tid_impl*}, id_default*{id_default <- id_default*}
 
-      4. Else Phantom#1072
+      4. Else Phantom#1109
 
-    3. Else Phantom#1073
+    3. Else Phantom#1110
 
   2. Case (% matches pattern `MethodT%%`)
 
@@ -18320,7 +18618,7 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
                   3. Result in routineTypeIR, [], []
 
-              3. Else Phantom#1074
+              3. Else Phantom#1111
 
             3. Case (% is in ["setValid", "setInvalid"])
 
@@ -18336,9 +18634,9 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
                 3. Result in routineTypeIR, [], []
 
-              3. Else Phantom#1075
+              3. Else Phantom#1112
 
-          1. Else Phantom#1076
+          1. Else Phantom#1113
 
         2. Case (% matches pattern [ _/1 ])
 
@@ -18360,13 +18658,13 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
               4. Result in routineTypeIR, [], []
 
-            3. Else Phantom#1077
+            3. Else Phantom#1114
 
-          2. Else Phantom#1078
+          2. Else Phantom#1115
 
-      1. Else Phantom#1079
+      1. Else Phantom#1116
 
-    2. Else Phantom#1080
+    2. Else Phantom#1117
 
     3. (Let (_expressionIR (( typeIR_base _ctk ))) be typedExpressionIR_base)
 
@@ -18392,11 +18690,11 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
           1. Result in routineTypeIR, tid_impl*{tid_impl <- tid_impl*}, id_default*{id_default <- id_default*}
 
-        4. Else Phantom#1081
+        4. Else Phantom#1118
 
-      4. Else Phantom#1082
+      4. Else Phantom#1119
 
-    5. Else Phantom#1083
+    5. Else Phantom#1120
 
     6. If ((name = "apply")), then
 
@@ -18430,11 +18728,11 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
                   1. Result in routineTypeIR, [], id_default*{id_default <- id_default*}
 
-                1. Else Phantom#1084
+                1. Else Phantom#1121
 
-              2. Else Phantom#1085
+              2. Else Phantom#1122
 
-            8. Else Phantom#1086
+            8. Else Phantom#1123
 
           2. Case (% has type controlObjectTypeIR)
 
@@ -18462,13 +18760,13 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
                   1. Result in routineTypeIR, [], id_default*{id_default <- id_default*}
 
-                1. Else Phantom#1087
+                1. Else Phantom#1124
 
-              2. Else Phantom#1088
+              2. Else Phantom#1125
 
-            8. Else Phantom#1089
+            8. Else Phantom#1126
 
-        1. Else Phantom#1090
+        1. Else Phantom#1127
 
         2. If ((argumentIR''*{argumentIR'' <- argumentIR''*} matches pattern [])), then
 
@@ -18480,13 +18778,13 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
             3. Result in routineTypeIR, [], []
 
-          1. Else Phantom#1091
+          1. Else Phantom#1128
 
-        2. Else Phantom#1092
+        2. Else Phantom#1129
 
-      1. Else Phantom#1093
+      1. Else Phantom#1130
 
-    6. Else Phantom#1094
+    6. Else Phantom#1131
 
   3. Case (% matches pattern `TypeT%%`)
 
@@ -18502,11 +18800,11 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
           2. Result in routineTypeIR, [], []
 
-        1. Else Phantom#1095
+        1. Else Phantom#1132
 
-      1. Else Phantom#1096
+      1. Else Phantom#1133
 
-    2. Else Phantom#1097
+    2. Else Phantom#1134
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:325.1-329.35
 relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, tid'*{tid' <- tid'*}, argumentIR*{argumentIR <- argumentIR*}, id_default'*{id_default' <- id_default'*}
@@ -18531,11 +18829,11 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
           2. Result in typeIR_ret, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-        2. Else Phantom#1098
+        2. Else Phantom#1135
 
-      2. Else Phantom#1099
+      2. Else Phantom#1136
 
-    2. Else Phantom#1100
+    2. Else Phantom#1137
 
   2. Case (% matches pattern `FuncT%%`)
 
@@ -18575,15 +18873,15 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
               2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            1. Else Phantom#1101
+            1. Else Phantom#1138
 
-          6. Else Phantom#1102
+          6. Else Phantom#1139
 
-        3. Else Phantom#1103
+        3. Else Phantom#1140
 
-      3. Else Phantom#1104
+      3. Else Phantom#1141
 
-    3. Else Phantom#1105
+    3. Else Phantom#1142
 
   3. Case (% matches pattern `ExternFuncT%%`)
 
@@ -18623,15 +18921,15 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
               2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            1. Else Phantom#1106
+            1. Else Phantom#1143
 
-          6. Else Phantom#1107
+          6. Else Phantom#1144
 
-        3. Else Phantom#1108
+        3. Else Phantom#1145
 
-      3. Else Phantom#1109
+      3. Else Phantom#1146
 
-    3. Else Phantom#1110
+    3. Else Phantom#1147
 
   4. Case (% matches pattern `ActionT%`)
 
@@ -18653,13 +18951,13 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
             2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-          2. Else Phantom#1111
+          2. Else Phantom#1148
 
-        2. Else Phantom#1112
+        2. Else Phantom#1149
 
-      1. Else Phantom#1113
+      1. Else Phantom#1150
 
-    2. Else Phantom#1114
+    2. Else Phantom#1151
 
   5. Case (% matches pattern `BuiltinMethodT%%`)
 
@@ -18679,11 +18977,11 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
           2. Result in typeIR_ret, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-        2. Else Phantom#1115
+        2. Else Phantom#1152
 
-      2. Else Phantom#1116
+      2. Else Phantom#1153
 
-    2. Else Phantom#1117
+    2. Else Phantom#1154
 
   6. Case (% matches pattern `ExternMethodT%%`)
 
@@ -18723,15 +19021,15 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
               2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            1. Else Phantom#1118
+            1. Else Phantom#1155
 
-          6. Else Phantom#1119
+          6. Else Phantom#1156
 
-        3. Else Phantom#1120
+        3. Else Phantom#1157
 
-      3. Else Phantom#1121
+      3. Else Phantom#1158
 
-    3. Else Phantom#1122
+    3. Else Phantom#1159
 
   7. Case (% matches pattern `ExternAbstractMethodT%%`)
 
@@ -18771,15 +19069,15 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
               2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            1. Else Phantom#1123
+            1. Else Phantom#1160
 
-          6. Else Phantom#1124
+          6. Else Phantom#1161
 
-        3. Else Phantom#1125
+        3. Else Phantom#1162
 
-      3. Else Phantom#1126
+      3. Else Phantom#1163
 
-    3. Else Phantom#1127
+    3. Else Phantom#1164
 
   8. Case (% matches pattern `ParserApplyMethodT%`)
 
@@ -18801,13 +19099,13 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
             2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-          2. Else Phantom#1128
+          2. Else Phantom#1165
 
-        2. Else Phantom#1129
+        2. Else Phantom#1166
 
-      1. Else Phantom#1130
+      1. Else Phantom#1167
 
-    2. Else Phantom#1131
+    2. Else Phantom#1168
 
   9. Case (% matches pattern `ControlApplyMethodT%`)
 
@@ -18829,13 +19127,13 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
             2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-          2. Else Phantom#1132
+          2. Else Phantom#1169
 
-        2. Else Phantom#1133
+        2. Else Phantom#1170
 
-      1. Else Phantom#1134
+      1. Else Phantom#1171
 
-    2. Else Phantom#1135
+    2. Else Phantom#1172
 
   10. Case (% matches pattern `TableApplyMethodT%`)
 
@@ -18853,15 +19151,15 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
               1. Result in typeIR_table, [], []
 
-            1. Else Phantom#1136
+            1. Else Phantom#1173
 
-          1. Else Phantom#1137
+          1. Else Phantom#1174
 
-        1. Else Phantom#1138
+        1. Else Phantom#1175
 
-      1. Else Phantom#1139
+      1. Else Phantom#1176
 
-    2. Else Phantom#1140
+    2. Else Phantom#1177
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:339.1-342.29
 relation ConstructorType_ok: p, TC, prefixedName, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR*{argumentIR <- argumentIR*}
@@ -18880,9 +19178,9 @@ relation ConstructorType_ok: p, TC, prefixedName, typeArgumentIR*{typeArgumentIR
 
     1. Result in constructorTypeIR, tid_impl*{tid_impl <- tid_impl*}, id_default*{id_default <- id_default*}
 
-  4. Else Phantom#1141
+  4. Else Phantom#1178
 
-2. Else Phantom#1142
+2. Else Phantom#1179
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:349.19-349.31
 syntax instctxt = 
@@ -18932,19 +19230,19 @@ relation Inst_ok: cursor', TC, instctxt, constructorTypeIR, typeArgumentIR*{type
 
               2. Result in typeIR_object_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            1. Else Phantom#1143
+            1. Else Phantom#1180
 
-          6. Else Phantom#1144
+          6. Else Phantom#1181
 
-        3. Else Phantom#1145
+        3. Else Phantom#1182
 
-      3. Else Phantom#1146
+      3. Else Phantom#1183
 
-    2. Else Phantom#1147
+    2. Else Phantom#1184
 
-  2. Else Phantom#1148
+  2. Else Phantom#1185
 
-1. Else Phantom#1149
+1. Else Phantom#1186
 
 2. (Let (ConstructorT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*} typeIR_object) be constructorTypeIR)
 
@@ -18984,17 +19282,17 @@ relation Inst_ok: cursor', TC, instctxt, constructorTypeIR, typeArgumentIR*{type
 
             2. Result in typeIR_object_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-          1. Else Phantom#1150
+          1. Else Phantom#1187
 
-        6. Else Phantom#1151
+        6. Else Phantom#1188
 
-      3. Else Phantom#1152
+      3. Else Phantom#1189
 
-    3. Else Phantom#1153
+    3. Else Phantom#1190
 
-  2. Else Phantom#1154
+  2. Else Phantom#1191
 
-3. Else Phantom#1155
+3. Else Phantom#1192
 
 ;; ../../../../spec-concrete/5.05.2-subtype.watsup:338.1-342.23
 def $reduce_serenum_unary(typedExpressionIR, $check)
@@ -19093,7 +19391,7 @@ def $coerce_unary(typedExpressionIR, typeIR_to)
 
       2. Return ?(typedExpressionIR_cast)
 
-    1. Else Phantom#1156
+    1. Else Phantom#1193
 
 ;; ../../../../spec-concrete/5.05.2-subtype.watsup:423.1-424.44
 def $coerce_binary(typedExpressionIR_l, typedExpressionIR_r)
@@ -19966,9 +20264,9 @@ relation SwitchLabel_table_ok: TC, tid_table, bool', switchLabel
 
     1. Result in (DefaultL)
 
-  1. Else Phantom#1157
+  1. Else Phantom#1194
 
-1. Else Phantom#1158
+1. Else Phantom#1195
 
 2. If ((switchLabel matches pattern `ExprL%`)), then
 
@@ -20004,17 +20302,17 @@ relation SwitchLabel_table_ok: TC, tid_table, bool', switchLabel
 
             2. Result in (ExprL typedExpressionIR_label)
 
-          2. Else Phantom#1159
+          2. Else Phantom#1196
 
-        2. Else Phantom#1160
+        2. Else Phantom#1197
 
-      5. Else Phantom#1161
+      5. Else Phantom#1198
 
-    3. Else Phantom#1162
+    3. Else Phantom#1199
 
-  2. Else Phantom#1163
+  2. Else Phantom#1200
 
-2. Else Phantom#1164
+2. Else Phantom#1201
 
 ;; ../../../../spec-concrete/5.10-typing-statement.watsup:185.1-187.29
 relation SwitchCase_table_ok: TC, f, tid_table, b_last, switchCase
@@ -20073,9 +20371,9 @@ relation SwitchLabel_general_ok: TC, _typeIR', bool', switchLabel
 
     1. Result in (DefaultL)
 
-  1. Else Phantom#1165
+  1. Else Phantom#1202
 
-1. Else Phantom#1166
+1. Else Phantom#1203
 
 2. If ((switchLabel matches pattern `ExprL%`)), then
 
@@ -20095,11 +20393,11 @@ relation SwitchLabel_general_ok: TC, _typeIR', bool', switchLabel
 
       1. Result in (ExprL typedExpressionIR_label_cast)
 
-    3. Else Phantom#1167
+    3. Else Phantom#1204
 
-  4. Else Phantom#1168
+  4. Else Phantom#1205
 
-2. Else Phantom#1169
+2. Else Phantom#1206
 
 ;; ../../../../spec-concrete/5.10-typing-statement.watsup:273.1-275.29
 relation SwitchCase_general_ok: TC, f, typeIR_switch, b_last, switchCase
@@ -20254,9 +20552,9 @@ relation Decl_object_ok: p, TC_0, frame, rdenv, objectDeclaration
 
           3. Result in frame, rdenv_init, (functionDeclarationIR as objectDeclarationIR)
 
-        4. Else Phantom#1170
+        4. Else Phantom#1207
 
-      6. Else Phantom#1171
+      6. Else Phantom#1208
 
       7. If ((typeIR_ret = ((VoidT) as typeIR))), then
 
@@ -20274,11 +20572,11 @@ relation Decl_object_ok: p, TC_0, frame, rdenv, objectDeclaration
 
           3. Result in frame, rdenv_init, (functionDeclarationIR as objectDeclarationIR)
 
-        4. Else Phantom#1172
+        4. Else Phantom#1209
 
-      7. Else Phantom#1173
+      7. Else Phantom#1210
 
-    7. Else Phantom#1174
+    7. Else Phantom#1211
 
   2. Case (% has type instantiation)
 
@@ -20302,9 +20600,9 @@ relation Decl_object_ok: p, TC_0, frame, rdenv, objectDeclaration
 
         3. Result in frame_init, rdenv, (instantiationIR as objectDeclarationIR)
 
-      4. Else Phantom#1175
+      4. Else Phantom#1212
 
-    3. Else Phantom#1176
+    3. Else Phantom#1213
 
 ;; ../../../../spec-concrete/5.11-typing-declaration.watsup:129.1-132.29
 relation Decls_object_ok: p, TC, frame', rdenv', objectDeclaration*{objectDeclaration <- objectDeclaration*}
@@ -20332,7 +20630,7 @@ def $subst_rdenv(theta, rdenv_extern, set<pair<rid, routineTypeDefIR>>')
 
   1. Return rdenv_extern
 
-1. Else Phantom#1177
+1. Else Phantom#1214
 
 2. (Let ({ pair<rid, routineTypeDefIR>*{pair<rid, routineTypeDefIR> <- pair<rid, routineTypeDefIR>*} }) be set<pair<rid, routineTypeDefIR>>')
 
@@ -20366,15 +20664,15 @@ def $subst_rdenv(theta, rdenv_extern, set<pair<rid, routineTypeDefIR>>')
 
           2. Return $subst_rdenv(theta, rdenv_extern_subst, ({ (rid_init_t -> routineTypeDefIR_init_t)*{rid_init_t <- rid_init_t*, routineTypeDefIR_init_t <- routineTypeDefIR_init_t*} }))
 
-        4. Else Phantom#1178
+        4. Else Phantom#1215
 
-      2. Else Phantom#1179
+      2. Else Phantom#1216
 
-    2. Else Phantom#1180
+    2. Else Phantom#1217
 
-  4. Else Phantom#1181
+  4. Else Phantom#1218
 
-3. Else Phantom#1182
+3. Else Phantom#1219
 
 ;; ../../../../spec-concrete/5.11-typing-declaration.watsup:369.1-369.81
 def $split_constructors(methodPrototype*{methodPrototype <- methodPrototype*})
@@ -20442,9 +20740,9 @@ relation Enum_serializable_field_ok: TC_0, name_enum, typeIR, (name expression)
 
     5. Result in TC_1, (name typedExpressionIR_cast), value
 
-  3. Else Phantom#1183
+  3. Else Phantom#1220
 
-3. Else Phantom#1184
+3. Else Phantom#1221
 
 ;; ../../../../spec-concrete/5.11-typing-declaration.watsup:569.1-572.26
 relation Enum_serializable_fields_ok: TC', name_enum, typeIR, namedExpression*{namedExpression <- namedExpression*}
@@ -20502,9 +20800,9 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
             3. Result in (ExprK typedExpressionIR_cast)
 
-          1. Else Phantom#1185
+          1. Else Phantom#1222
 
-    4. Else Phantom#1186
+    4. Else Phantom#1223
 
     5. If (~$is_set_typeIR(typeIR')), then
 
@@ -20516,9 +20814,9 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
         3. Result in (ExprK typedExpressionIR_cast)
 
-      1. Else Phantom#1187
+      1. Else Phantom#1224
 
-    5. Else Phantom#1188
+    5. Else Phantom#1225
 
   2. Case (% matches pattern `MaskK%%`)
 
@@ -20556,13 +20854,13 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
             2. Result in (MaskK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
 
-          3. Else Phantom#1189
+          3. Else Phantom#1226
 
-        4. Else Phantom#1190
+        4. Else Phantom#1227
 
-      3. Else Phantom#1191
+      3. Else Phantom#1228
 
-    5. Else Phantom#1192
+    5. Else Phantom#1229
 
   3. Case (% matches pattern `RangeK%%`)
 
@@ -20604,15 +20902,15 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
               2. Result in (RangeK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
 
-            3. Else Phantom#1193
+            3. Else Phantom#1230
 
-          2. Else Phantom#1194
+          2. Else Phantom#1231
 
-        4. Else Phantom#1195
+        4. Else Phantom#1232
 
-      3. Else Phantom#1196
+      3. Else Phantom#1233
 
-    5. Else Phantom#1197
+    5. Else Phantom#1234
 
   4. Case (% matches pattern `DefaultK`)
 
@@ -20751,9 +21049,9 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
     1. Result in [(DefaultK)]
 
-  1. Else Phantom#1198
+  1. Else Phantom#1235
 
-1. Else Phantom#1199
+1. Else Phantom#1236
 
 2. Case analysis on keysetExpression*{keysetExpression <- keysetExpression*}
 
@@ -20765,7 +21063,7 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
       2. Result in [keysetExpressionIR]
 
-    1. Else Phantom#1200
+    1. Else Phantom#1237
 
   2. Case (% = [(AnyK)])
 
@@ -20775,9 +21073,9 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
       2. Result in [keysetExpressionIR]
 
-    1. Else Phantom#1201
+    1. Else Phantom#1238
 
-2. Else Phantom#1202
+2. Else Phantom#1239
 
 3. If ((|typeIR'*{typeIR' <- typeIR'*}| = |keysetExpression*{keysetExpression <- keysetExpression*}|)), then
 
@@ -20785,7 +21083,7 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
   2. Result in keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*}
 
-3. Else Phantom#1203
+3. Else Phantom#1240
 
 ;; ../../../../spec-concrete/5.13.1-typing-parser-statement.watsup:184.1-186.26
 relation SelectCase_ok: TC, name_state*{name_state <- name_state*}, typeIR_key*{typeIR_key <- typeIR_key*}, (keysetExpression*{keysetExpression <- keysetExpression*} name)
@@ -20796,7 +21094,7 @@ relation SelectCase_ok: TC, name_state*{name_state <- name_state*}, typeIR_key*{
 
   1. Result in (keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*} name)
 
-2. Else Phantom#1204
+2. Else Phantom#1241
 
 ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:7.1-7.52
 def $compat_table_exact_optional_key(typeIR)
@@ -21015,9 +21313,9 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
             3. Result in (LPM n), (ExprK typedExpressionIR_set)
 
-          4. Else Phantom#1205
+          4. Else Phantom#1242
 
-        3. Else Phantom#1206
+        3. Else Phantom#1243
 
       2. Case (% matches pattern `MaskK%%`)
 
@@ -21063,17 +21361,17 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
                     3. Result in (LPM n_prefix), (MaskK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
 
-                  3. Else Phantom#1207
+                  3. Else Phantom#1244
 
-                1. Else Phantom#1208
+                1. Else Phantom#1245
 
-              3. Else Phantom#1209
+              3. Else Phantom#1246
 
-            3. Else Phantom#1210
+            3. Else Phantom#1247
 
-          5. Else Phantom#1211
+          5. Else Phantom#1248
 
-        3. Else Phantom#1212
+        3. Else Phantom#1249
 
       3. Case (% matches pattern `DefaultK`)
 
@@ -21085,7 +21383,7 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
           2. Result in (LPM n), (DefaultK)
 
-        2. Else Phantom#1213
+        2. Else Phantom#1250
 
       4. Case (% matches pattern `AnyK`)
 
@@ -21097,9 +21395,9 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
           2. Result in (LPM 0), (AnyK)
 
-        2. Else Phantom#1214
+        2. Else Phantom#1251
 
-    1. Else Phantom#1215
+    1. Else Phantom#1252
 
   2. Case (% = "ternary")
 
@@ -21129,13 +21427,13 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
             1. Result in (NOLPM), (MaskK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
 
-          3. Else Phantom#1216
+          3. Else Phantom#1253
 
-        3. Else Phantom#1217
+        3. Else Phantom#1254
 
-      5. Else Phantom#1218
+      5. Else Phantom#1255
 
-    1. Else Phantom#1219
+    1. Else Phantom#1256
 
   3. Case (% = "range")
 
@@ -21165,15 +21463,15 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
             1. Result in (NOLPM), (RangeK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
 
-          3. Else Phantom#1220
+          3. Else Phantom#1257
 
-        3. Else Phantom#1221
+        3. Else Phantom#1258
 
-      5. Else Phantom#1222
+      5. Else Phantom#1259
 
-    1. Else Phantom#1223
+    1. Else Phantom#1260
 
-1. Else Phantom#1224
+1. Else Phantom#1261
 
 2. Case analysis on keysetExpression
 
@@ -21195,9 +21493,9 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
         3. Result in (NOLPM), (ExprK typedExpressionIR_set)
 
-      3. Else Phantom#1225
+      3. Else Phantom#1262
 
-    2. Else Phantom#1226
+    2. Else Phantom#1263
 
   2. Case (% matches pattern `DefaultK`)
 
@@ -21205,7 +21503,7 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
       1. Result in (NOLPM), (DefaultK)
 
-    1. Else Phantom#1227
+    1. Else Phantom#1264
 
   3. Case (% matches pattern `AnyK`)
 
@@ -21213,9 +21511,9 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
       1. Result in (NOLPM), (AnyK)
 
-    1. Else Phantom#1228
+    1. Else Phantom#1265
 
-2. Else Phantom#1229
+2. Else Phantom#1266
 
 ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:356.1-359.29
 relation TableEntry_keysets_ok': TC, TBLC, TBLS', matchKey*{matchKey <- matchKey*}, keysetExpression*{keysetExpression <- keysetExpression*}
@@ -21228,7 +21526,7 @@ relation TableEntry_keysets_ok': TC, TBLC, TBLS', matchKey*{matchKey <- matchKey
 
       1. Result in TBLS', []
 
-    1. Else Phantom#1230
+    1. Else Phantom#1267
 
   2. Case (% matches pattern _ :: _)
 
@@ -21246,7 +21544,7 @@ relation TableEntry_keysets_ok': TC, TBLC, TBLS', matchKey*{matchKey <- matchKey
 
       5. Result in TBLS_3, keysetExpressionIR_h :: keysetExpressionIR_t*{keysetExpressionIR_t <- keysetExpressionIR_t*}
 
-    2. Else Phantom#1231
+    2. Else Phantom#1268
 
 ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:708.1-708.44
 def $count_table_keys(tableProperty''*{tableProperty'' <- tableProperty''*})
@@ -21364,7 +21662,7 @@ def $align_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, arg
 
   2. Return parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}
 
-3. Else Phantom#1232
+3. Else Phantom#1269
 
 ;; ../../../../spec-concrete/5.15.1-typing-call-convention.watsup:28.1-28.96
 def $align_parameters'(_map<id, parameterTypeIR>', parameterTypeIR', argumentIR)
@@ -21375,7 +21673,7 @@ def $align_parameters'(_map<id, parameterTypeIR>', parameterTypeIR', argumentIR)
 
   2. Return ?(parameterTypeIR')
 
-1. Else Phantom#1233
+1. Else Phantom#1270
 
 2. (Let ({ (id_param -> parameterTypeIR)*{id_param <- id_param*, parameterTypeIR <- parameterTypeIR*} }) be _map<id, parameterTypeIR>')
 
@@ -21397,7 +21695,7 @@ def $align_parameters'(_map<id, parameterTypeIR>', parameterTypeIR', argumentIR)
 
     1. Return ?(parameterTypeIR')
 
-3. Else Phantom#1234
+3. Else Phantom#1271
 
 ;; ../../../../spec-concrete/5.15.1-typing-call-convention.watsup:61.1-63.23
 relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
@@ -21426,11 +21724,11 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
             1. The relation holds
 
-        1. Else Phantom#1235
+        1. Else Phantom#1272
 
-      2. Else Phantom#1236
+      2. Else Phantom#1273
 
-    3. Else Phantom#1237
+    3. Else Phantom#1274
 
   2. Case (% has type memberAccessExpressionIR)
 
@@ -21458,13 +21756,13 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
                 1. The relation holds
 
-              1. Else Phantom#1238
+              1. Else Phantom#1275
 
               2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
                 1. The relation holds
 
-              2. Else Phantom#1239
+              2. Else Phantom#1276
 
             2. Case (% = "last")
 
@@ -21472,27 +21770,27 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
                 1. The relation holds
 
-              1. Else Phantom#1240
+              1. Else Phantom#1277
 
               2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
                 1. The relation holds
 
-              2. Else Phantom#1241
+              2. Else Phantom#1278
 
-          2. Else Phantom#1242
+          2. Else Phantom#1279
 
-        3. Else Phantom#1243
+        3. Else Phantom#1280
 
         4. If (~$is_headerStackTypeIR($canon(typeIR_base))), then
 
           1. The relation holds
 
-        4. Else Phantom#1244
+        4. Else Phantom#1281
 
-      2. Else Phantom#1245
+      2. Else Phantom#1282
 
-    2. Else Phantom#1246
+    2. Else Phantom#1283
 
   3. Case (% has type indexAccessExpressionIR)
 
@@ -21508,7 +21806,7 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
           1. The relation holds
 
-        2. Else Phantom#1247
+        2. Else Phantom#1284
 
       2. Case (% matches pattern `BitAccE%%%`)
 
@@ -21518,9 +21816,9 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
           1. The relation holds
 
-        2. Else Phantom#1248
+        2. Else Phantom#1285
 
-1. Else Phantom#1249
+1. Else Phantom#1286
 
 ;; ../../../../spec-concrete/5.15.2-typing-call-inference.watsup:6.1-7.12
 syntax infer = 

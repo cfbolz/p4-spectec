@@ -3,7 +3,9 @@ un_lnot
 un_plus
 un_minus
 bin_plus
+bin_satplus
 bin_minus
+bin_satminus
 bin_mul
 bin_div
 bin_mod
