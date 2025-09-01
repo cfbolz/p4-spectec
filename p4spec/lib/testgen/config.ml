@@ -13,7 +13,7 @@ module MCov = Runtime_testgen.Cov.Multiple
 let samples_close_miss = 3
 
 (* Max number of related vids to derive from per seed *)
-let samples_related_vid = 3
+let samples_related_vid = 10
 
 (* Max number of close-ASTs per seed *)
 let samples_derivation_source = 10
