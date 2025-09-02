@@ -163,6 +163,8 @@ rule Call_action_default_ok:
   ---- ;; split parameters into data- and control-planes
   -- if (parameterTypeIR_data*, parameterTypeIR_control*)
       = $split_dataplane_parameters(parameterTypeIR*)
+  ---- ;; check arity
+  -- if |parameterTypeIR*| = |argumentIR*|
   ---- ;; check calling convention
   -- Call_convention_ok:
       LOCAL TC ACTION |- parameterTypeIR* argumentIR*

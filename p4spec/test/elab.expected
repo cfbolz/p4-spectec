@@ -11431,21 +11431,22 @@ relation TableActions_ok: `%%|-%:%%`(typingContext, tableContext, tableAction*, 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:216.1-219.23
 relation Call_action_default_ok: `%|-%%:%%%`(typingContext, parameterTypeIR*, argumentIR*, parameterTypeIR*, parameterTypeIR*, argumentIR*)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:160.1-169.42
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:160.1-171.42
    rule : `%|-%%:%%%`(TC, parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, argumentIR*{argumentIR <- argumentIR*}, parameterTypeIR_data*{parameterTypeIR_data <- parameterTypeIR_data*}, parameterTypeIR_control*{parameterTypeIR_control <- parameterTypeIR_control*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
       -- let (parameterTypeIR_data*{parameterTypeIR_data <- parameterTypeIR_data*}, parameterTypeIR_control*{parameterTypeIR_control <- parameterTypeIR_control*}) = $split_dataplane_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*})
+      -- if (|parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}| = |argumentIR*{argumentIR <- argumentIR*}|)
       -- Call_convention_ok: `%%%|-%%:%`(`LOCAL`_cursor(), TC, `ACTION`_actctxt(), parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, argumentIR*{argumentIR <- argumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:221.1-223.23
 relation TableDefaultAction_ok: `%%|-%:%`(typingContext, tableContext, initializer, tableActionReferenceIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:173.1-177.54
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:175.1-179.54
    rule nameE: `%%|-%:%`(TC, TBLC, initializer, `%%`_tableActionReferenceIR(prefixedName, []))
       -- if initializer <: referenceExpression
       -- let `NameE%`_referenceExpression(prefixedName) = initializer as referenceExpression
       -- if (?(([], [])) = $find_action(TBLC, prefixedName))
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:181.1-200.57
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:183.1-202.57
    rule callE: `%%|-%:%`(TC, TBLC, initializer, `%%`_tableActionReferenceIR(prefixedName, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}))
       -- if initializer <: callExpression
       -- let callExpression = initializer as callExpression
@@ -11466,7 +11467,7 @@ relation TableDefaultAction_ok: `%%|-%:%`(typingContext, tableContext, initializ
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:225.1-227.23
 relation TableEntry_keysets_ok: `%%|-%:%%`(typingContext, tableContext, keysetExpression*, tableEntryState, keysetExpressionIR*)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:389.1-392.21
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:391.1-394.21
    rule defaultK-noprilpm: `%%|-%:%%`(TC, TBLC, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS, [`DefaultK`_keysetExpressionIR()])
       -- if (keysetExpression*{keysetExpression <- keysetExpression*} = [`DefaultK`_keysetExpression()])
       -- let matchMode = TBLC.MODE
@@ -11474,13 +11475,13 @@ relation TableEntry_keysets_ok: `%%|-%:%%`(typingContext, tableContext, keysetEx
       -- let `NOPRILPM%`_matchMode(n) = matchMode
       -- let TBLS = `LPM%`_tableEntryState(n)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:394.1-397.21
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:396.1-399.21
    rule defaultK-else: `%%|-%:%%`(TC, TBLC, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS, [`DefaultK`_keysetExpressionIR()])
       -- if (keysetExpression*{keysetExpression <- keysetExpression*} = [`DefaultK`_keysetExpression()])
       -- if (((TBLC.MODE = `NOPRI`_matchMode()) \/ (TBLC.MODE = `PRI`_matchMode())) \/ (TBLC.MODE = `PRILPM`_matchMode()))
       -- let TBLS = `NOLPM`_tableEntryState()
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:401.1-404.21
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:403.1-406.21
    rule anyK-noprilpm: `%%|-%:%%`(TC, TBLC, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS, [`AnyK`_keysetExpressionIR()])
       -- if (keysetExpression*{keysetExpression <- keysetExpression*} = [`AnyK`_keysetExpression()])
       -- let matchMode = TBLC.MODE
@@ -11488,13 +11489,13 @@ relation TableEntry_keysets_ok: `%%|-%:%%`(typingContext, tableContext, keysetEx
       -- let `NOPRILPM%`_matchMode(n) = matchMode
       -- let TBLS = `LPM%`_tableEntryState(0)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:406.1-409.21
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:408.1-411.21
    rule anyK-else: `%%|-%:%%`(TC, TBLC, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS, [`AnyK`_keysetExpressionIR()])
       -- if (keysetExpression*{keysetExpression <- keysetExpression*} = [`AnyK`_keysetExpression()])
       -- if (((TBLC.MODE = `NOPRI`_matchMode()) \/ (TBLC.MODE = `PRI`_matchMode())) \/ (TBLC.MODE = `PRILPM`_matchMode()))
       -- let TBLS = `NOLPM`_tableEntryState()
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:413.1-423.48
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:415.1-425.48
    rule list: `%%|-%:%%`(TC, TBLC, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS, keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*})
       -- if ((keysetExpression*{keysetExpression <- keysetExpression*} =/= [`AnyK`_keysetExpression()]) /\ (keysetExpression*{keysetExpression <- keysetExpression*} =/= [`DefaultK`_keysetExpression()]))
       -- if (|TBLC.KEYS| = |keysetExpression*{keysetExpression <- keysetExpression*}|)
@@ -11503,7 +11504,7 @@ relation TableEntry_keysets_ok: `%%|-%:%%`(typingContext, tableContext, keysetEx
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:229.1-231.23
 relation TableEntry_action_ok: `%%|-%:%`(typingContext, tableContext, tableActionReference, tableActionReferenceIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:431.1-450.57
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:433.1-452.57
    rule : `%%|-%:%`(TC, TBLC, `%%`_tableActionReference(prefixedName, argument*{argument <- argument*}), `%%`_tableActionReferenceIR(prefixedName, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}))
       -- let (parameterTypeIR*, argumentIR*)?{(parameterTypeIR*, argumentIR*) <- (parameterTypeIR*, argumentIR*)?} = $find_action(TBLC, prefixedName)
       -- if (parameterTypeIR*, argumentIR*)?{(parameterTypeIR*, argumentIR*) <- (parameterTypeIR*, argumentIR*)?} matches (_)
@@ -11517,12 +11518,12 @@ relation TableEntry_action_ok: `%%|-%:%`(typingContext, tableContext, tableActio
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:233.1-236.26
 relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableEntryState, tableEntryPriority?, tableContext, tableEntryPriorityIR?)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:460.1-462.26
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:462.1-464.26
    rule none-nopri: `%%%|-%:%%`(TC, TBLC, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC, ?())
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches ()
       -- if (TBLC.MODE = `NOPRI`_matchMode())
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:464.1-467.28
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:466.1-469.28
    rule none-noprilpm: `%%%|-%:%%`(TC, TBLC, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC, ?())
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches ()
       -- let matchMode = TBLC.MODE
@@ -11532,7 +11533,7 @@ relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableE
       -- if tableEntryState matches `LPM%`
       -- let `LPM%`_tableEntryState(n_prefix) = tableEntryState
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:469.1-482.58
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:471.1-484.58
    rule none-pri-prilpm-init-largest-wins: `%%%|-%:%%`(TC, TBLC_0, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC_1, ?(typedExpressionIR))
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches ()
       -- if ((TBLC_0.MODE = `PRI`_matchMode()) \/ (TBLC_0.MODE = `PRILPM`_matchMode()))
@@ -11546,7 +11547,7 @@ relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableE
       -- let TBLC_1 = $add_table_priority(TBLC_0, n)
       -- let typedExpressionIR = `%%`_typedExpressionIR(`NumE%`_literalExpression(`INT%`_number(n as int)) as expressionIR, `(%%)`_expressionNoteIR(`IntT`_numberTypeIR() as typeIR, `LCTK`_ctk()))
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:484.1-494.58
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:486.1-496.58
    rule none-pri-prilpm-init-non-largest-wins: `%%%|-%:%%`(TC, TBLC_0, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC_1, ?(typedExpressionIR))
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches ()
       -- if ((TBLC_0.MODE = `PRI`_matchMode()) \/ (TBLC_0.MODE = `PRILPM`_matchMode()))
@@ -11555,7 +11556,7 @@ relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableE
       -- let TBLC_1 = $add_table_priority(TBLC_0, 1)
       -- let typedExpressionIR = `%%`_typedExpressionIR(`NumE%`_literalExpression(`INT%`_number(1 as int)) as expressionIR, `(%%)`_expressionNoteIR(`IntT`_numberTypeIR() as typeIR, `LCTK`_ctk()))
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:496.1-509.58
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:498.1-511.58
    rule none-pri-prilpm-non-init-largest-wins: `%%%|-%:%%`(TC, TBLC_0, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC_1, ?(typedExpressionIR))
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches ()
       -- if ((TBLC_0.MODE = `PRI`_matchMode()) \/ (TBLC_0.MODE = `PRILPM`_matchMode()))
@@ -11569,7 +11570,7 @@ relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableE
       -- let TBLC_1 = $add_table_priority(TBLC_0, n)
       -- let typedExpressionIR = `%%`_typedExpressionIR(`NumE%`_literalExpression(`INT%`_number(n as int)) as expressionIR, `(%%)`_expressionNoteIR(`IntT`_numberTypeIR() as typeIR, `LCTK`_ctk()))
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:511.1-524.58
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:513.1-526.58
    rule none-pri-prilpm-non-init-non-largest-wins: `%%%|-%:%%`(TC, TBLC_0, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC_1, ?(typedExpressionIR))
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches ()
       -- if ((TBLC_0.MODE = `PRI`_matchMode()) \/ (TBLC_0.MODE = `PRILPM`_matchMode()))
@@ -11581,7 +11582,7 @@ relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableE
       -- let TBLC_1 = $add_table_priority(TBLC_0, n)
       -- let typedExpressionIR = `%%`_typedExpressionIR(`NumE%`_literalExpression(`INT%`_number(n as int)) as expressionIR, `(%%)`_expressionNoteIR(`IntT`_numberTypeIR() as typeIR, `LCTK`_ctk()))
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:526.1-540.48
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:528.1-542.48
    rule some-pri-prilpm-init: `%%%|-%:%%`(TC, TBLC_0, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC_2, ?(typedExpressionIR))
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches (_)
       -- let ?(expression) = tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}
@@ -11600,7 +11601,7 @@ relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableE
       -- let TBLC_1 = TBLC_0[PRIORITIES.INIT = true]
       -- let TBLC_2 = $add_table_priority(TBLC_1, n)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:542.1-556.48
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:544.1-558.48
    rule some-pri-prilpm-non-init: `%%%|-%:%%`(TC, TBLC_0, TBLS, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, TBLC_1, ?(typedExpressionIR))
       -- if tableEntryPriority?{tableEntryPriority <- tableEntryPriority?} matches (_)
       -- let ?(expression) = tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}
@@ -11622,7 +11623,7 @@ relation TableEntry_priority_ok: `%%%|-%:%%`(typingContext, tableContext, tableE
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:238.1-240.23
 relation TableEntry_ok: `%%|-%:%%`(typingContext, tableContext, tableEntry, tableContext, tableEntryIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:561.1-575.58
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:563.1-577.58
    rule : `%%|-%:%%`(TC, TBLC_0, `%%%%`_tableEntry(const?{const <- const?}, tableEntryPriority?{tableEntryPriority <- tableEntryPriority?}, keysetExpression*{keysetExpression <- keysetExpression*}, tableActionReference), TBLC_1, tableEntryIR)
       -- TableEntry_keysets_ok: `%%|-%:%%`(TC, TBLC_0, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS, keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*})
       -- TableEntry_action_ok: `%%|-%:%`(TC, TBLC_0, tableActionReference, tableActionReferenceIR)
@@ -11632,11 +11633,11 @@ relation TableEntry_ok: `%%|-%:%%`(typingContext, tableContext, tableEntry, tabl
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:242.1-244.23
 relation TableEntries_ok: `%%|-%:%%`(typingContext, tableContext, tableEntry*, tableContext, tableEntryIR*)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:583.1-584.28
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:585.1-586.28
    rule nil: `%%|-%:%%`(TC, TBLC, tableEntry*{tableEntry <- tableEntry*}, TBLC, [])
       -- if tableEntry*{tableEntry <- tableEntry*} matches []
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:586.1-590.74
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:588.1-592.74
    rule cons: `%%|-%:%%`(TC, TBLC_0, tableEntry*{tableEntry <- tableEntry*}, TBLC_2, tableEntryIR_h :: tableEntryIR_t*{tableEntryIR_t <- tableEntryIR_t*})
       -- if tableEntry*{tableEntry <- tableEntry*} matches _ :: _
       -- let tableEntry_h :: tableEntry_t*{tableEntry_t <- tableEntry_t*} = tableEntry*{tableEntry <- tableEntry*}
@@ -11646,19 +11647,19 @@ relation TableEntries_ok: `%%|-%:%%`(typingContext, tableContext, tableEntry*, t
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:246.1-248.23
 relation TableProperty_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty, tableContext, tablePropertyIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:600.1-603.63
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:602.1-605.63
    rule keyP: `%%|-%:%%`(TC, TBLC_0, tableProperty, TBLC_1, `KeyP%`_tablePropertyIR(tableKeyIR*{tableKeyIR <- tableKeyIR*}))
       -- if tableProperty matches `KeyP%`
       -- let `KeyP%`_tableProperty(tableKey*{tableKey <- tableKey*}) = tableProperty
       -- TableKeys_ok: `%%|-%:%%`(TC, TBLC_0, tableKey*{tableKey <- tableKey*}, TBLC_1, tableKeyIR*{tableKeyIR <- tableKeyIR*})
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:607.1-610.72
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:609.1-612.72
    rule actionP: `%%|-%:%%`(TC, TBLC_0, tableProperty, TBLC_1, `ActionP%`_tablePropertyIR(tableActionIR*{tableActionIR <- tableActionIR*}))
       -- if tableProperty matches `ActionP%`
       -- let `ActionP%`_tableProperty(tableAction*{tableAction <- tableAction*}) = tableProperty
       -- TableActions_ok: `%%|-%:%%`(TC, TBLC_0, tableAction*{tableAction <- tableAction*}, TBLC_1, tableActionIR*{tableActionIR <- tableActionIR*})
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:614.1-624.70
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:616.1-626.70
    rule entryP: `%%|-%:%%`(TC, TBLC_0, tableProperty, TBLC_3, `EntryP%%`_tablePropertyIR(const?{const <- const?}, tableEntryIR*{tableEntryIR <- tableEntryIR*}))
       -- if tableProperty matches `EntryP%%`
       -- let `EntryP%%`_tableProperty(const?{const <- const?}, tableEntry*{tableEntry <- tableEntry*}) = tableProperty
@@ -11667,7 +11668,7 @@ relation TableProperty_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty
       -- let TBLC_2 = TBLC_1[ENTRIES.CONST = (const?{const <- const?} = ?(`CONST`_const()))]
       -- TableEntries_ok: `%%|-%:%%`(TC, TBLC_2, tableEntry*{tableEntry <- tableEntry*}, TBLC_3, tableEntryIR*{tableEntryIR <- tableEntryIR*})
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:628.1-634.71
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:630.1-636.71
    rule customP-default-action: `%%|-%:%%`(TC, TBLC, tableProperty, TBLC, tablePropertyIR)
       -- if tableProperty matches `CustomP%%%`
       -- let `CustomP%%%`_tableProperty(const?{const <- const?}, text, initializer) = tableProperty
@@ -11675,7 +11676,7 @@ relation TableProperty_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty
       -- TableDefaultAction_ok: `%%|-%:%`(TC, TBLC, initializer, tableActionReferenceIR)
       -- let tablePropertyIR = `DefaultActionP%%`_tablePropertyIR(const?{const <- const?}, tableActionReferenceIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:636.1-646.66
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:638.1-648.66
    rule customP-size: `%%|-%:%%`(TC, TBLC, tableProperty, TBLC, tablePropertyIR)
       -- if tableProperty matches `CustomP%%%`
       -- let `CustomP%%%`_tableProperty(const?{const <- const?}, text, expression) = tableProperty
@@ -11685,7 +11686,7 @@ relation TableProperty_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty
       -- if (($is_arbitrary_int_typeIR(typeIR) \/ $is_fixed_int_typeIR(typeIR)) \/ $is_fixed_bit_typeIR(typeIR))
       -- let tablePropertyIR = `CustomP%%%`_tablePropertyIR(const?{const <- const?}, "size", typedExpressionIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:648.1-660.66
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:650.1-662.66
    rule customP-largest-priority-wins: `%%|-%:%%`(TC, TBLC_0, tableProperty, TBLC_1, tablePropertyIR)
       -- if tableProperty matches `CustomP%%%`
       -- let `CustomP%%%`_tableProperty(const?{const <- const?}, text, expression) = tableProperty
@@ -11701,7 +11702,7 @@ relation TableProperty_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty
       -- let TBLC_1 = TBLC_0[PRIORITIES.LARGEST_WINS = b_largest_priority_wins]
       -- let tablePropertyIR = `CustomConstP%%%`_tablePropertyIR(const?{const <- const?}, "largest_priority_wins", `BoolV%`_primitiveValue(b_largest_priority_wins) as constantInitializerIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:662.1-678.60
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:664.1-680.60
    rule customP-priority-delta: `%%|-%:%%`(TC, TBLC_0, tableProperty, TBLC_1, tablePropertyIR)
       -- if tableProperty matches `CustomP%%%`
       -- let `CustomP%%%`_tableProperty(const?{const <- const?}, text, expression) = tableProperty
@@ -11720,7 +11721,7 @@ relation TableProperty_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty
       -- let TBLC_1 = TBLC_0[PRIORITIES.DELTA = n_delta]
       -- let tablePropertyIR = `CustomConstP%%%`_tablePropertyIR(const?{const <- const?}, "priority_delta", `IntV%`_numberValue(n_delta as int) as constantInitializerIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:680.1-690.64
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:682.1-692.64
    rule customP: `%%|-%:%%`(TC, TBLC, tableProperty, TBLC, tablePropertyIR)
       -- if tableProperty matches `CustomP%%%`
       -- let `CustomP%%%`_tableProperty(const?{const <- const?}, name, expression) = tableProperty
@@ -11731,11 +11732,11 @@ relation TableProperty_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:250.1-252.23
 relation TableProperties_ok: `%%|-%:%%`(typingContext, tableContext, tableProperty*, tableContext, tablePropertyIR*)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:698.1-699.28
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:700.1-701.28
    rule nil: `%%|-%:%%`(TC, TBLC, tableProperty*{tableProperty <- tableProperty*}, TBLC, [])
       -- if tableProperty*{tableProperty <- tableProperty*} matches []
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:701.1-705.83
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:703.1-707.83
    rule cons: `%%|-%:%%`(TC, TBLC_0, tableProperty*{tableProperty <- tableProperty*}, TBLC_2, tablePropertyIR_h :: tablePropertyIR_t*{tablePropertyIR_t <- tablePropertyIR_t*})
       -- if tableProperty*{tableProperty <- tableProperty*} matches _ :: _
       -- let tableProperty_h :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty*{tableProperty <- tableProperty*}
@@ -11745,7 +11746,7 @@ relation TableProperties_ok: `%%|-%:%%`(typingContext, tableContext, tableProper
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:254.1-256.20
 relation Table_ok: `%|-%:%%`(typingContext, tableProperty*, tableContext, tablePropertyIR*)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:753.1-761.79
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:755.1-763.79
    rule : `%|-%:%%`(TC, tableProperty*{tableProperty <- tableProperty*}, TBLC_1, tablePropertyIR*{tablePropertyIR <- tablePropertyIR*})
       -- if ($count_table_keys(tableProperty*{tableProperty <- tableProperty*}) <= 1)
       -- if ($count_table_actions(tableProperty*{tableProperty <- tableProperty*}) = 1)
@@ -11755,7 +11756,7 @@ relation Table_ok: `%|-%:%%`(typingContext, tableProperty*, tableContext, tableP
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:258.1-260.23
 relation TableType_ok: `%%|-%:%%`(typingContext, tableContext, name, typingContext, typeIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:763.1-788.55
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:765.1-790.55
    rule : `%%|-%:%%`(TC_0, TBLC, name, TC_1, typeIR_table)
       -- let tid_enum = "action_list(" ++ name ++ ")"
       -- let (prefixedName_action, _parameterTypeIR*{_parameterTypeIR <- _parameterTypeIR*}, _argumentIR*{_argumentIR <- _argumentIR*})*{_argumentIR* <- _argumentIR**, _parameterTypeIR* <- _parameterTypeIR**, prefixedName_action <- prefixedName_action*} = TBLC.ACTIONS
@@ -14364,10 +14365,10 @@ def $split_dataplane_parameters(parameterTypeIR*) : (parameterTypeIR*, parameter
       -- if (direction =/= `NO`_direction())
       -- let (parameterTypeIR_data*{parameterTypeIR_data <- parameterTypeIR_data*}, parameterTypeIR_control*{parameterTypeIR_control <- parameterTypeIR_control*}) = $split_dataplane_parameters(parameterTypeIR_t*{parameterTypeIR_t <- parameterTypeIR_t*})
 
-;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:214.1-217.26
+;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:216.1-219.26
 relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey, keysetExpression, tableEntryState, keysetExpressionIR)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:221.1-234.65
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:223.1-236.65
    rule exprK-lpm: `%%|-%%:%%`(TC, TBLC, (typeIR_key, text), keysetExpression, `LPM%`_tableEntryState(n), `ExprK%`_keysetExpressionIR(typedExpressionIR_set))
       -- if (text = "lpm")
       -- if keysetExpression matches `ExprK%`
@@ -14381,7 +14382,7 @@ relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey
       -- let typeIR_set = `SetT%`_setTypeIR(typeIR_key) as typeIR
       -- let typedExpressionIR_set = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_set, typedExpressionIR) as expressionIR, `(%%)`_expressionNoteIR(typeIR_set, ctk))
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:236.1-249.65
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:238.1-251.65
    rule exprK-non-lpm: `%%|-%%:%%`(TC, TBLC, (typeIR_key, name_matchkind), keysetExpression, `NOLPM`_tableEntryState(), `ExprK%`_keysetExpressionIR(typedExpressionIR_set))
       -- if keysetExpression matches `ExprK%`
       -- let `ExprK%`_keysetExpression(expression) = keysetExpression
@@ -14392,7 +14393,7 @@ relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey
       -- let typeIR_set = `SetT%`_setTypeIR(typeIR_key) as typeIR
       -- let typedExpressionIR_set = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_set, typedExpressionIR) as expressionIR, `(%%)`_expressionNoteIR(typeIR_set, ctk))
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:253.1-283.70
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:255.1-285.70
    rule maskK-lpm: `%%|-%%:%%`(TC, TBLC, (typeIR_key, text), keysetExpression, `LPM%`_tableEntryState(n_prefix), `MaskK%%`_keysetExpressionIR(typedExpressionIR_l_coerced, typedExpressionIR_r_coerced))
       -- if (text = "lpm")
       -- if keysetExpression matches `MaskK%%`
@@ -14422,7 +14423,7 @@ relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey
       -- let ?(i_r) = int?{int <- int?}
       -- let n_prefix = $tableEntry_lpm_prefix(`FBitV%%`_numberValue(n, $to_bitstr(n as int, i_r)) as value)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:285.1-305.63
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:287.1-307.63
    rule maskK-ternary: `%%|-%%:%%`(TC, TBLC, (typeIR_key, text), keysetExpression, `NOLPM`_tableEntryState(), `MaskK%%`_keysetExpressionIR(typedExpressionIR_l_coerced, typedExpressionIR_r_coerced))
       -- if (text = "ternary")
       -- if keysetExpression matches `MaskK%%`
@@ -14442,7 +14443,7 @@ relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey
       -- if typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} matches (_)
       -- let ?(typedExpressionIR_r_coerced) = typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?}
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:309.1-329.63
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:311.1-331.63
    rule rangeK-range: `%%|-%%:%%`(TC, TBLC, (typeIR_key, text), keysetExpression, `NOLPM`_tableEntryState(), `RangeK%%`_keysetExpressionIR(typedExpressionIR_l_coerced, typedExpressionIR_r_coerced))
       -- if (text = "range")
       -- if keysetExpression matches `RangeK%%`
@@ -14462,7 +14463,7 @@ relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey
       -- if typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} matches (_)
       -- let ?(typedExpressionIR_r_coerced) = typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?}
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:333.1-336.31
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:335.1-338.31
    rule defaultK-lpm: `%%|-%%:%%`(TC, TBLC, (typeIR_key, text), keysetExpression, `LPM%`_tableEntryState(n), `DefaultK`_keysetExpressionIR())
       -- if (text = "lpm")
       -- if keysetExpression matches `DefaultK`
@@ -14470,12 +14471,12 @@ relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey
       -- if matchMode matches `NOPRILPM%`
       -- let `NOPRILPM%`_matchMode(n) = matchMode
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:338.1-341.35
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:340.1-343.35
    rule defaultK-else: `%%|-%%:%%`(TC, TBLC, (typeIR_key, name_matchkind), keysetExpression, `NOLPM`_tableEntryState(), `DefaultK`_keysetExpressionIR())
       -- if keysetExpression matches `DefaultK`
       -- if (name_matchkind =/= "exact")
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:345.1-348.31
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:347.1-350.31
    rule anyK-lpm: `%%|-%%:%%`(TC, TBLC, (typeIR_key, text), keysetExpression, `LPM%`_tableEntryState(0), `AnyK`_keysetExpressionIR())
       -- if (text = "lpm")
       -- if keysetExpression matches `AnyK`
@@ -14483,20 +14484,20 @@ relation TableEntry_keyset_ok: `%%|-%%:%%`(typingContext, tableContext, matchKey
       -- if matchMode matches `NOPRILPM%`
       -- let `NOPRILPM%`_matchMode(_nat) = matchMode
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:350.1-353.35
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:352.1-355.35
    rule anyK-else: `%%|-%%:%%`(TC, TBLC, (typeIR_key, name_matchkind), keysetExpression, `NOLPM`_tableEntryState(), `AnyK`_keysetExpressionIR())
       -- if keysetExpression matches `AnyK`
       -- if (name_matchkind =/= "exact")
 
-;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:361.1-364.29
+;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:363.1-366.29
 relation TableEntry_keysets_ok': `%%%|-%%:%%`(typingContext, tableContext, tableEntryState, matchKey*, keysetExpression*, tableEntryState, keysetExpressionIR*)
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:366.1-367.37
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:368.1-369.37
    rule nil: `%%%|-%%:%%`(TC, TBLC, TBLS, matchKey*{matchKey <- matchKey*}, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS, [])
       -- if matchKey*{matchKey <- matchKey*} matches []
       -- if keysetExpression*{keysetExpression <- keysetExpression*} matches []
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:369.1-379.53
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:371.1-381.53
    rule cons: `%%%|-%%:%%`(TC, TBLC, TBLS_0, matchKey*{matchKey <- matchKey*}, keysetExpression*{keysetExpression <- keysetExpression*}, TBLS_3, keysetExpressionIR_h :: keysetExpressionIR_t*{keysetExpressionIR_t <- keysetExpressionIR_t*})
       -- if matchKey*{matchKey <- matchKey*} matches _ :: _
       -- let matchKey_h :: matchKey_t*{matchKey_t <- matchKey_t*} = matchKey*{matchKey <- matchKey*}
@@ -14506,70 +14507,70 @@ relation TableEntry_keysets_ok': `%%%|-%%:%%`(typingContext, tableContext, table
       -- let TBLS_2 = $join_tableEntryState(TBLS_0, TBLS_1)
       -- TableEntry_keysets_ok': `%%%|-%%:%%`(TC, TBLC, TBLS_2, matchKey_t*{matchKey_t <- matchKey_t*}, keysetExpression_t*{keysetExpression_t <- keysetExpression_t*}, TBLS_3, keysetExpressionIR_t*{keysetExpressionIR_t <- keysetExpressionIR_t*})
 
-;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:713.1-713.44
+;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:715.1-715.44
 def $count_table_keys(tableProperty*) : nat =
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:715.1-715.31
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:717.1-717.31
    clause 0(tableProperty*{tableProperty <- tableProperty*}) = 0
       -- if tableProperty*{tableProperty <- tableProperty*} matches []
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:716.1-719.47
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:718.1-721.47
    clause 1(tableProperty'*{tableProperty' <- tableProperty'*}) = (1 + $count_table_keys(tableProperty_t*{tableProperty_t <- tableProperty_t*}))
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
       -- if tableProperty matches `KeyP%`
       -- let `KeyP%`_tableProperty(_tableKey*{_tableKey <- _tableKey*}) = tableProperty
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:720.1-723.40
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:722.1-725.40
    clause 2(tableProperty'*{tableProperty' <- tableProperty'*}) = $count_table_keys(tableProperty_t*{tableProperty_t <- tableProperty_t*})
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
       -- if tableProperty matches `ActionP%`
       -- let `ActionP%`_tableProperty(_tableAction*{_tableAction <- _tableAction*}) = tableProperty
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:724.1-727.40
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:726.1-729.40
    clause 3(tableProperty'*{tableProperty' <- tableProperty'*}) = $count_table_keys(tableProperty_t*{tableProperty_t <- tableProperty_t*})
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
       -- if tableProperty matches `EntryP%%`
       -- let `EntryP%%`_tableProperty(_const?{_const <- _const?}, _tableEntry*{_tableEntry <- _tableEntry*}) = tableProperty
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:728.1-731.40
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:730.1-733.40
    clause 4(tableProperty'*{tableProperty' <- tableProperty'*}) = $count_table_keys(tableProperty_t*{tableProperty_t <- tableProperty_t*})
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
       -- if tableProperty matches `CustomP%%%`
       -- let `CustomP%%%`_tableProperty(_const?{_const <- _const?}, _name, _initializer) = tableProperty
 
-;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:733.1-733.47
+;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:735.1-735.47
 def $count_table_actions(tableProperty*) : nat =
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:735.1-735.34
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:737.1-737.34
    clause 0(tableProperty*{tableProperty <- tableProperty*}) = 0
       -- if tableProperty*{tableProperty <- tableProperty*} matches []
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:736.1-739.50
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:738.1-741.50
    clause 1(tableProperty'*{tableProperty' <- tableProperty'*}) = (1 + $count_table_actions(tableProperty_t*{tableProperty_t <- tableProperty_t*}))
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
       -- if tableProperty matches `ActionP%`
       -- let `ActionP%`_tableProperty(_tableAction*{_tableAction <- _tableAction*}) = tableProperty
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:740.1-743.43
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:742.1-745.43
    clause 2(tableProperty'*{tableProperty' <- tableProperty'*}) = $count_table_actions(tableProperty_t*{tableProperty_t <- tableProperty_t*})
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
       -- if tableProperty matches `KeyP%`
       -- let `KeyP%`_tableProperty(_tableKey*{_tableKey <- _tableKey*}) = tableProperty
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:744.1-747.43
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:746.1-749.43
    clause 3(tableProperty'*{tableProperty' <- tableProperty'*}) = $count_table_actions(tableProperty_t*{tableProperty_t <- tableProperty_t*})
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
       -- if tableProperty matches `EntryP%%`
       -- let `EntryP%%`_tableProperty(_const?{_const <- _const?}, _tableEntry*{_tableEntry <- _tableEntry*}) = tableProperty
 
-   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:748.1-751.43
+   ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:750.1-753.43
    clause 4(tableProperty'*{tableProperty' <- tableProperty'*}) = $count_table_actions(tableProperty_t*{tableProperty_t <- tableProperty_t*})
       -- if tableProperty'*{tableProperty' <- tableProperty'*} matches _ :: _
       -- let tableProperty :: tableProperty_t*{tableProperty_t <- tableProperty_t*} = tableProperty'*{tableProperty' <- tableProperty'*}
