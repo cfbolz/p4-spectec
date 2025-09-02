@@ -184,7 +184,8 @@ relation SwitchLabel_table_ok:
 ;;;;;;  DefaultL
 
 rule SwitchLabel_table_ok/defaultL:
-  TC tid_table true |- DefaultL : DefaultL
+  TC _ b_last |- DefaultL : DefaultL
+  -- if b_last = true
 
 ;;;;;; ExprL expression
 
@@ -277,7 +278,8 @@ relation SwitchLabel_general_ok:
 ;;;;;; DefaultL
 
 rule SwitchLabel_general_ok/defaultL:
-  TC _ true |- DefaultL : DefaultL
+  TC _ b_last |- DefaultL : DefaultL
+  -- if b_last = true
 
 ;;;;;; ExprL expression
 

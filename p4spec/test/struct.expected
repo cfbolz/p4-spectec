@@ -18316,7 +18316,7 @@ relation RoutineTarget_lvalue_ok: p, TC, lvalue
 3. Result in routineTargetIR
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:354.1-357.29
-relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR''*{argumentIR'' <- argumentIR''*}
+relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR*{argumentIR <- argumentIR*}
 
 1. Case analysis on routineTargetIR
 
@@ -18324,7 +18324,7 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
     1. (Let (FuncT prefixedName) be routineTargetIR)
 
-    2. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_routine_overloaded(p, TC, prefixedName, argumentIR''*{argumentIR'' <- argumentIR''*}))
+    2. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_routine_overloaded(p, TC, prefixedName, argumentIR*{argumentIR <- argumentIR*}))
 
     3. If (((rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} matches pattern (_))), then
 
@@ -18346,211 +18346,207 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
     1. (Let (MethodT typedExpressionIR_base name) be routineTargetIR)
 
-    2. If ((typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} matches pattern [])), then
+    2. If (name is in ["minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes"]), then
 
-      1. Case analysis on argumentIR''*{argumentIR'' <- argumentIR''*}
+      1. If (((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0) /\ (|argumentIR*{argumentIR <- argumentIR*}| = 0))), then
 
-        1. Case (% matches pattern [])
+        1. (Let routineTypeIR be (BuiltinMethodT [] ((IntT) as typeIR)))
 
-          1. Case analysis on name
+        2. Result in routineTypeIR, [], []
 
-            1. Case (% is in ["minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes"])
+      1. Else Phantom#1066
 
-              1. (Let routineTypeIR be (BuiltinMethodT [] ((IntT) as typeIR)))
-
-              2. Result in routineTypeIR, [], []
-
-            2. Case (% is in ["isValid"])
-
-              1. (Let (_expressionIR (( typeIR_base _ctk ))) be typedExpressionIR_base)
-
-              2. (Let typeIR be $canon(typeIR_base))
-
-              3. Case analysis on typeIR
-
-                1. Case (% has type headerTypeIR)
-
-                  1. (Let (HeaderT _tid _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) be (typeIR as headerTypeIR))
-
-                  2. (Let routineTypeIR be (BuiltinMethodT [] ((BoolT) as typeIR)))
-
-                  3. Result in routineTypeIR, [], []
-
-                2. Case (% has type headerUnionTypeIR)
-
-                  1. (Let (HeaderUnionT _tid _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) be (typeIR as headerUnionTypeIR))
-
-                  2. (Let routineTypeIR be (BuiltinMethodT [] ((BoolT) as typeIR)))
-
-                  3. Result in routineTypeIR, [], []
-
-              3. Else Phantom#1066
-
-            3. Case (% is in ["setValid", "setInvalid"])
-
-              1. (Let (_expressionIR (( typeIR_base _ctk ))) be typedExpressionIR_base)
-
-              2. (Let typeIR be $canon(typeIR_base))
-
-              3. If ((typeIR has type headerTypeIR)), then
-
-                1. (Let (HeaderT _tid _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) be (typeIR as headerTypeIR))
-
-                2. (Let routineTypeIR be (BuiltinMethodT [] ((VoidT) as typeIR)))
-
-                3. Result in routineTypeIR, [], []
-
-              3. Else Phantom#1067
-
-          1. Else Phantom#1068
-
-        2. Case (% matches pattern [ _/1 ])
-
-          1. (Let [argumentIR] be argumentIR''*{argumentIR'' <- argumentIR''*})
-
-          2. If (name is in ["push_front", "pop_front"]), then
-
-            1. (Let (_expressionIR (( typeIR_base _ctk ))) be typedExpressionIR_base)
-
-            2. (Let typeIR' be $canon(typeIR_base))
-
-            3. If ((typeIR' has type headerStackTypeIR)), then
-
-              1. (Let (HeaderStackT typeIR _nat) be (typeIR' as headerStackTypeIR))
-
-              2. (Let parameterTypeIR be ((NO) ((IntT) as typeIR) "count" ?()))
-
-              3. (Let routineTypeIR be (BuiltinMethodT [parameterTypeIR] ((IntT) as typeIR)))
-
-              4. Result in routineTypeIR, [], []
-
-            3. Else Phantom#1069
-
-          2. Else Phantom#1070
-
-      1. Else Phantom#1071
-
-    2. Else Phantom#1072
+    2. Else Phantom#1067
 
     3. (Let (_expressionIR (( typeIR_base _ctk ))) be typedExpressionIR_base)
 
-    4. (Let typeIR be $canon(typeIR_base))
+    4. (Let typeIR' be $canon(typeIR_base))
 
-    5. If ((typeIR has type externObjectTypeIR)), then
+    5. Case analysis on typeIR'
 
-      1. (Let (ExternT _tid ({ (rid_f -> routineTypeDefIR_f)*{rid_f <- rid_f*, routineTypeDefIR_f <- routineTypeDefIR_f*} })) be (typeIR as externObjectTypeIR))
+      1. Case (% has type headerStackTypeIR)
 
-      2. (Let id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*} be $ids_arguments(argumentIR''*{argumentIR'' <- argumentIR''*}))
+        1. (Let (HeaderStackT typeIR _nat) be (typeIR' as headerStackTypeIR))
 
-      3. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_overloaded<routineTypeDefIR>(({ (rid_f -> routineTypeDefIR_f)*{rid_f <- rid_f*, routineTypeDefIR_f <- routineTypeDefIR_f*} }), name, id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*}))
+        2. If (name is in ["push_front", "pop_front"]), then
 
-      4. If (((rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} matches pattern (_))), then
+          1. If (((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0) /\ (|argumentIR*{argumentIR <- argumentIR*}| = 1))), then
 
-        1. (Let ?((rid, routineTypeDefIR, id_default*{id_default <- id_default*})) be (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?})
+            1. (Let parameterTypeIR be ((NO) ((IntT) as typeIR) "count" ?()))
 
-        2. (Let (routineTypeIR, tid_impl*{tid_impl <- tid_impl*}) be $specialize_routineTypeDef(routineTypeDefIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}))
-
-        3. (Let bound be $union_set<tid>($bound(p, TC), ({ tid_impl*{tid_impl <- tid_impl*} })))
-
-        4. If ((RoutineType_wf: bound |- routineTypeIR holds)), then
-
-          1. Result in routineTypeIR, tid_impl*{tid_impl <- tid_impl*}, id_default*{id_default <- id_default*}
-
-        4. Else Phantom#1073
-
-      4. Else Phantom#1074
-
-    5. Else Phantom#1075
-
-    6. If ((name = "apply")), then
-
-      1. If ((typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} matches pattern [])), then
-
-        1. Case analysis on typeIR
-
-          1. Case (% has type parserObjectTypeIR)
-
-            1. (Let (ParserT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}) be (typeIR as parserObjectTypeIR))
-
-            2. (Let routineTypeIR be (ParserApplyMethodT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}))
-
-            3. (Let (_direction _typeIR id_param value_param?{value_param <- value_param?}) be parameterTypeIR)*{_direction <- _direction*, _typeIR <- _typeIR*, id_param <- id_param*, parameterTypeIR <- parameterTypeIR*, value_param? <- value_param?*}
-
-            4. (Let pid be (id_param (value_param?{value_param <- value_param?} =/= ?())))*{id_param <- id_param*, pid <- pid*, value_param? <- value_param?*}
-
-            5. (Let rid be ("apply" pid*{pid <- pid*}))
-
-            6. (Let id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*} be $ids_arguments(argumentIR''*{argumentIR'' <- argumentIR''*}))
-
-            7. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_overloaded<routineTypeDefIR>(({ [(rid -> ((MonoTD routineTypeIR) as routineTypeDefIR))] }), "apply", id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*}))
-
-            8. If (((rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} matches pattern (_))), then
-
-              1. (Let ?((rid', routineTypeDefIR, id_default*{id_default <- id_default*})) be (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?})
-
-              2. If ((rid' = rid)), then
-
-                1. If ((routineTypeDefIR = ((MonoTD routineTypeIR) as routineTypeDefIR))), then
-
-                  1. Result in routineTypeIR, [], id_default*{id_default <- id_default*}
-
-                1. Else Phantom#1076
-
-              2. Else Phantom#1077
-
-            8. Else Phantom#1078
-
-          2. Case (% has type controlObjectTypeIR)
-
-            1. (Let (ControlT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}) be (typeIR as controlObjectTypeIR))
-
-            2. (Let routineTypeIR be (ControlApplyMethodT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}))
-
-            3. (Let (_direction _typeIR id_param value_param?{value_param <- value_param?}) be parameterTypeIR)*{_direction <- _direction*, _typeIR <- _typeIR*, id_param <- id_param*, parameterTypeIR <- parameterTypeIR*, value_param? <- value_param?*}
-
-            4. (Let pid be (id_param (value_param?{value_param <- value_param?} =/= ?())))*{id_param <- id_param*, pid <- pid*, value_param? <- value_param?*}
-
-            5. (Let rid be ("apply" pid*{pid <- pid*}))
-
-            6. (Let id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*} be $ids_arguments(argumentIR''*{argumentIR'' <- argumentIR''*}))
-
-            7. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_overloaded<routineTypeDefIR>(({ [(rid -> ((MonoTD routineTypeIR) as routineTypeDefIR))] }), "apply", id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*}))
-
-            8. If (((rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} matches pattern (_))), then
-
-              1. (Let ?((rid', routineTypeDefIR, id_default*{id_default <- id_default*})) be (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?})
-
-              2. If ((rid' = rid)), then
-
-                1. If ((routineTypeDefIR = ((MonoTD routineTypeIR) as routineTypeDefIR))), then
-
-                  1. Result in routineTypeIR, [], id_default*{id_default <- id_default*}
-
-                1. Else Phantom#1079
-
-              2. Else Phantom#1080
-
-            8. Else Phantom#1081
-
-        1. Else Phantom#1082
-
-        2. If ((argumentIR''*{argumentIR'' <- argumentIR''*} matches pattern [])), then
-
-          1. If ((typeIR has type tableObjectTypeIR)), then
-
-            1. (Let (TableT _tid typeIR_table) be (typeIR as tableObjectTypeIR))
-
-            2. (Let routineTypeIR be (TableApplyMethodT typeIR_table))
+            2. (Let routineTypeIR be (BuiltinMethodT [parameterTypeIR] ((IntT) as typeIR)))
 
             3. Result in routineTypeIR, [], []
 
-          1. Else Phantom#1083
+          1. Else Phantom#1068
 
-        2. Else Phantom#1084
+        2. Else Phantom#1069
 
-      1. Else Phantom#1085
+      2. Case (% has type headerTypeIR)
 
-    6. Else Phantom#1086
+        1. (Let (HeaderT _tid _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) be (typeIR' as headerTypeIR))
+
+        2. Case analysis on name
+
+          1. Case (% is in ["isValid"])
+
+            1. If (((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0) /\ (|argumentIR*{argumentIR <- argumentIR*}| = 0))), then
+
+              1. (Let routineTypeIR be (BuiltinMethodT [] ((BoolT) as typeIR)))
+
+              2. Result in routineTypeIR, [], []
+
+            1. Else Phantom#1070
+
+          2. Case (% is in ["setValid", "setInvalid"])
+
+            1. If (((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0) /\ (|argumentIR*{argumentIR <- argumentIR*}| = 0))), then
+
+              1. (Let routineTypeIR be (BuiltinMethodT [] ((VoidT) as typeIR)))
+
+              2. Result in routineTypeIR, [], []
+
+            1. Else Phantom#1071
+
+        2. Else Phantom#1072
+
+      3. Case (% has type headerUnionTypeIR)
+
+        1. (Let (HeaderUnionT _tid _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) be (typeIR' as headerUnionTypeIR))
+
+        2. If (name is in ["isValid"]), then
+
+          1. If (((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0) /\ (|argumentIR*{argumentIR <- argumentIR*}| = 0))), then
+
+            1. (Let routineTypeIR be (BuiltinMethodT [] ((BoolT) as typeIR)))
+
+            2. Result in routineTypeIR, [], []
+
+          1. Else Phantom#1073
+
+        2. Else Phantom#1074
+
+      4. Case (% has type externObjectTypeIR)
+
+        1. (Let (ExternT _tid ({ (rid_f -> routineTypeDefIR_f)*{rid_f <- rid_f*, routineTypeDefIR_f <- routineTypeDefIR_f*} })) be (typeIR' as externObjectTypeIR))
+
+        2. (Let id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*} be $ids_arguments(argumentIR*{argumentIR <- argumentIR*}))
+
+        3. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_overloaded<routineTypeDefIR>(({ (rid_f -> routineTypeDefIR_f)*{rid_f <- rid_f*, routineTypeDefIR_f <- routineTypeDefIR_f*} }), name, id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*}))
+
+        4. If (((rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} matches pattern (_))), then
+
+          1. (Let ?((rid, routineTypeDefIR, id_default*{id_default <- id_default*})) be (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?})
+
+          2. (Let (routineTypeIR, tid_impl*{tid_impl <- tid_impl*}) be $specialize_routineTypeDef(routineTypeDefIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}))
+
+          3. (Let bound be $union_set<tid>($bound(p, TC), ({ tid_impl*{tid_impl <- tid_impl*} })))
+
+          4. If ((RoutineType_wf: bound |- routineTypeIR holds)), then
+
+            1. Result in routineTypeIR, tid_impl*{tid_impl <- tid_impl*}, id_default*{id_default <- id_default*}
+
+          4. Else Phantom#1075
+
+        4. Else Phantom#1076
+
+      5. Case (% has type parserObjectTypeIR)
+
+        1. (Let (ParserT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}) be (typeIR' as parserObjectTypeIR))
+
+        2. If ((name = "apply")), then
+
+          1. If ((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0)), then
+
+            1. (Let routineTypeIR be (ParserApplyMethodT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}))
+
+            2. (Let (_direction _typeIR id_param value_param?{value_param <- value_param?}) be parameterTypeIR)*{_direction <- _direction*, _typeIR <- _typeIR*, id_param <- id_param*, parameterTypeIR <- parameterTypeIR*, value_param? <- value_param?*}
+
+            3. (Let pid be (id_param (value_param?{value_param <- value_param?} =/= ?())))*{id_param <- id_param*, pid <- pid*, value_param? <- value_param?*}
+
+            4. (Let rid be ("apply" pid*{pid <- pid*}))
+
+            5. (Let id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*} be $ids_arguments(argumentIR*{argumentIR <- argumentIR*}))
+
+            6. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_overloaded<routineTypeDefIR>(({ [(rid -> ((MonoTD routineTypeIR) as routineTypeDefIR))] }), "apply", id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*}))
+
+            7. If (((rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} matches pattern (_))), then
+
+              1. (Let ?((rid', routineTypeDefIR, id_default*{id_default <- id_default*})) be (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?})
+
+              2. If ((rid' = rid)), then
+
+                1. If ((routineTypeDefIR = ((MonoTD routineTypeIR) as routineTypeDefIR))), then
+
+                  1. Result in routineTypeIR, [], id_default*{id_default <- id_default*}
+
+                1. Else Phantom#1077
+
+              2. Else Phantom#1078
+
+            7. Else Phantom#1079
+
+          1. Else Phantom#1080
+
+        2. Else Phantom#1081
+
+      6. Case (% has type controlObjectTypeIR)
+
+        1. (Let (ControlT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}) be (typeIR' as controlObjectTypeIR))
+
+        2. If ((name = "apply")), then
+
+          1. If ((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0)), then
+
+            1. (Let routineTypeIR be (ControlApplyMethodT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}))
+
+            2. (Let (_direction _typeIR id_param value_param?{value_param <- value_param?}) be parameterTypeIR)*{_direction <- _direction*, _typeIR <- _typeIR*, id_param <- id_param*, parameterTypeIR <- parameterTypeIR*, value_param? <- value_param?*}
+
+            3. (Let pid be (id_param (value_param?{value_param <- value_param?} =/= ?())))*{id_param <- id_param*, pid <- pid*, value_param? <- value_param?*}
+
+            4. (Let rid be ("apply" pid*{pid <- pid*}))
+
+            5. (Let id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*} be $ids_arguments(argumentIR*{argumentIR <- argumentIR*}))
+
+            6. (Let (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} be $find_overloaded<routineTypeDefIR>(({ [(rid -> ((MonoTD routineTypeIR) as routineTypeDefIR))] }), "apply", id_arg?{id_arg <- id_arg?}*{id_arg? <- id_arg?*}))
+
+            7. If (((rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?} matches pattern (_))), then
+
+              1. (Let ?((rid', routineTypeDefIR, id_default*{id_default <- id_default*})) be (rid, routineTypeDefIR, id*)?{(rid, routineTypeDefIR, id*) <- (rid, routineTypeDefIR, id*)?})
+
+              2. If ((rid' = rid)), then
+
+                1. If ((routineTypeDefIR = ((MonoTD routineTypeIR) as routineTypeDefIR))), then
+
+                  1. Result in routineTypeIR, [], id_default*{id_default <- id_default*}
+
+                1. Else Phantom#1082
+
+              2. Else Phantom#1083
+
+            7. Else Phantom#1084
+
+          1. Else Phantom#1085
+
+        2. Else Phantom#1086
+
+      7. Case (% has type tableObjectTypeIR)
+
+        1. (Let (TableT _tid typeIR_table) be (typeIR' as tableObjectTypeIR))
+
+        2. If ((name = "apply")), then
+
+          1. If (((|typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}| = 0) /\ (|argumentIR*{argumentIR <- argumentIR*}| = 0))), then
+
+            1. (Let routineTypeIR be (TableApplyMethodT typeIR_table))
+
+            2. Result in routineTypeIR, [], []
+
+          1. Else Phantom#1087
+
+        2. Else Phantom#1088
+
+    5. Else Phantom#1089
 
   3. Case (% matches pattern `TypeT%%`)
 
@@ -18558,7 +18554,7 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
     2. If ((typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} matches pattern [])), then
 
-      1. If ((argumentIR''*{argumentIR'' <- argumentIR''*} matches pattern [])), then
+      1. If ((argumentIR*{argumentIR <- argumentIR*} matches pattern [])), then
 
         1. If (name is in ["minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes"]), then
 
@@ -18566,11 +18562,11 @@ relation RoutineType_ok: p, TC, routineTargetIR, typeArgumentIR*{typeArgumentIR 
 
           2. Result in routineTypeIR, [], []
 
-        1. Else Phantom#1087
+        1. Else Phantom#1090
 
-      1. Else Phantom#1088
+      1. Else Phantom#1091
 
-    2. Else Phantom#1089
+    2. Else Phantom#1092
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:364.1-368.35
 relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, tid'*{tid' <- tid'*}, argumentIR*{argumentIR <- argumentIR*}, id_default'*{id_default' <- id_default'*}
@@ -18585,21 +18581,13 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
       1. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-      2. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+      2. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-        1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+      3. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-        2. If ($callable_builtin_function(p, TC)), then
+      4. Result in typeIR_ret, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-          1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
-
-          2. Result in typeIR_ret, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
-
-        2. Else Phantom#1090
-
-      2. Else Phantom#1091
-
-    2. Else Phantom#1092
+    2. Else Phantom#1093
 
   2. Case (% matches pattern `FuncT%%`)
 
@@ -18607,47 +18595,43 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
     2. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-    3. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+    3. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+    4. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      2. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
+    5. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
 
-      3. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
+      1. (Let ?(inference) be inference'?{inference' <- inference'?})
 
-        1. (Let ?(inference) be inference'?{inference' <- inference'?})
+      2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
 
-        2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
+      3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
 
-        3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
+        1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
 
-          1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
+        2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
 
-          2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
+        3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
 
-          3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
+        4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
 
-          4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
+        5. (Let routineTypeIR_inferred be (FuncT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
 
-          5. (Let routineTypeIR_inferred be (FuncT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
+        6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
 
-          6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
+          1. If ($callable_function(p, TC)), then
 
-            1. If ($callable_function(p, TC)), then
+            1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-              1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+            2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-              2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+          1. Else Phantom#1094
 
-            1. Else Phantom#1093
-
-          6. Else Phantom#1094
-
-        3. Else Phantom#1095
+        6. Else Phantom#1095
 
       3. Else Phantom#1096
 
-    3. Else Phantom#1097
+    5. Else Phantom#1097
 
   3. Case (% matches pattern `ExternFuncT%%`)
 
@@ -18655,47 +18639,43 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
     2. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-    3. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+    3. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+    4. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      2. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
+    5. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
 
-      3. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
+      1. (Let ?(inference) be inference'?{inference' <- inference'?})
 
-        1. (Let ?(inference) be inference'?{inference' <- inference'?})
+      2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
 
-        2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
+      3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
 
-        3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
+        1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
 
-          1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
+        2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
 
-          2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
+        3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
 
-          3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
+        4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
 
-          4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
+        5. (Let routineTypeIR_inferred be (ExternFuncT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
 
-          5. (Let routineTypeIR_inferred be (ExternFuncT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
+        6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
 
-          6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
+          1. If ($callable_extern_function(p, TC)), then
 
-            1. If ($callable_extern_function(p, TC)), then
+            1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-              1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+            2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-              2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+          1. Else Phantom#1098
 
-            1. Else Phantom#1098
+        6. Else Phantom#1099
 
-          6. Else Phantom#1099
+      3. Else Phantom#1100
 
-        3. Else Phantom#1100
-
-      3. Else Phantom#1101
-
-    3. Else Phantom#1102
+    5. Else Phantom#1101
 
   4. Case (% matches pattern `ActionT%`)
 
@@ -18707,23 +18687,19 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
         1. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-        2. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+        2. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-          1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+        3. If ($callable_action(p, TC)), then
 
-          2. If ($callable_action(p, TC)), then
+          1. (Call_convention_ok: p TC (ACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-            1. (Call_convention_ok: p TC (ACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+          2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+        3. Else Phantom#1102
 
-          2. Else Phantom#1103
+      1. Else Phantom#1103
 
-        2. Else Phantom#1104
-
-      1. Else Phantom#1105
-
-    2. Else Phantom#1106
+    2. Else Phantom#1104
 
   5. Case (% matches pattern `BuiltinMethodT%%`)
 
@@ -18733,21 +18709,13 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
       1. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-      2. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+      2. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-        1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+      3. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-        2. If ($callable_builtin_method(p, TC)), then
+      4. Result in typeIR_ret, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-          1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
-
-          2. Result in typeIR_ret, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
-
-        2. Else Phantom#1107
-
-      2. Else Phantom#1108
-
-    2. Else Phantom#1109
+    2. Else Phantom#1105
 
   6. Case (% matches pattern `ExternMethodT%%`)
 
@@ -18755,47 +18723,43 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
     2. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-    3. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+    3. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+    4. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      2. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
+    5. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
 
-      3. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
+      1. (Let ?(inference) be inference'?{inference' <- inference'?})
 
-        1. (Let ?(inference) be inference'?{inference' <- inference'?})
+      2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
 
-        2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
+      3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
 
-        3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
+        1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
 
-          1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
+        2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
 
-          2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
+        3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
 
-          3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
+        4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
 
-          4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
+        5. (Let routineTypeIR_inferred be (ExternMethodT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
 
-          5. (Let routineTypeIR_inferred be (ExternMethodT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
+        6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
 
-          6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
+          1. If ($callable_extern_method(p, TC)), then
 
-            1. If ($callable_extern_method(p, TC)), then
+            1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-              1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+            2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-              2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+          1. Else Phantom#1106
 
-            1. Else Phantom#1110
+        6. Else Phantom#1107
 
-          6. Else Phantom#1111
+      3. Else Phantom#1108
 
-        3. Else Phantom#1112
-
-      3. Else Phantom#1113
-
-    3. Else Phantom#1114
+    5. Else Phantom#1109
 
   7. Case (% matches pattern `ExternAbstractMethodT%%`)
 
@@ -18803,47 +18767,43 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
     2. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-    3. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+    3. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+    4. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
 
-      2. (Let inference'?{inference' <- inference'?} be $infer(tid'*{tid' <- tid'*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
+    5. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
 
-      3. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
+      1. (Let ?(inference) be inference'?{inference' <- inference'?})
 
-        1. (Let ?(inference) be inference'?{inference' <- inference'?})
+      2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
 
-        2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid'))*{tid' <- tid'*, typeIR? <- typeIR?*}
+      3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
 
-        3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
+        1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
 
-          1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
+        2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
 
-          2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
+        3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
 
-          3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
+        4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
 
-          4. (Let typeIR_ret_inferred be $subst_type(inference, typeIR_ret))
+        5. (Let routineTypeIR_inferred be (ExternAbstractMethodT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
 
-          5. (Let routineTypeIR_inferred be (ExternAbstractMethodT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_ret_inferred))
+        6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
 
-          6. If ((RoutineType_wf: $bound(p, TC) |- routineTypeIR_inferred holds)), then
+          1. If ($callable_extern_abstract_method(p, TC)), then
 
-            1. If ($callable_extern_abstract_method(p, TC)), then
+            1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-              1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+            2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-              2. Result in typeIR_ret_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+          1. Else Phantom#1110
 
-            1. Else Phantom#1115
+        6. Else Phantom#1111
 
-          6. Else Phantom#1116
+      3. Else Phantom#1112
 
-        3. Else Phantom#1117
-
-      3. Else Phantom#1118
-
-    3. Else Phantom#1119
+    5. Else Phantom#1113
 
   8. Case (% matches pattern `ParserApplyMethodT%`)
 
@@ -18855,23 +18815,19 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
         1. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-        2. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+        2. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-          1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+        3. If ($callable_parser_apply_method(p, TC)), then
 
-          2. If ($callable_parser_apply_method(p, TC)), then
+          1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-            1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+          2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+        3. Else Phantom#1114
 
-          2. Else Phantom#1120
+      1. Else Phantom#1115
 
-        2. Else Phantom#1121
-
-      1. Else Phantom#1122
-
-    2. Else Phantom#1123
+    2. Else Phantom#1116
 
   9. Case (% matches pattern `ControlApplyMethodT%`)
 
@@ -18883,23 +18839,19 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
         1. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default'*{id_default' <- id_default'*}))
 
-        2. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+        2. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-          1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+        3. If ($callable_control_apply_method(p, TC)), then
 
-          2. If ($callable_control_apply_method(p, TC)), then
+          1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-            1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+          2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            2. Result in ((VoidT) as typeIR), [], argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+        3. Else Phantom#1117
 
-          2. Else Phantom#1124
+      1. Else Phantom#1118
 
-        2. Else Phantom#1125
-
-      1. Else Phantom#1126
-
-    2. Else Phantom#1127
+    2. Else Phantom#1119
 
   10. Case (% matches pattern `TableApplyMethodT%`)
 
@@ -18917,15 +18869,15 @@ relation Call_ok: p, TC, routineTypeIR, typeArgumentIR*{typeArgumentIR <- typeAr
 
               1. Result in typeIR_table, [], []
 
-            1. Else Phantom#1128
+            1. Else Phantom#1120
 
-          1. Else Phantom#1129
+          1. Else Phantom#1121
 
-        1. Else Phantom#1130
+        1. Else Phantom#1122
 
-      1. Else Phantom#1131
+      1. Else Phantom#1123
 
-    2. Else Phantom#1132
+    2. Else Phantom#1124
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:378.1-381.29
 relation ConstructorType_ok: p, TC, prefixedName, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, argumentIR*{argumentIR <- argumentIR*}
@@ -18944,9 +18896,9 @@ relation ConstructorType_ok: p, TC, prefixedName, typeArgumentIR*{typeArgumentIR
 
     1. Result in constructorTypeIR, tid_impl*{tid_impl <- tid_impl*}, id_default*{id_default <- id_default*}
 
-  4. Else Phantom#1133
+  4. Else Phantom#1125
 
-2. Else Phantom#1134
+2. Else Phantom#1126
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:388.19-388.31
 syntax instctxt = 
@@ -18954,111 +18906,49 @@ syntax instctxt =
    | `ANON`()
 
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:390.1-393.38
-relation Inst_ok: cursor', TC, instctxt, constructorTypeIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, tid_infer*{tid_infer <- tid_infer*}, argumentIR*{argumentIR <- argumentIR*}, id_default*{id_default <- id_default*}
+relation Inst_ok: p, TC, instctxt, constructorTypeIR, typeArgumentIR*{typeArgumentIR <- typeArgumentIR*}, tid_infer*{tid_infer <- tid_infer*}, argumentIR*{argumentIR <- argumentIR*}, id_default*{id_default <- id_default*}
 
-1. If ((cursor' matches pattern `GLOBAL`)), then
+1. (Let (ConstructorT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*} typeIR_object) be constructorTypeIR)
 
-  1. (Let (ConstructorT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*} typeIR_object) be constructorTypeIR)
+2. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default*{id_default <- id_default*}))
 
-  2. If ($is_package_object_typeIR($canon(typeIR_object))), then
+3. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
 
-    1. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default*{id_default <- id_default*}))
+4. (Let inference'?{inference' <- inference'?} be $infer(tid_infer*{tid_infer <- tid_infer*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
 
-    2. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
+5. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
 
-      1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
+  1. (Let ?(inference) be inference'?{inference' <- inference'?})
 
-      2. (Let inference'?{inference' <- inference'?} be $infer(tid_infer*{tid_infer <- tid_infer*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
+  2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid_infer))*{tid_infer <- tid_infer*, typeIR? <- typeIR?*}
 
-      3. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
+  3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
 
-        1. (Let ?(inference) be inference'?{inference' <- inference'?})
+    1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
 
-        2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid_infer))*{tid_infer <- tid_infer*, typeIR? <- typeIR?*}
+    2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
 
-        3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
+    3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
 
-          1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
+    4. (Let typeIR_object_inferred be $subst_type(inference, typeIR_object))
 
-          2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
+    5. (Let constructorTypeIR_inferred be (ConstructorT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_object_inferred))
 
-          3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
+    6. If ((ConstructorType_wf: $bound(p, TC) |- constructorTypeIR_inferred holds)), then
 
-          4. (Let typeIR_object_inferred be $subst_type(inference, typeIR_object))
+      1. If ($instantiable(p, TC, instctxt, typeIR_object_inferred)), then
 
-          5. (Let constructorTypeIR_inferred be (ConstructorT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_object_inferred))
+        1. (Call_convention_ok: p TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-          6. If ((ConstructorType_wf: $bound((GLOBAL), TC) |- constructorTypeIR_inferred holds)), then
+        2. Result in typeIR_object_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
 
-            1. If ($instantiable((GLOBAL), TC, instctxt, typeIR_object_inferred)), then
+      1. Else Phantom#1127
 
-              1. (Call_convention_ok: (BLOCK) TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
+    6. Else Phantom#1128
 
-              2. Result in typeIR_object_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
+  3. Else Phantom#1129
 
-            1. Else Phantom#1135
-
-          6. Else Phantom#1136
-
-        3. Else Phantom#1137
-
-      3. Else Phantom#1138
-
-    2. Else Phantom#1139
-
-  2. Else Phantom#1140
-
-1. Else Phantom#1141
-
-2. (Let (ConstructorT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*} typeIR_object) be constructorTypeIR)
-
-3. If (~$is_package_object_typeIR($canon(typeIR_object))), then
-
-  1. (Let parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*} be $filter_default_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, id_default*{id_default <- id_default*}))
-
-  2. If ((|parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}| = |argumentIR*{argumentIR <- argumentIR*}|)), then
-
-    1. (Let parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*} be $align_parameters(parameterTypeIR_non_default*{parameterTypeIR_non_default <- parameterTypeIR_non_default*}, argumentIR*{argumentIR <- argumentIR*}))
-
-    2. (Let inference'?{inference' <- inference'?} be $infer(tid_infer*{tid_infer <- tid_infer*}, parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}, argumentIR*{argumentIR <- argumentIR*}))
-
-    3. If ((inference'?{inference' <- inference'?} matches pattern (_))), then
-
-      1. (Let ?(inference) be inference'?{inference' <- inference'?})
-
-      2. (Let typeIR?{typeIR <- typeIR?} be $find_map<tid, typeIR>(inference, tid_infer))*{tid_infer <- tid_infer*, typeIR? <- typeIR?*}
-
-      3. If ((typeIR?{typeIR <- typeIR?} matches pattern (_)))*{typeIR? <- typeIR?*}, then
-
-        1. (Let ?(typeIR_inferred) be typeIR?{typeIR <- typeIR?})*{typeIR? <- typeIR?*, typeIR_inferred <- typeIR_inferred*}
-
-        2. (Let typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*} be typeArgumentIR*{typeArgumentIR <- typeArgumentIR*} ++ typeIR_inferred*{typeIR_inferred <- typeIR_inferred*})
-
-        3. (Let parameterTypeIR_aligned_inferred be $subst_parameterType(inference, parameterTypeIR_aligned))*{parameterTypeIR_aligned <- parameterTypeIR_aligned*, parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}
-
-        4. (Let typeIR_object_inferred be $subst_type(inference, typeIR_object))
-
-        5. (Let constructorTypeIR_inferred be (ConstructorT parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} typeIR_object_inferred))
-
-        6. If ((ConstructorType_wf: $bound(cursor', TC) |- constructorTypeIR_inferred holds)), then
-
-          1. If ($instantiable(cursor', TC, instctxt, typeIR_object_inferred)), then
-
-            1. (Call_convention_ok: cursor' TC (NOACTION) |- parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*} argumentIR*{argumentIR <- argumentIR*} : argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
-
-            2. Result in typeIR_object_inferred, typeArgumentIR_inferred*{typeArgumentIR_inferred <- typeArgumentIR_inferred*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*}
-
-          1. Else Phantom#1142
-
-        6. Else Phantom#1143
-
-      3. Else Phantom#1144
-
-    3. Else Phantom#1145
-
-  2. Else Phantom#1146
-
-3. Else Phantom#1147
+5. Else Phantom#1130
 
 ;; ../../../../spec-concrete/5.05.2-subtype.watsup:338.1-342.23
 def $reduce_serenum_unary(typedExpressionIR, $check)
@@ -19157,9 +19047,11 @@ def $coerce_unary(typedExpressionIR, typeIR_to)
 
       2. Return ?(typedExpressionIR_cast)
 
-    1. Else Phantom#1148
+3. Otherwise
 
-;; ../../../../spec-concrete/5.05.2-subtype.watsup:423.1-424.44
+  1. Return ?()
+
+;; ../../../../spec-concrete/5.05.2-subtype.watsup:426.1-427.44
 def $coerce_binary(typedExpressionIR_l, typedExpressionIR_r)
 
 1. (Let (_expressionIR (( typeIR_l _ctk ))) be typedExpressionIR_l)
@@ -20022,65 +19914,63 @@ def $compat'_direct_application(typeIR)
   1. Return false
 
 ;; ../../../../spec-concrete/5.10-typing-statement.watsup:180.1-182.26
-relation SwitchLabel_table_ok: TC, tid_table, bool', switchLabel
+relation SwitchLabel_table_ok: TC, _tid', b_last', switchLabel
 
-1. If ((bool' = true)), then
+1. Case analysis on switchLabel
 
-  1. If ((switchLabel matches pattern `DefaultL`)), then
+  1. Case (% matches pattern `DefaultL`)
 
-    1. Result in (DefaultL)
+    1. If ((b_last' = true)), then
 
-  1. Else Phantom#1149
+      1. Result in (DefaultL)
 
-1. Else Phantom#1150
+    1. Else Phantom#1131
 
-2. If ((switchLabel matches pattern `ExprL%`)), then
+  2. Case (% matches pattern `ExprL%`)
 
-  1. (Let (ExprL expression) be switchLabel)
+    1. (Let (ExprL expression) be switchLabel)
 
-  2. If ((expression has type referenceExpression)), then
+    2. If ((expression has type referenceExpression)), then
 
-    1. (Let (NameE prefixedName) be (expression as referenceExpression))
+      1. (Let (NameE prefixedName) be (expression as referenceExpression))
 
-    2. (Let prefixedName' be prefixedName)
+      2. (Let prefixedName' be prefixedName)
 
-    3. If ((prefixedName' matches pattern `CURRENT%`)), then
+      3. If ((prefixedName' matches pattern `CURRENT%`)), then
 
-      1. (Let (CURRENT name_label) be prefixedName')
+        1. (Let (CURRENT name_label) be prefixedName')
 
-      2. (Let tid_table_enum be "action_list(" ++ tid_table ++ ")")
+        2. (Let tid_table_enum be "action_list(" ++ _tid' ++ ")")
 
-      3. (Let id_label be tid_table_enum ++ "." ++ name_label)
+        3. (Let id_label be tid_table_enum ++ "." ++ name_label)
 
-      4. (Let varTypeIR?{varTypeIR <- varTypeIR?} be $find_var((LOCAL), TC, (CURRENT id_label)))
+        4. (Let varTypeIR?{varTypeIR <- varTypeIR?} be $find_var((LOCAL), TC, (CURRENT id_label)))
 
-      5. If ((varTypeIR?{varTypeIR <- varTypeIR?} matches pattern (_))), then
+        5. If ((varTypeIR?{varTypeIR <- varTypeIR?} matches pattern (_))), then
 
-        1. (Let ?((_direction typeIR_label ctk_label value?{value <- value?})) be varTypeIR?{varTypeIR <- varTypeIR?})
+          1. (Let ?((_direction typeIR_label ctk_label value?{value <- value?})) be varTypeIR?{varTypeIR <- varTypeIR?})
 
-        2. If ((value?{value <- value?} matches pattern (_))), then
+          2. If ((value?{value <- value?} matches pattern (_))), then
 
-          1. (Let ?(value_label) be value?{value <- value?})
+            1. (Let ?(value_label) be value?{value <- value?})
 
-          2. If ((value_label = ((TableEnumV tid_table_enum name_label) as value))), then
+            2. If ((value_label = ((TableEnumV tid_table_enum name_label) as value))), then
 
-            1. (Let typedExpressionIR_label be (((NameE (CURRENT name_label)) as expressionIR) (( typeIR_label ctk_label ))))
+              1. (Let typedExpressionIR_label be (((NameE (CURRENT name_label)) as expressionIR) (( typeIR_label ctk_label ))))
 
-            2. Result in (ExprL typedExpressionIR_label)
+              2. Result in (ExprL typedExpressionIR_label)
 
-          2. Else Phantom#1151
+            2. Else Phantom#1132
 
-        2. Else Phantom#1152
+          2. Else Phantom#1133
 
-      5. Else Phantom#1153
+        5. Else Phantom#1134
 
-    3. Else Phantom#1154
+      3. Else Phantom#1135
 
-  2. Else Phantom#1155
+    2. Else Phantom#1136
 
-2. Else Phantom#1156
-
-;; ../../../../spec-concrete/5.10-typing-statement.watsup:207.1-209.29
+;; ../../../../spec-concrete/5.10-typing-statement.watsup:208.1-210.29
 relation SwitchCase_table_ok: TC, f, tid_table, b_last, switchCase
 
 1. Case analysis on switchCase
@@ -20107,7 +19997,7 @@ relation SwitchCase_table_ok: TC, f, tid_table, b_last, switchCase
 
     5. Result in f_post, switchCaseIR, switchLabel
 
-;; ../../../../spec-concrete/5.10-typing-statement.watsup:235.1-237.26
+;; ../../../../spec-concrete/5.10-typing-statement.watsup:236.1-238.26
 relation SwitchCases_table_ok: TC, f, tid_table, switchCase*{switchCase <- switchCase*}
 
 1. Case analysis on switchCase*{switchCase <- switchCase*}
@@ -20128,44 +20018,42 @@ relation SwitchCases_table_ok: TC, f, tid_table, switchCase*{switchCase <- switc
 
     5. Result in f_t, switchCaseIR_h :: switchCaseIR_t*{switchCaseIR_t <- switchCaseIR_t*}, switchLabel_h :: switchLabel_t*{switchLabel_t <- switchLabel_t*}
 
-;; ../../../../spec-concrete/5.10-typing-statement.watsup:273.1-275.26
-relation SwitchLabel_general_ok: TC, _typeIR', bool', switchLabel
+;; ../../../../spec-concrete/5.10-typing-statement.watsup:274.1-276.26
+relation SwitchLabel_general_ok: TC, _typeIR', b_last', switchLabel
 
-1. If ((bool' = true)), then
+1. Case analysis on switchLabel
 
-  1. If ((switchLabel matches pattern `DefaultL`)), then
+  1. Case (% matches pattern `DefaultL`)
 
-    1. Result in (DefaultL)
+    1. If ((b_last' = true)), then
 
-  1. Else Phantom#1157
+      1. Result in (DefaultL)
 
-1. Else Phantom#1158
+    1. Else Phantom#1137
 
-2. If ((switchLabel matches pattern `ExprL%`)), then
+  2. Case (% matches pattern `ExprL%`)
 
-  1. (Let (ExprL expression_label) be switchLabel)
+    1. (Let (ExprL expression_label) be switchLabel)
 
-  2. (Expr_ok: (LOCAL) TC |- expression_label : typedExpressionIR_label)
+    2. (Expr_ok: (LOCAL) TC |- expression_label : typedExpressionIR_label)
 
-  3. (Let typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} be $coerce_unary(typedExpressionIR_label, _typeIR'))
+    3. (Let typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} be $coerce_unary(typedExpressionIR_label, _typeIR'))
 
-  4. If ((typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} matches pattern (_))), then
+    4. If ((typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} matches pattern (_))), then
 
-    1. (Let ?(typedExpressionIR_label_cast) be typedExpressionIR?{typedExpressionIR <- typedExpressionIR?})
+      1. (Let ?(typedExpressionIR_label_cast) be typedExpressionIR?{typedExpressionIR <- typedExpressionIR?})
 
-    2. (Let (_expressionIR (( _typeIR ctk ))) be typedExpressionIR_label_cast)
+      2. (Let (_expressionIR (( _typeIR ctk ))) be typedExpressionIR_label_cast)
 
-    3. If ((ctk matches pattern `LCTK`)), then
+      3. If ((ctk matches pattern `LCTK`)), then
 
-      1. Result in (ExprL typedExpressionIR_label_cast)
+        1. Result in (ExprL typedExpressionIR_label_cast)
 
-    3. Else Phantom#1159
+      3. Else Phantom#1138
 
-  4. Else Phantom#1160
+    4. Else Phantom#1139
 
-2. Else Phantom#1161
-
-;; ../../../../spec-concrete/5.10-typing-statement.watsup:295.1-297.29
+;; ../../../../spec-concrete/5.10-typing-statement.watsup:297.1-299.29
 relation SwitchCase_general_ok: TC, f, typeIR_switch, b_last, switchCase
 
 1. Case analysis on switchCase
@@ -20192,7 +20080,7 @@ relation SwitchCase_general_ok: TC, f, typeIR_switch, b_last, switchCase
 
     5. Result in f_post, switchCaseIR, switchLabel
 
-;; ../../../../spec-concrete/5.10-typing-statement.watsup:323.1-325.26
+;; ../../../../spec-concrete/5.10-typing-statement.watsup:325.1-327.26
 relation SwitchCases_general_ok: TC, f, typeIR_switch, switchCase*{switchCase <- switchCase*}
 
 1. Case analysis on switchCase*{switchCase <- switchCase*}
@@ -20213,12 +20101,12 @@ relation SwitchCases_general_ok: TC, f, typeIR_switch, switchCase*{switchCase <-
 
     5. Result in f_t, switchCaseIR_h :: switchCaseIR_t*{switchCaseIR_t <- switchCaseIR_t*}, switchLabel_h :: switchLabel_t*{switchLabel_t <- switchLabel_t*}
 
-;; ../../../../spec-concrete/5.10-typing-statement.watsup:340.1-340.34
+;; ../../../../spec-concrete/5.10-typing-statement.watsup:342.1-342.34
 def $compat_switch(typeIR)
 
 1. Return $compat'_switch($canon(typeIR))
 
-;; ../../../../spec-concrete/5.10-typing-statement.watsup:341.1-341.35
+;; ../../../../spec-concrete/5.10-typing-statement.watsup:343.1-343.35
 def $compat'_switch(typeIR)
 
 1. Case analysis on typeIR
@@ -20302,7 +20190,7 @@ relation Decl_object_ok: p, TC_0, frame, rdenv, objectDeclaration
 
       5. (Block_ok: TC_5 (CONT) |- blockStatement : _typingContext f blockStatementIR)
 
-      6. If ((f matches pattern `RET`)), then
+      6. If (((typeIR_ret =/= ((VoidT) as typeIR)) => (f = (RET)))), then
 
         1. (Let rid be $rid(name, parameter*{parameter <- parameter*}))
 
@@ -20318,31 +20206,11 @@ relation Decl_object_ok: p, TC_0, frame, rdenv, objectDeclaration
 
           3. Result in frame, rdenv_init, (functionDeclarationIR as objectDeclarationIR)
 
-        4. Else Phantom#1162
+        4. Else Phantom#1140
 
-      6. Else Phantom#1163
+      6. Else Phantom#1141
 
-      7. If ((typeIR_ret = ((VoidT) as typeIR))), then
-
-        1. (Let rid be $rid(name, parameter*{parameter <- parameter*}))
-
-        2. (Let routineTypeIR be (ExternMethodT parameterTypeIR*{parameterTypeIR <- parameterTypeIR*} typeIR_ret))
-
-        3. (Let routineTypeDefIR be ((PolyTD routineTypeIR tid_expl*{tid_expl <- tid_expl*} tid_impl*{tid_impl <- tid_impl*}) as routineTypeDefIR))
-
-        4. If ((RoutineTypeDef_wf: $bound(p, TC_0) |- routineTypeDefIR holds)), then
-
-          1. (Let rdenv_init be $update_map<rid, routineTypeDefIR>(rdenv, rid, routineTypeDefIR))
-
-          2. (Let functionDeclarationIR be (FuncD typeIR_ret name tid_expl*{tid_expl <- tid_expl*} tid_impl*{tid_impl <- tid_impl*} parameterIR*{parameterIR <- parameterIR*} blockStatementIR))
-
-          3. Result in frame, rdenv_init, (functionDeclarationIR as objectDeclarationIR)
-
-        4. Else Phantom#1164
-
-      7. Else Phantom#1165
-
-    7. Else Phantom#1166
+    7. Else Phantom#1142
 
   2. Case (% has type instantiation)
 
@@ -20362,7 +20230,7 @@ relation Decl_object_ok: p, TC_0, frame, rdenv, objectDeclaration
 
       3. Result in frame_init, rdenv, (instantiationIR as objectDeclarationIR)
 
-    5. Else Phantom#1167
+    5. Else Phantom#1143
 
 ;; ../../../../spec-concrete/5.11-typing-declaration.watsup:171.1-174.29
 relation Decls_object_ok: p, TC, frame', rdenv', objectDeclaration*{objectDeclaration <- objectDeclaration*}
@@ -20390,7 +20258,7 @@ def $subst_rdenv(theta, rdenv_extern, set<pair<rid, routineTypeDefIR>>')
 
   1. Return rdenv_extern
 
-1. Else Phantom#1168
+1. Else Phantom#1144
 
 2. (Let ({ pair<rid, routineTypeDefIR>*{pair<rid, routineTypeDefIR> <- pair<rid, routineTypeDefIR>*} }) be set<pair<rid, routineTypeDefIR>>')
 
@@ -20424,15 +20292,15 @@ def $subst_rdenv(theta, rdenv_extern, set<pair<rid, routineTypeDefIR>>')
 
           2. Return $subst_rdenv(theta, rdenv_extern_subst, ({ (rid_init_t -> routineTypeDefIR_init_t)*{rid_init_t <- rid_init_t*, routineTypeDefIR_init_t <- routineTypeDefIR_init_t*} }))
 
-        4. Else Phantom#1169
+        4. Else Phantom#1145
 
-      2. Else Phantom#1170
+      2. Else Phantom#1146
 
-    2. Else Phantom#1171
+    2. Else Phantom#1147
 
-  4. Else Phantom#1172
+  4. Else Phantom#1148
 
-3. Else Phantom#1173
+3. Else Phantom#1149
 
 ;; ../../../../spec-concrete/5.11-typing-declaration.watsup:421.1-421.81
 def $split_constructors(methodPrototype*{methodPrototype <- methodPrototype*})
@@ -20500,9 +20368,9 @@ relation Enum_serializable_field_ok: TC_0, name_enum, typeIR, (name expression)
 
     5. Result in TC_1, (name typedExpressionIR_cast), value
 
-  3. Else Phantom#1174
+  3. Else Phantom#1150
 
-3. Else Phantom#1175
+3. Else Phantom#1151
 
 ;; ../../../../spec-concrete/5.11-typing-declaration.watsup:621.1-624.26
 relation Enum_serializable_fields_ok: TC', name_enum, typeIR, namedExpression*{namedExpression <- namedExpression*}
@@ -20560,9 +20428,9 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
             3. Result in (ExprK typedExpressionIR_cast)
 
-          1. Else Phantom#1176
+          1. Else Phantom#1152
 
-    4. Else Phantom#1177
+    4. Else Phantom#1153
 
     5. If (~$is_set_typeIR(typeIR')), then
 
@@ -20574,9 +20442,9 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
         3. Result in (ExprK typedExpressionIR_cast)
 
-      1. Else Phantom#1178
+      1. Else Phantom#1154
 
-    5. Else Phantom#1179
+    5. Else Phantom#1155
 
   2. Case (% matches pattern `MaskK%%`)
 
@@ -20614,13 +20482,13 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
             2. Result in (MaskK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
 
-          3. Else Phantom#1180
+          3. Else Phantom#1156
 
-        4. Else Phantom#1181
+        4. Else Phantom#1157
 
-      3. Else Phantom#1182
+      3. Else Phantom#1158
 
-    5. Else Phantom#1183
+    5. Else Phantom#1159
 
   3. Case (% matches pattern `RangeK%%`)
 
@@ -20644,33 +20512,27 @@ relation SelectCase_keyset_ok: TC, typeIR_key, keysetExpression
 
         2. (Let (_expressionIR (( typeIR_reduced _ctk ))) be typedExpressionIR_l_reduced)
 
-        3. (Let (_expressionIR' (( typeIR _ctk' ))) be typedExpressionIR_r_reduced)
+        3. (Let typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} be $coerce_unary(typedExpressionIR_l_reduced, typeIR_key))
 
-        4. If ((typeIR = typeIR_reduced)), then
+        4. If ((typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} matches pattern (_))), then
 
-          1. (Let typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} be $coerce_unary(typedExpressionIR_l_reduced, typeIR_key))
+          1. (Let ?(typedExpressionIR_l_coerced) be typedExpressionIR?{typedExpressionIR <- typedExpressionIR?})
 
-          2. If ((typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} matches pattern (_))), then
+          2. (Let typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} be $coerce_unary(typedExpressionIR_r_reduced, typeIR_key))
 
-            1. (Let ?(typedExpressionIR_l_coerced) be typedExpressionIR?{typedExpressionIR <- typedExpressionIR?})
+          3. If ((typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} matches pattern (_))), then
 
-            2. (Let typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} be $coerce_unary(typedExpressionIR_r_reduced, typeIR_key))
+            1. (Let ?(typedExpressionIR_r_coerced) be typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?})
 
-            3. If ((typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} matches pattern (_))), then
+            2. Result in (RangeK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
 
-              1. (Let ?(typedExpressionIR_r_coerced) be typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?})
+          3. Else Phantom#1160
 
-              2. Result in (RangeK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
+        4. Else Phantom#1161
 
-            3. Else Phantom#1184
+      3. Else Phantom#1162
 
-          2. Else Phantom#1185
-
-        4. Else Phantom#1186
-
-      3. Else Phantom#1187
-
-    5. Else Phantom#1188
+    5. Else Phantom#1163
 
   4. Case (% matches pattern `DefaultK`)
 
@@ -20800,7 +20662,7 @@ def $compat'_range(typeIR'', typeIR''')
 
   1. Return false
 
-;; ../../../../spec-concrete/5.13.1-typing-parser-statement.watsup:149.1-151.23
+;; ../../../../spec-concrete/5.13.1-typing-parser-statement.watsup:148.1-150.23
 relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpression*{keysetExpression <- keysetExpression*}
 
 1. If ((typeIR'*{typeIR' <- typeIR'*} matches pattern [])), then
@@ -20809,9 +20671,9 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
     1. Result in [(DefaultK)]
 
-  1. Else Phantom#1189
+  1. Else Phantom#1164
 
-1. Else Phantom#1190
+1. Else Phantom#1165
 
 2. Case analysis on keysetExpression*{keysetExpression <- keysetExpression*}
 
@@ -20823,7 +20685,7 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
       2. Result in [keysetExpressionIR]
 
-    1. Else Phantom#1191
+    1. Else Phantom#1166
 
   2. Case (% = [(AnyK)])
 
@@ -20833,9 +20695,9 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
       2. Result in [keysetExpressionIR]
 
-    1. Else Phantom#1192
+    1. Else Phantom#1167
 
-2. Else Phantom#1193
+2. Else Phantom#1168
 
 3. If ((|typeIR'*{typeIR' <- typeIR'*}| = |keysetExpression*{keysetExpression <- keysetExpression*}|)), then
 
@@ -20843,9 +20705,9 @@ relation SelectCase_keysets_ok: TC, typeIR'*{typeIR' <- typeIR'*}, keysetExpress
 
   2. Result in keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*}
 
-3. Else Phantom#1194
+3. Else Phantom#1169
 
-;; ../../../../spec-concrete/5.13.1-typing-parser-statement.watsup:184.1-186.26
+;; ../../../../spec-concrete/5.13.1-typing-parser-statement.watsup:183.1-185.26
 relation SelectCase_ok: TC, name_state*{name_state <- name_state*}, typeIR_key*{typeIR_key <- typeIR_key*}, (keysetExpression*{keysetExpression <- keysetExpression*} name)
 
 1. (SelectCase_keysets_ok: TC typeIR_key*{typeIR_key <- typeIR_key*} |- keysetExpression*{keysetExpression <- keysetExpression*} : keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*})
@@ -20854,7 +20716,7 @@ relation SelectCase_ok: TC, name_state*{name_state <- name_state*}, typeIR_key*{
 
   1. Result in (keysetExpressionIR*{keysetExpressionIR <- keysetExpressionIR*} name)
 
-2. Else Phantom#1195
+2. Else Phantom#1170
 
 ;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:7.1-7.52
 def $compat_table_exact_optional_key(typeIR)
@@ -21073,9 +20935,9 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
             3. Result in (LPM n), (ExprK typedExpressionIR_set)
 
-          4. Else Phantom#1196
+          4. Else Phantom#1171
 
-        3. Else Phantom#1197
+        3. Else Phantom#1172
 
       2. Case (% matches pattern `MaskK%%`)
 
@@ -21105,33 +20967,45 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
               2. (Let (_expressionIR (( typeIR_reduced ctk_r_reduced ))) be typedExpressionIR_r_reduced)
 
-              3. If ((Sub_impl: typeIR_reduced <: typeIR_key holds)), then
+              3. (Let typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} be $coerce_unary(typedExpressionIR_l_reduced, typeIR_key))
 
-                1. If ((ctk_r_reduced matches pattern `LCTK`)), then
+              4. If ((typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} matches pattern (_))), then
 
-                  1. (Eval_static: (LOCAL) TC |- typedExpressionIR_r_reduced ~> value_r)
+                1. (Let ?(typedExpressionIR_l_coerced) be typedExpressionIR?{typedExpressionIR <- typedExpressionIR?})
 
-                  2. (Let int?{int <- int?} be $to_number(value_r))
+                2. (Let typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} be $coerce_unary(typedExpressionIR_r_reduced, typeIR_key))
 
-                  3. If ((int?{int <- int?} matches pattern (_))), then
+                3. If ((typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} matches pattern (_))), then
 
-                    1. (Let ?(i_r) be int?{int <- int?})
+                  1. (Let ?(typedExpressionIR_r_coerced) be typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?})
 
-                    2. (Let n_prefix be $tableEntry_lpm_prefix(((FBitV n $to_bitstr((n as int), i_r)) as value)))
+                  2. If ((ctk_r_reduced matches pattern `LCTK`)), then
 
-                    3. Result in (LPM n_prefix), (MaskK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
+                    1. (Eval_static: (LOCAL) TC |- typedExpressionIR_r_coerced ~> value_r)
 
-                  3. Else Phantom#1198
+                    2. (Let int?{int <- int?} be $to_number(value_r))
 
-                1. Else Phantom#1199
+                    3. If ((int?{int <- int?} matches pattern (_))), then
 
-              3. Else Phantom#1200
+                      1. (Let ?(i_r) be int?{int <- int?})
 
-            3. Else Phantom#1201
+                      2. (Let n_prefix be $tableEntry_lpm_prefix(((FBitV n $to_bitstr((n as int), i_r)) as value)))
 
-          5. Else Phantom#1202
+                      3. Result in (LPM n_prefix), (MaskK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
 
-        3. Else Phantom#1203
+                    3. Else Phantom#1173
+
+                  2. Else Phantom#1174
+
+                3. Else Phantom#1175
+
+              4. Else Phantom#1176
+
+            3. Else Phantom#1177
+
+          5. Else Phantom#1178
+
+        3. Else Phantom#1179
 
       3. Case (% matches pattern `DefaultK`)
 
@@ -21143,7 +21017,7 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
           2. Result in (LPM n), (DefaultK)
 
-        2. Else Phantom#1204
+        2. Else Phantom#1180
 
       4. Case (% matches pattern `AnyK`)
 
@@ -21155,9 +21029,9 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
           2. Result in (LPM 0), (AnyK)
 
-        2. Else Phantom#1205
+        2. Else Phantom#1181
 
-    1. Else Phantom#1206
+    1. Else Phantom#1182
 
   2. Case (% = "ternary")
 
@@ -21181,19 +21055,29 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
           1. (Let ?((typedExpressionIR_l_reduced, typedExpressionIR_r_reduced)) be (typedExpressionIR, typedExpressionIR)'?{(typedExpressionIR, typedExpressionIR)' <- (typedExpressionIR, typedExpressionIR)'?})
 
-          2. (Let (_expressionIR (( typeIR_reduced ctk_r_reduced ))) be typedExpressionIR_r_reduced)
+          2. (Let typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} be $coerce_unary(typedExpressionIR_l_reduced, typeIR_key))
 
-          3. If ((Sub_impl: typeIR_reduced <: typeIR_key holds)), then
+          3. If ((typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} matches pattern (_))), then
 
-            1. Result in (NOLPM), (MaskK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
+            1. (Let ?(typedExpressionIR_l_coerced) be typedExpressionIR?{typedExpressionIR <- typedExpressionIR?})
 
-          3. Else Phantom#1207
+            2. (Let typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} be $coerce_unary(typedExpressionIR_r_reduced, typeIR_key))
 
-        3. Else Phantom#1208
+            3. If ((typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} matches pattern (_))), then
 
-      5. Else Phantom#1209
+              1. (Let ?(typedExpressionIR_r_coerced) be typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?})
 
-    1. Else Phantom#1210
+              2. Result in (NOLPM), (MaskK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
+
+            3. Else Phantom#1183
+
+          3. Else Phantom#1184
+
+        3. Else Phantom#1185
+
+      5. Else Phantom#1186
+
+    1. Else Phantom#1187
 
   3. Case (% = "range")
 
@@ -21217,21 +21101,31 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
           1. (Let ?((typedExpressionIR_l_reduced, typedExpressionIR_r_reduced)) be (typedExpressionIR, typedExpressionIR)'?{(typedExpressionIR, typedExpressionIR)' <- (typedExpressionIR, typedExpressionIR)'?})
 
-          2. (Let (_expressionIR (( typeIR_reduced ctk_r_reduced ))) be typedExpressionIR_r_reduced)
+          2. (Let typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} be $coerce_unary(typedExpressionIR_l_reduced, typeIR_key))
 
-          3. If ((Sub_impl: typeIR_reduced <: typeIR_key holds)), then
+          3. If ((typedExpressionIR?{typedExpressionIR <- typedExpressionIR?} matches pattern (_))), then
 
-            1. Result in (NOLPM), (RangeK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
+            1. (Let ?(typedExpressionIR_l_coerced) be typedExpressionIR?{typedExpressionIR <- typedExpressionIR?})
 
-          3. Else Phantom#1211
+            2. (Let typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} be $coerce_unary(typedExpressionIR_r_reduced, typeIR_key))
 
-        3. Else Phantom#1212
+            3. If ((typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?} matches pattern (_))), then
 
-      5. Else Phantom#1213
+              1. (Let ?(typedExpressionIR_r_coerced) be typedExpressionIR'?{typedExpressionIR' <- typedExpressionIR'?})
 
-    1. Else Phantom#1214
+              2. Result in (NOLPM), (RangeK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
 
-1. Else Phantom#1215
+            3. Else Phantom#1188
+
+          3. Else Phantom#1189
+
+        3. Else Phantom#1190
+
+      5. Else Phantom#1191
+
+    1. Else Phantom#1192
+
+1. Else Phantom#1193
 
 2. Case analysis on keysetExpression
 
@@ -21253,9 +21147,9 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
         3. Result in (NOLPM), (ExprK typedExpressionIR_set)
 
-      3. Else Phantom#1216
+      3. Else Phantom#1194
 
-    2. Else Phantom#1217
+    2. Else Phantom#1195
 
   2. Case (% matches pattern `DefaultK`)
 
@@ -21263,7 +21157,7 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
       1. Result in (NOLPM), (DefaultK)
 
-    1. Else Phantom#1218
+    1. Else Phantom#1196
 
   3. Case (% matches pattern `AnyK`)
 
@@ -21271,11 +21165,11 @@ relation TableEntry_keyset_ok: TC, TBLC, (typeIR_key, text'), keysetExpression
 
       1. Result in (NOLPM), (AnyK)
 
-    1. Else Phantom#1219
+    1. Else Phantom#1197
 
-2. Else Phantom#1220
+2. Else Phantom#1198
 
-;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:356.1-359.29
+;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:361.1-364.29
 relation TableEntry_keysets_ok': TC, TBLC, TBLS', matchKey*{matchKey <- matchKey*}, keysetExpression*{keysetExpression <- keysetExpression*}
 
 1. Case analysis on matchKey*{matchKey <- matchKey*}
@@ -21286,7 +21180,7 @@ relation TableEntry_keysets_ok': TC, TBLC, TBLS', matchKey*{matchKey <- matchKey
 
       1. Result in TBLS', []
 
-    1. Else Phantom#1221
+    1. Else Phantom#1199
 
   2. Case (% matches pattern _ :: _)
 
@@ -21304,9 +21198,9 @@ relation TableEntry_keysets_ok': TC, TBLC, TBLS', matchKey*{matchKey <- matchKey
 
       5. Result in TBLS_3, keysetExpressionIR_h :: keysetExpressionIR_t*{keysetExpressionIR_t <- keysetExpressionIR_t*}
 
-    2. Else Phantom#1222
+    2. Else Phantom#1200
 
-;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:708.1-708.44
+;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:713.1-713.44
 def $count_table_keys(tableProperty''*{tableProperty'' <- tableProperty''*})
 
 1. Case analysis on tableProperty''*{tableProperty'' <- tableProperty''*}
@@ -21345,7 +21239,7 @@ def $count_table_keys(tableProperty''*{tableProperty'' <- tableProperty''*})
 
         2. Return $count_table_keys(tableProperty_t*{tableProperty_t <- tableProperty_t*})
 
-;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:728.1-728.47
+;; ../../../../spec-concrete/5.14.1-typing-control-table.watsup:733.1-733.47
 def $count_table_actions(tableProperty''*{tableProperty'' <- tableProperty''*})
 
 1. Case analysis on tableProperty''*{tableProperty'' <- tableProperty''*}
@@ -21422,7 +21316,7 @@ def $align_parameters(parameterTypeIR*{parameterTypeIR <- parameterTypeIR*}, arg
 
   2. Return parameterTypeIR_aligned*{parameterTypeIR_aligned <- parameterTypeIR_aligned*}
 
-3. Else Phantom#1223
+3. Else Phantom#1201
 
 ;; ../../../../spec-concrete/5.15.1-typing-call-convention.watsup:28.1-28.96
 def $align_parameters'(_map<id, parameterTypeIR>', parameterTypeIR', argumentIR)
@@ -21433,7 +21327,7 @@ def $align_parameters'(_map<id, parameterTypeIR>', parameterTypeIR', argumentIR)
 
   2. Return ?(parameterTypeIR')
 
-1. Else Phantom#1224
+1. Else Phantom#1202
 
 2. (Let ({ (id_param -> parameterTypeIR)*{id_param <- id_param*, parameterTypeIR <- parameterTypeIR*} }) be _map<id, parameterTypeIR>')
 
@@ -21455,7 +21349,7 @@ def $align_parameters'(_map<id, parameterTypeIR>', parameterTypeIR', argumentIR)
 
     1. Return ?(parameterTypeIR')
 
-3. Else Phantom#1225
+3. Else Phantom#1203
 
 ;; ../../../../spec-concrete/5.15.1-typing-call-convention.watsup:61.1-63.23
 relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
@@ -21484,11 +21378,11 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
             1. The relation holds
 
-        1. Else Phantom#1226
+        1. Else Phantom#1204
 
-      2. Else Phantom#1227
+      2. Else Phantom#1205
 
-    3. Else Phantom#1228
+    3. Else Phantom#1206
 
   2. Case (% has type memberAccessExpressionIR)
 
@@ -21516,13 +21410,13 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
                 1. The relation holds
 
-              1. Else Phantom#1229
+              1. Else Phantom#1207
 
               2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
                 1. The relation holds
 
-              2. Else Phantom#1230
+              2. Else Phantom#1208
 
             2. Case (% = "last")
 
@@ -21530,27 +21424,27 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
                 1. The relation holds
 
-              1. Else Phantom#1231
+              1. Else Phantom#1209
 
               2. If (((p = (LOCAL)) /\ $is_parser_state_localKind(TC.LOCAL.KIND))), then
 
                 1. The relation holds
 
-              2. Else Phantom#1232
+              2. Else Phantom#1210
 
-          2. Else Phantom#1233
+          2. Else Phantom#1211
 
-        3. Else Phantom#1234
+        3. Else Phantom#1212
 
         4. If (~$is_headerStackTypeIR($canon(typeIR_base))), then
 
           1. The relation holds
 
-        4. Else Phantom#1235
+        4. Else Phantom#1213
 
-      2. Else Phantom#1236
+      2. Else Phantom#1214
 
-    2. Else Phantom#1237
+    2. Else Phantom#1215
 
   3. Case (% has type indexAccessExpressionIR)
 
@@ -21566,7 +21460,7 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
           1. The relation holds
 
-        2. Else Phantom#1238
+        2. Else Phantom#1216
 
       2. Case (% matches pattern `BitAccE%%%`)
 
@@ -21576,9 +21470,9 @@ relation Expr_lvalue_ok: p, TC, (expressionIR (( _typeIR _ctk )))
 
           1. The relation holds
 
-        2. Else Phantom#1239
+        2. Else Phantom#1217
 
-1. Else Phantom#1240
+1. Else Phantom#1218
 
 ;; ../../../../spec-concrete/5.15.2-typing-call-inference.watsup:6.1-7.12
 syntax infer = 
@@ -22346,24 +22240,7 @@ def $lvalue_as_expression(lvalue)
 
     3. Return ((BitAccE expression_base expression_hi expression_lo) as expression)
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:220.1-220.61
-def $callable_builtin_function(cursor, TC)
-
-1. Case analysis on cursor
-
-  1. Case (% matches pattern `GLOBAL`)
-
-    1. Return true
-
-  2. Case (% matches pattern `BLOCK`)
-
-    1. Return true
-
-  3. Case (% matches pattern `LOCAL`)
-
-    1. Return true
-
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:247.1-247.53
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:259.1-259.53
 def $callable_function(cursor, TC)
 
 1. Case analysis on cursor
@@ -22380,7 +22257,7 @@ def $callable_function(cursor, TC)
 
     1. Return (~$is_extern_method_localKind(TC.LOCAL.KIND) /\ ~$is_extern_abstract_method_localKind(TC.LOCAL.KIND))
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:291.1-291.60
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:301.1-301.60
 def $callable_extern_function(cursor, TC)
 
 1. Case analysis on cursor
@@ -22397,7 +22274,7 @@ def $callable_extern_function(cursor, TC)
 
     1. Return true
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:333.1-333.51
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:341.1-341.51
 def $callable_action(cursor, TC)
 
 1. Case analysis on cursor
@@ -22414,24 +22291,7 @@ def $callable_action(cursor, TC)
 
     1. Return ($is_action_localKind(TC.LOCAL.KIND) \/ $is_control_apply_method_localKind(TC.LOCAL.KIND))
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:364.1-364.59
-def $callable_builtin_method(cursor, TC)
-
-1. Case analysis on cursor
-
-  1. Case (% matches pattern `GLOBAL`)
-
-    1. Return true
-
-  2. Case (% matches pattern `BLOCK`)
-
-    1. Return true
-
-  3. Case (% matches pattern `LOCAL`)
-
-    1. Return true
-
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:391.1-391.58
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:387.1-387.58
 def $callable_extern_method(cursor, TC)
 
 1. Case analysis on cursor
@@ -22448,7 +22308,7 @@ def $callable_extern_method(cursor, TC)
 
     1. Return true
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:433.1-433.67
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:427.1-427.67
 def $callable_extern_abstract_method(cursor, TC)
 
 1. Case analysis on cursor
@@ -22465,7 +22325,7 @@ def $callable_extern_abstract_method(cursor, TC)
 
     1. Return true
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:475.1-475.64
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:467.1-467.64
 def $callable_parser_apply_method(cursor, TC)
 
 1. Case analysis on cursor
@@ -22482,7 +22342,7 @@ def $callable_parser_apply_method(cursor, TC)
 
     1. Return $is_parser_state_localKind(TC.LOCAL.KIND)
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:502.1-502.65
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:492.1-492.65
 def $callable_control_apply_method(cursor, TC)
 
 1. Case analysis on cursor
@@ -22499,7 +22359,7 @@ def $callable_control_apply_method(cursor, TC)
 
     1. Return $is_control_apply_method_localKind(TC.LOCAL.KIND)
 
-;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:529.1-529.63
+;; ../../../../spec-concrete/5.15.4-typing-routine-call.watsup:517.1-517.63
 def $callable_table_apply_method(cursor, TC)
 
 1. Case analysis on cursor

@@ -74,57 +74,67 @@ rule RoutineType_ok/funcT:
 ;;; MethodT typedExpressionIR nameIR
 
 rule RoutineType_ok/methodT-builtin-minmax-SizeIn-BitsBytes:
-  p TC |- (MethodT typedExpressionIR_base name) eps eps
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps eps
   ---- ;; if the method is min/maxSizeInBits/Bytes builtin
   -- if name <- [ "minSizeInBits", "minSizeInBytes",
                   "maxSizeInBits", "maxSizeInBytes" ]
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0 /\ |argumentIR*| = 0
   ---- ;; create routine type
   -- if routineTypeIR = BuiltinMethodT eps IntT
 
 rule RoutineType_ok/methodT-builtin-stack-push-pop-front:
-  p TC |- (MethodT typedExpressionIR_base name) eps argumentIR
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps eps
-  ---- ;; if the method is push/pop_front builtin
-  -- if name <- [ "push_front", "pop_front" ]
   ---- ;; check that the base type is a stack
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   -- if HeaderStackT typeIR _ = $canon(typeIR_base)
+  ---- ;; if the method is push/pop_front builtin
+  -- if name <- [ "push_front", "pop_front" ]
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0 /\ |argumentIR*| = 1
   ---- ;; (TODO) check if the argument is named
   ---- ;; create routine type
   -- if parameterTypeIR = NO IntT "count" eps
   -- if routineTypeIR = BuiltinMethodT parameterTypeIR IntT
 
 rule RoutineType_ok/methodT-builtin-header-isValid:
-  p TC |- (MethodT typedExpressionIR_base name) eps eps
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps eps
-  ---- ;; if the method is isValid builtin
-  -- if name <- [ "isValid" ]
   ---- ;; check that the base type is a header
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   -- if HeaderT _ _ = $canon(typeIR_base)
+  ---- ;; if the method is isValid builtin
+  -- if name <- [ "isValid" ]
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0 /\ |argumentIR*| = 0
   ---- ;; create routine type
   -- if routineTypeIR = BuiltinMethodT eps BoolT
 
 rule RoutineType_ok/methodT-builtin-union-isValid:
-  p TC |- (MethodT typedExpressionIR_base name) eps eps
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps eps
-  ---- ;; if the method is isValid builtin
-  -- if name <- [ "isValid" ]
   ---- ;; check that the base type is a header
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   -- if HeaderUnionT _ _ = $canon(typeIR_base)
+  ---- ;; if the method is isValid builtin
+  -- if name <- [ "isValid" ]
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0 /\ |argumentIR*| = 0
   ---- ;; create routine type
   -- if routineTypeIR = BuiltinMethodT eps BoolT
 
 rule RoutineType_ok/methodT-builtin-header-set-ValidInvalid:
-  p TC |- (MethodT typedExpressionIR_base name) eps eps
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps eps
-  ---- ;; if the method is setValid/Invalid builtin
-  -- if name <- [ "setValid", "setInvalid" ]
   ---- ;; check that the base type is a header
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   -- if HeaderT _ _ = $canon(typeIR_base)
+  ---- ;; if the method is setValid/Invalid builtin
+  -- if name <- [ "setValid", "setInvalid" ]
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0 /\ |argumentIR*| = 0
   ---- ;; create routine type
   -- if routineTypeIR = BuiltinMethodT eps VoidT
 
@@ -149,11 +159,15 @@ rule RoutineType_ok/methodT-extern:
   -- RoutineType_wf: bound |- routineTypeIR
 
 rule RoutineType_ok/methodT-parser-apply:
-  p TC |- (MethodT typedExpressionIR_base "apply") eps argumentIR*
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps id_default*
   ---- ;; if the base type is a parser 
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   -- if ParserT parameterTypeIR* = $canon(typeIR_base)
+  ---- ;; if the method is apply
+  -- if name = "apply"
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0
   ---- ;; create method type
   -- if routineTypeIR = ParserApplyMethodT parameterTypeIR*
   ---- ;; create routine id
@@ -169,11 +183,15 @@ rule RoutineType_ok/methodT-parser-apply:
           (id_arg?)*)
 
 rule RoutineType_ok/methodT-control-apply:
-  p TC |- (MethodT typedExpressionIR_base "apply") eps argumentIR*
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps id_default*
   ---- ;; if the base type is a control 
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   -- if ControlT parameterTypeIR* = $canon(typeIR_base)
+  ---- ;; if the method is apply
+  -- if name = "apply"
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0
   ---- ;; create method type
   -- if routineTypeIR = ControlApplyMethodT parameterTypeIR*
   ---- ;; create routine id
@@ -189,11 +207,15 @@ rule RoutineType_ok/methodT-control-apply:
           (id_arg?)*)
 
 rule RoutineType_ok/methodT-table-apply:
-  p TC |- (MethodT typedExpressionIR_base "apply") eps eps
+  p TC |- (MethodT typedExpressionIR_base name) typeArgumentIR* argumentIR*
         : routineTypeIR eps eps
   ---- ;; if the base type is a table
   -- if _ `( typeIR_base _ ) = typedExpressionIR_base
   -- if TableT _ typeIR_table = $canon(typeIR_base)
+  ---- ;; if the method is apply
+  -- if name = "apply"
+  ---- ;; check arity
+  -- if |typeArgumentIR*| = 0 /\ |argumentIR*| = 0
   ---- ;; create method type
   -- if routineTypeIR = TableApplyMethodT typeIR_table
 
@@ -217,12 +239,6 @@ rule RoutineType_ok/typeT-builtin-minmax-SizeIn-BitsBytes:
 
 ;;;; BuiltinFuncT parameterTypeIR* typeIR
 
-dec $callable_builtin_function(cursor, typingContext) : bool
-
-def $callable_builtin_function(GLOBAL, TC) = true
-def $callable_builtin_function(BLOCK, TC) = true
-def $callable_builtin_function(LOCAL, TC) = true
-
 rule Call_ok/builtin-function:
   p TC |- (BuiltinFuncT parameterTypeIR* typeIR_ret)
             typeArgumentIR* eps argumentIR* id_default*
@@ -230,13 +246,9 @@ rule Call_ok/builtin-function:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
-  ---- ;; check call site
-  -- if $callable_builtin_function(p, TC)
   ---- ;; check call convention
   -- Call_convention_ok:
       p TC NOACTION |- parameterTypeIR_aligned* argumentIR*
@@ -261,8 +273,6 @@ rule Call_ok/function:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
@@ -303,8 +313,6 @@ rule Call_ok/externfunction:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
@@ -344,8 +352,6 @@ rule Call_ok/action:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
@@ -361,12 +367,6 @@ rule Call_ok/action:
 
 ;;;; BuiltinMethodT parameterTypeIR* typeIR
 
-dec $callable_builtin_method(cursor, typingContext) : bool
-
-def $callable_builtin_method(GLOBAL, TC) = true
-def $callable_builtin_method(BLOCK, TC) = true
-def $callable_builtin_method(LOCAL, TC) = true
-
 rule Call_ok/builtin-method:
   p TC |- (BuiltinMethodT parameterTypeIR* typeIR_ret)
             typeArgumentIR* eps argumentIR* id_default*
@@ -374,13 +374,9 @@ rule Call_ok/builtin-method:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
-  ---- ;; check call site
-  -- if $callable_builtin_method(p, TC)
   ---- ;; check call convention
   -- Call_convention_ok:
       p TC NOACTION |- parameterTypeIR_aligned* argumentIR*
@@ -403,8 +399,6 @@ rule Call_ok/extern-method:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
@@ -445,8 +439,6 @@ rule Call_ok/extern-abstract-method:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
@@ -485,8 +477,6 @@ rule Call_ok/parser-apply-method:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)
@@ -512,8 +502,6 @@ rule Call_ok/control-apply-method:
   ---- ;; filter default arguments
   -- if parameterTypeIR_non_default*
       = $filter_default_parameters(parameterTypeIR*, id_default*)
-  ---- ;; check arity
-  -- if $(|parameterTypeIR_non_default*| = |argumentIR*|)
   ---- ;; align parameters and arguments if named
   -- if parameterTypeIR_aligned*
       = $align_parameters(parameterTypeIR_non_default*, argumentIR*)

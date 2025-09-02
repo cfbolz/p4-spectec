@@ -418,6 +418,9 @@ def $coerce_unary(typedExpressionIR, typeIR_to) = typedExpressionIR_cast
   -- if typedExpressionIR_cast
       = (CastE typeIR_to typedExpressionIR) `( typeIR_to ctk )
 
+def $coerce_unary(typedExpressionIR, typeIR_to) = eps
+  -- otherwise
+
 ;;; Binary
 
 dec $coerce_binary(typedExpressionIR, typedExpressionIR)

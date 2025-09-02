@@ -2741,6 +2741,7 @@ Typecheck success: ../../../../p4c/testdata/p4_16_samples/pna-dpdk_128bit_odd_si
 Typecheck success: ../../../../p4c/testdata/p4_16_samples/pna-elim-hdr-copy-dpdk.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_samples/pna-example-SelectByDirection.p4
+negative inner acc: -0.024868
 Typecheck success: ../../../../p4c/testdata/p4_16_samples/pna-example-SelectByDirection.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_samples/pna-example-SelectByDirection1.p4

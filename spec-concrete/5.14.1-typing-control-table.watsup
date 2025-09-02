@@ -252,7 +252,7 @@ rule TableEntry_keyset_ok/exprK-non-lpm:
 
 rule TableEntry_keyset_ok/maskK-lpm:
   TC TBLC |- (typeIR_key, "lpm") (MaskK expression_l expression_r)
-           : (LPM n_prefix) (MaskK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
+           : (LPM n_prefix) (MaskK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
   ---- ;; check match mode
   -- if TBLC.MODE = NOPRILPM n
   ---- ;; check both sides
@@ -270,18 +270,21 @@ rule TableEntry_keyset_ok/maskK-lpm:
           )
   ---- ;; fetch the type
   -- if _ `( typeIR_reduced ctk_r_reduced ) = typedExpressionIR_r_reduced
-  ---- ;; check compatibility with the key type
-  -- Sub_impl: typeIR_reduced <: typeIR_key
+  ---- ;; cast the expressions to the key type
+  -- if typedExpressionIR_l_coerced
+      = $coerce_unary(typedExpressionIR_l_reduced, typeIR_key)
+  -- if typedExpressionIR_r_coerced
+      = $coerce_unary(typedExpressionIR_r_reduced, typeIR_key)
   ---- ;; statically evaluate the right hand side to get its width
   -- if ctk_r_reduced = LCTK
-  -- Eval_static: LOCAL TC |- typedExpressionIR_r_reduced ~> value_r
+  -- Eval_static: LOCAL TC |- typedExpressionIR_r_coerced ~> value_r
   -- if i_r = $to_number(value_r)
   ---- ;; compute the table entry state
   -- if n_prefix = $tableEntry_lpm_prefix(FBitV n $to_bitstr(n, i_r))
 
 rule TableEntry_keyset_ok/maskK-ternary:
   TC TBLC |- (typeIR_key, "ternary") (MaskK expression_l expression_r)
-           : NOLPM (MaskK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
+           : NOLPM (MaskK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
   ---- ;; check both sides
   -- Expr_ok: LOCAL TC |- expression_l : typedExpressionIR_l
   -- Expr_ok: LOCAL TC |- expression_r : typedExpressionIR_r
@@ -295,16 +298,17 @@ rule TableEntry_keyset_ok/maskK-ternary:
             typedExpressionIR_r_cast,
             def $compat_mask
           )
-  ---- ;; fetch the type
-  -- if _ `( typeIR_reduced ctk_r_reduced ) = typedExpressionIR_r_reduced
-  ---- ;; check compatibility with the key type
-  -- Sub_impl: typeIR_reduced <: typeIR_key
+  ---- ;; cast the expressions to the key type
+  -- if typedExpressionIR_l_coerced
+      = $coerce_unary(typedExpressionIR_l_reduced, typeIR_key)
+  -- if typedExpressionIR_r_coerced
+      = $coerce_unary(typedExpressionIR_r_reduced, typeIR_key)
 
 ;;;;; RangeK expression expression
 
 rule TableEntry_keyset_ok/rangeK-range:
   TC TBLC |- (typeIR_key, "range") (RangeK expression_l expression_r)
-           : NOLPM (RangeK typedExpressionIR_l_reduced typedExpressionIR_r_reduced)
+           : NOLPM (RangeK typedExpressionIR_l_coerced typedExpressionIR_r_coerced)
   ---- ;; check both sides
   -- Expr_ok: LOCAL TC |- expression_l : typedExpressionIR_l
   -- Expr_ok: LOCAL TC |- expression_r : typedExpressionIR_r
@@ -318,10 +322,11 @@ rule TableEntry_keyset_ok/rangeK-range:
             typedExpressionIR_r_cast,
             def $compat_range
           )
-  ---- ;; fetch the type
-  -- if _ `( typeIR_reduced ctk_r_reduced ) = typedExpressionIR_r_reduced
-  ---- ;; check compatibility with the key type
-  -- Sub_impl: typeIR_reduced <: typeIR_key
+  ---- ;; cast the expressions to the key type
+  -- if typedExpressionIR_l_coerced
+      = $coerce_unary(typedExpressionIR_l_reduced, typeIR_key)
+  -- if typedExpressionIR_r_coerced
+      = $coerce_unary(typedExpressionIR_r_reduced, typeIR_key)
 
 ;;;;; DefaultK
 

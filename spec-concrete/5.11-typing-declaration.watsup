@@ -141,8 +141,8 @@ rule Decl_object_ok/functionDeclaration:
   ---- ;; check body
   -- if TC_5 = TC_4[ .LOCAL.KIND = EXTERNMETHOD typeIR_ret ]
   -- Block_ok: TC_5 CONT |- blockStatement : _ f blockStatementIR
-  ---- ;; check that the function returns on all paths, if it is not void
-  -- if f = RET \/ typeIR_ret = VoidT
+  ---- ;; check that if the function does not return void, it returns on all paths
+  -- if (typeIR_ret =/= VoidT) => (f = RET)
   ---- ;; add function
   -- if rid = $rid(name, parameter*)
   -- if routineTypeIR = ExternMethodT parameterTypeIR* typeIR_ret

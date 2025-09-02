@@ -125,9 +125,8 @@ rule SelectCase_keyset_ok/rangeK:
             typedExpressionIR_r_cast,
             def $compat_range
           )
-  ---- ;; fetch the types of both sides
+  ---- ;; fetch the type
   -- if _ `( typeIR_reduced _ ) = typedExpressionIR_l_reduced
-  -- if _ `( typeIR_reduced _ ) = typedExpressionIR_r_reduced
   ---- ;; cast the expressions to the key type
   -- if typedExpressionIR_l_coerced
       = $coerce_unary(typedExpressionIR_l_reduced, typeIR_key)
