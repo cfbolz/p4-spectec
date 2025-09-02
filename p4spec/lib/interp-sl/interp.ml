@@ -225,7 +225,6 @@ let rec eval_exp (ctx : Ctx.t) (exp : exp) : Ctx.t * value =
   | SliceE (exp_b, exp_l, exp_h) -> eval_slice_exp note ctx exp_b exp_l exp_h
   | UpdE (exp_b, path, exp_f) -> eval_upd_exp note ctx exp_b path exp_f
   | CallE (id, targs, args) -> eval_call_exp note ctx id targs args
-  | HoldE (id, notexp) -> eval_hold_exp note ctx id notexp
   | IterE (exp, iterexp) -> eval_iter_exp note ctx exp iterexp
 
 and eval_exps (ctx : Ctx.t) (exps : exp list) : Ctx.t * value list =
@@ -823,29 +822,6 @@ and eval_call_exp (_note : typ') (ctx : Ctx.t) (id : id) (targs : targ list)
   let ctx, value_res = invoke_func ctx id targs args in
   (ctx, value_res)
 
-(* Conditional relation holds expression evaluation *)
-
-and eval_hold_exp (note : typ') (ctx : Ctx.t) (id : id) (notexp : notexp) :
-    Ctx.t * value =
-  let _, exps_input = notexp in
-  let ctx, values_input = eval_exps ctx exps_input in
-  let ctx, hold =
-    match invoke_rel ctx id values_input with
-    | Some (ctx, _) -> (ctx, true)
-    | None -> (ctx, false)
-  in
-  let value_res =
-    let vid = Value.fresh () in
-    let typ = note in
-    Il.Ast.(BoolV hold $$$ { vid; typ })
-  in
-  Ctx.add_node ctx value_res;
-  List.iteri
-    (fun idx value_input ->
-      Ctx.add_edge ctx value_res value_input (Dep.Edges.Rel (id, idx)))
-    values_input;
-  (ctx, value_res)
-
 (* Iterated expression evaluation *)
 
 and eval_iter_exp_opt (note : typ') (ctx : Ctx.t) (exp : exp) (vars : var list)
@@ -936,6 +912,10 @@ and eval_instr (ctx : Ctx.t) (instr : instr) : Ctx.t * Sign.t =
   match instr.it with
   | IfI (exp_cond, iterexps, instrs_then, phantom_opt) ->
       eval_if_instr ctx exp_cond iterexps instrs_then phantom_opt
+  | IfHoldI (id, notexp, iterexps, instrs_then, phantom_opt) ->
+      eval_if_hold_instr ctx id notexp iterexps instrs_then phantom_opt
+  | IfNotHoldI (id, notexp, iterexps, instrs_then, phantom_opt) ->
+      eval_if_not_hold_instr ctx id notexp iterexps instrs_then phantom_opt
   | CaseI (exp, cases, phantom_opt) -> eval_case_instr ctx exp cases phantom_opt
   | OtherwiseI instr -> eval_instr ctx instr
   | LetI (exp_l, exp_r, iterexps) -> eval_let_instr ctx exp_l exp_r iterexps
@@ -1007,6 +987,182 @@ and eval_if_cond_iter (ctx : Ctx.t) (exp_cond : exp) (iterexps : iterexp list) :
 and eval_if_instr (ctx : Ctx.t) (exp_cond : exp) (iterexps : iterexp list)
     (instrs_then : instr list) (phantom_opt : phantom option) : Ctx.t * Sign.t =
   let ctx, cond, value_cond = eval_if_cond_iter ctx exp_cond iterexps in
+  let vid = value_cond.note.vid in
+  let ctx =
+    match phantom_opt with
+    | Some (pid, _) -> Ctx.cover ctx (not cond) pid vid
+    | None -> ctx
+  in
+  if cond then eval_instrs ctx Cont instrs_then else (ctx, Cont)
+
+(* If-hold instruction evaluation *)
+
+and eval_if_hold_cond (ctx : Ctx.t) (id : id) (notexp : notexp) :
+    Ctx.t * bool * value =
+  let _, exps_input = notexp in
+  let ctx, values_input = eval_exps ctx exps_input in
+  let ctx, hold =
+    match invoke_rel ctx id values_input with
+    | Some (ctx, _) -> (ctx, true)
+    | None -> (ctx, false)
+  in
+  let value_res =
+    let vid = Value.fresh () in
+    let typ = Il.Ast.BoolT in
+    Il.Ast.(BoolV hold $$$ { vid; typ })
+  in
+  Ctx.add_node ctx value_res;
+  List.iteri
+    (fun idx value_input ->
+      Ctx.add_edge ctx value_res value_input (Dep.Edges.Rel (id, idx)))
+    values_input;
+  (ctx, hold, value_res)
+
+and eval_if_hold_cond_list (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (vars : var list) (iterexps : iterexp list) : Ctx.t * bool * value list =
+  let ctxs_sub = Ctx.sub_list ctx vars in
+  List.fold_left
+    (fun (ctx, cond, values_cond) ctx_sub ->
+      if not cond then (ctx, cond, values_cond)
+      else
+        let ctx_sub, cond, value_cond =
+          eval_if_hold_cond_iter' ctx_sub id notexp iterexps
+        in
+        let ctx = Ctx.commit ctx ctx_sub in
+        let values_cond = values_cond @ [ value_cond ] in
+        (ctx, cond, values_cond))
+    (ctx, true, []) ctxs_sub
+
+and eval_if_hold_cond_iter' (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (iterexps : iterexp list) : Ctx.t * bool * value =
+  match iterexps with
+  | [] -> eval_if_hold_cond ctx id notexp
+  | iterexp_h :: iterexps_t -> (
+      let iter_h, vars_h = iterexp_h in
+      match iter_h with
+      | Opt -> error no_region "(TODO)"
+      | List ->
+          let ctx, cond, values_cond =
+            eval_if_hold_cond_list ctx id notexp vars_h iterexps_t
+          in
+          let value_cond =
+            let vid = Value.fresh () in
+            let typ = Il.Ast.IterT (Il.Ast.BoolT $ no_region, Il.Ast.List) in
+            Il.Ast.(ListV values_cond $$$ { vid; typ })
+          in
+          Ctx.add_node ctx value_cond;
+          List.iter
+            (fun (id, _typ, iters) ->
+              let value_sub =
+                Ctx.find_value Local ctx (id, iters @ [ Il.Ast.List ])
+              in
+              Ctx.add_edge ctx value_cond value_sub Dep.Edges.Iter)
+            vars_h;
+          (ctx, cond, value_cond))
+
+and eval_if_hold_cond_iter (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (iterexps : iterexp list) : Ctx.t * bool * value =
+  let iterexps = List.rev iterexps in
+  eval_if_hold_cond_iter' ctx id notexp iterexps
+
+and eval_if_hold_instr (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (iterexps : iterexp list) (instrs_then : instr list)
+    (phantom_opt : phantom option) : Ctx.t * Sign.t =
+  let ctx, cond, value_cond = eval_if_hold_cond_iter ctx id notexp iterexps in
+  let vid = value_cond.note.vid in
+  let ctx =
+    match phantom_opt with
+    | Some (pid, _) -> Ctx.cover ctx (not cond) pid vid
+    | None -> ctx
+  in
+  if cond then eval_instrs ctx Cont instrs_then else (ctx, Cont)
+
+(* If-not-hold instruction evaluation *)
+
+and eval_if_not_hold_cond (ctx : Ctx.t) (id : id) (notexp : notexp) :
+    Ctx.t * bool * value =
+  let _, exps_input = notexp in
+  let ctx, values_input = eval_exps ctx exps_input in
+  let ctx, nothold =
+    match invoke_rel ctx id values_input with
+    | Some (ctx, _) -> (ctx, false)
+    | None -> (ctx, true)
+  in
+  let value_res =
+    let vid = Value.fresh () in
+    let typ = Il.Ast.BoolT in
+    Il.Ast.(BoolV nothold $$$ { vid; typ })
+  in
+  Ctx.add_node ctx value_res;
+  List.iteri
+    (fun idx value_input ->
+      Ctx.add_edge ctx value_res value_input (Dep.Edges.Rel (id, idx)))
+    values_input;
+  (ctx, nothold, value_res)
+
+and eval_if_not_hold_cond_list (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (vars : var list) (iterexps : iterexp list) : Ctx.t * bool * value list =
+  let ctxs_sub = Ctx.sub_list ctx vars in
+  List.fold_left
+    (fun (ctx, cond, values_cond) ctx_sub ->
+      if not cond then (ctx, cond, values_cond)
+      else
+        let ctx_sub, cond, value_cond =
+          eval_if_not_hold_cond_iter' ctx_sub id notexp iterexps
+        in
+        let ctx = Ctx.commit ctx ctx_sub in
+        let values_cond = values_cond @ [ value_cond ] in
+        (ctx, cond, values_cond))
+    (ctx, true, []) ctxs_sub
+
+and eval_if_not_hold_cond_iter' (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (iterexps : iterexp list) : Ctx.t * bool * value =
+  match iterexps with
+  | [] -> eval_if_not_hold_cond ctx id notexp
+  | iterexp_h :: iterexps_t -> (
+      let iter_h, vars_h = iterexp_h in
+      match iter_h with
+      | Opt -> error no_region "(TODO)"
+      | List ->
+          let ctx, cond, values_cond =
+            eval_if_not_hold_cond_list ctx id notexp vars_h iterexps_t
+          in
+          let value_cond =
+            let vid = Value.fresh () in
+            let typ = Il.Ast.IterT (Il.Ast.BoolT $ no_region, Il.Ast.List) in
+            Il.Ast.(ListV values_cond $$$ { vid; typ })
+          in
+          Ctx.add_node ctx value_cond;
+          List.iter
+            (fun (id, _typ, iters) ->
+              let value_sub =
+                Ctx.find_value Local ctx (id, iters @ [ Il.Ast.List ])
+              in
+              Ctx.add_edge ctx value_cond value_sub Dep.Edges.Iter)
+            vars_h;
+          (ctx, cond, value_cond))
+
+and eval_if_not_hold_cond_iter (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (iterexps : iterexp list) : Ctx.t * bool * value =
+  let iterexps = List.rev iterexps in
+  eval_if_not_hold_cond_iter' ctx id notexp iterexps
+
+and eval_if_not_hold_instr (ctx : Ctx.t) (id : id) (notexp : notexp)
+    (iterexps : iterexp list) (instrs_then : instr list)
+    (phantom_opt : phantom option) : Ctx.t * Sign.t =
+  (* Copy the current coverage information *)
+  let cover_backup =
+    !(ctx.cover) |> SCov.Cover.bindings
+    |> List.fold_left
+         (fun cover_backup (pid, branch) ->
+           SCov.Cover.add pid branch cover_backup)
+         SCov.Cover.empty
+  in
+  let ctx, cond, value_cond =
+    eval_if_not_hold_cond_iter ctx id notexp iterexps
+  in
+  (* Restore the coverage information *)
+  ctx.cover := cover_backup;
   let vid = value_cond.note.vid in
   let ctx =
     match phantom_opt with
