@@ -90,36 +90,46 @@ and insert_phantom' (tdenv : TDEnv.t) (pathconds : pathcond list)
         (pid, pathconds)
       in
       Sl.Ast.IfI (exp_cond, iterexps, instrs_then, Some phantom) $ at
-  | IfHoldI (id, notexp, iterexps, instrs_then) ->
-      let pathcond =
+  | HoldI (id, notexp, iterexps, instrs_hold, instrs_nothold) ->
+      let pathcond_hold =
         if iterexps = [] then HoldC (id, notexp)
         else ForallC (HoldC (id, notexp), iterexps)
       in
-      let instrs_then =
-        let pathconds = pathconds @ [ pathcond ] in
-        insert_phantom tdenv pathconds instrs_then
+      let instrs_hold =
+        let pathconds = pathconds @ [ pathcond_hold ] in
+        insert_phantom tdenv pathconds instrs_hold
       in
-      let phantom =
-        let pid = pid () in
-        let pathconds = pathconds @ [ negate_pathcond pathcond ] in
-        (pid, pathconds)
-      in
-      Sl.Ast.IfHoldI (id, notexp, iterexps, instrs_then, Some phantom) $ at
-  | IfNotHoldI (id, notexp, iterexps, instrs_then) ->
-      let pathcond =
+      let pathcond_nothold =
         if iterexps = [] then NotHoldC (id, notexp)
         else ForallC (NotHoldC (id, notexp), iterexps)
       in
-      let instrs_then =
-        let pathconds = pathconds @ [ pathcond ] in
-        insert_phantom tdenv pathconds instrs_then
+      let instrs_nothold =
+        let pathconds = pathconds @ [ pathcond_nothold ] in
+        insert_phantom tdenv pathconds instrs_nothold
       in
-      let phantom =
-        let pid = pid () in
-        let pathconds = pathconds @ [ negate_pathcond pathcond ] in
-        (pid, pathconds)
+      let holdcase =
+        match (instrs_hold, instrs_nothold) with
+        | [], [] -> assert false
+        | instrs_hold, [] ->
+            let phantom =
+              let pid = pid () in
+              let pathconds = pathconds @ [ negate_pathcond pathcond_hold ] in
+              (pid, pathconds)
+            in
+            Sl.Ast.HoldH (instrs_hold, Some phantom)
+        | [], instrs_nothold ->
+            let phantom =
+              let pid = pid () in
+              let pathconds =
+                pathconds @ [ negate_pathcond pathcond_nothold ]
+              in
+              (pid, pathconds)
+            in
+            Sl.Ast.NotHoldH (instrs_nothold, Some phantom)
+        | instrs_hold, instrs_nothold ->
+            Sl.Ast.BothH (instrs_hold, instrs_nothold)
       in
-      Sl.Ast.IfNotHoldI (id, notexp, iterexps, instrs_then, Some phantom) $ at
+      Sl.Ast.HoldI (id, notexp, iterexps, holdcase) $ at
   | CaseI (exp, cases, total) ->
       let pathconds_cases =
         List.map
@@ -176,12 +186,18 @@ and insert_nothing' (instr : instr) : Sl.Ast.instr =
   | IfI (exp_cond, iterexps, instrs_then) ->
       let instrs_then = insert_nothing instrs_then in
       Sl.Ast.IfI (exp_cond, iterexps, instrs_then, None) $ at
-  | IfHoldI (id, notexp, iterexps, instrs_then) ->
-      let instrs_then = insert_nothing instrs_then in
-      Sl.Ast.IfHoldI (id, notexp, iterexps, instrs_then, None) $ at
-  | IfNotHoldI (id, notexp, iterexps, instrs_then) ->
-      let instrs_then = insert_nothing instrs_then in
-      Sl.Ast.IfNotHoldI (id, notexp, iterexps, instrs_then, None) $ at
+  | HoldI (id, notexp, iterexps, instrs_hold, instrs_nothold) ->
+      let instrs_hold = insert_nothing instrs_hold in
+      let instrs_nothold = insert_nothing instrs_nothold in
+      let holdcase =
+        match (instrs_hold, instrs_nothold) with
+        | [], [] -> assert false
+        | instrs_hold, [] -> Sl.Ast.HoldH (instrs_hold, None)
+        | [], instrs_nothold -> Sl.Ast.NotHoldH (instrs_nothold, None)
+        | instrs_hold, instrs_nothold ->
+            Sl.Ast.BothH (instrs_hold, instrs_nothold)
+      in
+      Sl.Ast.HoldI (id, notexp, iterexps, holdcase) $ at
   | CaseI (exp, cases, _total) ->
       let cases =
         let guards, blocks = List.split cases in

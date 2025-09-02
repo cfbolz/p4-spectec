@@ -115,6 +115,13 @@ and pathcond =
   | HoldC of id * notexp
   | NotHoldC of id * notexp
 
+(* Holding conditions *)
+
+and holdcase =
+  | BothH of instr list * instr list
+  | HoldH of instr list * phantom option
+  | NotHoldH of instr list * phantom option
+
 (* Case analysis *)
 
 and case = guard * instr list
@@ -131,8 +138,7 @@ and guard =
 and instr = instr' phrase
 and instr' =
   | IfI of exp * iterexp list * instr list * phantom option
-  | IfHoldI of id * notexp * iterexp list * instr list * phantom option
-  | IfNotHoldI of id * notexp * iterexp list * instr list * phantom option
+  | HoldI of id * notexp * iterexp list * holdcase
   | CaseI of exp * case list * phantom option 
   | OtherwiseI of instr
   | LetI of exp * exp * iterexp list

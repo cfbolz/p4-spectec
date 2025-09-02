@@ -106,6 +106,24 @@ and eq_pathconds (pathconds_a : pathcond list) (pathconds_b : pathcond list) :
   List.length pathconds_a = List.length pathconds_b
   && List.for_all2 eq_pathcond pathconds_a pathconds_b
 
+(* Holding case analysis *)
+
+and eq_holdcase (holdcase_a : holdcase) (holdcase_b : holdcase) : bool =
+  match (holdcase_a, holdcase_b) with
+  | ( BothH (instrs_hold_a, instrs_nothold_a),
+      BothH (instrs_hold_b, instrs_nothold_b) ) ->
+      eq_instrs instrs_hold_a instrs_hold_b
+      && eq_instrs instrs_nothold_a instrs_nothold_b
+  | HoldH (instrs_hold_a, phantom_opt_a), HoldH (instrs_hold_b, phantom_opt_b)
+    ->
+      eq_instrs instrs_hold_a instrs_hold_b
+      && eq_phantom_opt phantom_opt_a phantom_opt_b
+  | ( NotHoldH (instrs_nothold_a, phantom_opt_a),
+      NotHoldH (instrs_nothold_b, phantom_opt_b) ) ->
+      eq_instrs instrs_nothold_a instrs_nothold_b
+      && eq_phantom_opt phantom_opt_a phantom_opt_b
+  | _ -> false
+
 (* Case analysis *)
 
 and eq_case (case_a : case) (case_b : case) : bool =
@@ -136,21 +154,11 @@ and eq_instr (instr_a : instr) (instr_b : instr) : bool =
       && eq_iterexps iterexps_a iterexps_b
       && eq_instrs instrs_then_a instrs_then_b
       && eq_phantom_opt phantom_opt_a phantom_opt_b
-  | ( IfHoldI (id_a, (mixop_a, exps_a), iterexps_a, instrs_then_a, phantom_opt_a),
-      IfHoldI (id_b, (mixop_b, exps_b), iterexps_b, instrs_then_b, phantom_opt_b)
-    ) ->
+  | ( HoldI (id_a, (mixop_a, exps_a), iterexps_a, holdcase_a),
+      HoldI (id_b, (mixop_b, exps_b), iterexps_b, holdcase_b) ) ->
       eq_id id_a id_b && eq_mixop mixop_a mixop_b && eq_exps exps_a exps_b
       && eq_iterexps iterexps_a iterexps_b
-      && eq_instrs instrs_then_a instrs_then_b
-      && eq_phantom_opt phantom_opt_a phantom_opt_b
-  | ( IfNotHoldI
-        (id_a, (mixop_a, exps_a), iterexps_a, instrs_then_a, phantom_opt_a),
-      IfNotHoldI
-        (id_b, (mixop_b, exps_b), iterexps_b, instrs_then_b, phantom_opt_b) ) ->
-      eq_id id_a id_b && eq_mixop mixop_a mixop_b && eq_exps exps_a exps_b
-      && eq_iterexps iterexps_a iterexps_b
-      && eq_instrs instrs_then_a instrs_then_b
-      && eq_phantom_opt phantom_opt_a phantom_opt_b
+      && eq_holdcase holdcase_a holdcase_b
   | CaseI (exp_a, cases_a, phantom_opt_a), CaseI (exp_b, cases_b, phantom_opt_b)
     ->
       eq_exp exp_a exp_b && eq_cases cases_a cases_b
