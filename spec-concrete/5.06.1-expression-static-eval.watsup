@@ -103,6 +103,12 @@ rule Eval_static/binaryExpressionIR-div:
   -- Eval_static: p TC |- typedExpressionIR_l ~> value_l
   -- Eval_static: p TC |- typedExpressionIR_r ~> value_r
 
+rule Eval_static/binaryExpressionIR-mod:
+  p TC |- (BinE typedExpressionIR_l MOD typedExpressionIR_r) `( _ _ )
+       ~> $bin_mod(value_l, value_r)
+  -- Eval_static: p TC |- typedExpressionIR_l ~> value_l
+  -- Eval_static: p TC |- typedExpressionIR_r ~> value_r
+
 rule Eval_static/binaryExpressionIR-shl:
   p TC |- (BinE typedExpressionIR_l SHL typedExpressionIR_r) `( _ _ )
        ~> $bin_shl(value_l, value_r)

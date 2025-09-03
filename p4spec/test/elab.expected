@@ -8668,6 +8668,14 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
    ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:106.1-110.57
+   rule binaryExpressionIR-mod: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_mod(value_l, value_r))
+      -- if expressionIR <: binaryExpressionIR
+      -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
+      -- if binop matches `MOD`
+      -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
+      -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
+
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:112.1-116.57
    rule binaryExpressionIR-shl: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_shl(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8675,7 +8683,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:112.1-116.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:118.1-122.57
    rule binaryExpressionIR-shr: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_shr(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8683,7 +8691,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:118.1-122.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:124.1-128.57
    rule binaryExpressionIR-le: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `BoolV%`_primitiveValue($bin_le(value_l, value_r)) as value)
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8691,7 +8699,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:124.1-128.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:130.1-134.57
    rule binaryExpressionIR-ge: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `BoolV%`_primitiveValue($bin_ge(value_l, value_r)) as value)
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8699,7 +8707,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:130.1-134.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:136.1-140.57
    rule binaryExpressionIR-lt: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `BoolV%`_primitiveValue($bin_lt(value_l, value_r)) as value)
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8707,7 +8715,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:136.1-140.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:142.1-146.57
    rule binaryExpressionIR-gt: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `BoolV%`_primitiveValue($bin_gt(value_l, value_r)) as value)
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8715,7 +8723,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:142.1-146.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:148.1-152.57
    rule binaryExpressionIR-eq: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `BoolV%`_primitiveValue($bin_eq(value_l, value_r)) as value)
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8723,7 +8731,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:148.1-152.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:154.1-158.57
    rule binaryExpressionIR-ne: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `BoolV%`_primitiveValue($bin_ne(value_l, value_r)) as value)
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8731,7 +8739,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:154.1-158.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:160.1-164.57
    rule binaryExpressionIR-band: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_band(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8739,7 +8747,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:160.1-164.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:166.1-170.57
    rule binaryExpressionIR-bxor: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_bxor(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8747,7 +8755,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:166.1-170.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:172.1-176.57
    rule binaryExpressionIR-bor: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_bor(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8755,7 +8763,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:172.1-176.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:178.1-182.57
    rule binaryExpressionIR-concat: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_concat(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8763,7 +8771,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:178.1-182.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:184.1-188.57
    rule binaryExpressionIR-land: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_land(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8771,7 +8779,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:184.1-188.57
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:190.1-194.57
    rule binaryExpressionIR-lor: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bin_lor(value_l, value_r))
       -- if expressionIR <: binaryExpressionIR
       -- let `BinE%%%`_binaryExpressionIR(typedExpressionIR_l, binop, typedExpressionIR_r) = expressionIR as binaryExpressionIR
@@ -8779,7 +8787,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_l, value_l)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_r, value_r)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:194.1-199.63
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:200.1-205.63
    rule ternaryExpressionIR-true: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), value_true)
       -- if expressionIR <: ternaryExpressionIR
       -- let `TernE%%%`_ternaryExpressionIR(typedExpressionIR_cond, typedExpressionIR_true, typedExpressionIR_false) = expressionIR as ternaryExpressionIR
@@ -8787,7 +8795,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if (value = `BoolV%`_primitiveValue(true) as value)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_true, value_true)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:201.1-206.65
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:207.1-212.65
    rule ternaryExpressionIR-false: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), value_false)
       -- if expressionIR <: ternaryExpressionIR
       -- let `TernE%%%`_ternaryExpressionIR(typedExpressionIR_cond, typedExpressionIR_true, typedExpressionIR_false) = expressionIR as ternaryExpressionIR
@@ -8795,20 +8803,20 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if (value = `BoolV%`_primitiveValue(false) as value)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_false, value_false)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:211.1-214.45
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:217.1-220.45
    rule castExpression: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), value_cast)
       -- if expressionIR <: castExpressionIR
       -- let `CastE%%`_castExpressionIR(typeIR, typedExpressionIR) = expressionIR as castExpressionIR
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR, value)
       -- let value_cast = $cast_op(typeIR, value)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:221.1-222.46
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:227.1-228.46
    rule dataExpressionIR-invalidE: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `InvalidHeaderV`_invalidHeaderValue() as value)
       -- if expressionIR <: dataExpressionIR
       -- let dataExpressionIR = expressionIR as dataExpressionIR
       -- if dataExpressionIR matches `InvalidE`
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:226.1-228.56
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:232.1-234.56
    rule dataExpressionIR-seqE: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `SeqV%`_sequenceValue(value*{value <- value*}) as value)
       -- if expressionIR <: dataExpressionIR
       -- let dataExpressionIR = expressionIR as dataExpressionIR
@@ -8816,7 +8824,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- let `SeqE%`_dataExpressionIR(typedExpressionIR*{typedExpressionIR <- typedExpressionIR*}) = dataExpressionIR
       -- (Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR, value))*{typedExpressionIR <- typedExpressionIR*, value <- value*}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:232.1-234.56
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:238.1-240.56
    rule dataExpressionIR-seqdefaultE: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `SeqDefaultV%`_sequenceValue(value*{value <- value*}) as value)
       -- if expressionIR <: dataExpressionIR
       -- let dataExpressionIR = expressionIR as dataExpressionIR
@@ -8824,7 +8832,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- let `SeqDefaultE%`_dataExpressionIR(typedExpressionIR*{typedExpressionIR <- typedExpressionIR*}) = dataExpressionIR
       -- (Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR, value))*{typedExpressionIR <- typedExpressionIR*, value <- value*}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:238.1-241.56
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:244.1-247.56
    rule dataExpressionIR-recordE: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `RecordV%`_recordValue(`%%`_fieldValue(value, name)*{name <- name*, value <- value*}) as value)
       -- if expressionIR <: dataExpressionIR
       -- let dataExpressionIR = expressionIR as dataExpressionIR
@@ -8832,7 +8840,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- let `RecordE%`_dataExpressionIR(`%%`_namedExpressionIR(name, typedExpressionIR)*{name <- name*, typedExpressionIR <- typedExpressionIR*}) = dataExpressionIR
       -- (Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR, value))*{typedExpressionIR <- typedExpressionIR*, value <- value*}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:245.1-248.56
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:251.1-254.56
    rule dataExpressionIR-recorddefaultE: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), `RecordDefaultV%`_recordValue(`%%`_fieldValue(value, name)*{name <- name*, value <- value*}) as value)
       -- if expressionIR <: dataExpressionIR
       -- let dataExpressionIR = expressionIR as dataExpressionIR
@@ -8840,7 +8848,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- let `RecordDefaultE%`_dataExpressionIR(`%%`_namedExpressionIR(name, typedExpressionIR)*{name <- name*, typedExpressionIR <- typedExpressionIR*}) = dataExpressionIR
       -- (Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR, value))*{typedExpressionIR <- typedExpressionIR*, value <- value*}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:256.1-259.61
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:262.1-265.61
    rule errorAccessExpressionIR: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), value_error)
       -- if expressionIR <: errorAccessExpression
       -- let `ErrAccE%`_errorAccessExpression(name) = expressionIR as errorAccessExpression
@@ -8849,7 +8857,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if value?{value <- value?} matches (_)
       -- let ?(value_error) = value?{value <- value?}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:266.1-271.27
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:272.1-277.27
    rule memberAccessExpressionIR-typeaccE-enum: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(typeIR_base, _ctk)), `EnumV%%`_enumValue(tid, name) as value)
       -- if expressionIR <: memberAccessExpressionIR
       -- let memberAccessExpressionIR = expressionIR as memberAccessExpressionIR
@@ -8866,7 +8874,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- let `EnumT%%`_enumTypeIR(tid, id_member*{id_member <- id_member*}) = enumTypeIR
       -- if name <- id_member*{id_member <- id_member*}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:273.1-279.61
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:279.1-285.61
    rule memberAccessExpressionIR-typeaccE-senum: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(typeIR_base, _ctk)), `SEnumV%%%`_enumValue(tid, name, value) as value)
       -- if expressionIR <: memberAccessExpressionIR
       -- let memberAccessExpressionIR = expressionIR as memberAccessExpressionIR
@@ -8885,7 +8893,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if value'?{value' <- value'?} matches (_)
       -- let ?(value) = value'?{value' <- value'?}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:283.1-286.44
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:289.1-292.44
    rule memberAccessExpressionIR-expraccE-headerstack: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(typeIR_base, _ctk)), `IntV%`_numberValue(n_size as int) as value)
       -- if expressionIR <: memberAccessExpressionIR
       -- let memberAccessExpressionIR = expressionIR as memberAccessExpressionIR
@@ -8896,7 +8904,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if typeIR <: headerStackTypeIR
       -- let `HeaderStackT%%`_headerStackTypeIR(_typeIR, n_size) = typeIR as headerStackTypeIR
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:288.1-293.67
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:294.1-299.67
    rule memberAccessExpressionIR-expraccE-struct: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(typeIR_base, _ctk)), value)
       -- if expressionIR <: memberAccessExpressionIR
       -- let memberAccessExpressionIR = expressionIR as memberAccessExpressionIR
@@ -8910,7 +8918,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if value''?{value'' <- value''?} matches (_)
       -- let ?(value) = value''?{value'' <- value''?}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:295.1-300.67
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:301.1-306.67
    rule memberAccessExpressionIR-expraccE-header: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(typeIR_base, _ctk)), value)
       -- if expressionIR <: memberAccessExpressionIR
       -- let memberAccessExpressionIR = expressionIR as memberAccessExpressionIR
@@ -8924,7 +8932,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if value''?{value'' <- value''?} matches (_)
       -- let ?(value) = value''?{value'' <- value''?}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:302.1-307.67
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:308.1-313.67
    rule memberAccessExpressionIR-expraccE-headerunion: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(typeIR_base, _ctk)), value)
       -- if expressionIR <: memberAccessExpressionIR
       -- let memberAccessExpressionIR = expressionIR as memberAccessExpressionIR
@@ -8938,7 +8946,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if value''?{value'' <- value''?} matches (_)
       -- let ?(value) = value''?{value'' <- value''?}
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:314.1-322.34
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:320.1-328.34
    rule indexAccessExpressionIR-arraccE-tuple: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), value)
       -- if expressionIR <: indexAccessExpressionIR
       -- let indexAccessExpressionIR = expressionIR as indexAccessExpressionIR
@@ -8957,7 +8965,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if (n_index < |value_e*{value_e <- value_e*}|)
       -- let value = value_e*{value_e <- value_e*}[n_index]
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:324.1-332.34
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:330.1-338.34
    rule indexAccessExpressionIR-arraccE-stack: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), value)
       -- if expressionIR <: indexAccessExpressionIR
       -- let indexAccessExpressionIR = expressionIR as indexAccessExpressionIR
@@ -8976,7 +8984,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- if (n_index < |value_e*{value_e <- value_e*}|)
       -- let value = value_e*{value_e <- value_e*}[n_index]
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:336.1-342.59
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:342.1-348.59
    rule indexAccessExpressionIR-bitaccE: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $bitacc_op(value_base, value_hi, value_lo))
       -- if expressionIR <: indexAccessExpressionIR
       -- let indexAccessExpressionIR = expressionIR as indexAccessExpressionIR
@@ -8986,7 +8994,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_hi, value_hi)
       -- Eval_static: `%%|-%~>%`(p, TC, typedExpressionIR_lo, value_lo)
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:355.1-360.54
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:361.1-366.54
    rule callExpressionIR-methodT-size: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $sizeof(typeIR_base, name))
       -- if expressionIR <: callExpressionIR
       -- let callExpressionIR = expressionIR as callExpressionIR
@@ -8999,7 +9007,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR_base, _ctk')) = typedExpressionIR_base
       -- if name <- ["minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes"]
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:364.1-369.54
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:370.1-375.54
    rule callExpressionIR-typeT-size-mono: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $sizeof(typeIR_base, name))
       -- if expressionIR <: callExpressionIR
       -- let callExpressionIR = expressionIR as callExpressionIR
@@ -9016,7 +9024,7 @@ relation Eval_static: `%%|-%~>%`(cursor, typingContext, typedExpressionIR, value
       -- let `MonoTD%`_monoTypeDefIR(typeIR_base) = typeDefIR as monoTypeDefIR
       -- if name <- ["minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes"]
 
-   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:371.1-376.54
+   ;; ../../../../spec-concrete/5.06.1-expression-static-eval.watsup:377.1-382.54
    rule callExpressionIR-typeT-size-poly: `%%|-%~>%`(p, TC, `%%`_typedExpressionIR(expressionIR, `(%%)`_expressionNoteIR(_typeIR, _ctk)), $sizeof(typeIR_base, name))
       -- if expressionIR <: callExpressionIR
       -- let callExpressionIR = expressionIR as callExpressionIR
