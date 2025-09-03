@@ -23,8 +23,9 @@ dec $bitacc(int, int, int) : int
 
 dec $un_bnot(value) : value
 
-def $un_bnot(FBitV w i) = FBitV w i'
+def $un_bnot(FBitV w i) = FBitV w i''
   -- if i' = $bneg(i)
+  -- if i'' = $to_bitstr(w, i')
 
 ;;; Unary logical not
 

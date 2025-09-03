@@ -2894,6 +2894,7 @@ Typecheck success: ../../../../p4c/testdata/p4_16_samples/psa-action-profile1.p4
 Typecheck success: ../../../../p4c/testdata/p4_16_samples/psa-action-profile3.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_samples/psa-action-profile4.p4
+negative inner acc: -0.046765
 Typecheck success: ../../../../p4c/testdata/p4_16_samples/psa-action-profile4.p4
 
 >>> Running typing test on ../../../../p4c/testdata/p4_16_samples/psa-action-selector1.p4
