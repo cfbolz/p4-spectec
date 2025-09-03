@@ -9387,7 +9387,32 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if numberTypeIR' matches `FBitT%`
       -- let `FBitT%`_numberTypeIR(w_b) = numberTypeIR'
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:53.1-55.36
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:53.1-55.46
+   rule newtype-both-left: `%<:%`(typeIR, typeIR')
+      -- if typeIR <: aliasTypeIR
+      -- let aliasTypeIR = typeIR as aliasTypeIR
+      -- if aliasTypeIR matches `NewT%%`
+      -- let `NewT%%`_aliasTypeIR(id_a, typeIR_a) = aliasTypeIR
+      -- if typeIR' <: aliasTypeIR
+      -- let aliasTypeIR' = typeIR' as aliasTypeIR
+      -- if aliasTypeIR' matches `NewT%%`
+      -- let `NewT%%`_aliasTypeIR(id_b, typeIR_b) = aliasTypeIR'
+      -- if Sub_impl: `%<:%`(`NewT%%`_aliasTypeIR(id_a, typeIR_a) as typeIR, typeIR_b) holds
+
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:57.1-60.46
+   rule newtype-both-right: `%<:%`(typeIR, typeIR')
+      -- if typeIR <: aliasTypeIR
+      -- let aliasTypeIR = typeIR as aliasTypeIR
+      -- if aliasTypeIR matches `NewT%%`
+      -- let `NewT%%`_aliasTypeIR(id_a, typeIR_a) = aliasTypeIR
+      -- if typeIR' <: aliasTypeIR
+      -- let aliasTypeIR' = typeIR' as aliasTypeIR
+      -- if aliasTypeIR' matches `NewT%%`
+      -- let `NewT%%`_aliasTypeIR(id_b, typeIR_b) = aliasTypeIR'
+      -- if Sub_impl: `%<:%`(`NewT%%`_aliasTypeIR(id_a, typeIR_a) as typeIR, typeIR_b) does not hold
+      -- if Sub_impl: `%<:%`(typeIR_a, `NewT%%`_aliasTypeIR(id_b, typeIR_b) as typeIR) holds
+
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:62.1-64.36
    rule newtype-left: `%<:%`(typeIR, typeIR_b)
       -- if typeIR <: aliasTypeIR
       -- let aliasTypeIR = typeIR as aliasTypeIR
@@ -9395,7 +9420,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `NewT%%`_aliasTypeIR(_tid, typeIR_a) = aliasTypeIR
       -- if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:57.1-59.36
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:66.1-68.36
    rule newtype-right: `%<:%`(typeIR_a, typeIR)
       -- if typeIR <: aliasTypeIR
       -- let aliasTypeIR = typeIR as aliasTypeIR
@@ -9403,7 +9428,32 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `NewT%%`_aliasTypeIR(_tid, typeIR_b) = aliasTypeIR
       -- if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:61.1-63.36
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:70.1-72.64
+   rule serenum-both-left: `%<:%`(typeIR, typeIR')
+      -- if typeIR <: enumTypeIR
+      -- let enumTypeIR = typeIR as enumTypeIR
+      -- if enumTypeIR matches `SEnumT%%%`
+      -- let `SEnumT%%%`_enumTypeIR(id_a, typeIR_a, valueFieldIR_a*{valueFieldIR_a <- valueFieldIR_a*}) = enumTypeIR
+      -- if typeIR' <: enumTypeIR
+      -- let enumTypeIR' = typeIR' as enumTypeIR
+      -- if enumTypeIR' matches `SEnumT%%%`
+      -- let `SEnumT%%%`_enumTypeIR(id_b, typeIR_b, valueFieldIR_b*{valueFieldIR_b <- valueFieldIR_b*}) = enumTypeIR'
+      -- if Sub_impl: `%<:%`(`SEnumT%%%`_enumTypeIR(id_a, typeIR_a, valueFieldIR_a*{valueFieldIR_a <- valueFieldIR_a*}) as typeIR, typeIR_b) holds
+
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:74.1-77.64
+   rule serenum-both-right: `%<:%`(typeIR, typeIR')
+      -- if typeIR <: enumTypeIR
+      -- let enumTypeIR = typeIR as enumTypeIR
+      -- if enumTypeIR matches `SEnumT%%%`
+      -- let `SEnumT%%%`_enumTypeIR(id_a, typeIR_a, valueFieldIR_a*{valueFieldIR_a <- valueFieldIR_a*}) = enumTypeIR
+      -- if typeIR' <: enumTypeIR
+      -- let enumTypeIR' = typeIR' as enumTypeIR
+      -- if enumTypeIR' matches `SEnumT%%%`
+      -- let `SEnumT%%%`_enumTypeIR(id_b, typeIR_b, valueFieldIR_b*{valueFieldIR_b <- valueFieldIR_b*}) = enumTypeIR'
+      -- if Sub_impl: `%<:%`(`SEnumT%%%`_enumTypeIR(id_a, typeIR_a, valueFieldIR_a*{valueFieldIR_a <- valueFieldIR_a*}) as typeIR, typeIR_b) does not hold
+      -- if Sub_impl: `%<:%`(`SEnumT%%%`_enumTypeIR(id_a, typeIR_a, valueFieldIR_a*{valueFieldIR_a <- valueFieldIR_a*}) as typeIR, typeIR_b) holds
+
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:79.1-81.36
    rule serenum-left: `%<:%`(typeIR, typeIR_b)
       -- if typeIR <: enumTypeIR
       -- let enumTypeIR = typeIR as enumTypeIR
@@ -9411,7 +9461,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `SEnumT%%%`_enumTypeIR(_tid, typeIR_a, _valueFieldIR*{_valueFieldIR <- _valueFieldIR*}) = enumTypeIR
       -- if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:65.1-67.36
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:83.1-85.36
    rule serenum-right: `%<:%`(typeIR_a, typeIR)
       -- if typeIR <: enumTypeIR
       -- let enumTypeIR = typeIR as enumTypeIR
@@ -9419,14 +9469,14 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `SEnumT%%%`_enumTypeIR(_tid, typeIR_b, _valueFieldIR*{_valueFieldIR <- _valueFieldIR*}) = enumTypeIR
       -- if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:69.1-71.41
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:87.1-89.41
    rule default: `%<:%`(typeIR, typeIR_b)
       -- if typeIR <: defaultTypeIR
       -- let defaultTypeIR = typeIR as defaultTypeIR
       -- if (defaultTypeIR = `DefaultT`_defaultTypeIR())
       -- if $is_defaultable_typeIR(typeIR_b)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:73.1-74.32
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:91.1-92.32
    rule invalidheader-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: invalidHeaderTypeIR
       -- let invalidHeaderTypeIR = typeIR as invalidHeaderTypeIR
@@ -9434,7 +9484,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if typeIR' <: headerTypeIR
       -- let `HeaderT%%`_headerTypeIR(_tid, _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) = typeIR' as headerTypeIR
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:76.1-77.37
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:94.1-95.37
    rule invalidheader-headerunion: `%<:%`(typeIR, typeIR')
       -- if typeIR <: invalidHeaderTypeIR
       -- let invalidHeaderTypeIR = typeIR as invalidHeaderTypeIR
@@ -9442,7 +9492,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if typeIR' <: headerUnionTypeIR
       -- let `HeaderUnionT%%`_headerUnionTypeIR(_tid, _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) = typeIR' as headerUnionTypeIR
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:79.1-81.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:97.1-99.39
    rule seq-list: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9452,7 +9502,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `ListT%`_listTypeIR(typeIR_b) = typeIR' as listTypeIR
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:83.1-85.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:101.1-103.39
    rule seq-tuple: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9462,7 +9512,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `TupleT%`_tupleTypeIR(typeIR_b*{typeIR_b <- typeIR_b*}) = typeIR' as tupleTypeIR
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*, typeIR_b <- typeIR_b*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:87.1-90.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:105.1-108.39
    rule seq-stack: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9473,7 +9523,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if (|typeIR_a*{typeIR_a <- typeIR_a*}| <= n_size)
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:92.1-94.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:110.1-112.39
    rule seq-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9483,7 +9533,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `StructT%%`_structTypeIR(_tid, `%%`_fieldTypeIR(typeIR_b, _id)*{_id <- _id*, typeIR_b <- typeIR_b*}) = typeIR' as structTypeIR
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*, typeIR_b <- typeIR_b*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:96.1-98.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:114.1-116.39
    rule seq-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9493,7 +9543,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `HeaderT%%`_headerTypeIR(_tid, `%%`_fieldTypeIR(typeIR_b, _id)*{_id <- _id*, typeIR_b <- typeIR_b*}) = typeIR' as headerTypeIR
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*, typeIR_b <- typeIR_b*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:100.1-106.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:118.1-124.50
    rule seqdefault-tuple: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9506,7 +9556,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b_non_default) holds)*{typeIR_a <- typeIR_a*, typeIR_b_non_default <- typeIR_b_non_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:108.1-112.41
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:126.1-130.41
    rule seqdefault-stack: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9518,7 +9568,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*}
       -- if $is_defaultable_typeIR(typeIR_b)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:114.1-120.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:132.1-138.50
    rule seqdefault-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9531,7 +9581,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b_non_default) holds)*{typeIR_a <- typeIR_a*, typeIR_b_non_default <- typeIR_b_non_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:122.1-128.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:140.1-146.50
    rule seqdefault-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9544,7 +9594,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_expl: `%<:%`(typeIR_a, typeIR_b_non_default) holds)*{typeIR_a <- typeIR_a*, typeIR_b_non_default <- typeIR_b_non_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:130.1-137.55
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:148.1-155.55
    rule record-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -9561,7 +9611,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (let ?(typeIR_b_aligned) = typeIR'''?{typeIR''' <- typeIR'''?})*{typeIR'''? <- typeIR'''?*, typeIR_b_aligned <- typeIR_b_aligned*}
       -- (if Sub_expl: `%<:%`(typeIR_a_aligned, typeIR_b_aligned) holds)*{typeIR_a_aligned <- typeIR_a_aligned*, typeIR_b_aligned <- typeIR_b_aligned*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:139.1-146.55
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:157.1-164.55
    rule record-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -9578,7 +9628,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (let ?(typeIR_b_aligned) = typeIR'''?{typeIR''' <- typeIR'''?})*{typeIR'''? <- typeIR'''?*, typeIR_b_aligned <- typeIR_b_aligned*}
       -- (if Sub_expl: `%<:%`(typeIR_a_aligned, typeIR_b_aligned) holds)*{typeIR_a_aligned <- typeIR_a_aligned*, typeIR_b_aligned <- typeIR_b_aligned*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:148.1-161.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:166.1-179.50
    rule recorddefault-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -9600,7 +9650,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (let ?(typeIR_b_default) = typeIR''''?{typeIR'''' <- typeIR''''?})*{typeIR''''? <- typeIR''''?*, typeIR_b_default <- typeIR_b_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:163.1-176.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:181.1-194.50
    rule recorddefault-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -9622,7 +9672,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (let ?(typeIR_b_default) = typeIR''''?{typeIR'''' <- typeIR''''?})*{typeIR''''? <- typeIR''''?*, typeIR_b_default <- typeIR_b_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:178.1-180.36
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:196.1-198.36
    rule set-set: `%<:%`(typeIR, typeIR')
       -- if typeIR <: setTypeIR
       -- let `SetT%`_setTypeIR(typeIR_a) = typeIR as setTypeIR
@@ -9630,7 +9680,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `SetT%`_setTypeIR(typeIR_b) = typeIR' as setTypeIR
       -- if Sub_expl: `%<:%`(typeIR_a, typeIR_b) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:182.1-185.36
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:200.1-203.36
    rule non-set-set: `%<:%`(typeIR_a, typeIR)
       -- if typeIR <: setTypeIR
       -- let `SetT%`_setTypeIR(typeIR_b) = typeIR as setTypeIR
@@ -9640,7 +9690,7 @@ relation Sub_expl_canon_neq: `%<:%`(typeIR, typeIR)
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:35.1-35.54
 relation Sub_impl: `%<:%`(typeIR, typeIR)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:191.1-195.54
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:209.1-213.54
    rule : `%<:%`(typeIR_a, typeIR_b)
       -- let typeIR_a_canon = $canon(typeIR_a)
       -- let typeIR_b_canon = $canon(typeIR_b)
@@ -9649,11 +9699,11 @@ relation Sub_impl: `%<:%`(typeIR, typeIR)
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:36.1-36.60
 relation Sub_impl_canon: `%<:%`(typeIR, typeIR)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:197.1-199.38
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:215.1-217.38
    rule equals: `%<:%`(typeIR_a, typeIR_b)
       -- if Type_alpha: `%~~%`(typeIR_a, typeIR_b) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:201.1-204.46
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:219.1-222.46
    rule not-equals: `%<:%`(typeIR_a, typeIR_b)
       -- if Type_alpha: `%~~%`(typeIR_a, typeIR_b) does not hold
       -- if Sub_impl_canon_neq: `%<:%`(typeIR_a, typeIR_b) holds
@@ -9661,7 +9711,7 @@ relation Sub_impl_canon: `%<:%`(typeIR, typeIR)
 ;; ../../../../spec-concrete/5.04-typing-relation.watsup:37.1-37.64
 relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:206.1-207.18
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:224.1-225.18
    rule arbint-fixint: `%<:%`(typeIR, typeIR')
       -- if typeIR <: numberTypeIR
       -- let numberTypeIR = typeIR as numberTypeIR
@@ -9671,7 +9721,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if numberTypeIR' matches `FIntT%`
       -- let `FIntT%`_numberTypeIR(_nat) = numberTypeIR'
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:209.1-210.18
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:227.1-228.18
    rule arbint-fixbit: `%<:%`(typeIR, typeIR')
       -- if typeIR <: numberTypeIR
       -- let numberTypeIR = typeIR as numberTypeIR
@@ -9681,7 +9731,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if numberTypeIR' matches `FBitT%`
       -- let `FBitT%`_numberTypeIR(_nat) = numberTypeIR'
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:212.1-214.36
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:230.1-232.36
    rule serenum-left: `%<:%`(typeIR, typeIR_b)
       -- if typeIR <: enumTypeIR
       -- let enumTypeIR = typeIR as enumTypeIR
@@ -9689,14 +9739,14 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `SEnumT%%%`_enumTypeIR(_tid, typeIR_a, _valueFieldIR*{_valueFieldIR <- _valueFieldIR*}) = enumTypeIR
       -- if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:216.1-218.41
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:234.1-236.41
    rule default: `%<:%`(typeIR, typeIR_b)
       -- if typeIR <: defaultTypeIR
       -- let defaultTypeIR = typeIR as defaultTypeIR
       -- if (defaultTypeIR = `DefaultT`_defaultTypeIR())
       -- if $is_defaultable_typeIR(typeIR_b)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:220.1-221.32
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:238.1-239.32
    rule invalidheader-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: invalidHeaderTypeIR
       -- let invalidHeaderTypeIR = typeIR as invalidHeaderTypeIR
@@ -9704,7 +9754,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if typeIR' <: headerTypeIR
       -- let `HeaderT%%`_headerTypeIR(_tid, _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) = typeIR' as headerTypeIR
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:223.1-224.37
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:241.1-242.37
    rule invalidheader-headerunion: `%<:%`(typeIR, typeIR')
       -- if typeIR <: invalidHeaderTypeIR
       -- let invalidHeaderTypeIR = typeIR as invalidHeaderTypeIR
@@ -9712,7 +9762,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if typeIR' <: headerUnionTypeIR
       -- let `HeaderUnionT%%`_headerUnionTypeIR(_tid, _fieldTypeIR*{_fieldTypeIR <- _fieldTypeIR*}) = typeIR' as headerUnionTypeIR
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:226.1-228.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:244.1-246.39
    rule seq-list: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9722,7 +9772,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `ListT%`_listTypeIR(typeIR_b) = typeIR' as listTypeIR
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:230.1-232.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:248.1-250.39
    rule seq-tuple: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9732,7 +9782,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `TupleT%`_tupleTypeIR(typeIR_b*{typeIR_b <- typeIR_b*}) = typeIR' as tupleTypeIR
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*, typeIR_b <- typeIR_b*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:234.1-237.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:252.1-255.39
    rule seq-stack: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9743,7 +9793,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- if (|typeIR_a*{typeIR_a <- typeIR_a*}| <= n_size)
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:239.1-241.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:257.1-259.39
    rule seq-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9753,7 +9803,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `StructT%%`_structTypeIR(_tid, `%%`_fieldTypeIR(typeIR_b, _id)*{_id <- _id*, typeIR_b <- typeIR_b*}) = typeIR' as structTypeIR
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*, typeIR_b <- typeIR_b*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:243.1-245.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:261.1-263.39
    rule seq-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9763,7 +9813,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `HeaderT%%`_headerTypeIR(_tid, `%%`_fieldTypeIR(typeIR_b, _id)*{_id <- _id*, typeIR_b <- typeIR_b*}) = typeIR' as headerTypeIR
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*, typeIR_b <- typeIR_b*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:247.1-249.39
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:265.1-267.39
    rule seq-seq: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9775,7 +9825,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- let `SeqT%`_sequenceTypeIR(typeIR_b*{typeIR_b <- typeIR_b*}) = sequenceTypeIR'
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*, typeIR_b <- typeIR_b*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:251.1-257.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:269.1-275.50
    rule seqdefault-tuple: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9788,7 +9838,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b_non_default) holds)*{typeIR_a <- typeIR_a*, typeIR_b_non_default <- typeIR_b_non_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:259.1-263.41
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:277.1-281.41
    rule seqdefault-stack: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9800,7 +9850,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b) holds)*{typeIR_a <- typeIR_a*}
       -- if $is_defaultable_typeIR(typeIR_b)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:265.1-271.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:283.1-289.50
    rule seqdefault-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9813,7 +9863,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b_non_default) holds)*{typeIR_a <- typeIR_a*, typeIR_b_non_default <- typeIR_b_non_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:273.1-279.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:291.1-297.50
    rule seqdefault-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: sequenceTypeIR
       -- let sequenceTypeIR = typeIR as sequenceTypeIR
@@ -9826,7 +9876,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (if Sub_impl: `%<:%`(typeIR_a, typeIR_b_non_default) holds)*{typeIR_a <- typeIR_a*, typeIR_b_non_default <- typeIR_b_non_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:281.1-288.55
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:299.1-306.55
    rule record-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -9843,7 +9893,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (let ?(typeIR_b_aligned) = typeIR'''?{typeIR''' <- typeIR'''?})*{typeIR'''? <- typeIR'''?*, typeIR_b_aligned <- typeIR_b_aligned*}
       -- (if Sub_impl: `%<:%`(typeIR_a_aligned, typeIR_b_aligned) holds)*{typeIR_a_aligned <- typeIR_a_aligned*, typeIR_b_aligned <- typeIR_b_aligned*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:290.1-297.55
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:308.1-315.55
    rule record-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -9860,7 +9910,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (let ?(typeIR_b_aligned) = typeIR'''?{typeIR''' <- typeIR'''?})*{typeIR'''? <- typeIR'''?*, typeIR_b_aligned <- typeIR_b_aligned*}
       -- (if Sub_impl: `%<:%`(typeIR_a_aligned, typeIR_b_aligned) holds)*{typeIR_a_aligned <- typeIR_a_aligned*, typeIR_b_aligned <- typeIR_b_aligned*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:299.1-312.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:317.1-330.50
    rule recorddefault-struct: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -9882,7 +9932,7 @@ relation Sub_impl_canon_neq: `%<:%`(typeIR, typeIR)
       -- (let ?(typeIR_b_default) = typeIR''''?{typeIR'''' <- typeIR''''?})*{typeIR''''? <- typeIR''''?*, typeIR_b_default <- typeIR_b_default*}
       -- (if $is_defaultable_typeIR(typeIR_b_default))*{typeIR_b_default <- typeIR_b_default*}
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:314.1-327.50
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:332.1-345.50
    rule recorddefault-header: `%<:%`(typeIR, typeIR')
       -- if typeIR <: recordTypeIR
       -- let recordTypeIR = typeIR as recordTypeIR
@@ -12871,15 +12921,15 @@ relation Inst_ok: `%%%|-%%%%%:%%%`(cursor, typingContext, instctxt, constructorT
       -- if $instantiable(p, TC, instctxt, typeIR_object_inferred)
       -- Call_convention_ok: `%%%|-%%:%`(p, TC, `NOACTION`_actctxt(), parameterTypeIR_aligned_inferred*{parameterTypeIR_aligned_inferred <- parameterTypeIR_aligned_inferred*}, argumentIR*{argumentIR <- argumentIR*}, argumentIR_cast*{argumentIR_cast <- argumentIR_cast*})
 
-;; ../../../../spec-concrete/5.05.2-subtype.watsup:338.1-342.23
+;; ../../../../spec-concrete/5.05.2-subtype.watsup:356.1-360.23
 def $reduce_serenum_unary(typedExpressionIR, $check(typeIR) : bool) : typedExpressionIR? =
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:345.1-348.23
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:363.1-366.23
    clause 0(typedExpressionIR, $check) = ?(typedExpressionIR)
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR, _ctk)) = typedExpressionIR
       -- if $check(typeIR)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:350.1-356.79
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:368.1-374.79
    clause 1(typedExpressionIR, $check) = $reduce_serenum_unary(typedExpressionIR_cast, $check)
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR, ctk)) = typedExpressionIR
       -- if ~$check(typeIR)
@@ -12890,20 +12940,20 @@ def $reduce_serenum_unary(typedExpressionIR, $check(typeIR) : bool) : typedExpre
       -- let `SEnumT%%%`_enumTypeIR(_tid, typeIR_underlying, _valueFieldIR*{_valueFieldIR <- _valueFieldIR*}) = enumTypeIR
       -- let typedExpressionIR_cast = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_underlying, typedExpressionIR) as expressionIR, `(%%)`_expressionNoteIR(typeIR_underlying, ctk))
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:358.1-359.15
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:376.1-377.15
    clause 2(typedExpressionIR, $check) = ?()
       -- otherwise
 
-;; ../../../../spec-concrete/5.05.2-subtype.watsup:363.1-368.44
+;; ../../../../spec-concrete/5.05.2-subtype.watsup:381.1-386.44
 def $reduce_serenum_binary(typedExpressionIR, typedExpressionIR, $check(typeIR, typeIR) : bool) : (typedExpressionIR, typedExpressionIR)? =
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:370.1-374.35
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:388.1-392.35
    clause 0(typedExpressionIR_l, typedExpressionIR_r, $check) = ?((typedExpressionIR_l, typedExpressionIR_r))
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR_l, _ctk)) = typedExpressionIR_l
       -- let `%%`_typedExpressionIR(_expressionIR', `(%%)`_expressionNoteIR(typeIR_r, _ctk')) = typedExpressionIR_r
       -- if $check(typeIR_l, typeIR_r)
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:376.1-384.87
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:394.1-402.87
    clause 1(typedExpressionIR_l, typedExpressionIR_r, $check) = $reduce_serenum_binary(typedExpressionIR_l_cast, typedExpressionIR_r, $check)
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR_l, ctk_l)) = typedExpressionIR_l
       -- let `%%`_typedExpressionIR(_expressionIR', `(%%)`_expressionNoteIR(typeIR_r, _ctk)) = typedExpressionIR_r
@@ -12915,7 +12965,7 @@ def $reduce_serenum_binary(typedExpressionIR, typedExpressionIR, $check(typeIR, 
       -- let `SEnumT%%%`_enumTypeIR(_tid, typeIR_l_underlying, _valueFieldIR*{_valueFieldIR <- _valueFieldIR*}) = enumTypeIR
       -- let typedExpressionIR_l_cast = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_l_underlying, typedExpressionIR_l) as expressionIR, `(%%)`_expressionNoteIR(typeIR_l_underlying, ctk_l))
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:386.1-394.87
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:404.1-412.87
    clause 2(typedExpressionIR_l, typedExpressionIR_r, $check) = $reduce_serenum_binary(typedExpressionIR_l, typedExpressionIR_r_cast, $check)
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR_l, _ctk)) = typedExpressionIR_l
       -- let `%%`_typedExpressionIR(_expressionIR', `(%%)`_expressionNoteIR(typeIR_r, ctk_r)) = typedExpressionIR_r
@@ -12927,39 +12977,39 @@ def $reduce_serenum_binary(typedExpressionIR, typedExpressionIR, $check(typeIR, 
       -- let `SEnumT%%%`_enumTypeIR(_tid, typeIR_r_underlying, _valueFieldIR*{_valueFieldIR <- _valueFieldIR*}) = enumTypeIR
       -- let typedExpressionIR_r_cast = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_r_underlying, typedExpressionIR_r) as expressionIR, `(%%)`_expressionNoteIR(typeIR_r_underlying, ctk_r))
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:396.1-397.15
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:414.1-415.15
    clause 3(typedExpressionIR_l, typedExpressionIR_r, $check) = ?()
       -- otherwise
 
-;; ../../../../spec-concrete/5.05.2-subtype.watsup:408.1-408.66
+;; ../../../../spec-concrete/5.05.2-subtype.watsup:426.1-426.66
 def $coerce_unary(typedExpressionIR, typeIR) : typedExpressionIR? =
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:410.1-412.37
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:428.1-430.37
    clause 0(typedExpressionIR, typeIR_to) = ?(typedExpressionIR)
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR, _ctk)) = typedExpressionIR
       -- if Type_alpha: `%~~%`(typeIR, typeIR_to) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:414.1-419.63
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:432.1-437.63
    clause 1(typedExpressionIR, typeIR_to) = ?(typedExpressionIR_cast)
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR, ctk)) = typedExpressionIR
       -- if Type_alpha: `%~~%`(typeIR, typeIR_to) does not hold
       -- if Sub_impl: `%<:%`(typeIR, typeIR_to) holds
       -- let typedExpressionIR_cast = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_to, typedExpressionIR) as expressionIR, `(%%)`_expressionNoteIR(typeIR_to, ctk))
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:421.1-422.15
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:439.1-440.15
    clause 2(typedExpressionIR, typeIR_to) = ?()
       -- otherwise
 
-;; ../../../../spec-concrete/5.05.2-subtype.watsup:426.1-427.44
+;; ../../../../spec-concrete/5.05.2-subtype.watsup:444.1-445.44
 def $coerce_binary(typedExpressionIR, typedExpressionIR) : (typedExpressionIR, typedExpressionIR)? =
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:429.1-433.38
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:447.1-451.38
    clause 0(typedExpressionIR_l, typedExpressionIR_r) = ?((typedExpressionIR_l, typedExpressionIR_r))
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR_l, _ctk)) = typedExpressionIR_l
       -- let `%%`_typedExpressionIR(_expressionIR', `(%%)`_expressionNoteIR(typeIR_r, _ctk')) = typedExpressionIR_r
       -- if Type_alpha: `%~~%`(typeIR_l, typeIR_r) holds
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:435.1-442.65
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:453.1-460.65
    clause 1(typedExpressionIR_l, typedExpressionIR_r) = ?((typedExpressionIR_l_cast, typedExpressionIR_r))
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR_l, ctk_l)) = typedExpressionIR_l
       -- let `%%`_typedExpressionIR(_expressionIR', `(%%)`_expressionNoteIR(typeIR_r, _ctk)) = typedExpressionIR_r
@@ -12967,7 +13017,7 @@ def $coerce_binary(typedExpressionIR, typedExpressionIR) : (typedExpressionIR, t
       -- if Sub_impl: `%<:%`(typeIR_l, typeIR_r) holds
       -- let typedExpressionIR_l_cast = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_r, typedExpressionIR_l) as expressionIR, `(%%)`_expressionNoteIR(typeIR_r, ctk_l))
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:444.1-452.65
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:462.1-470.65
    clause 2(typedExpressionIR_l, typedExpressionIR_r) = ?((typedExpressionIR_l, typedExpressionIR_r_cast))
       -- let `%%`_typedExpressionIR(_expressionIR, `(%%)`_expressionNoteIR(typeIR_l, _ctk)) = typedExpressionIR_l
       -- let `%%`_typedExpressionIR(_expressionIR', `(%%)`_expressionNoteIR(typeIR_r, ctk_r)) = typedExpressionIR_r
@@ -12976,7 +13026,7 @@ def $coerce_binary(typedExpressionIR, typedExpressionIR) : (typedExpressionIR, t
       -- if Sub_impl: `%<:%`(typeIR_r, typeIR_l) holds
       -- let typedExpressionIR_r_cast = `%%`_typedExpressionIR(`CastE%%`_castExpressionIR(typeIR_l, typedExpressionIR_r) as expressionIR, `(%%)`_expressionNoteIR(typeIR_l, ctk_r))
 
-   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:454.1-455.15
+   ;; ../../../../spec-concrete/5.05.2-subtype.watsup:472.1-473.15
    clause 3(typedExpressionIR_l, typedExpressionIR_r) = ?()
       -- otherwise
 

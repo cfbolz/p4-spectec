@@ -16,14 +16,14 @@
     (diff run_il_neg_p4c.expected run_il_neg_p4c.actual))
    (ignore-outputs
     (diff run_sl_pos_p4c.expected run_sl_pos_p4c.actual))
-  (ignore-outputs
-   (diff run_sl_neg_p4c.expected run_sl_neg_p4c.actual))
-  (ignore-outputs
-   (diff cov_dangling_p4c.expected cov_dangling_p4c.actual))
-  (ignore-outputs
-   (diff parser_pos_p4c.expected parser_pos_p4c.actual))
-  (ignore-outputs
-   (diff parser_neg_p4c.expected parser_neg_p4c.actual)))))
+   (ignore-outputs
+    (diff run_sl_neg_p4c.expected run_sl_neg_p4c.actual))
+   (ignore-outputs
+    (diff cov_dangling_p4c.expected cov_dangling_p4c.actual))
+   (ignore-outputs
+    (diff parser_pos_p4c.expected parser_pos_p4c.actual))
+   (ignore-outputs
+    (diff parser_neg_p4c.expected parser_neg_p4c.actual)))))
 
 (rule
  (target elab.actual)

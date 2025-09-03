@@ -50,6 +50,15 @@ rule Sub_expl_canon_neq/fixbit-fixint:
 rule Sub_expl_canon_neq/fixbit-fixbit:
   FBitT w_a <: FBitT w_b
 
+rule Sub_expl_canon_neq/newtype-both-left:
+  NewT id_a typeIR_a <: NewT id_b typeIR_b
+  -- Sub_impl: NewT id_a typeIR_a <: typeIR_b
+
+rule Sub_expl_canon_neq/newtype-both-right:
+  NewT id_a typeIR_a <: NewT id_b typeIR_b
+  -- Sub_impl:/ NewT id_a typeIR_a <: typeIR_b
+  -- Sub_impl: typeIR_a <: NewT id_b typeIR_b
+
 rule Sub_expl_canon_neq/newtype-left:
   NewT _ typeIR_a <: typeIR_b
   -- Sub_impl: typeIR_a <: typeIR_b
@@ -57,6 +66,15 @@ rule Sub_expl_canon_neq/newtype-left:
 rule Sub_expl_canon_neq/newtype-right:
   typeIR_a <: NewT _ typeIR_b
   -- Sub_impl: typeIR_a <: typeIR_b
+
+rule Sub_expl_canon_neq/serenum-both-left:
+  SEnumT id_a typeIR_a valueFieldIR_a* <: SEnumT id_b typeIR_b valueFieldIR_b*
+  -- Sub_impl: SEnumT id_a typeIR_a valueFieldIR_a* <: typeIR_b
+
+rule Sub_expl_canon_neq/serenum-both-right:
+  SEnumT id_a typeIR_a valueFieldIR_a* <: SEnumT id_b typeIR_b valueFieldIR_b*
+  -- Sub_impl:/ SEnumT id_a typeIR_a valueFieldIR_a* <: typeIR_b
+  -- Sub_impl: SEnumT id_a typeIR_a valueFieldIR_a* <: typeIR_b
 
 rule Sub_expl_canon_neq/serenum-left:
   SEnumT _ typeIR_a _ <: typeIR_b
