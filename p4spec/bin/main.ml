@@ -1,4 +1,5 @@
 open Util.Error
+open Util.Source
 
 let version = "0.1"
 
@@ -369,6 +370,75 @@ let parse_command =
        | Interface.Lexer.Error msg -> Format.printf "Lexer error: %s\n" msg
        | e -> Format.printf "Unknown error: %s\n" (Printexc.to_string e))
 
+let count_rels (spec : El.Ast.spec) : int =
+  let is_rel (def : El.Ast.def) : bool =
+    match def.it with RelD _ -> true | _ -> false
+  in
+  List.filter is_rel spec |> List.length
+
+let count_rules (spec : El.Ast.spec) : int =
+  let is_rule (def : El.Ast.def) : bool =
+    match def.it with RuleD _ -> true | _ -> false
+  in
+  List.filter is_rule spec |> List.length
+
+let count_decs (spec : El.Ast.spec) : int =
+  let is_dec (def : El.Ast.def) : bool =
+    match def.it with DecD _ -> true | _ -> false
+  in
+  List.filter is_dec spec |> List.length
+
+let count_defs (spec : El.Ast.spec) : int =
+  let is_def (def : El.Ast.def) : bool =
+    match def.it with DefD _ -> true | _ -> false
+  in
+  List.filter is_def spec |> List.length
+
+let count_prems (spec : El.Ast.spec) : int =
+  let count_prems' (def : El.Ast.def) : int option =
+    match def.it with
+    | RuleD (_, _, _, prems) -> Some (List.length prems)
+    | DefD (_, _, _, _, prems) -> Some (List.length prems)
+    | _ -> None
+  in
+  List.filter_map count_prems' spec |> List.fold_left ( + ) 0
+
+let count_locs (filenames : string list) : int =
+  let rec count_loc (filename : string) : int =
+    let ic = open_in filename in
+    let rec count_lines loc =
+      try
+        let _ = input_line ic in
+        count_lines (loc + 1)
+      with End_of_file -> loc
+    in
+    let locs = count_lines 0 in
+    close_in ic;
+    locs
+  in
+  List.map count_loc filenames |> List.fold_left ( + ) 0
+
+let stat_command =
+  Core.Command.basic ~summary:"statistics of the p4_16 spec"
+    (let open Core.Command.Let_syntax in
+     let open Core.Command.Param in
+     let%map filenames = anon (sequence ("filename" %: string)) in
+     fun () ->
+       try
+         let spec = List.concat_map Frontend.Parse.parse_file filenames in
+         Format.printf
+           "# locs : %d\n\
+            # relations : %d\n\
+            # rules : %d\n\
+            # decs : %d\n\
+            # defs : %d\n\
+            # prems : %d\n"
+           (count_locs filenames) (count_rels spec) (count_rules spec)
+           (count_decs spec) (count_defs spec) (count_prems spec)
+       with
+       | ParseError (at, msg) -> Format.printf "%s\n" (string_of_error at msg)
+       | ElabError (at, msg) -> Format.printf "%s\n" (string_of_error at msg))
+
 let command =
   Core.Command.group
     ~summary:"p4spec: a language design framework for the p4_16 language"
@@ -382,6 +452,7 @@ let command =
       ("testgen-dbg", run_testgen_debug_command);
       ("interesting", interesting_command);
       ("parse", parse_command);
+      ("stat", stat_command);
     ]
 
 let () = Command_unix.run ~version command
