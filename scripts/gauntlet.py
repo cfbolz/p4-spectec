@@ -65,12 +65,12 @@ class GauntletRunner:
         # Check if p4smith exists (we'll try to find it)
         p4smith_path = self.find_p4smith()
         if not p4smith_path:
-            print("WARNING: p4smith not found. You may need to build it first.")
+            print("ERROR: p4smith not found. You may need to build it first.")
             print("To build p4smith:")
             print("  cd p4c")
             print("  mkdir build && cd build")
             print("  cmake ..")
-            print("  make p4smith")
+            print("  make")
             return False
         
         # Check if spec-concrete directory exists
@@ -89,10 +89,9 @@ class GauntletRunner:
     def find_p4smith(self) -> Optional[Path]:
         """Try to find p4smith binary in various locations."""
         possible_paths = [
-            self.p4c_build_dir / "p4smith",
-            self.p4c_build_dir / "backends" / "p4tools" / "p4smith",
             Path("/usr/local/bin/p4smith"),
             Path("/opt/homebrew/bin/p4smith"),
+            self.p4c_build_dir / "p4smith",
         ]
         
         for path in possible_paths:
