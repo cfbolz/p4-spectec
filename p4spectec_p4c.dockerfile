@@ -1,29 +1,28 @@
 # --------------------------------------
-# Stage 1: P4C dependencies
+# Stage 1: Build P4C
 # --------------------------------------
 FROM p4lang/behavioral-model:latest AS base 
 
-ARG DEBIAN_FRONTEND=noninteractive
-# ENV TZ=Asia/Seoul
+ENV DEBIAN_FRONTEND=noninteractive
 ARG ENABLE_BMV2=OFF
 ARG ENABLE_GTESTS=ON
 ARG ENABLE_WERROR=ON
 
 RUN apt-get update && \
     apt-get install -y \
-    sudo bison build-essential ccache cmake curl flex g++ git lld libboost-dev libboost-graph-dev \
+    sudo bison build-essential cmake curl flex g++ git lld libboost-dev libboost-graph-dev \
     libboost-iostreams-dev libfl-dev ninja-build pkg-config python3 python3-pip python3-setuptools tcpdump \
     wget ca-certificates \
-    && apt-get clean
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY p4c /home/p4c
-WORKDIR /home/p4c
+COPY . /home/p4spectec
+WORKDIR /home/p4spectec/p4c
 RUN pip3 install --upgrade pip && \
     pip3 install -r requirements.txt
 
 # Build
-WORKDIR /home/p4c/build
-RUN ccache --set-config=max_size=1G
+WORKDIR /home/p4spectec/p4c/build
+# RUN ccache --set-config=max_size=1G
 ENV CMAKE_FLAGS="-DCMAKE_UNITY_BUILD=OFF \
     -DENABLE_GTESTS=${ENABLE_GTESTS} \
     -DCMAKE_BUILD_TYPE=Debug \
@@ -33,30 +32,15 @@ RUN cmake $CMAKE_FLAGS -G "Unix Makefiles" .. \
     -DCMAKE_CXX_FLAGS="--coverage -O0" \
     -DCMAKE_C_FLAGS="--coverage -O0"
 RUN cmake --build . -- -j$(nproc) VERBOSE=1 && \
-    cmake --install . && \
-    ccache -p -s;
+    cmake --install . 
 
 RUN pip3 install gcovr
-
-COPY scripts/run_coverage.sh /home/run_coverage.sh
-RUN chmod a+x /home/run_coverage.sh
-WORKDIR /home
-
-# --------------------------------------
-# Stage 2: Copy p4spectec
-# --------------------------------------
-FROM base AS p4base
-
-COPY . /home/p4-spectec
-# RUN rm -rf /home/p4spectec/p4c && \
-#     mv /home/p4c /home/p4spectec
-
-WORKDIR /home/p4-spectec
+WORKDIR /home/p4spectec
 
 # ---------------------------------------
-# Stage 3: Installations - p4-spectec
+# Stage 2: P4SpecTec dependencies
 # ---------------------------------------
-FROM p4base AS opambase
+FROM base AS opambase
 
 RUN apt-get update && \
     apt-get install -y opam make libgmp-dev pkg-config && \
@@ -64,17 +48,17 @@ RUN apt-get update && \
 
 # Initialize opam
 RUN opam init --disable-sandboxing --auto-setup && \
-    opam switch create 5.1.0 && \
+    opam switch create 4.14.0 && \
     eval $(opam env) && \
-    opam install dune menhir bignum core core_unix bisect_ppx -y
+    opam install dune menhir bignum core.v0.15.1 core_unix.v0.15.2 bisect_ppx -y
 
 # Set opam environment permanently
-ENV OPAM_SWITCH_PREFIX=/root/.opam/5.1.0
+ENV OPAM_SWITCH_PREFIX=/root/.opam/4.14.0
 ENV PATH=$OPAM_SWITCH_PREFIX/bin:$PATH
 ENV CAML_LD_LIBRARY_PATH=$OPAM_SWITCH_PREFIX/lib/stublibs:$OPAM_SWITCH_PREFIX/lib/ocaml/stublibs:$OPAM_SWITCH_PREFIX/lib/ocaml
 
 # ---------------------------------------
-# Stage 4: Build p4spec
+# Stage 3: Build P4SpecTec
 # ---------------------------------------
 FROM opambase AS p4specbase
 
@@ -82,7 +66,7 @@ RUN make build-spec && \
     chmod a+x ./p4spectec
 
 # --------------------------------------
-# Stage 5: Fuzzer & Reducer dependencies
+# Stage 4: Fuzzer & Reducer dependencies
 # --------------------------------------
 FROM p4specbase AS reducebase
 
@@ -94,4 +78,4 @@ RUN python3 -m pip install psutil
 COPY patches/creduce /usr/bin/creduce
 RUN chmod +x /usr/bin/creduce
 
-ENV P4SPECTEC_PATH=/home/p4-spectec
+ENV P4CHERRY_PATH=/home/p4spectec
