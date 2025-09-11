@@ -2,4 +2,5 @@
  (name sl)
  (libraries bignum util xl el il yojson)
  (modules ast eq print)
- (preprocess (pps ppx_deriving_yojson)))
+ (preprocess
+  (pps ppx_deriving_yojson)))

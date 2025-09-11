@@ -2,4 +2,5 @@
  (name el)
  (libraries bignum util xl domain yojson)
  (modules ast print free)
- (preprocess (pps ppx_deriving_yojson)))
+ (preprocess
+  (pps ppx_deriving_yojson)))

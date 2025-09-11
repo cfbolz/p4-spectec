@@ -2,4 +2,5 @@
  (name xl)
  (libraries util bignum yojson)
  (modules atom bool num utf8 mixop var)
- (preprocess (pps ppx_deriving_yojson)))
+ (preprocess
+  (pps ppx_deriving_yojson)))
