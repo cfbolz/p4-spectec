@@ -4,4 +4,5 @@
  (preprocess
   (pps ppx_let))
  (modules main)
+ (modes byte exe)
  (libraries p4spec core core_unix core_unix.command_unix))

@@ -13,6 +13,7 @@ build-spec:
 	rm -f ./$(SPEC)
 	opam switch 5.1.0
 	cd p4spec && opam exec -- dune build bin/main.exe && echo
+	cd p4spec && opam exec -- dune build bin/main.bc && echo
 	ln -f $(EXESPEC) ./$(SPEC)
 
 # Format

@@ -4,6 +4,7 @@
 (name p4spec)
 
 (generate_opam_files true)
+(map_workspace_root false)
 
 (package
   (name p4spec)

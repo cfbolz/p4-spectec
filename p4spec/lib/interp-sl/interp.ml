@@ -1351,12 +1351,6 @@ and eval_return_instr (ctx : Ctx.t) (exp : exp) : Ctx.t * Sign.t =
 and invoke_rel (ctx : Ctx.t) (id : id) (values_input : value list) :
     (Ctx.t * value list) option =
 
-  values_input
-  |> List.iter (fun value ->
-      let yojson = Sl.Ast.value_to_yojson value in
-      Yojson.Safe.pretty_print Format.std_formatter yojson);
-  print_newline ();
-
   let _inputs, exps_input, instrs = Ctx.find_rel Local ctx id in
   check (instrs <> []) id.at "relation has no instructions";
   let attempt_rules () =
@@ -1375,6 +1369,21 @@ and invoke_rel (ctx : Ctx.t) (id : id) (values_input : value list) :
                   (Dep.Edges.Rel (id, idx_arg)))
               values_output)
           values_input;
+        (* do the same kind of json output as in invoke_func*)
+        let json_list = List.map Sl.Ast.value_to_yojson values_input in
+        let yojson_values = `List json_list in
+        let json_outputs = List.map Sl.Ast.value_to_yojson values_output in
+        let yojson_results = `List json_outputs in
+        let json =
+          `Assoc
+            [
+              ("calltype", `String "relation");
+              ("name", `String id.it);
+              ("inputs", yojson_values);
+              ("results", yojson_results);
+            ] in
+        let json_str = Yojson.Safe.to_string json in
+        print_endline json_str;
         Some (ctx, values_output)
     | _ -> None
   in
@@ -1431,6 +1440,7 @@ and invoke_func_def (ctx : Ctx.t) (id : id) (targs : targ list)
       ctx_local tparams targs
   in
   let ctx, values_input = eval_args ctx args in
+
   let attempt_clauses () =
     let ctx_local = Ctx.localize_inputs ctx_local values_input in
     let ctx_local = assign_args ctx ctx_local args_input values_input in
@@ -1443,6 +1453,22 @@ and invoke_func_def (ctx : Ctx.t) (id : id) (targs : targ list)
             Ctx.add_edge ctx value_output value_input
               (Dep.Edges.Func (id, idx_arg)))
           values_input;
+        (* turn values_input into a list of yojson values *)
+        let json_list = List.map Sl.Ast.value_to_yojson values_input in
+        let yojson_values = `List json_list in
+        (* turn result value into a yojson value *)
+        let yojson_result = Sl.Ast.value_to_yojson value_output in
+        (* create a json object with four fields: "calltype", "name", "inputs", "result" *)
+        let json =
+          `Assoc
+            [
+              ("calltype", `String "function");
+              ("name", `String id.it);
+              ("inputs", yojson_values);
+              ("result", yojson_result);
+            ] in
+        let json_str = Yojson.Safe.to_string json in
+        print_endline json_str;
         (ctx, value_output)
     | _ -> error id.at "function was not matched"
   in
