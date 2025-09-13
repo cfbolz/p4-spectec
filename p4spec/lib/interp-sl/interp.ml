@@ -1408,6 +1408,22 @@ and invoke_func_builtin (ctx : Ctx.t) (id : id) (targs : targ list)
     (args : arg list) : Ctx.t * value =
   let ctx, values_input = eval_args ctx args in
   let value_output = Builtin.invoke ctx id targs values_input in
+    (* turn values_input into a list of yojson values *)
+  let json_list = List.map Sl.Ast.value_to_yojson values_input in
+  let yojson_values = `List json_list in
+  (* turn result value into a yojson value *)
+  let yojson_result = Sl.Ast.value_to_yojson value_output in
+  (* create a json object with four fields: "calltype", "name", "inputs", "result" *)
+  let json =
+    `Assoc
+      [
+        ("calltype", `String "builtin");
+        ("name", `String id.it);
+        ("inputs", yojson_values);
+        ("result", yojson_result);
+      ] in
+  let json_str = Yojson.Safe.to_string json in
+  print_endline json_str;
   List.iteri
     (fun idx_arg value_input ->
       Ctx.add_edge ctx value_output value_input (Dep.Edges.Func (id, idx_arg)))
