@@ -32,7 +32,7 @@
    elab.actual
    (with-stderr-to
     elab.err
-    (run ./test.exe elab -s ../../../../spec-concrete)))))
+    (run ./test.exe elab -s ../../../../spec)))))
 
 (rule
  (target struct.actual)
@@ -41,7 +41,7 @@
    struct.actual
    (with-stderr-to
     struct.err
-    (run ./test.exe struct -s ../../../../spec-concrete)))))
+    (run ./test.exe struct -s ../../../../spec)))))
 
 (rule
  (target run_il_pos_p4c.actual)
@@ -54,7 +54,7 @@
      ./test.exe
      run-il
      -s
-     ../../../../spec-concrete
+     ../../../../spec
      -i
      ../../../../p4c/p4include
      -e
@@ -73,7 +73,7 @@
      ./test.exe
      run-il
      -s
-     ../../../../spec-concrete
+     ../../../../spec
      -i
      ../../../../p4c/p4include
      -e
@@ -93,7 +93,7 @@
      ./test.exe
      run-sl
      -s
-     ../../../../spec-concrete
+     ../../../../spec
      -i
      ../../../../p4c/p4include
      -e
@@ -112,7 +112,7 @@
      ./test.exe
      run-sl
      -s
-     ../../../../spec-concrete
+     ../../../../spec
      -i
      ../../../../p4c/p4include
      -e
@@ -132,7 +132,7 @@
      ./test.exe
      cover-dangling
      -s
-     ../../../../spec-concrete
+     ../../../../spec
      -i
      ../../../../p4c/p4include
      -e

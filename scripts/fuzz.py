@@ -44,7 +44,7 @@ def parse_args() -> FuzzConfig:
 
     parser.add_argument("dir", type=str, help="Path to the working directory")
     parser.add_argument("--loops", type=int, default=2, help="Fuzz loop count")
-    parser.add_argument("--spec", type=str, default="spec-concrete")
+    parser.add_argument("--spec", type=str, default="spec")
     parser.add_argument("--include", type=str, default="p4c/p4include")
     parser.add_argument("--exclude", type=str, default="excludes")
     parser.add_argument(

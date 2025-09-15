@@ -26,7 +26,7 @@ class GauntletRunner:
         self.project_root = Path(project_root)
         self.p4c_build_dir = self.project_root / "p4c" / "build"
         self.gauntlet_dir = self.project_root / "gauntlet"
-        self.spec_concrete_dir = self.project_root / "spec-concrete"
+        self.spec_dir = self.project_root / "spec"
         self.p4include_dir = self.project_root / "p4c" / "p4include"
         self.p4spectec_binary = self.project_root / "p4spectec"
         self.loop_size = max(1, int(loop_size))
@@ -73,9 +73,9 @@ class GauntletRunner:
             print("  make")
             return False
         
-        # Check if spec-concrete directory exists
-        if not self.spec_concrete_dir.exists():
-            print(f"ERROR: spec-concrete directory not found at {self.spec_concrete_dir}")
+        # Check if spec directory exists
+        if not self.spec_dir.exists():
+            print(f"ERROR: spec directory not found at {self.spec_dir}")
             return False
         
         # Check if p4include directory exists
@@ -167,10 +167,10 @@ class GauntletRunner:
         try:
             # Collect .watsup files in a deterministic order (alphabetical)
             watsup_files = sorted(
-                self.spec_concrete_dir.glob("*.watsup"), key=lambda p: p.name
+                self.spec_dir.glob("*.watsup"), key=lambda p: p.name
             )
             if not watsup_files:
-                return "error", "No .watsup files found in spec-concrete"
+                return "error", "No .watsup files found in spec"
 
             # Build the p4spectec command with explicit, ordered arguments
             cmd = [
@@ -355,7 +355,7 @@ class GauntletRunner:
         cov_file = self.gauntlet_dir / f"{loop_name}.cov"
 
         # Collect .watsup files in deterministic order
-        watsup_files = sorted(self.spec_concrete_dir.glob("*.watsup"), key=lambda p: p.name)
+        watsup_files = sorted(self.spec_dir.glob("*.watsup"), key=lambda p: p.name)
         if not watsup_files:
             print("No .watsup files found for coverage; skipping.")
             return
