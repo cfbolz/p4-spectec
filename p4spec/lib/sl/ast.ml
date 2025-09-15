@@ -111,9 +111,19 @@ and phantom = pid * pathcond list
 [@@deriving yojson]
 
 and pathcond =
-  | ForallC of exp * iterexp list
-  | ExistsC of exp * iterexp list
+  | ForallC of pathcond * iterexp list
+  | ExistsC of pathcond * iterexp list
   | PlainC of exp
+  | HoldC of id * notexp
+  | NotHoldC of id * notexp
+[@@deriving yojson]
+
+(* Holding conditions *)
+
+and holdcase =
+  | BothH of instr list * instr list
+  | HoldH of instr list * phantom option
+  | NotHoldH of instr list * phantom option
 [@@deriving yojson]
 
 (* Case analysis *)
@@ -131,9 +141,10 @@ and guard =
 
 (* Instructions *)
 
-and instr = instr' phrase [@@deriving yojson]
+and instr = instr' phrase
 and instr' =
   | IfI of exp * iterexp list * instr list * phantom option
+  | HoldI of id * notexp * iterexp list * holdcase
   | CaseI of exp * case list * phantom option 
   | OtherwiseI of instr
   | LetI of exp * exp * iterexp list

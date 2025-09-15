@@ -19,7 +19,11 @@
    (ignore-outputs
     (diff run_sl_neg_p4c.expected run_sl_neg_p4c.actual))
    (ignore-outputs
-    (diff cov_sl_p4c.expected cov_sl_p4c.actual)))))
+    (diff cov_dangling_p4c.expected cov_dangling_p4c.actual))
+   (ignore-outputs
+    (diff parser_pos_p4c.expected parser_pos_p4c.actual))
+   (ignore-outputs
+    (diff parser_neg_p4c.expected parser_neg_p4c.actual)))))
 
 (rule
  (target elab.actual)
@@ -28,7 +32,7 @@
    elab.actual
    (with-stderr-to
     elab.err
-    (run ./test.exe elab -s ../../../../spec)))))
+    (run ./test.exe elab -s ../../../../spec-concrete)))))
 
 (rule
  (target struct.actual)
@@ -37,7 +41,7 @@
    struct.actual
    (with-stderr-to
     struct.err
-    (run ./test.exe struct -s ../../../../spec)))))
+    (run ./test.exe struct -s ../../../../spec-concrete)))))
 
 (rule
  (target run_il_pos_p4c.actual)
@@ -50,7 +54,7 @@
      ./test.exe
      run-il
      -s
-     ../../../../spec
+     ../../../../spec-concrete
      -i
      ../../../../p4c/p4include
      -e
@@ -67,9 +71,9 @@
     run_il_neg_p4c.err
     (run
      ./test.exe
-     run-sl
+     run-il
      -s
-     ../../../../spec
+     ../../../../spec-concrete
      -i
      ../../../../p4c/p4include
      -e
@@ -89,7 +93,7 @@
      ./test.exe
      run-sl
      -s
-     ../../../../spec
+     ../../../../spec-concrete
      -i
      ../../../../p4c/p4include
      -e
@@ -108,7 +112,7 @@
      ./test.exe
      run-sl
      -s
-     ../../../../spec
+     ../../../../spec-concrete
      -i
      ../../../../p4c/p4include
      -e
@@ -118,22 +122,52 @@
      -neg)))))
 
 (rule
- (target cov_sl_p4c.actual)
+ (target cov_dangling_p4c.actual)
  (action
   (with-stdout-to
-   cov_sl_p4c.actual
+   cov_dangling_p4c.actual
    (with-stderr-to
-    cov_sl_p4c.err
+    cov_dangling_p4c.err
     (run
      ./test.exe
-     cover-sl
+     cover-dangling
      -s
-     ../../../../spec
+     ../../../../spec-concrete
      -i
      ../../../../p4c/p4include
      -e
      ../../../../excludes
      -d
      ../../../../p4c/testdata/p4_16_samples
+     -d
+     ../../../../p4c/testdata/p4_16_errors)))))
+
+(rule
+ (target parser_pos_p4c.actual)
+ (action
+  (with-stdout-to
+   parser_pos_p4c.actual
+   (with-stderr-to
+    parser_pos_p4c.err
+    (run
+     ./test.exe
+     parser
+     -i
+     ../../../../p4c/p4include
+     -d
+     ../../../../p4c/testdata/p4_16_samples)))))
+
+(rule
+ (target parser_neg_p4c.actual)
+ (action
+  (with-stdout-to
+   parser_neg_p4c.actual
+   (with-stderr-to
+    parser_neg_p4c.err
+    (run
+     ./test.exe
+     parser
+     -i
+     ../../../../p4c/p4include
      -d
      ../../../../p4c/testdata/p4_16_errors)))))

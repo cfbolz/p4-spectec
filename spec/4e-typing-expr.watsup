@@ -40,13 +40,15 @@ rule Expr_ok/namee:
 ;;
 
 rule Expr_ok/seqe:
-  p C |- SeqE expr* : SeqE exprIL* `(SeqT typ*; ctk_e)
+  p C |- SeqE expr*
+       : SeqE exprIL* `(SeqT typ*; ctk_e)
   -- (Expr_ok: p C |- expr : exprIL)*
   -- if (`(typ; ctk) = $annot(exprIL))*
   -- if ctk_e = $joins_ctk(ctk*)
 
 rule Expr_ok/seqdefaulte:
-  p C |- SeqDefaultE expr* : SeqDefaultE exprIL* `(SeqDefaultT typ*; ctk_e)
+  p C |- SeqDefaultE expr*
+       : SeqDefaultE exprIL* `(SeqDefaultT typ*; ctk_e)
   -- (Expr_ok: p C |- expr : exprIL)*
   -- if (`(typ; ctk) = $annot(exprIL))*
   -- if ctk_e = $joins_ctk(ctk*)
@@ -56,13 +58,15 @@ rule Expr_ok/seqdefaulte:
 ;;
 
 rule Expr_ok/recorde:
-  p C |- RecordE (member, expr)* : RecordE (member, exprIL)* `(RecordT (member, typ)*; ctk_e)
+  p C |- RecordE (member, expr)*
+       : RecordE (member, exprIL)* `(RecordT (member, typ)*; ctk_e)
   -- (Expr_ok: p C |- expr : exprIL)*
   -- if (`(typ; ctk) = $annot(exprIL))*
   -- if ctk_e = $joins_ctk(ctk*)
 
 rule Expr_ok/recorddefaulte:
-  p C |- RecordDefaultE (member, expr)* : RecordE (member, exprIL)* `(RecordDefaultT (member, typ)*; ctk_e)
+  p C |- RecordDefaultE (member, expr)*
+       : RecordE (member, exprIL)* `(RecordDefaultT (member, typ)*; ctk_e)
   -- (Expr_ok: p C |- expr : exprIL)*
   -- if (`(typ; ctk) = $annot(exprIL))*
   -- if ctk_e = $joins_ctk(ctk*)
@@ -162,7 +166,8 @@ def $compatible'_plusminusmult(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-plus-minus-mult:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
   -- if binop <- [ PLUS, MINUS, MUL ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -170,7 +175,10 @@ rule Expr_ok/bine-plus-minus-mult:
   ----
   -- if (exprIL_l', exprIL_r') = $coerce_binary(exprIL_l, exprIL_r)
   ----
-  -- if (exprIL_l'', exprIL_r'') = $reduce_senums_binary(exprIL_l', exprIL_r', def $compatible_plusminusmult)
+  -- if (exprIL_l'', exprIL_r'')
+      = $reduce_senums_binary(
+          exprIL_l', exprIL_r', def $compatible_plusminusmult
+        )
   ----
   -- if `(typ''; ctk_l'') = $annot(exprIL_l'')
   -- if `(_; ctk_r'') = $annot(exprIL_r'')
@@ -187,7 +195,8 @@ def $compatible'_satplusminus(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-sat-plus-minus:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
   -- if binop <- [ SPLUS, SMINUS ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -195,7 +204,10 @@ rule Expr_ok/bine-sat-plus-minus:
   ----
   -- if (exprIL_l', exprIL_r') = $coerce_binary(exprIL_l, exprIL_r)
   ----
-  -- if (exprIL_l'', exprIL_r'') = $reduce_senums_binary(exprIL_l', exprIL_r', def $compatible_satplusminus)
+  -- if (exprIL_l'', exprIL_r'')
+      = $reduce_senums_binary(
+          exprIL_l', exprIL_r', def $compatible_satplusminus
+        )
   -- if `(typ''; ctk_l'') = $annot(exprIL_l'')
   -- if `(_; ctk_r'') = $annot(exprIL_r'')
   ----
@@ -211,7 +223,8 @@ def $compatible'_divmod(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-div-mod-lctk:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
   -- if binop <- [ DIV, MOD ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -219,19 +232,23 @@ rule Expr_ok/bine-div-mod-lctk:
   ----
   -- if (exprIL_l', exprIL_r') = $coerce_binary(exprIL_l, exprIL_r)
   ----
-  -- if (exprIL_l'', exprIL_r'') = $reduce_senums_binary(exprIL_l', exprIL_r', def $compatible_divmod)
+  -- if (exprIL_l'', exprIL_r'')
+      = $reduce_senums_binary(
+          exprIL_l', exprIL_r', def $compatible_divmod
+        )
   ----
   -- if `(typ''; ctk_l'') = $annot(exprIL_l'')
   -- if `(_; LCTK) = $annot(exprIL_r'')
   ----
-  -- Eval_static: p C |- exprIL_r'' ~> val_r _
+  -- Eval_static: p C |- exprIL_r'' ~> val_r
   -- if n_r = $get_num(val_r)
   -- if $(n_r > 0)
   ----
   -- if ctk = $join_ctk(ctk_l'', LCTK)
 
 rule Expr_ok/bine-div-mod-non-lctk:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
   -- if binop <- [ DIV, MOD ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -239,7 +256,10 @@ rule Expr_ok/bine-div-mod-non-lctk:
   ----
   -- if (exprIL_l', exprIL_r') = $coerce_binary(exprIL_l, exprIL_r)
   ----
-  -- if (exprIL_l'', exprIL_r'') = $reduce_senums_binary(exprIL_l', exprIL_r', def $compatible_divmod)
+  -- if (exprIL_l'', exprIL_r'')
+      = $reduce_senums_binary(
+          exprIL_l', exprIL_r', def $compatible_divmod
+        )
   ----
   -- if `(typ''; ctk_l'') = $annot(exprIL_l'')
   -- if `(_; ctk_r'') = $annot(exprIL_r'')
@@ -264,13 +284,17 @@ def $compatible'_shift(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-shift-fbitt:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l' exprIL_r' `(typ_l'; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l' exprIL_r' `(typ_l'; ctk)
   -- if binop <- [ SHL, SHR ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
   -- Expr_ok: p C |- expr_r : exprIL_r
   ----
-  -- if (exprIL_l', exprIL_r') = $reduce_senums_binary(exprIL_l, exprIL_r, def $compatible_shift)
+  -- if (exprIL_l', exprIL_r')
+      = $reduce_senums_binary(
+          exprIL_l, exprIL_r, def $compatible_shift
+        )
   -- if `(typ_l'; ctk_l') = $annot(exprIL_l')
   -- if `(typ_r'; ctk_r') = $annot(exprIL_r')
   ----
@@ -279,25 +303,30 @@ rule Expr_ok/bine-shift-fbitt:
   -- if ctk = $join_ctk(ctk_l', ctk_r')
 
 rule Expr_ok/bine-shift-intt:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l' exprIL_r' `(typ_l'; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l' exprIL_r' `(typ_l'; ctk)
   -- if binop <- [ SHL, SHR ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
   -- Expr_ok: p C |- expr_r : exprIL_r
   ----
-  -- if (exprIL_l', exprIL_r') = $reduce_senums_binary(exprIL_l, exprIL_r, def $compatible_shift)
+  -- if (exprIL_l', exprIL_r')
+      = $reduce_senums_binary(
+          exprIL_l, exprIL_r, def $compatible_shift
+        )
   -- if `(typ_l'; ctk_l') = $annot(exprIL_l')
   -- if `(typ_r'; ctk_r') = $annot(exprIL_r')
   ----
   -- if $is_intt(typ_r') \/ $is_fintt(typ_r')
   -- if ctk_r' = LCTK
-  -- Eval_static: p C |- exprIL_r' ~> val_r' _
+  -- Eval_static: p C |- exprIL_r' ~> val_r'
   -- if n_r = $get_num(val_r')
   ----
   -- if ctk = $join_ctk(ctk_l', ctk_r')
 
 rule Expr_ok/bine-compare-eq:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l' exprIL_r' `(BoolT; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l' exprIL_r' `(BoolT; ctk)
   -- if binop <- [ EQ, NE ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -323,7 +352,8 @@ def $compatible'_compare(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-compare:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l'' exprIL_r'' `(BoolT; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l'' exprIL_r'' `(BoolT; ctk)
   -- if binop <- [ LE, GE, LT, GT ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -331,7 +361,10 @@ rule Expr_ok/bine-compare:
   ----
   -- if (exprIL_l', exprIL_r') = $coerce_binary(exprIL_l, exprIL_r)
   ----
-  -- if (exprIL_l'', exprIL_r'') = $reduce_senums_binary(exprIL_l', exprIL_r', def $compatible_compare)
+  -- if (exprIL_l'', exprIL_r'')
+      = $reduce_senums_binary(
+          exprIL_l', exprIL_r', def $compatible_compare
+        )
   ----
   -- if `(_; ctk_l'') = $annot(exprIL_l'')
   -- if `(_; ctk_r'') = $annot(exprIL_r'')
@@ -348,7 +381,8 @@ def $compatible'_bitwise(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-bitwise:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l'' exprIL_r'' `(typ''; ctk)
   -- if binop <- [ BAND, BXOR, BOR ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -356,7 +390,10 @@ rule Expr_ok/bine-bitwise:
   ----
   -- if (exprIL_l', exprIL_r') = $coerce_binary(exprIL_l, exprIL_r)
   ----
-  -- if (exprIL_l'', exprIL_r'') = $reduce_senums_binary(exprIL_l', exprIL_r', def $compatible_bitwise)
+  -- if (exprIL_l'', exprIL_r'')
+      = $reduce_senums_binary(
+          exprIL_l', exprIL_r', def $compatible_bitwise
+        )
   ----
   -- if `(typ''; ctk_l'') = $annot(exprIL_l'')
   -- if `(_; ctk_r'') = $annot(exprIL_r'')
@@ -375,11 +412,15 @@ def $compatible'_concat(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-concat-fint:
-  p C |- BinE CONCAT expr_l expr_r : BinE CONCAT exprIL_l' exprIL_r' `(typ''; ctk)
+  p C |- BinE CONCAT expr_l expr_r
+       : BinE CONCAT exprIL_l' exprIL_r' `(typ''; ctk)
   -- Expr_ok: p C |- expr_l : exprIL_l
   -- Expr_ok: p C |- expr_r : exprIL_r
   ----
-  -- if (exprIL_l', exprIL_r') = $reduce_senums_binary(exprIL_l, exprIL_r, def $compatible_concat)
+  -- if (exprIL_l', exprIL_r')
+      = $reduce_senums_binary(
+          exprIL_l, exprIL_r, def $compatible_concat
+        )
   ----
   -- if `(typ_l'; ctk_l') = $annot(exprIL_l')
   -- if `(typ_r'; ctk_r') = $annot(exprIL_r')
@@ -391,11 +432,15 @@ rule Expr_ok/bine-concat-fint:
   -- if ctk = $join_ctk(ctk_l', ctk_r')
 
 rule Expr_ok/bine-concat-fbit:
-  p C |- BinE CONCAT expr_l expr_r : BinE CONCAT exprIL_l' exprIL_r' `(typ''; ctk)
+  p C |- BinE CONCAT expr_l expr_r
+       : BinE CONCAT exprIL_l' exprIL_r' `(typ''; ctk)
   -- Expr_ok: p C |- expr_l : exprIL_l
   -- Expr_ok: p C |- expr_r : exprIL_r
   ----
-  -- if (exprIL_l', exprIL_r') = $reduce_senums_binary(exprIL_l, exprIL_r, def $compatible_concat)
+  -- if (exprIL_l', exprIL_r')
+      = $reduce_senums_binary(
+          exprIL_l, exprIL_r, def $compatible_concat
+        )
   ----
   -- if `(typ_l'; ctk_l') = $annot(exprIL_l')
   -- if `(typ_r'; ctk_r') = $annot(exprIL_r')
@@ -416,7 +461,8 @@ def $compatible'_logical(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/bine-logical:
-  p C |- BinE binop expr_l expr_r : BinE binop exprIL_l exprIL_r `(BoolT; ctk)
+  p C |- BinE binop expr_l expr_r
+       : BinE binop exprIL_l exprIL_r `(BoolT; ctk)
   -- if binop <- [ LAND, LOR ]
   ----
   -- Expr_ok: p C |- expr_l : exprIL_l
@@ -424,7 +470,10 @@ rule Expr_ok/bine-logical:
   ----
   -- if (exprIL_l', exprIL_r') = $coerce_binary(exprIL_l, exprIL_r)
   ----
-  -- if (exprIL_l'', exprIL_r'') = $reduce_senums_binary(exprIL_l', exprIL_r', def $compatible_logical)
+  -- if (exprIL_l'', exprIL_r'')
+      = $reduce_senums_binary(
+          exprIL_l', exprIL_r', def $compatible_logical
+        )
   ----
   -- if `(_; ctk_l'') = $annot(exprIL_l'')
   -- if `(_; ctk_r'') = $annot(exprIL_r'')
@@ -435,7 +484,8 @@ rule Expr_ok/bine-logical:
 ;;
 
 rule Expr_ok/terne:
-  p C |- TernE expr_c expr_t expr_f : TernE exprIL_c exprIL_t' exprIL_f' `(typ'; ctk)
+  p C |- TernE expr_c expr_t expr_f
+       : TernE exprIL_c exprIL_t' exprIL_f' `(typ'; ctk)
   -- Expr_ok: p C |- expr_c : exprIL_c
   -- if `(BoolT; ctk_c) = $annot(exprIL_c)
   ----
@@ -480,13 +530,17 @@ def $compatible'_mask(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/maske:
-  p C |- MaskE expr_b expr_m : MaskE exprIL_b'' exprIL_m'' `(SetT typ''; DYN)
+  p C |- MaskE expr_b expr_m
+       : MaskE exprIL_b'' exprIL_m'' `(SetT typ''; DYN)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- Expr_ok: p C |- expr_m : exprIL_m
   ----
   -- if (exprIL_b', exprIL_m') = $coerce_binary(exprIL_b, exprIL_m)
   ----
-  -- if (exprIL_b'', exprIL_m'') = $reduce_senums_binary(exprIL_b', exprIL_m', def $compatible_mask)
+  -- if (exprIL_b'', exprIL_m'')
+      = $reduce_senums_binary(
+          exprIL_b', exprIL_m', def $compatible_mask
+        )
   ----
   -- if `(typ''; _) = $annot(exprIL_b'')
   ----
@@ -508,13 +562,17 @@ def $compatible'_range(typ_l, typ_r) = false
   -- otherwise
 
 rule Expr_ok/rangee:
-  p C |- RangeE expr_lb expr_ub : RangeE exprIL_lb'' exprIL_ub'' `(SetT typ''; DYN)
+  p C |- RangeE expr_lb expr_ub
+       : RangeE exprIL_lb'' exprIL_ub'' `(SetT typ''; DYN)
   -- Expr_ok: p C |- expr_lb : exprIL_lb
   -- Expr_ok: p C |- expr_ub : exprIL_ub
   ----
   -- if (exprIL_ub', exprIL_lb') = $coerce_binary(exprIL_lb, exprIL_ub)
   ----
-  -- if (exprIL_lb'', exprIL_ub'') = $reduce_senums_binary(exprIL_lb', exprIL_ub', def $compatible_range)
+  -- if (exprIL_lb'', exprIL_ub'')
+      = $reduce_senums_binary(
+          exprIL_lb', exprIL_ub', def $compatible_range
+        )
   ----
   -- if `(typ''; _) = $annot(exprIL_lb'')
   ;; -- Type_wf: $bound_tids(C) |- SetT typ''
@@ -587,8 +645,10 @@ rule Select_case_ok:
 
 
 rule Expr_ok/selecte:
-  LOCAL C |- SelectE expr_k* selectcase* : SelectE exprIL_k* selectcaseIL* `(StateT; DYN)
-  -- if C.LOCAL.KIND = PARSERSTATE
+  LOCAL C |- SelectE expr_k* selectcase*
+           : SelectE exprIL_k* selectcaseIL* `(StateT; DYN)
+  ----
+  -- if $is_parser_state_localkind(C.LOCAL.KIND)
   -- (Expr_ok: LOCAL C |- expr_k : exprIL_k)*
   -- if (`(typ_k; ctk_k) = $annot(exprIL_k))*
   ----
@@ -611,7 +671,7 @@ def $compatible'_arrayindex(typ) = false
   -- otherwise
 
 rule Expr_ok/arracce-tuplet:
-  p C |- ArrAccE expr_b expr_i : ArrAccE exprIL_b exprIL_i' `(typ; DYN)
+  p C |- ArrAccE expr_b expr_i : ArrAccE exprIL_b exprIL_i' `(typ; ctk)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   ----
@@ -621,14 +681,15 @@ rule Expr_ok/arracce-tuplet:
   -- if exprIL_i' = $reduce_senum_unary(exprIL_i, def $compatible_arrayindex)
   ----
   -- if TupleT typ_b'* = $canon_typ(typ_b)
-  -- Eval_static: p C |- exprIL_i' ~> val_i _
+  -- Eval_static: p C |- exprIL_i' ~> val_i
   -- if n = $get_num(val_i)
   -- if typ = typ_b'*[n]
+  -- if ctk = $join_ctk(ctk_b, LCTK)
 
 rule Expr_ok/arracce-stackt-lctk:
-  p C |- ArrAccE expr_b expr_i : ArrAccE exprIL_b exprIL_i' `(typ_b'; DYN)
+  p C |- ArrAccE expr_b expr_i : ArrAccE exprIL_b exprIL_i' `(typ_b'; ctk)
   -- Expr_ok: p C |- expr_b : exprIL_b
-  -- if `(typ_b; _) = $annot(exprIL_b)
+  -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   ----
   -- Expr_ok: p C |- expr_i : exprIL_i
   -- if `(typ_i; LCTK) = $annot(exprIL_i)
@@ -636,12 +697,13 @@ rule Expr_ok/arracce-stackt-lctk:
   -- if exprIL_i' = $reduce_senum_unary(exprIL_i, def $compatible_arrayindex)
   ----
   -- if StackT typ_b' i_s = $canon_typ(typ_b)
-  -- Eval_static: p C |- exprIL_i' ~> val_i _
+  -- Eval_static: p C |- exprIL_i' ~> val_i
   -- if i = $get_num(val_i)
   -- if $(0 <= i) /\ $(i <= i_s)
+  -- if ctk = $join_ctk(ctk_b, LCTK)
 
 rule Expr_ok/arracce-stackt-ctk-dyn:
-  p C |- ArrAccE expr_b expr_i : ArrAccE exprIL_b exprIL_i' `(typ_b'; DYN)
+  p C |- ArrAccE expr_b expr_i : ArrAccE exprIL_b exprIL_i' `(typ_b'; ctk)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   ----
@@ -652,6 +714,7 @@ rule Expr_ok/arracce-stackt-ctk-dyn:
   -- if exprIL_i' = $reduce_senum_unary(exprIL_i, def $compatible_arrayindex)
   ----
   -- if StackT typ_b' _ = $canon_typ(typ_b)
+  -- if ctk = $join_ctk(ctk_b, ctk_i)
 
 ;;
 ;; Bitstring access expression
@@ -693,7 +756,8 @@ def $is_valid_bitstring_slice'(_, _, _) = false
   -- otherwise
 
 rule Expr_ok/bitacce:
-  p C |- BitAccE expr_b expr_l expr_h : BitAccE exprIL_b' exprIL_l'' exprIL_h'' `(typ; ctk_b')
+  p C |- BitAccE expr_b expr_l expr_h
+       : BitAccE exprIL_b' exprIL_l'' exprIL_h'' `(typ; ctk_b')
   -- Expr_ok: p C |- expr_b : exprIL_b
   ----
   -- if exprIL_b' = $reduce_senum_unary(exprIL_b, def $compatible_bitstringbase)
@@ -704,7 +768,7 @@ rule Expr_ok/bitacce:
   ----
   -- if exprIL_l' = $reduce_senum_unary(exprIL_l, def $compatible_bitstringindex)
   ----
-  -- Eval_static: p C |- exprIL_l' ~> val_l _
+  -- Eval_static: p C |- exprIL_l' ~> val_l
   -- if n_l = $get_num(val_l)
   -- if exprIL_l'' = ValueE val_l `(typ_l; LCTK)
   ----
@@ -713,7 +777,7 @@ rule Expr_ok/bitacce:
   ----
   -- if exprIL_h' = $reduce_senum_unary(exprIL_h, def $compatible_bitstringindex)
   ----
-  -- Eval_static: p C |- exprIL_h' ~> val_h _
+  -- Eval_static: p C |- exprIL_h' ~> val_h
   -- if n_h = $get_num(val_h)
   -- if exprIL_h'' = ValueE val_h `(typ_h; LCTK)
   ----
@@ -751,35 +815,44 @@ rule Expr_ok/typeacce-senumt:
 ;;
 
 rule Expr_ok/expracce-stackt-size:
-  p C |- ExprAccE expr_b "size" : ExprAccE exprIL_b "size" `(FBitT 32; LCTK)
+  p C |- ExprAccE expr_b "size"
+       : ExprAccE exprIL_b "size" `(FBitT 32; LCTK)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if StackT typ_s int_s = $canon_typ(typ_b)
 
 rule Expr_ok/expracce-stackt-lastindex:
-  p C |- ExprAccE expr_b "lastIndex" : ExprAccE exprIL_b "lastIndex" `(FBitT 32; DYN)
-  -- if (p = BLOCK /\ C.BLOCK.KIND = PARSER) \/ (p = LOCAL /\ C.LOCAL.KIND = PARSERSTATE)
+  p C |- ExprAccE expr_b "lastIndex"
+       : ExprAccE exprIL_b "lastIndex" `(FBitT 32; DYN)
+  ----
+  -- if (p = BLOCK /\ $is_parser_blockkind(C.BLOCK.KIND))
+        \/ (p = LOCAL /\ $is_parser_state_localkind(C.LOCAL.KIND))
   ----
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if StackT typ_s int_s = $canon_typ(typ_b)
 
 rule Expr_ok/expracce-stackt-last:
-  p C |- ExprAccE expr_b "last" : ExprAccE exprIL_b "last" `(typ_s; DYN)
-  -- if (p = BLOCK /\ C.BLOCK.KIND = PARSER) \/ (p = LOCAL /\ C.LOCAL.KIND = PARSERSTATE)
+  p C |- ExprAccE expr_b "last"
+       : ExprAccE exprIL_b "last" `(typ_s; DYN)
+  ----
+  -- if (p = BLOCK /\ $is_parser_blockkind(C.BLOCK.KIND))
+        \/ (p = LOCAL /\ $is_parser_state_localkind(C.LOCAL.KIND))
   ----
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if StackT typ_s int_s = $canon_typ(typ_b)
 
 rule Expr_ok/expracce-stackt-next:
-  p C |- ExprAccE expr_b "next" : ExprAccE exprIL_b "next" `(typ_s; DYN)
+  p C |- ExprAccE expr_b "next"
+       : ExprAccE exprIL_b "next" `(typ_s; DYN)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if StackT typ_s int_s = $canon_typ(typ_b)
 
 rule Expr_ok/expracce-structt:
-  p C |- ExprAccE expr_b member : ExprAccE exprIL_b member `(typ; DYN)
+  p C |- ExprAccE expr_b member
+       : ExprAccE exprIL_b member `(typ; ctk_b)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if StructT id_s (member_s, typ_s)* = $canon_typ(typ_b)
@@ -787,7 +860,8 @@ rule Expr_ok/expracce-structt:
   -- if typ = $assoc_<member, typ>(member, (member_s, typ_s)*)
 
 rule Expr_ok/expracce-headert:
-  p C |- ExprAccE expr_b member : ExprAccE exprIL_b member `(typ; DYN)
+  p C |- ExprAccE expr_b member
+       : ExprAccE exprIL_b member `(typ; ctk_b)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if HeaderT id_h (member_h, typ_h)* = $canon_typ(typ_b)
@@ -795,7 +869,8 @@ rule Expr_ok/expracce-headert:
   -- if typ = $assoc_<member, typ>(member, (member_h, typ_h)*)
 
 rule Expr_ok/expracce-uniont:
-  p C |- ExprAccE expr_b member : ExprAccE exprIL_b member `(typ; DYN)
+  p C |- ExprAccE expr_b member
+       : ExprAccE exprIL_b member `(typ; ctk_b)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if UnionT id_u (member_u, typ_u)* = $canon_typ(typ_b)
@@ -803,7 +878,8 @@ rule Expr_ok/expracce-uniont:
   -- if typ = $assoc_<member, typ>(member, (member_u, typ_u)*)
 
 rule Expr_ok/expracce-tablestructt:
-  p C |- ExprAccE expr_b member : ExprAccE exprIL_b member `(typ; DYN)
+  p C |- ExprAccE expr_b member
+       : ExprAccE exprIL_b member `(typ; DYN)
   -- Expr_ok: p C |- expr_b : exprIL_b
   -- if `(typ_b; ctk_b) = $annot(exprIL_b)
   -- if TableStructT id_t (member_t, typ_t)* = $canon_typ(typ_b)
@@ -815,41 +891,89 @@ rule Expr_ok/expracce-tablestructt:
 ;;
 
 rule Expr_ok/callfunce:
-  p C |- CallFuncE name targ* arg* : CallFuncE name targIL'* argIL'* `(typ; DYN)
+  p C |- CallFuncE name targ* arg*
+       : CallFuncE name targIL'* argIL'* `(typ; DYN)
+  ----
   -- (Type_ok: p C |- targ : targIL tid_fresh_a*)*
   -- if tid_fresh* = $concat_<tid>(tid_fresh_a**)
   ----
-  -- FuncType_ok: p C |- name targIL* arg* : ft tid_fresh_inserted* id_deft*
+  -- (Arg_ok: p C |- arg : argIL typ_arg)*
+  ----
+  -- FuncType_ok: p C |- name targIL* argIL*
+                       : ft tid_fresh_inserted* id_deft*
   ----
   -- if tid_fresh'* = $concat_<tid>(tid_fresh* :: tid_fresh_inserted*)
   ----
-  -- Call_ok: p C tid_fresh'* |- ft targIL* arg* id_deft* : typ targIL'* argIL'*
+  -- Call_ok: p C |- ft targIL* tid_fresh'* (argIL, typ_arg)* id_deft*
+                   : typ targIL'* argIL'*
   -- if typ =/= VoidT
 
 ;;
 ;; Method call expression
 ;;
 
-rule Expr_ok/callmethode:
-  p C |- CallMethodE expr_b member eps eps : CallMethodE exprIL_b member eps eps `(IntT; LCTK)
-  -- if member <- [ "minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes" ]
-  ----
-  -- MethodType_ok: p C |- expr_b member eps eps : ft exprIL_b tid_fresh_inserted* id_deft*
-  ----
-  -- Call_ok: p C eps |- ft eps eps eps : IntT eps eps
-
-rule Expr_ok/callmethode:
-  p C |- CallMethodE expr_b member targ* arg* : CallMethodE exprIL_b member targIL'* argIL'* `(typ; DYN)
-  -- if ~(member <- [ "minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes" ])
+rule Expr_ok/callmethode-builtin-size:
+  p C |- CallMethodE expr_b member targ* arg*
+       : CallMethodE exprIL_b member targIL'* argIL'* `(typ; LCTK)
   ----
   -- (Type_ok: p C |- targ : targIL tid_fresh_a*)*
   -- if tid_fresh* = $concat_<tid>(tid_fresh_a**)
   ----
-  -- MethodType_ok: p C |- expr_b member targIL* arg* : ft exprIL_b tid_fresh_inserted* id_deft*
+  -- (Arg_ok: p C |- arg : argIL typ_arg)*
+  ----
+  -- MethodType_ok: p C |- expr_b member targIL* argIL*
+                         : ft exprIL_b tid_fresh_inserted* id_deft*
+  ----
+  -- if $is_builtinmethodt(ft)
+  -- if member <- [ "minSizeInBits", "minSizeInBytes",
+                    "maxSizeInBits", "maxSizeInBytes" ]
   ----
   -- if tid_fresh'* = $concat_<tid>(tid_fresh* ++ tid_fresh_inserted*)
   ----
-  -- Call_ok: p C tid_fresh'* |- ft targIL* arg* id_deft* : typ targIL'* argIL'*
+  -- Call_ok: p C |- ft targIL* tid_fresh'* (argIL, typ_arg)* id_deft*
+                   : typ targIL'* argIL'*
+  -- if typ =/= VoidT
+
+rule Expr_ok/callmethode-builtin:
+  p C |- CallMethodE expr_b member targ* arg*
+       : CallMethodE exprIL_b member targIL'* argIL'* `(typ; DYN)
+  ----
+  -- (Type_ok: p C |- targ : targIL tid_fresh_a*)*
+  -- if tid_fresh* = $concat_<tid>(tid_fresh_a**)
+  ----
+  -- (Arg_ok: p C |- arg : argIL typ_arg)*
+  ----
+  -- MethodType_ok: p C |- expr_b member targIL* argIL*
+                         : ft exprIL_b tid_fresh_inserted* id_deft*
+  ----
+  -- if $is_builtinmethodt(ft)
+  -- if ~(member <- [ "minSizeInBits", "minSizeInBytes",
+                      "maxSizeInBits", "maxSizeInBytes" ])
+  ----
+  -- if tid_fresh'* = $concat_<tid>(tid_fresh* ++ tid_fresh_inserted*)
+  ----
+  -- Call_ok: p C |- ft targIL* tid_fresh'* (argIL, typ_arg)* id_deft*
+                   : typ targIL'* argIL'*
+  -- if typ =/= VoidT
+
+rule Expr_ok/callmethode-non-builtin:
+  p C |- CallMethodE expr_b member targ* arg*
+       : CallMethodE exprIL_b member targIL'* argIL'* `(typ; DYN)
+  ----
+  -- (Type_ok: p C |- targ : targIL tid_fresh_a*)*
+  -- if tid_fresh* = $concat_<tid>(tid_fresh_a**)
+  ----
+  -- (Arg_ok: p C |- arg : argIL typ_arg)*
+  ----
+  -- MethodType_ok: p C |- expr_b member targIL* argIL*
+                         : ft exprIL_b tid_fresh_inserted* id_deft*
+  ----
+  -- if ~$is_builtinmethodt(ft)
+  ----
+  -- if tid_fresh'* = $concat_<tid>(tid_fresh* ++ tid_fresh_inserted*)
+  ----
+  -- Call_ok: p C |- ft targIL* tid_fresh'* (argIL, typ_arg)* id_deft*
+                   : typ targIL'* argIL'*
   -- if typ =/= VoidT
 
 ;;
@@ -857,14 +981,17 @@ rule Expr_ok/callmethode:
 ;;
 
 rule Expr_ok/calltypee:
-  p C |- CallTypeE name member eps eps : CallTypeE name member eps eps `(IntT; LCTK)
+  p C |- CallTypeE name member eps eps
+       : CallTypeE name member eps eps `(IntT; LCTK)
+  ----
   -- if typdef = $find_typdef(p, C, name)
   ----
-  -- if member <- [ "minSizeInBits", "minSizeInBytes", "maxSizeInBits", "maxSizeInBytes" ]
+  -- if member <- [ "minSizeInBits", "minSizeInBytes",
+                    "maxSizeInBits", "maxSizeInBytes" ]
   ----
   -- if ft = BuiltinMethodT eps IntT
   ----
-  -- Call_ok: p C eps |- ft eps eps eps : IntT eps eps
+  -- Call_ok: p C |- ft eps eps eps eps : IntT eps eps
 
 ;;
 ;; Nameless instantiation expression
@@ -891,15 +1018,20 @@ def $not_abstract_extern_object''(_) = true
   -- otherwise
 
 rule Expr_ok/inste:
-  p C |- InstE name targ* arg* : InstE name targIL'* targIL_hidden* argIL'* `(typ; CTK)
+  p C |- InstE name targ* arg*
+       : InstE name targIL'* argIL'* `(typ; CTK)
   -- (Type_ok: p C |- targ : targIL tid_fresh_a*)*
   -- if tid_fresh* = $concat_<tid>(tid_fresh_a**)
   ----
-  -- ConsType_ok: p C |- name targIL* arg* : ct tid_fresh_inserted* id_deft*
+  -- (Arg_ok: p C |- arg : argIL typ_arg)*
+  ----
+  -- ConsType_ok: p C |- name targIL* argIL*
+                       : ct tid_fresh_inserted* id_deft*
   ----
   -- if tid_fresh'* = $concat_<tid>(tid_fresh* ++ tid_fresh_inserted*)
   ----
-  -- Inst_ok: p C tid_fresh'* |- ct targIL* arg* id_deft* : typ targIL'* targIL_hidden* argIL'*
+  -- Inst_ok: p C ANON |- ct targIL* tid_fresh'* (argIL, typ_arg)* id_deft*
+                        : typ targIL'* argIL'*
   -- if $not_abstract_extern_object(typ)
 
 ;;

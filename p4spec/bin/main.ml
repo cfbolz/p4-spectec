@@ -1,4 +1,5 @@
 open Util.Error
+open Util.Source
 
 let version = "0.1"
 
@@ -88,7 +89,7 @@ let run_il_command =
          with
          | WellTyped -> Format.printf "well-typed\n"
          | IllTyped (_, msg) -> Format.printf "ill-typed: %s\n" msg
-         | IllFormed msg -> Format.printf "ill-formed: %s\n" msg
+         | IllFormed (_, msg) -> Format.printf "ill-formed: %s\n" msg
        with
        | ParseError (at, msg) -> Format.printf "%s\n" (string_of_error at msg)
        | ElabError (at, msg) -> Format.printf "%s\n" (string_of_error at msg))
@@ -117,13 +118,13 @@ let run_sl_command =
          with
          | WellTyped _ -> Format.printf "well-typed\n"
          | IllTyped (_, msg, _) -> Format.printf "ill-typed: %s\n" msg
-         | IllFormed (msg, _) -> Format.printf "ill-formed: %s\n" msg
+         | IllFormed (_, msg, _) -> Format.printf "ill-formed: %s\n" msg
        with
        | ParseError (at, msg) -> Format.printf "%s\n" (string_of_error at msg)
        | ElabError (at, msg) -> Format.printf "%s\n" (string_of_error at msg))
 
-let cover_sl_command =
-  Core.Command.basic ~summary:"measure phantom coverage of SL"
+let cover_dangling_command =
+  Core.Command.basic ~summary:"measure dangling coverage of the P4 type system"
     (let open Core.Command.Let_syntax in
      let open Core.Command.Param in
      let%map filenames_spec = anon (sequence ("filename" %: string))
@@ -334,6 +335,41 @@ let interesting_command =
        | ParseError (at, msg) -> Format.printf "%s\n" (string_of_error at msg)
        | ElabError (at, msg) -> Format.printf "%s\n" (string_of_error at msg))
 
+let parse_command =
+  Core.Command.basic ~summary:"parse a P4 program"
+    (let open Core.Command.Let_syntax in
+     let open Core.Command.Param in
+     let%map includes_p4 = flag "-i" (listed string) ~doc:"p4 include paths"
+     and filename_p4 = flag "-p" (required string) ~doc:"p4 file to typecheck"
+     and roundtrip =
+       flag "-r" no_arg ~doc:"perform a round-trip parse/unparse"
+     in
+     fun () ->
+       try
+         let parsed_il_file =
+           Interface.Parse.parse_file includes_p4 filename_p4
+         in
+         let string_p4 =
+           Format.asprintf "%a\n" Interface.Unparse.pp_program parsed_il_file
+         in
+         if roundtrip then
+           let parsed_il_str =
+             Interface.Parse.parse_string filename_p4 string_p4
+           in
+           Il.Eq.eq_value ~dbg:true parsed_il_file parsed_il_str
+           |> (fun b ->
+                if b then "Roundtrip successful" else "Roundtrip failed")
+           |> print_endline
+         else string_p4 |> print_endline
+       with
+       | Sys_error msg -> Format.printf "File error: %s\n" msg
+       | ElabError (at, msg) ->
+           Format.printf "Elaboration error: %s\n" (string_of_error at msg)
+       | ParseError (at, msg) ->
+           Format.printf "Parse error: %s\n" (string_of_error at msg)
+       | Interface.Lexer.Error msg -> Format.printf "Lexer error: %s\n" msg
+       | e -> Format.printf "Unknown error: %s\n" (Printexc.to_string e))
+
 let json_ast_command =
   Core.Command.basic ~summary:"Emit/Parse JSON AST for Structured Language"
     ~readme:(fun () ->
@@ -386,10 +422,11 @@ let command =
       ("struct", struct_command);
       ("run-il", run_il_command);
       ("run-sl", run_sl_command);
-      ("cover-sl", cover_sl_command);
+      ("cover-dangling", cover_dangling_command);
       ("testgen", run_testgen_command);
       ("testgen-dbg", run_testgen_debug_command);
       ("interesting", interesting_command);
+      ("parse", parse_command);
       ("json-ast", json_ast_command);
     ]
 
