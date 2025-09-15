@@ -1413,6 +1413,8 @@ and invoke_func_builtin (ctx : Ctx.t) (id : id) (targs : targ list)
   let yojson_values = `List json_list in
   (* turn result value into a yojson value *)
   let yojson_result = Sl.Ast.value_to_yojson value_output in
+  let yojson_targs_list = List.map Sl.Ast.typ_to_yojson targs in
+  let yojson_targs = `List yojson_targs_list in
   (* create a json object with four fields: "calltype", "name", "inputs", "result" *)
   let json =
     `Assoc
@@ -1421,6 +1423,7 @@ and invoke_func_builtin (ctx : Ctx.t) (id : id) (targs : targ list)
         ("name", `String id.it);
         ("inputs", yojson_values);
         ("result", yojson_result);
+        ("targs", yojson_targs);
       ] in
   let json_str = Yojson.Safe.to_string json in
   print_endline json_str;
