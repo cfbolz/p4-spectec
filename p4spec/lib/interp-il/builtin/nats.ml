@@ -34,7 +34,10 @@ let max (at : region) (targs : targ list) (values_input : value list) : value =
   let values =
     Extract.one at values_input |> Value.get_list |> List.map bigint_of_value
   in
-  let max = List.fold_left Bigint.max Bigint.zero values in
+  let max = match values with
+    | [] -> error at "max of empty list"
+    | hd :: tl -> List.fold_left Bigint.max hd tl
+  in
   value_of_bigint max
 
 (* dec $min(nat* ) : nat *)
