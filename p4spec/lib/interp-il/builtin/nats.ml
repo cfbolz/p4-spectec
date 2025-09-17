@@ -2,6 +2,7 @@ open Xl
 open Il.Ast
 module Value = Runtime_dynamic.Value
 open Util.Source
+open Error
 
 (* Conversion between meta-numerics and OCaml numerics *)
 
@@ -44,7 +45,7 @@ let min (at : region) (targs : targ list) (values_input : value list) : value =
     Extract.one at values_input |> Value.get_list |> List.map bigint_of_value
   in
   let min = match values with
-    | [] -> Bigint.zero
+    | [] -> error at "min of empty list"
     | hd :: tl -> List.fold_left Bigint.min hd tl
   in
   value_of_bigint min
